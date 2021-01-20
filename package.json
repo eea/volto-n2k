@@ -17,6 +17,8 @@
     "url": "git@github.com:eea/volto-addon-template.git"
   },
   "dependencies": {
+    "react-highlight-words": "^0.16.0",
+    "react-stickynode": "^3.0.4"
   },
   "scripts": {
     "release": "release-it",

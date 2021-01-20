@@ -1,0 +1,108 @@
+.n2k-theme {
+  .ui.basic.segment.content-area {
+    margin: 0;
+    padding: 0;
+  }
+
+  .ui.segment.header-wrapper {
+    padding: 0;
+
+    .header {
+      .logo-nav-wrapper {
+        top: 0;
+        
+        .navigation {
+
+          .ui.secondary.pointing.menu {
+            top: 0;
+
+            a.item {
+              color: #999999;
+              font-weight: bold;
+              font-size: 1.15em;
+
+              &.active {
+                color: #3B7F02;
+
+                @media only screen and (min-width: 1655px) {
+                  &::before {
+                    display: block !important;
+                    content: '';
+                    position: relative;
+                    top: -16px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 100%;
+                    background-color: #3B7F02;
+                  }
+                }
+              }
+            }
+          }
+
+          .hamburger-wrapper {
+            height: 24px;
+            margin: .5rem 0;
+
+            button.hamburger {
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .sticky-outer-wrapper {
+      .sticky-inner-wrapper {
+        z-index: 2;
+        background-color: rgba(255, 255, 255, 1);
+        padding: .5rem 0;
+      }
+
+      &.active {
+        .sticky-inner-wrapper {
+          background-color: rgba(255, 255, 255, .9);
+        }
+      }
+    }
+  }
+
+  .ui.segment.footer-wrapper {
+    background-image: url('./static/eu.jpg');
+    background-size: 100%;
+    background-position: top;
+
+    .content {
+      text-align: left;
+      padding: 12rem 0;
+      width: 50%;
+
+      a.item {
+        color: #3B7F02;
+        text-decoration: none;
+      }
+
+      .ui.input.search {
+        input {
+          background-color: rgba(255, 255, 255, .5);
+          border-radius: 0;
+          border: none;
+          padding: 0.4em 1em;
+          color: #fff;
+        }
+        button {
+          border-radius: 0;
+          background-color: #3B7F02;
+          margin-left: 1em;
+          padding: 0.5em;
+          
+          i.icon {
+            font-size: 1.3em;
+          }
+        }
+      }
+    }
+  }
+}
