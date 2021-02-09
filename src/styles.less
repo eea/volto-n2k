@@ -14,14 +14,33 @@
         .navigation {
 
           .ui.secondary.pointing.menu {
-            top: 0;
+            top: 35px;
 
-            a.item {
+            .item {
               color: #999999;
-              font-weight: bold;
-              font-size: 1.15em;
 
-              &.active {
+              &.firstLevel {
+                border: 1px solid transparent;
+                font-size: 1.15em;
+                font-weight: bold;
+                &:hover {
+                  color: #3B7F02 !important;
+
+                  > a {
+                    color: #3B7F02 !important;
+
+                  }
+                }
+              }
+
+              &.secondLevel {
+                &:hover {
+                  background: initial !important;
+                  color: #3B7F02;
+                }
+              }
+
+              &.active, &.menuActive {
                 color: #3B7F02;
 
                 @media only screen and (min-width: 1655px) {
@@ -39,6 +58,10 @@
                   }
                 }
               }
+            }
+
+            @media only screen and (max-width: 991px) {
+              top: 52px !important;
             }
           }
 

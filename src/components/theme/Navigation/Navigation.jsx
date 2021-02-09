@@ -5,16 +5,17 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { isMatch } from 'lodash';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { defineMessages, injectIntl } from 'react-intl';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
 import cx from 'classnames';
-import { getBaseUrl } from '@plone/volto/helpers';
-import { settings } from '~/config';
+import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers';
 
 import { getNavigation } from '@plone/volto/actions';
+import { settings } from '~/config';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -45,9 +46,9 @@ class Navigation extends Component {
       PropTypes.shape({
         title: PropTypes.string,
         url: PropTypes.string,
+        items: PropTypes.array,
       }),
     ).isRequired,
-    lang: PropTypes.string.isRequired,
   };
 
   /**
@@ -63,6 +64,7 @@ class Navigation extends Component {
     this.state = {
       isMobileMenuOpen: false,
     };
+    this.container = React.createRef();
   }
 
   /**
@@ -70,12 +72,23 @@ class Navigation extends Component {
    * @method componentWillMount
    * @returns {undefined}
    */
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     this.props.getNavigation(
       getBaseUrl(this.props.pathname),
       settings.navDepth,
     );
   }
+
+  handleClickOutsideNav = (event) => {
+    if (
+      this.container.current &&
+      !this.container.current.contains(event.target)
+    ) {
+      this.setState({
+        isMobileMenuOpen: false,
+      });
+    }
+  };
 
   /**
    * Component will receive props
@@ -83,13 +96,35 @@ class Navigation extends Component {
    * @param {Object} nextProps Next properties
    * @returns {undefined}
    */
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.pathname !== this.props.pathname) {
+  componentDidUpdate(nextProps) {
+    if (
+      nextProps.pathname !== this.props.pathname ||
+      nextProps.userToken !== this.props.userToken
+    ) {
       this.props.getNavigation(
         getBaseUrl(nextProps.pathname),
         settings.navDepth,
       );
+      this.closeMobileMenu();
     }
+
+    // Hide submenu on route change
+    if (document.querySelector('body')) {
+      document.querySelector('body').click();
+    }
+  }
+
+  /**
+   * Check if menu is active
+   * @method isActive
+   * @param {string} url Url of the navigation item.
+   * @returns {bool} Is menu active?
+   */
+  isActive(url) {
+    return (
+      (url === '' && this.props.pathname === '/') ||
+      (url !== '' && isMatch(this.props.pathname.split('/'), url.split('/')))
+    );
   }
 
   /**
@@ -98,7 +133,11 @@ class Navigation extends Component {
    * @returns {undefined}
    */
   toggleMobileMenu() {
-    this.setState({ isMobileMenuOpen: !this.state.isMobileMenuOpen });
+    this.setState({ isMobileMenuOpen: !this.state.isMobileMenuOpen }, () => {
+      if (this.state.isMobileMenuOpen) {
+        document.addEventListener('mousedown', this.handleClickOutsideNav);
+      }
+    });
   }
 
   /**
@@ -110,7 +149,9 @@ class Navigation extends Component {
     if (!this.state.isMobileMenuOpen) {
       return;
     }
-    this.setState({ isMobileMenuOpen: false });
+    this.setState({ isMobileMenuOpen: false }, () => {
+      document.removeEventListener('mousedown', this.handleClickOutsideNav);
+    });
   }
 
   /**
@@ -119,11 +160,9 @@ class Navigation extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    const { lang } = this.props;
-
     return (
-      <nav className="navigation">
-        <div className="hamburger-wrapper mobile tablet only">
+      <nav className="navigation" ref={this.container}>
+        <div className="hamburger-wrapper mobile only">
           <button
             className={cx('hamburger hamburger--collapse', {
               'is-active': this.state.isMobileMenuOpen,
@@ -161,25 +200,128 @@ class Navigation extends Component {
           className={
             this.state.isMobileMenuOpen
               ? 'open'
-              : 'computer large screen widescreen only'
+              : 'tablet computer large screen widescreen only'
           }
           onClick={this.closeMobileMenu}
+          onBlur={() => this.closeMobileMenu}
         >
-          {this.props.items.map((item) => (
-            <NavLink
-              to={item.url === '' ? '/' : item.url}
-              key={item.url}
-              className="item"
-              activeClassName="active"
-              exact={
-                settings.isMultilingual
-                  ? item.url === `/${lang}`
-                  : item.url === ''
-              }
-            >
-              {item.title}
-            </NavLink>
-          ))}
+          {this.props.items.map((item) => {
+            const flatUrl = flattenToAppURL(item.url);
+            const itemID = item.title.split(' ').join('-').toLowerCase();
+            return item.items && item.items.length ? (
+              <Dropdown
+                id={itemID}
+                className={
+                  this.isActive(flatUrl)
+                    ? 'item firstLevel menuActive'
+                    : 'item firstLevel'
+                }
+                key={flatUrl}
+                trigger={
+                  <Link to={flatUrl === '' ? '/' : flatUrl} key={flatUrl}>
+                    {item.title}
+                  </Link>
+                }
+                item
+                simple
+              >
+                {item.title === 'Countries' ? (
+                  <Dropdown.Menu>
+                    <div className="submenu-wrapper">
+                      <div className="submenu countries-submenu">
+                        {item.items.map((subsubitem) => {
+                          const flatSubSubUrl = flattenToAppURL(subsubitem.url);
+                          return (
+                            <Link
+                              to={flatSubSubUrl === '' ? '/' : flatSubSubUrl}
+                              title={subsubitem.title}
+                              key={flatSubSubUrl}
+                              className={
+                                this.isActive(flatSubSubUrl)
+                                  ? 'item thirdLevel menuActive'
+                                  : 'item thirdLevel'
+                              }
+                            >
+                              {subsubitem.title}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </Dropdown.Menu>
+                ) : (
+                  <Dropdown.Menu>
+                    {item.items.map((subitem) => {
+                      const flatSubUrl = flattenToAppURL(subitem.url);
+                      const subItemID = subitem.title
+                        .split(' ')
+                        .join('-')
+                        .toLowerCase();
+                      return (
+                        <Dropdown.Item key={flatSubUrl}>
+                          <div className="secondLevel-wrapper">
+                            <Link
+                              id={subItemID}
+                              to={flatSubUrl === '' ? '/' : flatSubUrl}
+                              key={flatSubUrl}
+                              className={
+                                this.isActive(flatSubUrl)
+                                  ? 'item secondLevel menuActive'
+                                  : 'item secondLevel'
+                              }
+                            >
+                              {subitem.title}
+                            </Link>
+                          </div>
+                          {subitem.items && (
+                            <div className="submenu-wrapper">
+                              <div className="submenu">
+                                {subitem.items.map((subsubitem) => {
+                                  const flatSubSubUrl = flattenToAppURL(
+                                    subsubitem.url,
+                                  );
+                                  return (
+                                    <Link
+                                      to={
+                                        flatSubSubUrl === ''
+                                          ? '/'
+                                          : flatSubSubUrl
+                                      }
+                                      title={subsubitem.title}
+                                      key={flatSubSubUrl}
+                                      className={
+                                        this.isActive(flatSubSubUrl)
+                                          ? 'item thirdLevel menuActive'
+                                          : 'item thirdLevel'
+                                      }
+                                    >
+                                      {subsubitem.title}
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+                        </Dropdown.Item>
+                      );
+                    })}
+                  </Dropdown.Menu>
+                )}
+              </Dropdown>
+            ) : (
+              <Link
+                to={flatUrl === '' ? '/' : flatUrl}
+                key={flatUrl}
+                className={
+                  this.isActive(flatUrl)
+                    ? 'item menuActive firstLevel'
+                    : 'item firstLevel'
+                }
+              >
+                {item.title}
+              </Link>
+            );
+          })}
         </Menu>
       </nav>
     );
@@ -189,10 +331,12 @@ class Navigation extends Component {
 export default compose(
   injectIntl,
   connect(
-    (state) => ({
-      items: state.navigation.items,
-      lang: state.intl.locale,
-    }),
+    (state) => {
+      return {
+        items: state.navigation.items,
+        userToken: state?.userSession?.token,
+      };
+    },
     { getNavigation },
   ),
 )(Navigation);
