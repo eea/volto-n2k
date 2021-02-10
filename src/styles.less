@@ -11,10 +11,17 @@
       .logo-nav-wrapper {
         top: 0;
         
-        .navigation {
+        .tools-search-wrapper {
+          margin-left: 0 !important;
+        }
 
+        .navigation {
           .ui.secondary.pointing.menu {
-            top: 35px;
+            top: 0;
+
+            &.open {
+              top: 35px;
+            }
 
             .item {
               color: #999999;
@@ -59,9 +66,10 @@
                 }
               }
             }
-
             @media only screen and (max-width: 991px) {
-              top: 52px !important;
+              &.stackable.open {
+                top: 52px !important;
+              }
             }
           }
 
@@ -127,5 +135,9 @@
         }
       }
     }
+  }
+
+  .simple-data-table {
+    padding: 0;
   }
 }
