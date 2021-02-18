@@ -4,8 +4,11 @@
  */
 
 import React from 'react';
-import { Container, Segment, Input } from 'semantic-ui-react';
+import { Icon } from '@plone/volto/components';
+import { Container, Segment, Input, Button } from 'semantic-ui-react';
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+
+import upKeySVG from '@plone/volto/icons/up-key.svg';
 
 const messages = defineMessages({
   copyright: {
@@ -21,7 +24,20 @@ const messages = defineMessages({
  * @returns {string} Markup of the component
  */
 const Footer = ({ intl, pathname }) => (
-  <Segment
+  <div className="footer-wrapper">
+    <div className="back-to-top">
+      <Button
+        circular
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+      >
+        <Icon name={upKeySVG} size="40px" color="#7B7B7B" />
+      </Button>
+      <p>Back to top</p>
+    </div>
+    <div className="footer-wrapper-bg" />
+    {/* <Segment
     role="contentinfo"
     className="footer-wrapper"
     vertical
@@ -95,7 +111,8 @@ const Footer = ({ intl, pathname }) => (
         />
       </div>
     </Container>
-  </Segment>
+  </Segment> */}
+  </div>
 );
 
 /**

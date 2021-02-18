@@ -99,16 +99,21 @@
 
       &.active {
         .sticky-inner-wrapper {
-          background-color: rgba(255, 255, 255, .9);
+          background-color: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(2px);
         }
       }
     }
   }
 
-  .ui.segment.footer-wrapper {
-    background-image: url('./static/eu.jpg');
-    background-size: 100%;
-    background-position: top;
+  .footer-wrapper {
+    text-align: center;
+
+    .footer-wrapper-bg {
+      background-color: #050826;
+      width: 100%;
+      min-height: 400px;
+    }
 
     .content {
       text-align: left;
@@ -144,5 +149,35 @@
 
   .simple-data-table {
     padding: 0;
+  }
+}
+
+.back-to-top {
+  margin-top: 2em;
+  margin-bottom: 3rem;
+  color: #7B7B7B;
+  font-weight: bold;
+  font-size: 14px;
+
+  .ui.circular.button {
+    background-color: #fff;
+    position: relative;
+    width: 3em;
+    height: 3em;
+    border-radius: 10em;
+    box-shadow: 0px 4px 9px -6px #000000;
+    margin-bottom: 1.5rem;
+  
+    &:hover {
+      box-shadow: 0px 4px 8px -4px #000000;
+    }
+  
+    .icon {
+      margin: 0 !important;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
