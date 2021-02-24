@@ -1,6 +1,6 @@
 import React from 'react';
 
-import installExplodedPieChart from './components/manage/Blocks/ExplodedPieChart';
+import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
 
 import { Header, Footer } from '@eeacms/volto-n2k/components';
 
@@ -16,7 +16,7 @@ const applyConfig = (config) => {
     },
   };
 
-  return [installExplodedPieChart].reduce((acc, apply) => apply(acc), config);
+  return [installExplodedPiesChart].reduce((acc, apply) => apply(acc), config);
 };
 
 export default applyConfig;

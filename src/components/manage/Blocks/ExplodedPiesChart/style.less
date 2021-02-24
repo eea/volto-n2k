@@ -1,0 +1,33 @@
+.exploded-pies-chart {
+  div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    max-width: 200px;					
+    padding: 1em 2em;				
+    font: 12px sans-serif;		
+    background: #629FCA;	
+    color: #fff;
+    pointer-events: none;
+    border: 0px;		
+    border-radius: 8px;			
+    border-radius: 1px solid #ccc;
+    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    opacity: 0;
+    z-index: 999;
+    transform: translate(-50%, -120%);
+
+    &:before {
+      position: absolute;
+      top: 99%;
+      width: 0;
+      height: 0;
+      border: solid transparent;
+      content: " ";
+      pointer-events: none;
+      left: 50%;
+      border-width: 6px;
+      border-top-color: #629FCA;
+      margin-left: -6px;
+    }
+  }
+}

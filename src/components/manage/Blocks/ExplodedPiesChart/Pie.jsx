@@ -19,12 +19,21 @@ import * as d3 from 'd3';
 //   return text;
 // }
 
+// const Tooltip = () => {
+//   return (
+
+//   )
+// }
+
 const Arc = ({ data, index, createArc, format, size }) => {
+  const [mouseOver, setMouseOver] = React.useState(false);
   const arcData = data.data;
   const offsetX = 0;
   const textWidth = arcData.outerRadius
     ? size.width - ((2 * arcData.outerRadius + size.height) / 2 + offsetX)
     : null;
+
+  const tooltipDiv = d3.select('.exploded-pies-chart div.tooltip');
 
   return (
     <g key={index} className="arc">
@@ -40,7 +49,7 @@ const Arc = ({ data, index, createArc, format, size }) => {
               dy="-6"
               x={textWidth}
             >
-              {format(arcData.value)}%
+              {format(arcData.value) * 100}%
             </text>
             <text
               textAnchor="end"
@@ -71,8 +80,34 @@ const Arc = ({ data, index, createArc, format, size }) => {
       <path
         className="arc"
         d={createArc(data)}
-        fill={arcData.color}
+        fill={mouseOver ? '#629FCA' : arcData.color}
         filter={arcData.filter ? `url(${arcData.filter})` : ''}
+        onFocus={() => {}}
+        onBlur={() => {}}
+        onMouseOver={(event) => {
+          if (arcData.showMouseOver) {
+            setMouseOver(true);
+            tooltipDiv.transition().duration(200).style('opacity', 0.9);
+            tooltipDiv
+              .html(`${format(arcData.value) * 100}% <br/> ${arcData.label}`)
+              .style('left', event.clientX + 'px')
+              .style('top', event.clientY + 'px');
+          }
+        }}
+        onMouseOut={() => {
+          if (mouseOver) {
+            setMouseOver(false);
+            tooltipDiv.transition().duration(500).style('opacity', 0);
+          }
+        }}
+        onMouseMove={(event) => {
+          if (arcData.showMouseOver) {
+            tooltipDiv
+              .html(`${format(arcData.value) * 100}% <br/> ${arcData.label}`)
+              .style('left', event.clientX + 'px')
+              .style('top', event.clientY + 'px');
+          }
+        }}
       />
     </g>
   );
