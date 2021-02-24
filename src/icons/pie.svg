@@ -1,0 +1,8 @@
+<svg height="20" width="20" viewBox="0 0 20 20">
+  <circle r="8" cx="10" cy="10" fill="inner-circle" class="pie" />
+  <circle r="5" cx="10" cy="10" fill="transparent" class="pie-percentage"
+    stroke="outer-circle"
+    stroke-width="10"
+    stroke-dasharray="calc(percentage-value * 31.4) 31.4"
+    transform="rotate(-90) translate(-20)" />
+</svg>
