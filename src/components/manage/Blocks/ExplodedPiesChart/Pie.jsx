@@ -49,7 +49,7 @@ const Arc = ({ data, index, createArc, format, size }) => {
               dy="-6"
               x={textWidth}
             >
-              {format(arcData.value) * 100}%
+              {format(arcData.value * 100)}%
             </text>
             <text
               textAnchor="end"
@@ -103,7 +103,7 @@ const Arc = ({ data, index, createArc, format, size }) => {
         onMouseMove={(event) => {
           if (arcData.showMouseOver) {
             tooltipDiv
-              .html(`${format(arcData.value) * 100}% <br/> ${arcData.label}`)
+              .html(`${format(arcData.value * 100)}% <br/> ${arcData.label}`)
               .style('left', event.clientX + 'px')
               .style('top', event.clientY + 'px');
           }

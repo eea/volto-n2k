@@ -1,7 +1,7 @@
-.n2k-theme {
+.natura2000-theme {
   .ui.basic.segment.content-area {
-    margin: 0;
     padding: 0;
+    margin: 0;
   }
 
   .ui.segment.header-wrapper {
@@ -10,7 +10,7 @@
     .header {
       .logo-nav-wrapper {
         top: 0;
-        
+
         .tools-search-wrapper {
           margin-left: 0 !important;
         }
@@ -27,7 +27,8 @@
             .item {
               color: #999999;
 
-              &:not(.active), &:not(.menuActive) > a {
+              &:not(.active),
+              &:not(.menuActive) > a {
                 color: #999999;
               }
 
@@ -35,12 +36,12 @@
                 border: 1px solid transparent;
                 font-size: 1.15em;
                 font-weight: bold;
+
                 &:hover {
-                  color: #3B7F02 !important;
+                  color: #3b7f02 !important;
 
                   > a {
-                    color: #3B7F02 !important;
-
+                    color: #3b7f02 !important;
                   }
                 }
               }
@@ -48,25 +49,29 @@
               &.secondLevel {
                 &:hover {
                   background: initial !important;
-                  color: #3B7F02;
+                  color: #3b7f02;
                 }
               }
 
-              &.active, &.menuActive {
-                color: #3B7F02;
+              &.active,
+              &.menuActive {
+                color: #3b7f02;
+              }
 
+              &.active:not(.secondLevel):not(.thirdLevel),
+              &.menuActive:not(.secondLevel):not(.thirdLevel) {
                 @media only screen and (min-width: 1655px) {
                   &::before {
-                    display: block !important;
-                    content: '';
                     position: relative;
                     top: -16px;
                     left: 50%;
-                    transform: translateX(-50%);
+                    display: block !important;
                     width: 6px;
                     height: 6px;
+                    background-color: #3b7f02;
                     border-radius: 100%;
-                    background-color: #3B7F02;
+                    content: '';
+                    transform: translateX(-50%);
                   }
                 }
               }
@@ -80,7 +85,7 @@
 
           .hamburger-wrapper {
             height: 24px;
-            margin: .5rem 0;
+            margin: 0.5rem 0;
 
             button.hamburger {
               padding: 0;
@@ -93,14 +98,14 @@
     .sticky-outer-wrapper {
       .sticky-inner-wrapper {
         z-index: 2;
+        padding: 0.5rem 0;
         background-color: rgba(255, 255, 255, 1);
-        padding: .5rem 0;
       }
 
       &.active {
         .sticky-inner-wrapper {
-          background-color: rgba(255, 255, 255, 0.8);
           backdrop-filter: blur(2px);
+          background-color: rgba(255, 255, 255, 0.8);
         }
       }
     }
@@ -110,35 +115,36 @@
     text-align: center;
 
     .footer-wrapper-bg {
-      background-color: #050826;
       width: 100%;
       min-height: 400px;
+      background-color: #050826;
     }
 
     .content {
-      text-align: left;
-      padding: 12rem 0;
       width: 50%;
+      padding: 12rem 0;
+      text-align: left;
 
       a.item {
-        color: #3B7F02;
+        color: #3b7f02;
         text-decoration: none;
       }
 
       .ui.input.search {
         input {
-          background-color: rgba(255, 255, 255, .5);
-          border-radius: 0;
-          border: none;
           padding: 0.4em 1em;
+          border: none;
+          background-color: rgba(255, 255, 255, 0.5);
+          border-radius: 0;
           color: #fff;
         }
+
         button {
-          border-radius: 0;
-          background-color: #3B7F02;
-          margin-left: 1em;
           padding: 0.5em;
-          
+          margin-left: 1em;
+          background-color: #3b7f02;
+          border-radius: 0;
+
           i.icon {
             font-size: 1.3em;
           }
@@ -155,28 +161,28 @@
 .back-to-top {
   margin-top: 2em;
   margin-bottom: 3rem;
-  color: #7B7B7B;
-  font-weight: bold;
+  color: #7b7b7b;
   font-size: 14px;
+  font-weight: bold;
 
   .ui.circular.button {
-    background-color: #fff;
     position: relative;
     width: 3em;
     height: 3em;
+    margin-bottom: 1.5rem;
+    background-color: #fff;
     border-radius: 10em;
     box-shadow: 0px 4px 9px -6px #000000;
-    margin-bottom: 1.5rem;
-  
+
     &:hover {
       box-shadow: 0px 4px 8px -4px #000000;
     }
-  
+
     .icon {
-      margin: 0 !important;
       position: absolute;
       top: 50%;
       left: 50%;
+      margin: 0 !important;
       transform: translate(-50%, -50%);
     }
   }

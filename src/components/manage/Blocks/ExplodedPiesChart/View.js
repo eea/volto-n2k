@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-import { Icon } from '@plone/volto/components';
-import pieSVG from '@eeacms/volto-n2k/icons/pie.svg';
+import * as d3 from 'd3';
 import './style.less';
 
 import Pie from './Pie';
@@ -17,6 +16,7 @@ const View = (props) => {
   const data = props.provider_data || {};
   const x_values = data?.[x] || [];
   const y_values = data?.[y] || [];
+  const format = d3.format('.2f');
 
   const yColorsObj = {};
 
@@ -27,7 +27,9 @@ const View = (props) => {
   const dataReady =
     data && Object.keys(data).length && x_values.length && y_values.length;
 
-  const total = dataReady ? x_values.reduce((a1, a2) => a1 + a2, 0) : null;
+  const total = dataReady
+    ? format(x_values.reduce((a1, a2) => a1 + a2, 0))
+    : null;
 
   return (
     <>

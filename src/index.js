@@ -9,7 +9,7 @@ import './styles.less';
 const applyConfig = (config) => {
   config.settings.themes = {
     ...(config.settings.themes || {}),
-    n2k: {
+    natura2000: {
       Header: Header,
       Footer: Footer,
       Breadcrumbs: () => <></>,

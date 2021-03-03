@@ -5,17 +5,10 @@
 
 import React from 'react';
 import { Icon } from '@plone/volto/components';
-import { Container, Segment, Input, Button } from 'semantic-ui-react';
-import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { Button } from 'semantic-ui-react';
+import { injectIntl } from 'react-intl';
 
 import upKeySVG from '@plone/volto/icons/up-key.svg';
-
-const messages = defineMessages({
-  copyright: {
-    id: 'Copyright',
-    defaultMessage: 'Copyright',
-  },
-});
 
 /**
  * Component to display the footer.
