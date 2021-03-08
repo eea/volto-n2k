@@ -14,7 +14,7 @@ import cx from 'classnames';
 import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers';
 
 import { getNavigation } from '@plone/volto/actions';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -74,7 +74,7 @@ class Navigation extends Component {
   componentDidMount() {
     this.props.getNavigation(
       getBaseUrl(this.props.pathname),
-      settings.navDepth,
+      config.settings.navDepth,
     );
   }
 
@@ -102,7 +102,7 @@ class Navigation extends Component {
     ) {
       this.props.getNavigation(
         getBaseUrl(nextProps.pathname),
-        settings.navDepth,
+        config.settings.navDepth,
       );
       this.closeMobileMenu();
     }
