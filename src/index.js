@@ -1,6 +1,7 @@
 import React from 'react';
 
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
+import installAppExtras from './components/theme/AppExtras';
 
 import { Header, Footer } from '@eeacms/volto-n2k/components';
 
@@ -16,7 +17,10 @@ const applyConfig = (config) => {
     },
   };
 
-  return [installExplodedPiesChart].reduce((acc, apply) => apply(acc), config);
+  return [installExplodedPiesChart, installAppExtras].reduce(
+    (acc, apply) => apply(acc),
+    config,
+  );
 };
 
 export default applyConfig;
