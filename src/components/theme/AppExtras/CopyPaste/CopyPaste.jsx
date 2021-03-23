@@ -140,12 +140,18 @@ const CopyPaste = (props) => {
         }}
         onFocus={() => {}}
       >
-        <Button className="copy" aria-label="Copy" onClick={copyData}>
+        <Button
+          className="copy"
+          aria-label="Copy blocks data"
+          title="Copy blocks data"
+          onClick={copyData}
+        >
           <Icon name={copySVG} className="circled" size="30px" />
         </Button>
         <Button
           className="paste"
-          aria-label="Paste"
+          aria-label="Paste blocks data"
+          title="Paste blocks data"
           onClick={pasteData}
           disabled={props.updateRequest.loading}
         >
