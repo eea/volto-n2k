@@ -5,6 +5,8 @@ import installAppExtras from './components/theme/AppExtras';
 
 import { Header, Footer } from '@eeacms/volto-n2k/components';
 
+import { gridSizes, variants } from './grid';
+
 import './styles.less';
 
 const applyConfig = (config) => {
@@ -15,6 +17,18 @@ const applyConfig = (config) => {
       Footer: Footer,
       Breadcrumbs: () => <></>,
     },
+  };
+
+  config.blocks.blocksConfig.columnsBlock = {
+    ...(config.blocks.blocksConfig.columnsBlock || {}),
+    gridSizes: {
+      ...(config.blocks.blocksConfig.columnsBlock?.gridSizes || {}),
+      ...gridSizes,
+    },
+    variants: [
+      ...(config.blocks.blocksConfig.columnsBlock?.variants || []),
+      ...variants,
+    ],
   };
 
   return [installExplodedPiesChart, installAppExtras].reduce(
