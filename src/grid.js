@@ -23,9 +23,33 @@ export const variants = [
     icon: codeSVG,
     defaultData: {
       gridSize: 12,
-      gridCols: ['halfWidth'],
+      gridCols: ['halfWidthBig'],
     },
     title: '50',
+  },
+  {
+    icon: codeSVG,
+    defaultData: {
+      gridSize: 12,
+      gridCols: ['threeFifths'],
+    },
+    title: '60',
+  },
+  {
+    icon: codeSVG,
+    defaultData: {
+      gridSize: 12,
+      gridCols: ['twoThirds'],
+    },
+    title: '70',
+  },
+  {
+    icon: codeSVG,
+    defaultData: {
+      gridSize: 12,
+      gridCols: ['fourFifths'],
+    },
+    title: '80',
   },
   {
     icon: codeSVG,

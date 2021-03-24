@@ -100,7 +100,7 @@ const CopyPaste = (props) => {
         time.current = 0;
         return;
       }
-      if (clock.current >= TIMEOUT) {
+      if (time.current >= TIMEOUT) {
         clearInterval(clock.current);
         time.current = 0;
         return;
