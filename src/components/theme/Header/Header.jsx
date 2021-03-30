@@ -43,16 +43,21 @@ class Header extends Component {
    */
   render() {
     return (
-      <Segment basic className="header-wrapper" role="banner">
-        <Sticky enabled={true} top={0}>
-          <Container>
-            <div className="header">
-              <div className="logo-nav-wrapper">
-                <div className="tools-search-wrapper">
-                  <Navigation pathname={this.props.pathname} />
+      <>
+        <Segment
+          basic
+          className="header-wrapper tablet computer large screen widescreen only"
+          role="banner"
+        >
+          <Sticky enabled={true} top={0}>
+            <Container>
+              <div className="header">
+                <div className="logo-nav-wrapper">
+                  <div className="tools-search-wrapper">
+                    <Navigation pathname={this.props.pathname} />
+                  </div>
                 </div>
-              </div>
-              {/* <div className="tools-search-wrapper">
+                {/* <div className="tools-search-wrapper">
                 <LanguageSelector />
                 {!this.props.token && (
                   <div className="tools">
@@ -60,10 +65,26 @@ class Header extends Component {
                   </div>
                 )}
               </div> */}
+              </div>
+            </Container>
+          </Sticky>
+        </Segment>
+        <Segment basic className="header-wrapper mobile only" role="banner">
+          <div className="sticky-outer-wrapper">
+            <div className="sticky-inner-wrapper">
+              <Container>
+                <div className="header">
+                  <div className="logo-nav-wrapper">
+                    <div className="tools-search-wrapper">
+                      <Navigation pathname={this.props.pathname} />
+                    </div>
+                  </div>
+                </div>
+              </Container>
             </div>
-          </Container>
-        </Sticky>
-      </Segment>
+          </div>
+        </Segment>
+      </>
     );
   }
 }
