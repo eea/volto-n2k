@@ -185,11 +185,6 @@
   .simple-data-table {
     padding: 0;
   }
-
-  .tabs-block .slick-slider:not(.slick-vertical) .slick-slide {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
 }
 
 .back-to-top {
@@ -226,89 +221,50 @@
   position: absolute;
 }
 
-.carousel_n2k {
-  .slick-slider {
-    .slick-list {
-      overflow: visible;
-
-      .slick-slide {
-        opacity: 1;
-        transition: opacity 0.5s;
-
-        &:not(.slick-active) {
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.5s;
-        }
-
-        &.slick-cloned {
-          opacity: 0;
-          transition: opacity 0s;
-        }
-
-        &.slick-slide.slick-cloned.slick-sliding {
-          opacity: 1;
-          transition: opacity 0.5s;
-        }
-      }
-    }
-  }
-}
-
 img.slick-image {
-  position: relative;
-  z-index: 0;
-  bottom: -71px;
-  left: -300px;
-  width: 600px;
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  left: -240px;
+  width: 500px;
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.5s;
+
+  &.hidden {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
 }
 
-@media only screen and (max-width: @largestMobileScreen) {
-  .styled-with-bg {
-    img.slick-image {
-      bottom: calc(-71px - 1rem);
-    }
+.styled-with-bg {
+  img.slick-image {
+    bottom: -1rem;
   }
+}
+
+.divider {
+  z-index: -1;
+  pointer-events: none;
 }
 
 @media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
   img.slick-image {
-    bottom: -131px;
-    left: -250px;
-    width: 600px;
-  }
-
-  .styled-with-bg {
-    img.slick-image {
-      bottom: calc(-131px - 1rem);
-    }
+    left: -200px;
+    width: 550px;
   }
 }
 
 @media only screen and (min-width: @computerBreakpoint) and (max-width: @largestSmallMonitor) {
   img.slick-image {
-    bottom: -131px;
-    left: -300px;
-    width: 700px;
-  }
-
-  .styled-with-bg {
-    img.slick-image {
-      bottom: calc(-131px - 1rem);
-    }
+    left: -200px;
+    width: 650px;
   }
 }
 
 @media only screen and (min-width: @largeMonitorBreakpoint) {
   img.slick-image {
-    bottom: -131px;
-    left: -400px;
-    width: 700px;
-  }
-
-  .styled-with-bg {
-    img.slick-image {
-      bottom: calc(-131px - 1rem);
-    }
+    left: -150px;
+    width: 650px;
   }
 }

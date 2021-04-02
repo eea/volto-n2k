@@ -2,13 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router';
-import { Portal } from 'react-portal';
 import loadable from '@loadable/component';
 import { RenderBlocks } from '@plone/volto/components';
-import {
-  waitForNodes,
-  withScrollToTarget,
-} from '@eeacms/volto-tabs-block/hocs';
+import { withScrollToTarget } from '@eeacms/volto-tabs-block/hocs';
+import { StyleWrapperView } from '@eeacms/volto-block-style/StyleWrapper';
 import cx from 'classnames';
 
 import 'slick-carousel/slick/slick.css';
@@ -17,152 +14,126 @@ import '@eeacms/volto-tabs-block/less/carousel.less';
 
 const Slider = loadable(() => import('react-slick'));
 
-const Dots = waitForNodes((props) => {
-  const node = props.node.current;
-
-  return (
-    <Portal node={node}>
-      <div className="slick-dots-wrapper">
-        <ul className={cx('slick-dots', props.uiContainer)}>{props.dots}</ul>
-      </div>
-    </Portal>
+const Dots = (props) => {
+  const { activeTab = null, tabsList = [], slider = {} } = props;
+  return slider.current ? (
+    <div className="slick-dots-wrapper">
+      <ul className={cx('slick-dots', props.uiContainer)}>
+        {tabsList.map((tab, index) => (
+          <li
+            key={`dot-${tab}`}
+            className={cx({ 'slick-active': activeTab === tab })}
+          >
+            <button
+              onClick={() => {
+                slider.current.slickGoTo(index);
+              }}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  ) : (
+    ''
   );
-});
+};
 
-const ArrowsGroup = waitForNodes((props) => {
-  const { currentSlide, slideCount } = props;
-  const node = props.node.current;
+const ArrowsGroup = (props) => {
+  const { activeTab = null, tabsList = [], slider = {} } = props;
+  const currentSlide = tabsList.indexOf(activeTab);
+  const slideCount = tabsList.length;
 
-  return (
-    <Portal node={node}>
-      <React.Fragment>
-        <div
-          className={cx({
-            'slick-arrows': true,
-            'one-arrow': currentSlide === 0 || currentSlide === slideCount - 1,
-          })}
+  return slider.current ? (
+    <div
+      className={cx({
+        'slick-arrows': true,
+        'one-arrow': currentSlide === 0 || currentSlide === slideCount - 1,
+      })}
+    >
+      {currentSlide > 0 ? (
+        <button
+          data-role="none"
+          className="slick-arrow slick-prev"
+          onClick={slider.current.slickPrev}
         >
-          {currentSlide > 0 ? (
-            <button
-              data-role="none"
-              className="slick-arrow slick-prev"
-              onClick={props.onPrev}
-            >
-              Previous
-            </button>
-          ) : (
-            ''
-          )}
-          {currentSlide < slideCount - 1 ? (
-            <button
-              data-role="none"
-              className="slick-arrow slick-next"
-              onClick={props.onNext}
-            >
-              Next
-            </button>
-          ) : (
-            ''
-          )}
-        </div>
-      </React.Fragment>
-    </Portal>
+          Previous
+        </button>
+      ) : (
+        ''
+      )}
+      {currentSlide < slideCount - 1 ? (
+        <button
+          data-role="none"
+          className="slick-arrow slick-next"
+          onClick={slider.current.slickNext}
+        >
+          Next
+        </button>
+      ) : (
+        ''
+      )}
+    </div>
+  ) : (
+    ''
   );
-});
+};
 
 const View = (props) => {
   const slider = React.useRef(null);
+  const img = React.useRef(null);
+  const [imgHeight, setImgHeight] = React.useState(0);
   const [hashlinkOnMount, setHashlinkOnMount] = React.useState(false);
   const {
-    metadata = {},
+    activeTab = null,
     data = {},
+    hashlink = {},
+    metadata = {},
     tabsList = [],
     tabs = {},
-    hashlink = {},
+    setActiveTab = () => {},
   } = props;
+  const activeTabIndex = tabsList.indexOf(activeTab);
+  const tabData = tabs[activeTab] || {};
   const uiContainer = data.align === 'full' ? 'ui container' : false;
   const image = data.image || null;
 
-  const onPrev = () => {
-    slider.current.slickPrev();
-  };
-
-  const onNext = () => {
-    slider.current.slickNext();
-  };
-
   const settings = {
     autoplay: false,
-    arrows: true,
-    dots: true,
+    arrows: false,
+    dots: false,
     speed: 500,
     initialSlide: 0,
     lazyLoad: 'ondemand',
-    prevArrow: <React.Fragment />,
-    nextArrow: (
-      <ArrowsGroup
-        nodes={[props.node, slider]}
-        node={props.node}
-        slider={slider}
-        onPrev={onPrev}
-        onNext={onNext}
-        image={image}
-      />
-    ),
-    appendDots: (dots) => (
-      <Dots
-        nodes={[props.node, slider]}
-        node={props.node}
-        slider={slider}
-        dots={dots}
-        uiContainer={uiContainer}
-      />
-    ),
     swipe: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     touchMove: true,
     beforeChange: (oldIndex, index) => {
-      const slickList = slider.current?.innerSlider?.list;
-      if (slickList) {
-        const infiniteLeftSlide = slickList.querySelector(
-          '.slick-slide.slick-cloned[data-index="-1"]',
-        );
-        const infiniteRightSlide = slickList.querySelector(
-          `.slick-slide.slick-cloned[data-index="${tabsList.length}"]`,
-        );
-        if (
-          oldIndex === 0 &&
-          index === tabsList.length - 1 &&
-          infiniteLeftSlide
-        ) {
-          infiniteLeftSlide.classList.add('slick-sliding');
-        } else if (
-          oldIndex === tabsList.length - 1 &&
-          index === 0 &&
-          infiniteRightSlide
-        ) {
-          infiniteRightSlide.classList.add('slick-sliding');
-        }
-      }
+      setActiveTab(tabsList[index]);
     },
-    afterChange: (index) => {
-      const slickList = slider.current?.innerSlider?.list;
-      if (slickList) {
-        const infiniteLeftSlide = slickList.querySelector(
-          '.slick-slide.slick-cloned[data-index="-1"]',
-        );
-        const infiniteRightSlide = slickList.querySelector(
-          `.slick-slide.slick-cloned[data-index="${tabsList.length}"]`,
-        );
-        if (infiniteLeftSlide) {
-          infiniteLeftSlide.classList.remove('slick-sliding');
-        }
-        if (infiniteRightSlide) {
-          infiniteRightSlide.classList.remove('slick-sliding');
-        }
-      }
-    },
+  };
+
+  const panes = tabsList.map((tab, index) => {
+    return {
+      id: tab,
+      renderItem: (
+        <React.Fragment key={`slide-${tab}`}>
+          <RenderBlocks {...props} metadata={metadata} content={tabs[tab]} />
+          {index === 0 ? (
+            <div
+              className="divider"
+              style={{ height: `${imgHeight - 80}px` }}
+            />
+          ) : (
+            ''
+          )}
+        </React.Fragment>
+      ),
+    };
+  });
+
+  const updateImageHeight = () => {
+    setImgHeight(img.current?.height || 0);
   };
 
   React.useEffect(() => {
@@ -173,7 +144,6 @@ const View = (props) => {
     ) {
       const id = hashlink.hash || urlHash || '';
       const index = tabsList.indexOf(id);
-      const currentIndex = slider.current?.innerSlider?.state?.currentSlide;
       const parentId = data.id || props.id;
       const parent = document.getElementById(parentId);
       // TODO: Find the best way to add offset relative to header
@@ -182,7 +152,7 @@ const View = (props) => {
       // const offsetHeight = headerWrapper?.offsetHeight || 0;
       const offsetHeight = 0;
       if (id !== parentId && index > -1 && parent) {
-        if (currentIndex !== index) {
+        if (activeTabIndex !== index) {
           slider.current.slickGoTo(index);
         }
         props.scrollToTarget(parent, offsetHeight);
@@ -196,31 +166,40 @@ const View = (props) => {
     /* eslint-disable-next-line */
   }, [hashlink.counter]);
 
-  const panes = tabsList.map((tab, index) => {
-    return {
-      id: tab,
-      renderItem: (
-        <React.Fragment key={`slide-${tab}`}>
-          <RenderBlocks {...props} metadata={metadata} content={tabs[tab]} />
-          {image && index === 0 ? (
-            <img
-              className="slick-image"
-              src={`${image}/@@images/image`}
-              alt="Logo"
-            />
-          ) : (
-            ''
-          )}
-        </React.Fragment>
-      ),
+  React.useEffect(() => {
+    img.current.onload = () => {
+      updateImageHeight();
     };
-  });
+    window.addEventListener('resize', updateImageHeight);
+    return () => {
+      window.removeEventListener('resize', updateImageHeight);
+    };
+    /* eslint-disable-next-line */
+  }, []);
 
   return (
     <>
-      <Slider {...settings} ref={slider} className={cx(uiContainer)}>
-        {panes.length ? panes.map((pane) => pane.renderItem) : ''}
-      </Slider>
+      <StyleWrapperView
+        {...props}
+        data={tabData}
+        styleData={tabData.styles || { customClass: 'styled' }}
+      >
+        <Slider {...settings} ref={slider} className={cx(uiContainer)}>
+          {panes.length ? panes.map((pane) => pane.renderItem) : ''}
+        </Slider>
+        <img
+          ref={img}
+          className={cx('slick-image', { hidden: activeTabIndex !== 0 })}
+          src={`${image}/@@images/image`}
+          alt="Logo"
+        />
+        <ArrowsGroup
+          activeTab={activeTab}
+          tabsList={tabsList}
+          slider={slider}
+        />
+        <Dots activeTab={activeTab} tabsList={tabsList} slider={slider} />
+      </StyleWrapperView>
     </>
   );
 };
