@@ -2,6 +2,7 @@ import React from 'react';
 
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
+import installSiteBanner from './components/manage/Blocks/SiteBanner';
 import installAppExtras from './components/theme/AppExtras';
 
 import { Header } from '@eeacms/volto-n2k/components';
@@ -34,6 +35,7 @@ const applyConfig = (config) => {
   return [
     installCarouselHorizontal,
     installExplodedPiesChart,
+    installSiteBanner,
     installAppExtras,
   ].reduce((acc, apply) => apply(acc), config);
 };
