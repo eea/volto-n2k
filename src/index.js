@@ -1,6 +1,7 @@
 import React from 'react';
 
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
+import installLandingBlock from './components/manage/Blocks/Landing';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
 import installSiteBanner from './components/manage/Blocks/SiteBanner';
 import installAppExtras from './components/theme/AppExtras';
@@ -12,6 +13,11 @@ import { gridSizes, variants } from './grid';
 import './less/styles.less';
 
 const applyConfig = (config) => {
+  config.blocks.groupBlocksOrder = [
+    ...config.blocks.groupBlocksOrder,
+    { id: 'natura_2000', title: 'Natura 2000' },
+  ];
+
   config.settings.themes = {
     ...(config.settings.themes || {}),
     natura2000: {
@@ -34,6 +40,7 @@ const applyConfig = (config) => {
 
   return [
     installCarouselHorizontal,
+    installLandingBlock,
     installExplodedPiesChart,
     installSiteBanner,
     installAppExtras,
