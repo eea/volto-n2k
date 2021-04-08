@@ -4,13 +4,13 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router';
 import loadable from '@loadable/component';
 import { RenderBlocks } from '@plone/volto/components';
-// import { withScrollToTarget } from '@eeacms/volto-tabs-block/hocs';
+import { withScrollToTarget } from '@eeacms/volto-tabs-block/hocs';
 import { StyleWrapperView } from '@eeacms/volto-block-style/StyleWrapper';
 import cx from 'classnames';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-// import '@eeacms/volto-tabs-block/less/carousel.less';
+import '@eeacms/volto-tabs-block/less/carousel.less';
 
 const Slider = loadable(() => import('react-slick'));
 
