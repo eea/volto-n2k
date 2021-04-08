@@ -42,7 +42,9 @@ class Header extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    return (
+    return this.props.pathname === '/natura2000' ? (
+      ''
+    ) : (
       <>
         <Segment
           basic

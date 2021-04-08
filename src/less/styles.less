@@ -1,6 +1,54 @@
 @import './globals.less';
 
+@font-face {
+  font-family: "OpenSans";
+  src: url("../fonts/OpenSans-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("../fonts/OpenSans-Semibold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("../fonts/OpenSans-Bold.ttf") format("truetype");
+  font-weight: 800;
+}
+
+
+.tabs-block.carousel_n2k {
+  overflow: hidden;
+}
+
+.styled-with-bg {
+  padding: 0 !important;
+}
+
+
 .natura2000-theme {
+  /* TEXT */
+  h1, h2, h3, h4, h5, h6, p, a, span {
+    font-family: OpenSans, 'Raleway', sans-serif;;
+  }
+
+  h2 {
+    font-weight: 600;
+  }
+
+  p, a {
+    font-size: 14px;
+  }
+
+  .tabs-block {
+    h2 {
+      font-size: 43px;
+    }
+  }
+
+
   .ui.basic.segment.content-area {
     padding: 0;
     margin: 0;
@@ -35,6 +83,7 @@
 
             .item {
               color: #999999;
+              position: relative;
 
               &:not(.active),
               &:not(.menuActive) > a {
@@ -71,8 +120,8 @@
               &.menuActive:not(.secondLevel):not(.thirdLevel) {
                 @media only screen and (min-width: 1655px) {
                   &::before {
-                    position: relative;
-                    top: -16px;
+                    position: absolute;
+                    top: 4px;
                     left: 50%;
                     display: block !important;
                     width: 6px;
@@ -223,7 +272,7 @@
 
 img.slick-image {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   bottom: 0;
   left: -270px;
   width: 500px;
@@ -234,12 +283,6 @@ img.slick-image {
   &.hidden {
     opacity: 0;
     transition: opacity 0.5s;
-  }
-}
-
-.styled-with-bg {
-  img.slick-image {
-    bottom: -1rem;
   }
 }
 

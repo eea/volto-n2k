@@ -1,22 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 import { UniversalLink } from '@plone/volto/components';
 import hiker from './images/hiker.png';
 import { tiles, tileProps } from './index';
+
+const getStyle = (props) => {
+  if (!props.screen) return {};
+  if (!props.screen.screenWidth || !props.screen.screenHeight) return {};
+  if (props.screen.screenWidth < 768)
+    return {
+      maxHeight: props.screen.screenHeight.toPixel(),
+      minHeight: props.screen.screenHeight.toPixel(),
+    };
+  return { minHeight: props.screen.screenHeight.toPixel() };
+};
 
 const DefaultView = (props) => {
   return (
     <>
       <div
         className="landing-page-wrapper default full-width"
-        style={{
-          ...(props.screenWidth < 768
-            ? {
-                maxHeight: `${props.screenHeight}px`,
-                minHeight: `${props.screenHeight}px`,
-              }
-            : { minHeight: `${props.screenHeight}px` }),
-        }}
+        style={getStyle(props)}
       >
         <Grid className="landing-page" container columns="12">
           <Grid.Row>
@@ -25,7 +30,7 @@ const DefaultView = (props) => {
               widescreen="7"
               largeScreen="7"
               computer="7"
-              tablet="6"
+              tablet="7"
               mobile="12"
             >
               <p>
@@ -42,7 +47,7 @@ const DefaultView = (props) => {
               widescreen="5"
               largeScreen="5"
               computer="5"
-              tablet="6"
+              tablet="5"
               mobile="6"
             >
               <Grid style={{ justifyContent: 'space-around' }}>
@@ -72,4 +77,6 @@ const DefaultView = (props) => {
   );
 };
 
-export default DefaultView;
+export default connect((state, props) => ({
+  screen: state.screen,
+}))(DefaultView);

@@ -320,7 +320,7 @@ const getN2kItems = (items) => {
   for (let i = 0; i < items.length; i++) {
     if (items[i].url === '/natura2000') {
       return [
-        { title: 'Biodiversity', url: '/' },
+        // { title: 'Biodiversity', url: '/' },
         ...(items[i].items || []),
         { title: items[i].title, url: items[i].url },
       ];

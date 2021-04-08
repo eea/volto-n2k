@@ -1,54 +1,63 @@
 import worldSVG from '@plone/volto/icons/world.svg';
 import Edit from './Edit';
 import View from './View';
-// import coasts_and_seas from './images/coasts_and_seas.png';
+import coasts_and_seas from './images/coasts_and_seas.png';
 import forests from './images/forests.png';
 import mountains from './images/mountains.png';
 import grasslands from './images/grasslands.png';
 import rivers from './images/rivers.png';
 import islands from './images/islands.png';
 import pople_and_nature from './images/pople_and_nature.png';
+// import natura2000 from './images/natura2000.png';
 
 export const tiles = [
   {
-    image: forests,
+    image: coasts_and_seas,
     title: 'Coasts and seas',
     description: 'COASTS AND SEAS',
+    link: '/natura2000/coasts-and-seas',
   },
   {
     image: forests,
     title: 'Forests',
     description: 'FORESTS',
+    link: '/natura2000/forests',
   },
   {
     image: mountains,
     title: 'Mountains',
     description: 'MOUNTAINS',
+    link: '/natura2000/mountains',
   },
   {
     image: grasslands,
     title: 'Grasslands',
     description: 'GRASSLANDS',
+    link: '/natura2000/grasslands',
   },
   {
     image: rivers,
     title: 'Rivers and lakes',
     description: 'RIVERS AND LAKES',
+    link: '/natura2000/rivers-and-lakes',
   },
   {
     image: islands,
     title: 'Islands',
     description: 'ISLANDS',
+    link: '/natura2000/islands',
   },
   {
     image: pople_and_nature,
     title: 'People and nature',
     description: 'PEOPLE AND NATURE',
+    link: '/natura2000/people-and-nature',
   },
   {
     image: forests,
     title: 'Natura 2000',
     description: 'NATURA 2000',
+    link: '/natura2000/natura2000',
   },
 ];
 

@@ -16,9 +16,10 @@ const Slider = loadable(() => import('react-slick'));
 
 const Dots = (props) => {
   const { activeTab = null, tabsList = [], slider = {} } = props;
-  return slider.current ? (
+  return slider.current && tabsList.length > 1 ? (
     <div className="slick-dots-wrapper">
-      <ul className={cx('slick-dots', props.uiContainer)}>
+      <div className="slick-line" />
+      <ul className={cx('slick-dots ui container', props.uiContainer)}>
         {tabsList.map((tab, index) => (
           <li
             key={`dot-${tab}`}
@@ -179,27 +180,17 @@ const View = (props) => {
 
   return (
     <>
-      <StyleWrapperView
-        {...props}
-        data={tabData}
-        styleData={tabData.styles || { customClass: 'styled' }}
-      >
-        <Slider {...settings} ref={slider} className={cx(uiContainer)}>
-          {panes.length ? panes.map((pane) => pane.renderItem) : ''}
-        </Slider>
-        <img
-          ref={img}
-          className={cx('slick-image', { hidden: activeTabIndex !== 0 })}
-          src={`${image}/@@images/image`}
-          alt="Logo"
-        />
-        <ArrowsGroup
-          activeTab={activeTab}
-          tabsList={tabsList}
-          slider={slider}
-        />
-        <Dots activeTab={activeTab} tabsList={tabsList} slider={slider} />
-      </StyleWrapperView>
+      <Slider {...settings} ref={slider} className={cx(uiContainer)}>
+        {panes.length ? panes.map((pane) => pane.renderItem) : ''}
+      </Slider>
+      <img
+        ref={img}
+        className={cx('slick-image', { hidden: activeTabIndex !== 0 })}
+        src={`${image}/@@images/image`}
+        alt="Logo"
+      />
+      <ArrowsGroup activeTab={activeTab} tabsList={tabsList} slider={slider} />
+      <Dots activeTab={activeTab} tabsList={tabsList} slider={slider} />
     </>
   );
 };
