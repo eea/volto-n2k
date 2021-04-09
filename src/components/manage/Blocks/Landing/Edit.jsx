@@ -12,7 +12,7 @@ import { withScreenSize } from '@eeacms/volto-n2k/hocs';
 import DefaultView from './DefalutView';
 import getSchema from './schema';
 import hiker from './images/hiker.png';
-import { tileProps } from './index';
+import { tileProps, getStyle } from './index';
 import './style.less';
 
 const Edit = (props) => {
@@ -88,14 +88,7 @@ const Edit = (props) => {
       ) : (
         <div
           className="landing-page-wrapper full-width edit"
-          style={{
-            ...(props.screenWidth < 768
-              ? {
-                  maxHeight: `${props.screenHeight}px`,
-                  minHeight: `${props.screenHeight}px`,
-                }
-              : { minHeight: `${props.screenHeight}px` }),
-          }}
+          style={getStyle(props)}
           role="presentation"
           onKeyDown={(e) => {
             handleKeyDown(e, props.index, props.block, props.blockNode.current);
@@ -108,10 +101,10 @@ const Edit = (props) => {
             <Grid.Row>
               <Grid.Column
                 className="landing-page-description"
-                widescreen="7"
-                largeScreen="7"
-                computer="7"
-                tablet="6"
+                widescreen="6"
+                largeScreen="6"
+                computer="6"
+                tablet="12"
                 mobile="12"
               >
                 <BlocksForm
@@ -176,11 +169,11 @@ const Edit = (props) => {
               </Grid.Column>
               <Grid.Column
                 className="landing-page-tiles"
-                widescreen="5"
-                largeScreen="5"
-                computer="5"
-                tablet="6"
-                mobile="6"
+                widescreen="6"
+                largeScreen="6"
+                computer="6"
+                tablet="5"
+                mobile="7"
               >
                 <Grid style={{ justifyContent: 'space-around' }}>
                   {tiles.map((item, index) => (

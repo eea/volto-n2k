@@ -3,18 +3,7 @@ import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 import { UniversalLink } from '@plone/volto/components';
 import hiker from './images/hiker.png';
-import { tiles, tileProps } from './index';
-
-const getStyle = (props) => {
-  if (!props.screen) return {};
-  if (!props.screen.screenWidth || !props.screen.screenHeight) return {};
-  if (props.screen.screenWidth < 768)
-    return {
-      maxHeight: props.screen.screenHeight.toPixel(),
-      minHeight: props.screen.screenHeight.toPixel(),
-    };
-  return { minHeight: props.screen.screenHeight.toPixel() };
-};
+import { tiles, tileProps, getStyle } from './index';
 
 const DefaultView = (props) => {
   return (
@@ -27,10 +16,10 @@ const DefaultView = (props) => {
           <Grid.Row>
             <Grid.Column
               className="landing-page-description"
-              widescreen="7"
-              largeScreen="7"
-              computer="7"
-              tablet="7"
+              widescreen="6"
+              largeScreen="6"
+              computer="6"
+              tablet="12"
               mobile="12"
             >
               <p>
@@ -44,11 +33,11 @@ const DefaultView = (props) => {
             </Grid.Column>
             <Grid.Column
               className="landing-page-tiles"
-              widescreen="5"
-              largeScreen="5"
-              computer="5"
+              widescreen="6"
+              largeScreen="6"
+              computer="6"
               tablet="5"
-              mobile="6"
+              mobile="7"
             >
               <Grid style={{ justifyContent: 'space-around' }}>
                 {tiles.map((item, index) => (

@@ -1,5 +1,8 @@
 @import './globals.less';
 
+@lightGreen: #7AC943;
+@darkGreen: #3B7F02;
+
 @font-face {
   font-family: "OpenSans";
   src: url("../fonts/OpenSans-Regular.ttf") format("truetype");
@@ -40,6 +43,15 @@
 
   p, a {
     font-size: 14px;
+  }
+
+  a {
+    color: @green;
+    font-weight: 600;
+
+    &:hover {
+      color: @darkGreen;
+    }
   }
 
   .tabs-block {
