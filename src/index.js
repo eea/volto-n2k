@@ -4,6 +4,7 @@ import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizo
 import installLandingBlock from './components/manage/Blocks/Landing';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
 import installSiteBanner from './components/manage/Blocks/SiteBanner';
+import installProtectedSpecies from './components/manage/Blocks/ProtectedSpecies';
 import installAppExtras from './components/theme/AppExtras';
 
 import { Header } from '@eeacms/volto-n2k/components';
@@ -43,6 +44,7 @@ const applyConfig = (config) => {
     installLandingBlock,
     installExplodedPiesChart,
     installSiteBanner,
+    installProtectedSpecies,
     installAppExtras,
   ].reduce((acc, apply) => apply(acc), config);
 };
