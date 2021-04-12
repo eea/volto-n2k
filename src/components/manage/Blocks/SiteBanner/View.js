@@ -22,7 +22,7 @@ const View = (props) => {
     <div className="site-banner full-width">
       <div className="ui container">
         <Grid columns="equal">
-          <Grid.Column width={8}>
+          <Grid.Column computer="8" mobile="12">
             <h2 className="country-title">{country_name}</h2>
             <span className="site-name">{site_name}</span>
             <Popup
@@ -83,7 +83,9 @@ const View = (props) => {
               )}
             </div>
           </Grid.Column>
-          <Grid.Column width={4}>{/*map svg here*/}</Grid.Column>
+          <Grid.Column computer="4" mobile="12">
+            {/*map svg here*/}
+          </Grid.Column>
         </Grid>
       </div>
     </div>

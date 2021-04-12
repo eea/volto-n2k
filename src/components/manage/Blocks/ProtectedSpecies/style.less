@@ -1,3 +1,7 @@
+@import (multiple, reference, optional) '../../theme.config';
+@type: extra;
+@element: custom;
+
 .natura2000-theme {
   .species-banner {
     font-family: 'RajdhaniB';
@@ -7,10 +11,6 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-
-    .ui.container {
-      position: relative;
-    }
   }
 
   .species-container {
@@ -19,6 +19,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
+    width: 100%;
   }
 
   .banner-layer {
@@ -31,12 +32,16 @@
   }
 
   .species-wrapper {
-    padding: 0 4em;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
     margin-bottom: 0 !important;
   }
 
-  .species-number {
-    .species-data {
+  .species-box {
+    margin: 0.5em 1.5em;
+
+    .upper {
       background-color: #eaeaea;
       width: 110px;
       height: 110px;
@@ -45,25 +50,63 @@
       margin: auto;
 
       > span {
+        color: #013c60;
+        font-size: 55px;
+        font-family: inherit;
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        color: #013c60;
-        font-size: 55px;
-        font-family: inherit;
       }
     }
-  }
 
-  .species-species_group_name {
-    .species-data {
+    .lower {
       text-align: center;
+      margin-top: 1em;
 
       span {
         color: #fff;
         font-family: inherit;
         font-size: 19px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: @largeMonitorBreakpoint) {
+  .natura2000-theme {
+    .species-box {
+      width: 100px;
+      margin: 0.8em;
+
+      .upper {
+        width: 80px;
+        height: 80px;
+
+        span {
+          font-size: 40px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .natura2000-theme {
+    .species-box {
+      width: 80px;
+
+      .upper {
+        width: 50px;
+        height: 50px;
+
+        span {
+          font-size: 25px;
+        }
+      }
+
+      .lower span {
+        font-size: 16px;
       }
     }
   }
