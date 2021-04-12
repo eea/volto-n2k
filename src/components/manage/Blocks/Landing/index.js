@@ -7,8 +7,8 @@ import mountains from './images/mountains.png';
 import grasslands from './images/grasslands.png';
 import rivers from './images/rivers.png';
 import islands from './images/islands.png';
-import pople_and_nature from './images/pople_and_nature.png';
-// import natura2000 from './images/natura2000.png';
+import people_and_nature from './images/people_and_nature.png';
+import natura2000 from './images/natura2000.png';
 
 export const tiles = [
   {
@@ -48,20 +48,45 @@ export const tiles = [
     link: '/natura2000/islands',
   },
   {
-    image: pople_and_nature,
+    image: people_and_nature,
     title: 'People and nature',
     description: 'PEOPLE AND NATURE',
     link: '/natura2000/people-and-nature',
   },
   {
-    image: forests,
+    image: natura2000,
     title: 'Natura 2000',
     description: 'NATURA 2000',
     link: '/natura2000/natura2000',
   },
 ];
 
-export const tileProps = { mobile: 12, tablet: 5, computer: 5 };
+export const tileProps = {
+  mobile: 12,
+  tablet: 12,
+  computer: 6,
+  largeScreen: 6,
+  widescreen: 6,
+};
+
+export const getStyle = (props) => {
+  if (!props.screen) return {};
+  if (!props.screen.screenWidth || !props.screen.screenHeight) return {};
+  if (props.screen.screenWidth < 1071)
+    return {
+      maxHeight: props.screen.screenHeight.toPixel(),
+      minHeight:
+        props.screen.screenHeight > 768
+          ? props.screen.screenHeight.toPixel()
+          : '768px',
+    };
+  return {
+    minHeight:
+      props.screen.screenHeight > 768
+        ? props.screen.screenHeight.toPixel()
+        : '768px',
+  };
+};
 
 export default (config) => {
   config.blocks.blocksConfig.landing_block = {

@@ -4,7 +4,7 @@ import { RenderBlocks, UniversalLink } from '@plone/volto/components';
 import { withScreenSize } from '@eeacms/volto-n2k/hocs';
 import DefaultView from './DefalutView';
 import hiker from './images/hiker.png';
-import { tileProps } from './index';
+import { tileProps, getStyle } from './index';
 import './style.less';
 
 const View = (props) => {
@@ -16,40 +16,26 @@ const View = (props) => {
   return useDefault ? (
     <DefaultView {...props} />
   ) : (
-    <div
-      className="landing-page-wrapper full-width"
-      style={{
-        ...(props.screenWidth < 768
-          ? {
-              maxHeight: `${props.screenHeight}px`,
-              minHeight: `${props.screenHeight}px`,
-            }
-          : {
-              minHeight: `${
-                props.screenHeight > 750 ? props.screenHeight : 750
-              }px`,
-            }),
-      }}
-    >
+    <div className="landing-page-wrapper full-width" style={getStyle(props)}>
       <Grid className="landing-page" container columns="12">
         <Grid.Row>
           <Grid.Column
             className="landing-page-description"
-            widescreen="7"
-            largeScreen="7"
-            computer="7"
-            tablet="6"
+            widescreen="6"
+            largeScreen="6"
+            computer="6"
+            tablet="12"
             mobile="12"
           >
             <RenderBlocks {...props} metadata={metadata} content={blocksData} />
           </Grid.Column>
           <Grid.Column
             className="landing-page-tiles"
-            widescreen="5"
-            largeScreen="5"
-            computer="5"
-            tablet="6"
-            mobile="6"
+            widescreen="6"
+            largeScreen="6"
+            computer="6"
+            tablet="5"
+            mobile="7"
           >
             <Grid style={{ justifyContent: 'space-around' }}>
               {tiles.map((item, index) => (
