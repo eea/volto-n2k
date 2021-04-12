@@ -24,7 +24,7 @@ const View = (props) => {
         <Grid columns="equal">
           <Grid.Column width={8}>
             <h2 className="country-title">{country_name}</h2>
-            <span>{site_name}</span>
+            <span className="site-name">{site_name}</span>
             <Popup
               content={designation}
               trigger={<Image src={infoSVG} className="info-icon" />}

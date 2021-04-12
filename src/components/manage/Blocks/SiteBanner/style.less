@@ -1,48 +1,58 @@
-.site-banner {
-  padding: 1.5em 0;
-  background-color: #04a77d;
-  color: #fff;
+.natura2000-theme {
+  .site-banner {
+    font-family: 'RajdhaniB';
+    color: #fff;
+    padding: 1.5em 0;
+    background-color: #04a77d;
 
-  .ui.container > * {
+    .ui.container > * {
+      margin-bottom: 0 !important;
+    }
+
+    .block .ui.image {
+      width: auto;
+    }
+  }
+
+  .country-title {
+    font-family: inherit;
+    font-size: 54px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 0.5em !important;
     margin-bottom: 0 !important;
   }
 
-  .block .ui.image {
-    width: auto;
-  }
-}
-
-.country-title {
-  text-transform: uppercase;
-  color: #fff;
-  margin-top: 0.5em !important;
-  margin-bottom: 0 !important;
-}
-
-.info-icon {
-  display: inline-block !important;
-  width: auto !important;
-  margin-left: 15px;
-}
-
-.site-details-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.site-detail {
-  flex: 0 1 30%;
-  margin-top: 2.5em;
-
-  .upper {
-    font-size: 34px;
-    font-weight: 700;
-    margin-bottom: 0.2em;
+  .site-name {
+    font-family: 'RajdhaniR';
+    font-size: 18px;
   }
 
-  .lower {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
+  .info-icon {
+    display: inline-block !important;
+    width: auto !important;
+    margin-left: 15px;
+  }
+
+  .site-details-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .site-detail {
+    flex: 0 1 30%;
+    margin-top: 3em;
+
+    .upper {
+      font-size: 39px;
+      font-weight: 700;
+      margin-bottom: 0.2em;
+    }
+
+    .lower {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
   }
 }
