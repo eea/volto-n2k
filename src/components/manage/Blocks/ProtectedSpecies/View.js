@@ -15,8 +15,8 @@ const View = (props) => {
       <div className="species-container">
         <Container>
           <div className="species-wrapper">
-            {Object.entries(data).map(([item, value]) => (
-              <div className="species-box">
+            {Object.entries(data).map(([item, value], index) => (
+              <div key={index} className="species-box">
                 <div className="upper">
                   <span>{value}</span>
                 </div>
