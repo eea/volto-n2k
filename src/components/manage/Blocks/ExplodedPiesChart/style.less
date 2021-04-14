@@ -41,10 +41,15 @@
     transform: translateY(-50%);
 
     > * {
+      width: 100%;
       color: #013C60;
       font-size: 12px;
       font-weight: 600;
       font-family: 'OpenSans', arial;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .value {

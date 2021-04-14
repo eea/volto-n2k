@@ -327,6 +327,34 @@ img.slick-image {
   margin-bottom: 1rem;
 }
 
+.sdf-image {
+  height: 500px;
+
+  .block-image {
+    position: relative;
+    height: 100%;
+    .block.image {
+      position: relative;
+      height: 100%;
+      img {
+        /* Set up positioning */
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
+        /* Set up proportionate scaling */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        opacity: 1;
+        pointer-events: none;
+        transition: opacity 0.5s;
+      }
+    }
+  }
+}
+
 @media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
   img.slick-image {
     left: -200px;

@@ -1,0 +1,46 @@
+div#view .ui.container > .navigation-anchors {
+  margin-bottom: 0;
+  padding: 1rem 0;
+
+  .ui.menu {
+    margin-bottom: 0;
+  }
+}
+
+.navigation-anchors {
+  background-color: #fff;
+  -webkit-box-shadow: 0px 0px 10px -5px #000000;
+  box-shadow: 0px 0px 10px -5px #000000;
+  z-index: 1;
+
+  > .ui.container > .ui.menu {
+    border: 0;
+    box-shadow: none;
+
+    .item {
+      font-family: 'Raleway', sans-serif;
+      font-weight: normal;
+      background: none;
+      padding: 1rem;
+      color: #000;
+
+      p, a {
+        font-weight: normal;
+        font-size: 16px;
+        color: #000;
+
+        &:hover {
+          opacity: .9;
+        }
+      }
+
+      &.active {
+        color: #04A87D;
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}

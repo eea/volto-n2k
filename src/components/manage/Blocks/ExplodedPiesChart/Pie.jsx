@@ -48,7 +48,8 @@ const Arc = ({ data, index, createArc, format, size }) => {
           <path
             className="arc"
             d={createArc(data)}
-            fill={mouseOver ? '#629FCA' : arcData.color}
+            opacity={mouseOver ? '0.9' : 1}
+            fill={arcData.color}
             filter={arcData.filter ? `url(${arcData.filter})` : ''}
             onFocus={() => {}}
             onBlur={() => {}}
@@ -87,7 +88,7 @@ const Pie = (props) => {
         <filter id="drop-shadow" x="0" y="0" width="200%" height="200%">
           <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
           <feOffset dx="1" dy="4" result="offsetblur" />
-          <feFlood flood-color="rgba(0, 0, 0, 0.2)" />
+          <feFlood floodColor="rgba(0, 0, 0, 0.2)" />
           <feComposite in2="offsetblur" operator="in" />
           <feMerge>
             <feMergeNode />
