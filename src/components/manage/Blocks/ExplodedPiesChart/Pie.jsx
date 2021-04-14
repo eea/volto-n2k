@@ -1,113 +1,69 @@
 import React from 'react';
 import * as d3 from 'd3';
-
-// function getTextWidth(text, font) {
-//   let canvas =
-//     getTextWidth.canvas ||
-//     (getTextWidth.canvas = document.createElement('canvas'));
-//   let context = canvas.getContext('2d');
-//   context.font = font;
-//   let metrics = context.measureText(text);
-//   return metrics.width;
-// }
-
-// function splitText(text, font, maxWidth) {
-//   const width = getTextWidth(text, font);
-//   if (width > maxWidth) {
-//     return splitText(text.substring(0, text.length), font, maxWidth);
-//   }
-//   return text;
-// }
-
-// const Tooltip = () => {
-//   return (
-
-//   )
-// }
+import { Popup } from 'semantic-ui-react';
 
 const Arc = ({ data, index, createArc, format, size }) => {
   const [mouseOver, setMouseOver] = React.useState(false);
   const arcData = data.data;
-  const offsetX = 0;
-  const textWidth = arcData.outerRadius
-    ? size.width - ((2 * arcData.outerRadius + size.height) / 2 + offsetX)
-    : null;
-
-  const tooltipDiv = d3.select('.exploded-pies-chart div.tooltip');
 
   return (
     <g key={index} className="arc">
       {arcData.showValue && arcData.label ? (
         <g>
-          <g transform={`translate(${arcData.outerRadius + offsetX}, 0)`}>
-            <text
-              textAnchor="end"
-              fill="#013C60"
-              fontSize="32"
-              fontWeight="bold"
-              className="arc-text"
-              dy="-6"
-              x={textWidth}
+          <foreignObject
+            transform={`translate(-${size.realOuterRadius}, -${size.realOuterRadius})`}
+            width="100%"
+            height={size.height}
+            position="relative"
+            x={size.realOuterRadius + size.outerRadius}
+          >
+            <div
+              className="text"
+              xmlns="http://www.w3.org/1999/xhtml"
+              style={{
+                width: `calc(100% - ${
+                  size.realOuterRadius + size.outerRadius
+                }px)`,
+                height: 2 * size.outerRadius,
+              }}
             >
-              {format(arcData.value * 100)}%
-            </text>
-            <text
-              textAnchor="end"
-              fill="#013C60"
-              fontSize="12"
-              fontWeight="bold"
-              fontFamily="arial"
-              className="arc-text"
-              dy="20"
-              x={textWidth}
-            >
-              <tspan>{arcData.label}</tspan>
-            </text>
-          </g>
-          <line
-            transform={`translate(${size.outerRadius}, 3)`}
-            stroke="#013C60"
-            stroke-width="3px"
-            x1="0"
-            y1="0"
-            x2={size.width - (2 * size.outerRadius + size.height) / 2}
-            y2="0"
-          ></line>
+              <p className="value">{format(arcData.value * 100)}%</p>
+              <span className="line" />
+              <p className="label">{arcData.label}</p>
+            </div>
+          </foreignObject>
         </g>
       ) : (
         ''
       )}
-      <path
-        className="arc"
-        d={createArc(data)}
-        fill={mouseOver ? '#629FCA' : arcData.color}
-        filter={arcData.filter ? `url(${arcData.filter})` : ''}
-        onFocus={() => {}}
-        onBlur={() => {}}
-        onMouseOver={(event) => {
-          if (arcData.showMouseOver) {
-            setMouseOver(true);
-            tooltipDiv.transition().duration(200).style('opacity', 0.9);
-            tooltipDiv
-              .html(`${format(arcData.value) * 100}% <br/> ${arcData.label}`)
-              .style('left', event.clientX + 'px')
-              .style('top', event.clientY + 'px');
-          }
-        }}
-        onMouseOut={() => {
-          if (mouseOver) {
-            setMouseOver(false);
-            tooltipDiv.transition().duration(500).style('opacity', 0);
-          }
-        }}
-        onMouseMove={(event) => {
-          if (arcData.showMouseOver) {
-            tooltipDiv
-              .html(`${format(arcData.value * 100)}% <br/> ${arcData.label}`)
-              .style('left', event.clientX + 'px')
-              .style('top', event.clientY + 'px');
-          }
-        }}
+      <Popup
+        content={
+          <>
+            <p style={{ marginBottom: 0 }}>{format(arcData.value * 100)}%</p>
+            <p>{arcData.label}</p>
+          </>
+        }
+        disabled={!arcData.showMouseOver}
+        trigger={
+          <path
+            className="arc"
+            d={createArc(data)}
+            fill={mouseOver ? '#629FCA' : arcData.color}
+            filter={arcData.filter ? `url(${arcData.filter})` : ''}
+            onFocus={() => {}}
+            onBlur={() => {}}
+            onMouseOver={(event) => {
+              if (arcData.showMouseOver) {
+                setMouseOver(true);
+              }
+            }}
+            onMouseOut={() => {
+              if (mouseOver) {
+                setMouseOver(false);
+              }
+            }}
+          />
+        }
       />
     </g>
   );
@@ -126,7 +82,7 @@ const Pie = (props) => {
   const format = d3.format('.2f');
 
   return (
-    <svg width={props.width} height={props.height}>
+    <svg width={'100%'} height={props.height}>
       <defs>
         <filter id="drop-shadow" x="0" y="0" width="200%" height="200%">
           <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
@@ -152,6 +108,7 @@ const Pie = (props) => {
               height: props.height,
               innerRadius: props.innerRadius,
               outerRadius: props.outerRadius,
+              realOuterRadius: props.center[0],
             }}
           />
         ))}

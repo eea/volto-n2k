@@ -35,7 +35,6 @@ const View = (props) => {
     <>
       {dataReady ? (
         <Grid className="exploded-pies-chart">
-          <div className="tooltip" />
           {x_values?.length > 0
             ? x_values.map((value, index) => (
                 <Grid.Column
@@ -61,6 +60,7 @@ const View = (props) => {
                             value: value / total,
                             label: y_values[index],
                             outerRadius: 55,
+                            shadow: 5,
                             showValue: true,
                             showMouseOver: true,
                             color: yColorsObj[y_values[index]] || '#7BB7F4',
