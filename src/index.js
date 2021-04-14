@@ -3,6 +3,8 @@ import React from 'react';
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installLandingBlock from './components/manage/Blocks/Landing';
 import installNavigationAnchors from './components/manage/Blocks/NavigationAnchors';
+import installImageText from './components/manage/Blocks/ImageText';
+import installTilesImages from './components/manage/Blocks/TilesImages';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
 import installSiteBanner from './components/manage/Blocks/SiteBanner';
 import installProtectedSpecies from './components/manage/Blocks/ProtectedSpecies';
@@ -49,6 +51,8 @@ const applyConfig = (config) => {
     installSiteBanner,
     installProtectedSpecies,
     installAppExtras,
+    installImageText,
+    installTilesImages,
   ].reduce((acc, apply) => apply(acc), config);
 };
 

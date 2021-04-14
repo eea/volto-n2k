@@ -12,9 +12,11 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import cx from 'classnames';
 import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers';
+import { Icon } from '@plone/volto/components';
 
 import { getNavigation } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
+import homePNG from '@eeacms/volto-n2k/icons/home.png';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -221,6 +223,11 @@ class Navigation extends Component {
             isMobileMenuOpen={this.state.isMobileMenuOpen}
             toggleMobileMenu={this.toggleMobileMenu}
           />
+          <Menu.Item className="home-button">
+            <Link to="/natura2000">
+              <img src={homePNG} alt="Home" />
+            </Link>
+          </Menu.Item>
           {this.props.items.map((item) => {
             const flatUrl = flattenToAppURL(item.url);
             const itemID = item.title.split(' ').join('-').toLowerCase();
@@ -319,11 +326,7 @@ class Navigation extends Component {
 const getN2kItems = (items) => {
   for (let i = 0; i < items.length; i++) {
     if (items[i].url === '/natura2000') {
-      return [
-        // { title: 'Biodiversity', url: '/' },
-        ...(items[i].items || []),
-        { title: items[i].title, url: items[i].url },
-      ];
+      return [...(items[i].items || [])];
     }
   }
   return [];

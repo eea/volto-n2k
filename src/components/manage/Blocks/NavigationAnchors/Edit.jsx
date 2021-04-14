@@ -3,10 +3,9 @@ import { Menu, Container } from 'semantic-ui-react';
 import { SidebarPortal } from '@plone/volto/components';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import SlateEditor from 'volto-slate/editor/SlateEditor';
-import { serializeNodes } from 'volto-slate/editor/render';
 import { Editor } from 'volto-slate/utils';
 import getSchema from './schema';
-import './style.less';
+import './styles.less';
 
 const createParagraph = (text) => {
   return {
@@ -16,7 +15,6 @@ const createParagraph = (text) => {
 
 const Edit = (props) => {
   const { data = {}, selected = false } = props;
-  const [editingItem, setEditingItem] = React.useState(null);
   const schema = getSchema();
   const items = data.items || [];
 
@@ -45,42 +43,29 @@ const Edit = (props) => {
             const defaultValue = `Item ${index}`;
 
             return (
-              <Menu.Item
-                key={`anchor-${index}`}
-                onDoubleClick={() => {
-                  if (editingItem !== index) {
-                    setEditingItem(index);
+              <Menu.Item key={`anchor-${index}`}>
+                <SlateEditor
+                  id={`anchor-${index}`}
+                  name={`anchor-${index}`}
+                  value={
+                    valueUndefined
+                      ? [createParagraph(defaultValue)]
+                      : value.children
                   }
-                }}
-              >
-                {editingItem === index && selected ? (
-                  <SlateEditor
-                    id={`anchor-${index}`}
-                    name={`anchor-${index}`}
-                    value={
-                      valueUndefined
-                        ? [createParagraph(defaultValue)]
-                        : value.children
-                    }
-                    onChange={(newValue) => {
-                      const newItems = [...items];
-                      newItems[index].value = [...(newValue || [])];
-                      props.onChangeBlock(props.block, {
-                        ...data,
-                        items: [...newItems],
-                      });
-                    }}
-                    block={null}
-                    renderExtensions={[]}
-                    selected={true}
-                    properties={props.metadata}
-                    placeholder={defaultValue}
-                  />
-                ) : !valueUndefined ? (
-                  serializeNodes(value.children)
-                ) : (
-                  <p>{defaultValue}</p>
-                )}
+                  onChange={(newValue) => {
+                    const newItems = [...items];
+                    newItems[index].value = [...(newValue || [])];
+                    props.onChangeBlock(props.block, {
+                      ...data,
+                      items: [...newItems],
+                    });
+                  }}
+                  block={null}
+                  renderExtensions={[]}
+                  selected={true}
+                  properties={props.metadata}
+                  placeholder={defaultValue}
+                />
               </Menu.Item>
             );
           })}
@@ -88,7 +73,6 @@ const Edit = (props) => {
             name="addition"
             onClick={() => {
               addNewItem();
-              setEditingItem(null);
             }}
           >
             +
@@ -98,7 +82,6 @@ const Edit = (props) => {
               name="addition"
               onClick={() => {
                 removeItem();
-                setEditingItem(null);
               }}
             >
               -
