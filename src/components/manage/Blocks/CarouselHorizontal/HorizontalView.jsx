@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router';
 import loadable from '@loadable/component';
-import { RenderBlocks } from '@plone/volto/components';
+import { Icon, RenderBlocks } from '@plone/volto/components';
 import { withScrollToTarget } from '@eeacms/volto-tabs-block/hocs';
+import rightArrowSVG from '@eeacms/volto-tabs-block/icons/right-arrow.svg';
+import leftArrowSVG from '@eeacms/volto-tabs-block/icons/left-arrow.svg';
 import cx from 'classnames';
-
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '@eeacms/volto-tabs-block/less/carousel.less';
@@ -56,7 +57,7 @@ const ArrowsGroup = (props) => {
           className="slick-arrow slick-prev"
           onClick={slider.current.slickPrev}
         >
-          Previous
+          <Icon name={leftArrowSVG} size="50px" />
         </button>
       ) : (
         ''
@@ -67,7 +68,7 @@ const ArrowsGroup = (props) => {
           className="slick-arrow slick-next"
           onClick={slider.current.slickNext}
         >
-          Next
+          <Icon name={rightArrowSVG} size="50px" />
         </button>
       ) : (
         ''
@@ -93,7 +94,7 @@ const View = (props) => {
     setActiveTab = () => {},
   } = props;
   const activeTabIndex = tabsList.indexOf(activeTab);
-  const tabData = tabs[activeTab] || {};
+  // const tabData = tabs[activeTab] || {};
   const uiContainer = data.align === 'full' ? 'ui container' : false;
   const image = data.image || null;
 

@@ -40,7 +40,7 @@ const Edit = (props) => {
       });
     }
     /* eslint-disable-next-line */
-  }, [])
+  }, []);
 
   const handleKeyDown = (
     e,

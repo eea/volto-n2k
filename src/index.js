@@ -7,7 +7,7 @@ import installSiteBanner from './components/manage/Blocks/SiteBanner';
 import installProtectedSpecies from './components/manage/Blocks/ProtectedSpecies';
 import installAppExtras from './components/theme/AppExtras';
 
-import { Header } from '@eeacms/volto-n2k/components';
+import { Header, Footer } from '@eeacms/volto-n2k/components';
 
 import { gridSizes, variants } from './grid';
 
@@ -23,6 +23,7 @@ const applyConfig = (config) => {
     ...(config.settings.themes || {}),
     natura2000: {
       Header: Header,
+      Footer: Footer,
       Breadcrumbs: () => <></>,
     },
   };

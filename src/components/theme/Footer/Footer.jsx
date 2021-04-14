@@ -1,14 +1,29 @@
+/* eslint-disable react/jsx-no-target-blank */
 /**
  * Footer component.
  * @module components/theme/Footer/Footer
  */
 
 import React from 'react';
-import { Icon } from '@plone/volto/components';
-import { Button } from 'semantic-ui-react';
-import { injectIntl } from 'react-intl';
+import { Container, Segment, Grid } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import LogoImage from '@plone/volto/components/theme/Logo/Logo.svg';
 
-import upKeySVG from '@plone/volto/icons/up-key.svg';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import ecLogo from 'volto-bise/static/ec.png';
+import eeaLogo from 'volto-bise/static/eea.png';
+import fiseLogo from 'volto-bise/static/forest.svg';
+import ccaLogo from 'volto-bise/static/cca.svg';
+import wiseLogo from 'volto-bise/static/wise.png';
+
+// const messages = defineMessages({
+//   copyright: {
+//     id: 'Copyright',
+//     defaultMessage: 'Copyright',
+//   },
+// });
 
 /**
  * Component to display the footer.
@@ -16,96 +31,151 @@ import upKeySVG from '@plone/volto/icons/up-key.svg';
  * @param {Object} intl Intl object
  * @returns {string} Markup of the component
  */
-const Footer = ({ intl, pathname }) => (
-  <div className="footer-wrapper">
-    <div className="back-to-top">
-      <Button
-        circular
-        onClick={() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-      >
-        <Icon name={upKeySVG} size="40px" color="#7B7B7B" />
-      </Button>
-      <p>Back to top</p>
-    </div>
-    <div className="footer-wrapper-bg" />
-    {/* <Segment
-    role="contentinfo"
-    className="footer-wrapper"
-    vertical
-    padded
-    inverted
-    textAlign="center"
-  >
+const Footer = ({ intl }) => (
+  <Segment role="contentinfo" vertical padded className="footerWrapper">
     <Container>
-      <div className="content">
-        <h1>
-          <FormattedMessage
-            id="Know more about marine conservation in the EU"
-            defaultMessage="Know more about marine conservation in the EU"
-          />
-        </h1>
-        <p>
-          <FormattedMessage
-            id="Do you want to explore {marine_ecosystems} yourself?"
-            defaultMessage="Do you want to explore {marine_ecosystems} yourself?"
-            values={{
-              marine_ecosystems: (
-                <a className="item" href="http://plone.org/foundation">
-                  <FormattedMessage
-                    id="marine ecosystems"
-                    defaultMessage="marine ecosystems"
+      <div className="footer-top-wrapper">
+        <Grid stackable>
+          <Grid.Row>
+            <Grid.Column mobile={16} tablet={10} computer={10}>
+              <ul className="footer-nav" id="footer_links">
+                <li>
+                  <Link className="item" to="/">
+                    <FormattedMessage id="home" defaultMessage="Home" />
+                  </Link>
+                </li>
+                <li>
+                  <a className="item" href={`mailto:bise@eea.europa.eu`}>
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <Link className="item" to="/sitemap">
+                    <FormattedMessage id="sitemap" defaultMessage="Sitemap" />
+                  </Link>
+                </li>
+                <li>
+                  <Link className="item" to="/legal-and-privacy-notice">
+                    <FormattedMessage
+                      id="legal_notice"
+                      defaultMessage="Privacy and legal notice"
+                    />
+                  </Link>
+                </li>
+                <li>
+                  <Link className="item" to="/copyright-notice">
+                    <FormattedMessage
+                      id="copyright_notice"
+                      defaultMessage="Copyright notice"
+                    />
+                  </Link>
+                </li>
+              </ul>
+            </Grid.Column>
+            <Grid.Column mobile={16} tablet={2} computer={2}>
+              <img
+                className="bise-footer"
+                src={LogoImage}
+                alt="BISE"
+                height={50}
+                width={150}
+              />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
+
+      <div className="site-info">
+        <Grid stackable>
+          <Grid.Row>
+            <Grid.Column
+              mobile={16}
+              tablet={16}
+              computer={5}
+              className="information"
+            >
+              <div>
+                <p>
+                  The Biodiversity information system for Europe is a
+                  partnership between the{' '}
+                  <a
+                    href="https://ec.europa.eu/"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    European Commission
+                  </a>{' '}
+                  and the{' '}
+                  <a
+                    href="https://www.eea.europa.eu/"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    European Environment Agency.
+                  </a>
+                </p>{' '}
+              </div>
+              <div className="site-info-logos">
+                <a href="https://ec.europa.eu/">
+                  <LazyLoadImage
+                    className="footerLogo"
+                    src={ecLogo}
+                    title="European Commission"
+                    alt="European Commission"
                   />
                 </a>
-              ),
-            }}
-          />
-        </p>
-        <p>
-          <FormattedMessage
-            id="Explore the nearest marine Natura 2000 site {n2k_site}."
-            defaultMessage="Explore the nearest marine Natura 2000 site {n2k_site}"
-            values={{
-              n2k_site: (
-                <a className="item" href="http://plone.org/foundation">
-                  <FormattedMessage id="here" defaultMessage="here" />
-                </a>
-              ),
-            }}
-          />
-        </p>
-        <p>
-          <FormattedMessage
-            id="Explore more European initiatives for {cetaceans} and {oceans_conservation}."
-            defaultMessage="Explore more European initiatives for {cetaceans} and {oceans_conservation}."
-            values={{
-              cetaceans: (
-                <a className="item" href="http://plone.org/foundation">
-                  <FormattedMessage id="cetaceans" defaultMessage="cetaceans" />
-                </a>
-              ),
-              oceans_conservation: (
-                <a className="item" href="http://plone.org/foundation">
-                  <FormattedMessage
-                    id="oceans conservation"
-                    defaultMessage="oceans conservation"
+                <a href="https://www.eea.europa.eu/">
+                  <LazyLoadImage
+                    className="footerLogo"
+                    src={eeaLogo}
+                    title="European Environment Agency"
+                    alt="European Environment Agency"
                   />
                 </a>
-              ),
-            }}
-          />
-        </p>
-        <Input
-          size="small"
-          className="search"
-          action={{ icon: 'search' }}
-          placeholder="Find address or place"
-        />
+              </div>
+            </Grid.Column>
+
+            <Grid.Column
+              mobile={16}
+              tablet={16}
+              computer={7}
+              className="other-information"
+            >
+              <div>
+                <p>Other European Information Systems</p>
+              </div>
+              <div className="footerLogos">
+                <a href="https://water.europa.eu/">
+                  <LazyLoadImage
+                    className="footerLogo"
+                    src={wiseLogo}
+                    title="Water Information System for Europe"
+                    alt="Water Information System for Europe"
+                  />
+                </a>
+                <a href="https://forest.eea.europa.eu/">
+                  <LazyLoadImage
+                    className="footerLogo"
+                    src={fiseLogo}
+                    title="Forest Information System for Europe"
+                    alt="Forest Information System for Europe"
+                  />
+                </a>
+                <a href="https://climate-adapt.eea.europa.eu/">
+                  <LazyLoadImage
+                    className="footerLogo"
+                    src={ccaLogo}
+                    title="Climate-Adapt"
+                    alt="Climate-Adapt"
+                  />
+                </a>
+              </div>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     </Container>
-  </Segment> */}
-  </div>
+  </Segment>
 );
 
 /**

@@ -1,24 +1,24 @@
 @import './globals.less';
 
 @lightGreen: #7AC943;
-@darkGreen: #3B7F02;
+@darkGreen: #3b7f02;
 
 @font-face {
-  font-family: "OpenSans";
-  src: url("../fonts/OpenSans-Regular.ttf") format("truetype");
+  font-family: 'OpenSans';
   font-weight: normal;
+  src: url('../fonts/OpenSans-Regular.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "OpenSans";
-  src: url("../fonts/OpenSans-Semibold.ttf") format("truetype");
+  font-family: 'OpenSans';
   font-weight: 600;
+  src: url('../fonts/OpenSans-Semibold.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "OpenSans";
-  src: url("../fonts/OpenSans-Bold.ttf") format("truetype");
+  font-family: 'OpenSans';
   font-weight: 800;
+  src: url('../fonts/OpenSans-Bold.ttf') format('truetype');
 }
 
 @font-face {
@@ -42,23 +42,31 @@
   padding: 0 !important;
 }
 
-
 .natura2000-theme {
   /* TEXT */
-  h1, h2, h3, h4, h5, h6, p, a, span {
-    font-family: OpenSans, 'Raleway', sans-serif;;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span {
+    font-family: OpenSans, 'Raleway', sans-serif;
   }
 
   h2 {
     font-weight: 600;
   }
 
-  p, a {
+  p,
+  a {
     font-size: 14px;
   }
 
   a {
-    color: @green;
+    color: @lightGreen;
     font-weight: 600;
 
     &:hover {
@@ -71,7 +79,6 @@
       font-size: 43px;
     }
   }
-
 
   .ui.basic.segment.content-area {
     padding: 0;
@@ -106,8 +113,8 @@
             }
 
             .item {
-              color: #999999;
               position: relative;
+              color: #999999;
 
               &:not(.active),
               &:not(.menuActive) > a {
@@ -249,7 +256,7 @@
 
     .sticky-outer-wrapper {
       .sticky-inner-wrapper {
-        z-index: 2;
+        z-index: 3;
         padding: 0.5rem 0;
       }
     }

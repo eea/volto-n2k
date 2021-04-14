@@ -7,13 +7,14 @@ div#view .ui.container > {
     margin-bottom: 0;
   }
 }
+
 .natura2000-theme {
   .landing-page-wrapper {
     position: relative;
-    background-image: url('./images/background.png');
-    background-size: cover;
-    background-repeat: no-repeat;
     padding-top: 4rem;
+    background-image: url('./images/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 
     &:not(.edit) {
       overflow-y: hidden;
@@ -24,13 +25,17 @@ div#view .ui.container > {
     }
 
     .ui.grid.landing-page {
-      max-height: inherit;
       z-index: 1;
+      max-height: inherit;
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
 
       > .row {
+        z-index: 1;
         justify-content: space-between;
         padding-bottom: 5rem;
-        z-index: 1;
       }
 
       /* Hide scrollbar for Chrome, Safari and Opera */
@@ -38,23 +43,20 @@ div#view .ui.container > {
         display: none;
       }
 
-      /* Hide scrollbar for IE, Edge and Firefox */
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
-
       .landing-page-description {
         margin-bottom: 3rem;
         color: #fff;
+
         p {
-          font-weight: 600;
           font-size: 20px;
+          font-weight: 600;
         }
       }
     }
 
     .landing-page-tiles {
       a:hover {
-        opacity: .9;
+        opacity: 0.9;
       }
 
       a:active {
@@ -70,13 +72,13 @@ div#view .ui.container > {
         width: 100%;
         // max-width: 200px;
       }
-      
+
       .item p.description {
-        color: #fff;
-        font-weight: bold;
-        font-size: 0.9em;
         position: relative;
         margin-top: 2rem;
+        color: #fff;
+        font-size: 0.9em;
+        font-weight: bold;
       }
 
       .column {

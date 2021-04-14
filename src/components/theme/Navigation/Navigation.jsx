@@ -194,6 +194,7 @@ class Navigation extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
+    console.log('HERE', this.props);
     return (
       <nav
         className={cx('navigation', this.props.className || '')}
