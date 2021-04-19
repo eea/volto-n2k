@@ -40,7 +40,7 @@ const Footer = ({ intl }) => (
             <Grid.Column mobile={16} tablet={10} computer={10}>
               <ul className="footer-nav" id="footer_links">
                 <li>
-                  <Link className="item" to="/">
+                  <Link className="item" to="/natura2000">
                     <FormattedMessage id="home" defaultMessage="Home" />
                   </Link>
                 </li>
@@ -50,12 +50,15 @@ const Footer = ({ intl }) => (
                   </a>
                 </li>
                 <li>
-                  <Link className="item" to="/sitemap">
+                  <Link className="item" to="/natura2000/sitemap">
                     <FormattedMessage id="sitemap" defaultMessage="Sitemap" />
                   </Link>
                 </li>
                 <li>
-                  <Link className="item" to="/legal-and-privacy-notice">
+                  <Link
+                    className="item"
+                    to="/natura2000/legal-and-privacy-notice"
+                  >
                     <FormattedMessage
                       id="legal_notice"
                       defaultMessage="Privacy and legal notice"
@@ -63,7 +66,7 @@ const Footer = ({ intl }) => (
                   </Link>
                 </li>
                 <li>
-                  <Link className="item" to="/copyright-notice">
+                  <Link className="item" to="/natura2000/copyright-notice">
                     <FormattedMessage
                       id="copyright_notice"
                       defaultMessage="Copyright notice"
@@ -73,13 +76,15 @@ const Footer = ({ intl }) => (
               </ul>
             </Grid.Column>
             <Grid.Column mobile={16} tablet={2} computer={2}>
-              <img
-                className="bise-footer"
-                src={LogoImage}
-                alt="BISE"
-                height={50}
-                width={150}
-              />
+              <Link to="/">
+                <img
+                  className="bise-footer"
+                  src={LogoImage}
+                  alt="BISE"
+                  height={50}
+                  width={150}
+                />
+              </Link>
             </Grid.Column>
           </Grid.Row>
         </Grid>

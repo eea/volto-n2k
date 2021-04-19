@@ -4,6 +4,7 @@
  */
 
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import { Container, Segment } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -42,7 +43,7 @@ class Header extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    return this.props.pathname === '/natura2000' ? (
+    return this.props.location.pathname === '/natura2000' ? (
       ''
     ) : (
       <>
@@ -93,4 +94,4 @@ class Header extends Component {
 
 export default connect((state) => ({
   token: state.userSession.token,
-}))(Header);
+}))(withRouter(Header));

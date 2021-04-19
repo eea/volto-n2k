@@ -16,7 +16,7 @@ import { Icon } from '@plone/volto/components';
 
 import { getNavigation } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
-import homePNG from '@eeacms/volto-n2k/icons/home.png';
+import homeSVG from '@eeacms/volto-n2k/icons/home.svg';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -225,7 +225,7 @@ class Navigation extends Component {
           />
           <Menu.Item className="home-button">
             <Link to="/natura2000">
-              <img src={homePNG} alt="Home" />
+              <Icon name={homeSVG} size="32" />
             </Link>
           </Menu.Item>
           {this.props.items.map((item) => {

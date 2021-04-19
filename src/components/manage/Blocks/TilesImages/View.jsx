@@ -14,7 +14,7 @@ const View = (props) => {
         <p className="with-border rounded-border">
           <UniversalLink href={image.link || '#'} title={image.title}>
             <img
-              src={`${image.image}/@@images/image`}
+              src={`${image.image}/@@images/image/mini`}
               alt={image.title}
               style={
                 data.size

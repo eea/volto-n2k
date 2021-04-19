@@ -186,7 +186,7 @@ const View = (props) => {
       <img
         ref={img}
         className={cx('slick-image', { hidden: activeTabIndex !== 0 })}
-        src={`${image}/@@images/image`}
+        src={`${image}/@@images/image/preview`}
         alt="Logo"
       />
       <ArrowsGroup activeTab={activeTab} tabsList={tabsList} slider={slider} />

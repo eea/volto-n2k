@@ -15,7 +15,7 @@ const View = (props) => {
       {data.image ? (
         <p className="with-border rounded-border">
           <img
-            src={`${data.image}/@@images/image`}
+            src={`${data.image}/@@images/image/mini`}
             alt={data.imageTitle}
             style={
               data.imageSize
