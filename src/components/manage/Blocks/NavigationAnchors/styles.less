@@ -1,6 +1,6 @@
 div#view .ui.container > .navigation-anchors {
-  margin-bottom: 0;
   padding: 1rem 0;
+  margin-bottom: 0;
 
   .ui.menu {
     margin-bottom: 0;
@@ -8,27 +8,27 @@ div#view .ui.container > .navigation-anchors {
 }
 
 .navigation-anchors {
+  z-index: 1;
   background-color: #fff;
   -webkit-box-shadow: 0px 0px 10px -5px #000000;
   box-shadow: 0px 0px 10px -5px #000000;
-  z-index: 1;
 
   > .ui.container > .ui.menu {
     border: 0;
     box-shadow: none;
 
     .item {
+      padding: 1rem;
+      background: none;
+      color: #000;
       font-family: 'Raleway', sans-serif;
       font-weight: normal;
-      background: none;
-      padding: 1rem;
-      color: #000;
 
       p,
       a {
-        font-weight: normal;
-        font-size: 16px;
         color: #000;
+        font-size: 16px;
+        font-weight: normal;
 
         &:hover {
           opacity: 0.9;

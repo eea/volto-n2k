@@ -101,18 +101,17 @@
             top: 0;
             flex-wrap: wrap;
 
-
             .home-button {
-              padding-left: 0 !important;
               padding-right: 0 !important;
+              padding-left: 0 !important;
             }
 
             &:not(.open) {
               .home-button {
-                top: 50%;
-                transform: translateY(-50%);
                 position: absolute;
+                top: 50%;
                 left: calc(-32px - 1rem);
+                transform: translateY(-50%);
               }
             }
 
@@ -347,8 +346,8 @@ img.slick-image {
   > .tabs.default
   > .ui.menu {
   border-bottom: 2px solid #dadada;
-  border-radius: 0;
   margin-bottom: 1rem;
+  border-radius: 0;
 }
 
 .sdf-image {
@@ -357,9 +356,11 @@ img.slick-image {
   .block-image {
     position: relative;
     height: 100%;
+
     .block.image {
       position: relative;
       height: 100%;
+
       img {
         /* Set up positioning */
         position: absolute;
