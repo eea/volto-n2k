@@ -225,7 +225,7 @@ class Navigation extends Component {
           />
           <Menu.Item className="home-button">
             <Link to="/natura2000">
-              <Icon name={homeSVG} size="32" />
+              <Icon name={homeSVG} size="32px" />
             </Link>
           </Menu.Item>
           {this.props.items.map((item) => {
