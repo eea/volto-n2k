@@ -28,7 +28,6 @@ const View = (props) => {
           </div>
         </Container>
       </div>
-      <div className="banner-layer"></div>
     </div>
   );
 };
