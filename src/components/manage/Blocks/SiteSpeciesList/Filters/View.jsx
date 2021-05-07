@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Dropdown } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
 import filterSVG from '@plone/volto/icons/filter.svg';
-import cx from 'classnames';
 
 const View = (props) => {
   const {

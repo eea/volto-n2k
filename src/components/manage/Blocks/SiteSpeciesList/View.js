@@ -1,18 +1,13 @@
 import React from 'react';
-import { Container, Pagination, Grid, Dropdown } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import { Icon } from '@plone/volto/components';
-import downKeySVG from '@plone/volto/icons/down-key.svg';
-import upKeySVG from '@plone/volto/icons/up-key.svg';
-import cx from 'classnames';
-import './style.less';
-
+import { Container, Pagination, Grid } from 'semantic-ui-react';
 import { SpeciesGroupsFilter, Filters } from './Filters';
 import {
   photoPlaceholders,
   getPopulationString,
   getLabelString,
 } from './utils';
+
+import './style.less';
 
 const getObjectByIndex = (provider_data, index) => {
   const obj = {};

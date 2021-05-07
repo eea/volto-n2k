@@ -8,7 +8,7 @@ div#view .site-species-list .ui.container.species-container > * {
   margin-top: -1.5rem;
 
   .species-group-filter {
-    background-color: #04A87D;
+    background-color: #04a87d;
 
     .ui.container {
       display: flex;
@@ -16,25 +16,26 @@ div#view .site-species-list .ui.container.species-container > * {
       justify-content: center;
 
       button.species-group-filter {
+        padding: 1rem;
+        border: none;
         background-color: transparent;
         color: #fff;
-        text-transform: uppercase;
-        border: none;
-        font-size: 14px;
-        padding: 1rem;
         cursor: pointer;
+        font-size: 14px;
+        text-transform: uppercase;
 
-        &.active, &:hover {
-          border-bottom: 3px solid #fff;
+        &.active,
+        &:hover {
           padding-bottom: calc(1rem - 3px);
+          border-bottom: 3px solid #fff;
         }
-          
       }
     }
   }
 
   .species-filters {
     padding-top: 1rem;
+
     .ui.container {
       display: flex;
       justify-content: space-between;
@@ -46,10 +47,10 @@ div#view .site-species-list .ui.container.species-container > * {
 
         .ui.button.dropdown,
         button {
-          cursor: pointer;
-          border: 1px solid #0000001F;
+          border: 1px solid #0000001f;
           background-color: #fff;
           color: #000;
+          cursor: pointer;
         }
       }
     }
@@ -58,18 +59,18 @@ div#view .site-species-list .ui.container.species-container > * {
   .ui.container.species-container {
     .ui.grid.species {
       margin-top: 0;
-      margin-bottom: 0;
       margin-right: 0;
+      margin-bottom: 0;
 
       .row {
         padding: 1rem 0;
       }
-  
+
       .species-photo {
-        padding-right: 0;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
         overflow: hidden;
+        padding-right: 0;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
 
         img {
           width: 100%;
@@ -82,31 +83,31 @@ div#view .site-species-list .ui.container.species-container > * {
         display: flex;
         flex-flow: column;
         justify-content: space-between;
-        background-color: #fff;
         padding: 0;
-        border-top-right-radius: 10px;
+        background-color: #fff;
         border-bottom-right-radius: 10px;
+        border-top-right-radius: 10px;
 
         .metadata {
           padding: 0 2rem;
           padding-top: 1rem;
 
           h3.name {
-            color: #013C60;
+            color: #013c60;
             font-weight: 400;
-  
+
             .code-2000 {
-              color: #0F8F22;
+              color: #0f8f22;
             }
           }
         }
 
         .footer-metadata {
           padding: 1rem 2rem;
-          border-top: 1px solid #E8E8E8;
+          border-top: 1px solid #e8e8e8;
 
           .green {
-            color: #0F8F22;
+            color: #0f8f22;
           }
         }
       }
