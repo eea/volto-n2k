@@ -9,6 +9,7 @@ export default (config) => {
       exploded_pies_chart: {
         view: ExplodedPiesChart,
         getSchema: getSchema,
+        title: 'Exploded pies chart',
       },
     },
   };

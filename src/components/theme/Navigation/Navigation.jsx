@@ -326,7 +326,12 @@ class Navigation extends Component {
 const getN2kItems = (items) => {
   for (let i = 0; i < items.length; i++) {
     if (items[i].url === '/natura2000') {
-      return [...(items[i].items || [])];
+      return [...(items[i].items || [])].filter(
+        (item) =>
+          item.url !== '/natura2000/sites' &&
+          item.url !== '/natura2000/habitats' &&
+          item.url !== '/natura2000/species',
+      );
     }
   }
   return [];

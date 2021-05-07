@@ -1,6 +1,6 @@
 const getSchema = (props) => {
   return {
-    title: 'Protected species',
+    title: 'Site protected species',
 
     fieldsets: [
       {

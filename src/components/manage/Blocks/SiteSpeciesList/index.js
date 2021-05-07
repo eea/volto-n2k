@@ -1,4 +1,4 @@
-import SiteBannerView from './View';
+import SiteSpeciesList from './View';
 import getSchema from './schema';
 
 export default (config) => {
@@ -6,10 +6,10 @@ export default (config) => {
     ...config.blocks.blocksConfig.custom_connected_block,
     blocks: {
       ...config.blocks.blocksConfig.custom_connected_block.blocks,
-      site_banner: {
-        view: SiteBannerView,
+      site_species_list: {
+        view: SiteSpeciesList,
         getSchema: getSchema,
-        title: 'Site banner',
+        title: 'Site species list',
       },
     },
   };

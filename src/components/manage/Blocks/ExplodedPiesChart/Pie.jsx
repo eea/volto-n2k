@@ -80,7 +80,7 @@ const Pie = (props) => {
     .innerRadius((d) => d.data.innerRadius || props.innerRadius)
     .outerRadius((d) => d.data.outerRadius || props.outerRadius);
   const data = createPie(props.data);
-  const format = d3.format('.2f');
+  const format = d3.format(`.${props.precision || 2}f`);
 
   return (
     <svg width={'100%'} height={props.height}>

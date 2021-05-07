@@ -1,4 +1,4 @@
-import ProtectedSpeciesView from './View';
+import SiteProtectedSpeciesView from './View';
 import getSchema from './schema';
 
 export default (config) => {
@@ -6,9 +6,10 @@ export default (config) => {
     ...config.blocks.blocksConfig.custom_connected_block,
     blocks: {
       ...config.blocks.blocksConfig.custom_connected_block.blocks,
-      protected_species: {
-        view: ProtectedSpeciesView,
+      site_protected_species: {
+        view: SiteProtectedSpeciesView,
         getSchema: getSchema,
+        title: 'Site protected species',
       },
     },
   };

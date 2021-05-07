@@ -1,13 +1,16 @@
 import React from 'react';
 
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
+import installBodyClass from './components/manage/Blocks/BodyClass';
 import installLandingBlock from './components/manage/Blocks/Landing';
 import installNavigationAnchors from './components/manage/Blocks/NavigationAnchors';
 import installImageText from './components/manage/Blocks/ImageText';
 import installTilesImages from './components/manage/Blocks/TilesImages';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
 import installSiteBanner from './components/manage/Blocks/SiteBanner';
-import installProtectedSpecies from './components/manage/Blocks/ProtectedSpecies';
+import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
+import installSiteProtectedHabitats from './components/manage/Blocks/SiteProtectedHabitats';
+import installSiteSpeciesList from './components/manage/Blocks/SiteSpeciesList';
 import installAppExtras from './components/theme/AppExtras';
 
 import { Header, Footer } from '@eeacms/volto-n2k/components';
@@ -45,11 +48,14 @@ const applyConfig = (config) => {
 
   return [
     installCarouselHorizontal,
+    installBodyClass,
     installLandingBlock,
     installNavigationAnchors,
     installExplodedPiesChart,
     installSiteBanner,
-    installProtectedSpecies,
+    installSiteProtectedSpecies,
+    installSiteProtectedHabitats,
+    installSiteSpeciesList,
     installAppExtras,
     installImageText,
     installTilesImages,

@@ -1,7 +1,7 @@
-const yColorSchema = (props) => {
+const xColorSchema = (props) => {
   const data = props.provider_data || {};
-  const y = props.data.y || '';
-  const choices = data[y]?.map((key) => [key, key]) || [];
+  const x = props.data.x || '';
+  const choices = data[x]?.map((key) => [key, key]) || [];
 
   return {
     title: 'Color',
@@ -41,25 +41,30 @@ const getSchema = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['x', 'y', 'y_colors'],
+        fields: ['x', 'y', 'x_colors', 'precision'],
       },
     ],
 
     properties: {
       x: {
-        title: 'X',
+        title: 'Value',
         type: 'array',
         choices,
       },
       y: {
-        title: 'Y',
+        title: 'Label',
         type: 'array',
         choices,
       },
-      y_colors: {
-        title: 'Y colors',
+      x_colors: {
+        title: 'Labels color',
         widget: 'objectlist',
-        schema: yColorSchema(props),
+        schema: xColorSchema(props),
+      },
+      precision: {
+        title: 'Precision',
+        type: 'number',
+        minimum: -1,
       },
     },
 
