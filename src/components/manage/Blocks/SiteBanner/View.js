@@ -10,12 +10,14 @@ const View = (props) => {
     country_name,
     site_name,
     designation = [],
+    cdda_designation_national_language = [],
     site_type = [],
     site_code = [],
     area_km2 = [],
     year_stablished = [],
     number_protected_habitat_types = [],
     number_protected_species = [],
+    major_ecosystem_type = [],
   } = provider_data;
 
   return (
@@ -31,6 +33,32 @@ const View = (props) => {
             />
 
             <div className="site-details-wrapper">
+              {site_type[0] === 'CDDA' && (
+                <>
+                  <div className="site-detail">
+                    <div className="upper">
+                      {cdda_designation_national_language[0] ? (
+                        <div>{cdda_designation_national_language}</div>
+                      ) : (
+                        <div>No data</div>
+                      )}
+                    </div>
+                    <div className="lower">Designation (National Language)</div>
+                  </div>
+
+                  <div className="site-detail">
+                    <div className="upper">
+                      {designation[0] ? (
+                        <div>{designation}</div>
+                      ) : (
+                        <div>No data</div>
+                      )}
+                    </div>
+                    <div className="lower">Designation (English)</div>
+                  </div>
+                </>
+              )}
+
               <div className="site-detail">
                 <div className="upper">
                   {site_code[0] ? <div>{site_code}</div> : <div>No data</div>}
@@ -53,8 +81,21 @@ const View = (props) => {
                     <div>No data</div>
                   )}
                 </div>
-                <div className="lower">Year est</div>
+                <div className="lower">Year established</div>
               </div>
+
+              {site_type[0] === 'CDDA' && (
+                <div className="site-detail">
+                  <div className="upper">
+                    {major_ecosystem_type[0] ? (
+                      <div>{major_ecosystem_type}</div>
+                    ) : (
+                      <div>No data</div>
+                    )}
+                  </div>
+                  <div className="lower">Ecosystem</div>
+                </div>
+              )}
 
               {site_type[0] === 'Natura2000' && (
                 <>
