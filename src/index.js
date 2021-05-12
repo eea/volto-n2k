@@ -1,3 +1,4 @@
+/* eslint-disable no-extend-native */
 import React from 'react';
 
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
@@ -18,6 +19,14 @@ import { Header, Footer } from '@eeacms/volto-n2k/components';
 import { gridSizes, variants } from './grid';
 
 import './less/styles.less';
+
+Array.prototype.sortByProperty = function (property, order = 'ASC') {
+  return this.sort((a, b) => {
+    if (a[property] < b[property]) return order === 'ASC' ? -1 : 1;
+    if (a[property] > b[property]) return order === 'ASC' ? 1 : -1;
+    return 0;
+  });
+};
 
 const applyConfig = (config) => {
   config.blocks.groupBlocksOrder = [

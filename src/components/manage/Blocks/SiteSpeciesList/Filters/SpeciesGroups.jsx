@@ -19,13 +19,13 @@ const SpeciesGroups = (props) => {
   }, [JSON.stringify(provider_data)]);
 
   return (
-    <div className="species-group-filter">
+    <div className="species-groups">
       <Container>
         {speciesGroups.map((species) => (
           <button
             key={`group-filter-${species}`}
             className={cx({
-              'species-group-filter': true,
+              'species-group': true,
               active: activeSpeciesGroup === species,
             })}
             onClick={() => {

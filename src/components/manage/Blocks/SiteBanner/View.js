@@ -68,7 +68,14 @@ const View = (props) => {
 
               <div className="site-detail">
                 <div className="upper">
-                  {area_km2[0] ? <div>{area_km2}</div> : <div>No data</div>}
+                  {area_km2[0] ? (
+                    <div>
+                      {area_km2} km
+                      <sup>2</sup>
+                    </div>
+                  ) : (
+                    <div>No data</div>
+                  )}
                 </div>
                 <div className="lower">Reported area</div>
               </div>
