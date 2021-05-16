@@ -50,9 +50,14 @@ div#view .site-species-list .species-list .ui.container > * {
       margin-bottom: 1rem;
   
       .ui.container {
+        overflow-x: auto;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        @media only screen and (max-width: 765px) {
+          justify-content: flex-start;
+        }
   
         button.species-group {
           padding: 1rem;

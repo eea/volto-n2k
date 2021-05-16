@@ -87,19 +87,24 @@ const View = (props) => {
 
   return (
     <div className="site-species-list full-width">
-      <Filters
-        {...props}
-        activeSpeciesGroup={activeSpeciesGroup}
-        activeFilters={filters}
-        filteredSpecies={filteredSpecies}
-        pagination={pagination}
-        sortBy={sortBy}
-        species={species}
-        setActiveSpeciesGroup={setActiveSpeciesGroup}
-        setActiveFilters={setFilters}
-        setPagination={setPagination}
-        setSortBy={setSortBy}
-      />
+      {props.mode !== 'edit' ? (
+        <Filters
+          {...props}
+          activeSpeciesGroup={activeSpeciesGroup}
+          activeFilters={filters}
+          filteredSpecies={filteredSpecies}
+          pagination={pagination}
+          sortBy={sortBy}
+          species={species}
+          setActiveSpeciesGroup={setActiveSpeciesGroup}
+          setActiveFilters={setFilters}
+          setPagination={setPagination}
+          setSortBy={setSortBy}
+        />
+      ) : (
+        ''
+      )}
+
       <div className="species-list">
         <Container>
           {filteredSpecies.length ? (

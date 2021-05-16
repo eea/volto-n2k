@@ -8,6 +8,7 @@ import installNavigationAnchors from './components/manage/Blocks/NavigationAncho
 import installImageText from './components/manage/Blocks/ImageText';
 import installTilesImages from './components/manage/Blocks/TilesImages';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
+import installContactBlock from './components/manage/Blocks/ContactBlock';
 import installSiteBanner from './components/manage/Blocks/SiteBanner';
 import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
 import installSiteProtectedHabitats from './components/manage/Blocks/SiteProtectedHabitats';
@@ -61,6 +62,7 @@ const applyConfig = (config) => {
     installLandingBlock,
     installNavigationAnchors,
     installExplodedPiesChart,
+    installContactBlock,
     installSiteBanner,
     installSiteProtectedSpecies,
     installSiteProtectedHabitats,

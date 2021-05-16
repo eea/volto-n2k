@@ -1,0 +1,25 @@
+.contact-block {
+  margin-left: 1rem;
+  .contact {
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #dadada;
+    }
+
+    .contact-field {
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      .icon {
+        margin-right: .5rem;
+      }
+
+      p {
+        color: #636363;
+        font-weight: 600;
+      }
+    }
+  }
+}

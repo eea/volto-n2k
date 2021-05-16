@@ -1,6 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import { Popup } from 'semantic-ui-react';
+import { adjustBrightness } from '@eeacms/volto-n2k/helpers';
 
 const Arc = ({ data, index, createArc, format, size }) => {
   const [mouseOver, setMouseOver] = React.useState(false);
@@ -48,8 +49,9 @@ const Arc = ({ data, index, createArc, format, size }) => {
           <path
             className="arc"
             d={createArc(data)}
-            opacity={mouseOver ? '0.9' : 1}
-            fill={arcData.color}
+            fill={
+              mouseOver ? adjustBrightness(arcData.color, -10) : arcData.color
+            }
             filter={arcData.filter ? `url(${arcData.filter})` : ''}
             onFocus={() => {}}
             onBlur={() => {}}
@@ -78,7 +80,9 @@ const Pie = (props) => {
   const createArc = d3.svg
     .arc()
     .innerRadius((d) => d.data.innerRadius || props.innerRadius)
-    .outerRadius((d) => d.data.outerRadius || props.outerRadius);
+    .outerRadius((d) => d.data.outerRadius || props.outerRadius)
+    .startAngle(0)
+    .endAngle((d) => d.value * 2 * Math.PI);
   const data = createPie(props.data);
   const format = d3.format(`.${props.precision || 2}f`);
 

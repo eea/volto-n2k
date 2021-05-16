@@ -68,6 +68,14 @@ const ArrowsGroup = (props) => {
           className="slick-arrow slick-next"
           onClick={slider.current.slickNext}
         >
+          {currentSlide === 0 ? (
+            <p className="learn-more">
+              Learn more about the status, threats and protection efforts around
+              Europe’s coasts and seas
+            </p>
+          ) : (
+            ''
+          )}
           <Icon name={rightArrowSVG} size="50px" />
         </button>
       ) : (
