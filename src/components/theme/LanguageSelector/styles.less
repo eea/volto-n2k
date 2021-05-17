@@ -1,0 +1,30 @@
+.language-selector {
+  .ui.dropdown {
+    .menu {
+      margin-top: .5rem;
+
+      .item {
+        background: #fff !important;
+
+        .text {
+          color: #999999;
+          font-weight: bold;
+          font-size: 1rem;
+        }
+
+        &.active.selected {
+          background: #fff !important;
+
+          .text {
+            color: #3b7f02;
+          }
+
+          &::before {
+            opacity: 0;
+            display: none !important;
+          }
+        }
+      }
+    }
+  }
+}

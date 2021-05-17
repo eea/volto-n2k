@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import cookie from 'react-cookie';
+import { withCookies } from 'react-cookie';
 
 import { useSelector } from 'react-redux';
 
@@ -15,11 +15,13 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 import { Dropdown } from 'semantic-ui-react';
 
 import config from '@plone/volto/registry';
+import './styles.less';
 
 const LanguageSelector = (props) => {
   const currentLang =
-    cookie.load('N2K_LANGUAGE') || config.settings.defaultLanguage;
-  const translations = useSelector((state) => state.content.data?.relatedItems);
+    props.cookies.get('N2K_LANGUAGE') || config.settings.defaultLanguage;
+  const content = useSelector((state) => state.content);
+  const translations = content.data?.relatedItems;
   const { settings } = config;
   const supportedLanguagesOptions = settings.supportedLanguages.map((lang) => ({
     key: lang,
@@ -30,7 +32,8 @@ const LanguageSelector = (props) => {
   return (
     <div className="language-selector">
       <Dropdown
-        placeholder="select_lang"
+        disabled={content.get.loading}
+        placeholder="Select a language"
         value={currentLang}
         scrolling
         options={supportedLanguagesOptions}
@@ -41,11 +44,11 @@ const LanguageSelector = (props) => {
           )[0];
 
           if (translation) {
-            props.history.push(flattenToAppURL(translation['@id']))
+            props.history.push(flattenToAppURL(translation['@id']));
           }
 
           if (config.settings.supportedLanguages.includes(lang)) {
-            cookie.save('N2K_LANGUAGE', lang);
+            props.cookies.set('N2K_LANGUAGE', lang);
           }
         }}
       />
@@ -53,4 +56,4 @@ const LanguageSelector = (props) => {
   );
 };
 
-export default withRouter(LanguageSelector);
+export default withRouter(withCookies(LanguageSelector));

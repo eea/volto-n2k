@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
-import cookie from 'react-cookie';
+import { withCookies } from 'react-cookie';
 import { defineMessages, injectIntl } from 'react-intl';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import cx from 'classnames';
@@ -329,10 +329,10 @@ class Navigation extends Component {
   }
 }
 
-const getN2kItems = (items) => {
+const getN2kItems = (items, cookies) => {
   if (__SERVER__) return [];
   const currentLang =
-    cookie.load('N2K_LANGUAGE') || config.settings.defaultLanguage;
+    cookies.get('N2K_LANGUAGE') || config.settings.defaultLanguage;
   const languageFolders = config.settings.supportedLanguages.map(
     (lang) => `/natura2000/${lang}`,
   );
@@ -359,11 +359,12 @@ const getN2kItems = (items) => {
 };
 
 export default compose(
+  withCookies,
   injectIntl,
   connect(
-    (state) => {
+    (state, props) => {
       return {
-        items: getN2kItems(state.navigation.items),
+        items: getN2kItems(state.navigation.items, props.cookies),
         userToken: state?.userSession?.token,
       };
     },
