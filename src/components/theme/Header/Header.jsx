@@ -60,14 +60,6 @@ class Header extends Component {
                     <Navigation pathname={this.props.pathname} />
                   </div>
                 </div>
-                {/* <div className="tools-search-wrapper">
-                <LanguageSelector />
-                {!this.props.token && (
-                  <div className="tools">
-                    <Anontools />
-                  </div>
-                )}
-              </div> */}
               </div>
             </Container>
           </Sticky>

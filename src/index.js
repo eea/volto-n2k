@@ -39,6 +39,12 @@ const applyConfig = (config) => {
     { id: 'natura_2000', title: 'Natura 2000' },
   ];
 
+  config.settings = {
+    ...config.settings,
+    defaultLanguage: 'en',
+    supportedLanguages: ['en', 'ro'],
+  };
+
   config.settings.themes = {
     ...(config.settings.themes || {}),
     natura2000: {

@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
+import cookie from 'react-cookie';
 import { defineMessages, injectIntl } from 'react-intl';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import cx from 'classnames';
@@ -16,6 +17,8 @@ import { Icon } from '@plone/volto/components';
 
 import { getNavigation } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
+import LanguageSelector from '../LanguageSelector/LanguageSelector';
+
 import homeSVG from '@eeacms/volto-n2k/icons/home.svg';
 
 const messages = defineMessages({
@@ -317,6 +320,9 @@ class Navigation extends Component {
               </Link>
             );
           })}
+          <Menu.Item className="firstLevel language-selector-wrapper">
+            <LanguageSelector />
+          </Menu.Item>
         </Menu>
       </nav>
     );
@@ -324,14 +330,29 @@ class Navigation extends Component {
 }
 
 const getN2kItems = (items) => {
+  if (__SERVER__) return [];
+  const currentLang =
+    cookie.load('N2K_LANGUAGE') || config.settings.defaultLanguage;
+  const languageFolders = config.settings.supportedLanguages.map(
+    (lang) => `/natura2000/${lang}`,
+  );
+
   for (let i = 0; i < items.length; i++) {
     if (items[i].url === '/natura2000') {
-      return [...(items[i].items || [])].filter(
-        (item) =>
-          item.url !== '/natura2000/sites' &&
-          item.url !== '/natura2000/habitats' &&
-          item.url !== '/natura2000/species',
-      );
+      const navItems = [
+        ...(items[i].items || []).filter(
+          (item) => item.url === `/natura2000/${currentLang}`,
+        )[0]?.items,
+        ...(items[i].items || []).filter(
+          (item) =>
+            !languageFolders.includes(item.url) &&
+            item.url !== '/natura2000/sites' &&
+            item.url !== '/natura2000/habitats' &&
+            item.url !== '/natura2000/species',
+        ),
+      ];
+
+      return navItems;
     }
   }
   return [];
