@@ -5,22 +5,20 @@
 
 import React from 'react';
 import { withRouter } from 'react-router';
-import { withCookies } from 'react-cookie';
-
 import { useSelector } from 'react-redux';
-
 import langmap from 'langmap';
 import { flattenToAppURL } from '@plone/volto/helpers';
-
 import { Dropdown } from 'semantic-ui-react';
-
 import config from '@plone/volto/registry';
+import { withCookies } from '@eeacms/volto-n2k/hocs';
 import './styles.less';
 
 const LanguageSelector = (props) => {
-  const currentLang =
-    props.cookies.get('N2K_LANGUAGE') || config.settings.defaultLanguage;
   const content = useSelector((state) => state.content);
+  const currentLang = props.cookies.get(
+    'N2K_LANGUAGE',
+    config.settings.defaultLanguage,
+  );
   const translations = content.data?.relatedItems;
   const { settings } = config;
   const supportedLanguagesOptions = settings.supportedLanguages.map((lang) => ({

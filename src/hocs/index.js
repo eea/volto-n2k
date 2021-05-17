@@ -1,3 +1,4 @@
 import withScreenSize from './withScreenSize';
+import withCookies from './withCookies';
 
-export { withScreenSize };
+export { withScreenSize, withCookies };

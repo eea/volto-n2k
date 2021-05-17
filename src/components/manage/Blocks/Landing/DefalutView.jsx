@@ -2,10 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 import { UniversalLink } from '@plone/volto/components';
+import { withCookies } from '@eeacms/volto-n2k/hocs';
+import config from '@plone/volto/registry';
 import hiker from './images/hiker.png';
 import { tiles, tileProps, getStyle } from './index';
 
 const DefaultView = (props) => {
+  const currentLang = props.cookies.get(
+    'N2K_LANGUAGE',
+    config.settings.defaultLanguage,
+  );
+
   return (
     <>
       <div
@@ -40,22 +47,31 @@ const DefaultView = (props) => {
               mobile="7"
             >
               <Grid style={{ justifyContent: 'space-around' }}>
-                {tiles.map((item, index) => (
-                  <Grid.Column
-                    key={`item-${index}`}
-                    className="item"
-                    {...tileProps}
-                  >
-                    <UniversalLink href={item.link || '#'} title={item.title}>
-                      <img
-                        className="image"
-                        src={item.image}
-                        alt={item.title}
-                      />
-                      <p className="description">{item.description}</p>
-                    </UniversalLink>
-                  </Grid.Column>
-                ))}
+                {currentLang
+                  ? tiles.map((item, index) => {
+                      return (
+                        <Grid.Column
+                          key={`item-${index}`}
+                          className="item"
+                          {...tileProps}
+                        >
+                          <UniversalLink
+                            href={
+                              item.link.replace(':lang', currentLang) || '#'
+                            }
+                            title={item.title}
+                          >
+                            <img
+                              className="image"
+                              src={item.image}
+                              alt={item.title}
+                            />
+                            <p className="description">{item.description}</p>
+                          </UniversalLink>
+                        </Grid.Column>
+                      );
+                    })
+                  : ''}
               </Grid>
             </Grid.Column>
           </Grid.Row>
@@ -68,4 +84,4 @@ const DefaultView = (props) => {
 
 export default connect((state, props) => ({
   screen: state.screen,
-}))(DefaultView);
+}))(withCookies(DefaultView));

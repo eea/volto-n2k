@@ -1,6 +1,8 @@
 /* eslint-disable no-extend-native */
 import React from 'react';
 
+import cookies from './store';
+
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installBodyClass from './components/manage/Blocks/BodyClass';
 import installLandingBlock from './components/manage/Blocks/Landing';
@@ -34,6 +36,11 @@ Array.prototype.sortByProperty = function (property, order = 'ASC') {
 };
 
 const applyConfig = (config) => {
+  config.addonReducers = {
+    ...config.addonReducers,
+    cookies,
+  };
+
   config.blocks.groupBlocksOrder = [
     ...config.blocks.groupBlocksOrder,
     { id: 'natura_2000', title: 'Natura 2000' },
