@@ -29,8 +29,8 @@ const View = (props) => {
       <div className="ui container">
         <Grid columns="equal">
           <Grid.Column style={{ paddingBottom: 0 }} computer="12" mobile="12">
-            <h2 className="country-title">{country_name}</h2>
-            <p className="site-name">{site_name}</p>
+            <h2 className="country-title">{site_name}</h2>
+            <p className="site-name">{country_name}</p>
             {designation ? (
               <p className="site-designation">{designation}</p>
             ) : (

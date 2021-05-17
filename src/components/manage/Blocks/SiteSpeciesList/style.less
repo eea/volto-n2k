@@ -17,14 +17,14 @@ div#view .site-species-list .species-list .ui.container > * {
           display: inline-flex;
           flex-flow: row;
           align-items: center;
-          border: 1px solid #C5C5C5;
-          color: #000;
+          border: 1px solid #c5c5c5;
           border-radius: 18px;
+          color: #000;
           font-weight: 400;
-          
+
           svg.icon {
-            margin-left: .5rem;
             margin-right: 0;
+            margin-left: 0.5rem;
             cursor: pointer;
           }
         }
@@ -46,19 +46,19 @@ div#view .site-species-list .species-list .ui.container > * {
     }
 
     .species-groups {
-      background-color: #04a87d;
       margin-bottom: 1rem;
-  
+      background-color: #04a87d;
+
       .ui.container {
-        overflow-x: auto;
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow-x: auto;
 
         @media only screen and (max-width: 765px) {
           justify-content: flex-start;
         }
-  
+
         button.species-group {
           padding: 1rem;
           border: none;
@@ -67,7 +67,7 @@ div#view .site-species-list .species-list .ui.container > * {
           cursor: pointer;
           font-size: 14px;
           text-transform: uppercase;
-  
+
           &.active,
           &:hover {
             padding-bottom: calc(1rem - 3px);
@@ -86,22 +86,22 @@ div#view .site-species-list .species-list .ui.container > * {
 
       .sidebar-header {
         display: flex;
-        background-color: #04A87D;
-        padding: 2rem 1rem;
-        align-items: center;
         flex-flow: row;
+        align-items: center;
         justify-content: space-between;
+        padding: 2rem 1rem;
+        background-color: #04a87d;
 
         .title {
+          margin-bottom: 0;
           color: #fff;
           font-size: 20px;
           font-weight: bold;
-          margin-bottom: 0;
         }
 
         .clear-button {
-          background-color: transparent;
           border: none;
+          background-color: transparent;
           cursor: pointer;
         }
       }
@@ -111,27 +111,27 @@ div#view .site-species-list .species-list .ui.container > * {
 
         .filter {
           padding: 0 1rem 1rem 1rem;
-          border-bottom: 2px solid #E0E0E0;
+          border-bottom: 2px solid #e0e0e0;
           margin-bottom: 2rem;
 
           .header {
-            background-color: transparent;
             padding: 0;
             margin-bottom: 2rem;
-            
+            background-color: transparent;
+
             .title {
               color: #000;
               font-weight: 600;
 
               .reset-button {
-                background-color: transparent;
                 border: none;
-                cursor: pointer;
-                color: #04A87D;
                 margin-left: 1rem;
+                background-color: transparent;
+                color: #04a87d;
+                cursor: pointer;
 
                 &:hover {
-                  opacity: .8;
+                  opacity: 0.8;
                 }
               }
             }
@@ -139,8 +139,8 @@ div#view .site-species-list .species-list .ui.container > * {
 
           .checkbox-wrapper {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             margin-bottom: 1rem;
 
             .count {
@@ -169,10 +169,10 @@ div#view .site-species-list .species-list .ui.container > * {
         img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
           border-bottom-left-radius: 10px;
           border-top-left-radius: 10px;
-    
+          object-fit: cover;
+
           @media only screen and (max-width: 767px) {
             border-bottom-left-radius: 0;
             border-top-left-radius: 10px;
@@ -192,10 +192,10 @@ div#view .site-species-list .species-list .ui.container > * {
 
         @media only screen and (max-width: 767px) {
           margin-left: 1rem;
-          border-bottom-right-radius: 10;
           border-bottom-left-radius: 10px;
-          border-top-right-radius: 0;
+          border-bottom-right-radius: 10;
           border-top-left-radius: 0;
+          border-top-right-radius: 0;
         }
 
         .metadata {
@@ -208,8 +208,8 @@ div#view .site-species-list .species-list .ui.container > * {
 
             a {
               color: #013c60;
-              font-weight: 400;
               font-size: 25px;
+              font-weight: 400;
             }
 
             .code-2000 {
@@ -231,8 +231,8 @@ div#view .site-species-list .species-list .ui.container > * {
 
     .ui.pagination.menu {
       width: 100%;
-      background-color: transparent;
       justify-content: center;
+      background-color: transparent;
 
       .item {
         &.active {
@@ -243,9 +243,9 @@ div#view .site-species-list .species-list .ui.container > * {
     }
 
     .empty {
-      text-align: center;
       margin-top: 3rem;
       margin-bottom: 3rem !important;
+      text-align: center;
     }
   }
 }

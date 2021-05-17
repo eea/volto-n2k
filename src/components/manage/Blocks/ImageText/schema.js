@@ -4,7 +4,7 @@ export default () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['theme'],
+      fields: ['theme', 'hasBorder'],
     },
     {
       id: 'image',
@@ -22,6 +22,11 @@ export default () => ({
         ['dark', 'Dark'],
       ],
       default: 'light',
+    },
+    hasBorder: {
+      title: 'Border',
+      type: 'boolean',
+      default: true,
     },
     image: {
       title: 'Image',

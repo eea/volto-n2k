@@ -29,7 +29,7 @@ export default () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['images'],
+      fields: ['theme', 'images'],
     },
     {
       id: 'advanced',

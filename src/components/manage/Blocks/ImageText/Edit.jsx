@@ -19,11 +19,12 @@ const Edit = (props) => {
   const value = { children: data.value || [], isVoid: Editor.isVoid };
   const valueUndefined =
     !value.children.length || Editor.string(value, []) === '';
+  const hasBorder = data.hasBorder ?? true;
 
   return (
     <div className={cx('image-text edit', data.theme || 'light')}>
       {data.image ? (
-        <p className="with-border rounded-border">
+        <p className={cx(hasBorder ? 'with-border rounded-border' : '')}>
           <img
             src={`${data.image}/@@images/image`}
             alt={data.imageTitle}

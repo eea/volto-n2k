@@ -112,7 +112,7 @@ const View = (props) => {
       updateFilters();
     }
     /* eslint-disable-next-line */
-  }, [filteredSpecies])
+  }, [filteredSpecies]);
 
   return (
     <div className="species-filters">

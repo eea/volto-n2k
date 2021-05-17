@@ -39,14 +39,14 @@
   .slick-arrows {
     .learn-more {
       position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 130px;
       color: #fff;
       text-align: left;
-      width: 130px;
-      left: -100%;
       transform: translateX(calc(-50% - 20px));
-      top: -50%;
 
-      @media only screen and (max-width: @largestMobileScreen + 53px)  {
+      @media only screen and (max-width: @largestMobileScreen + 53px) {
         display: none;
       }
     }
@@ -55,8 +55,8 @@
 
 body.grey-bg {
   #view {
-    background-color: #f8f8f8;
     padding-bottom: 4rem;
+    background-color: #f8f8f8;
   }
 }
 
@@ -398,7 +398,7 @@ img.slick-image {
 }
 
 .block-editor-maps .block.maps .block.maps {
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 @media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {

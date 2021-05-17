@@ -25,11 +25,11 @@
   .site-name {
     display: flex;
     align-items: center;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
     font-family: 'RajdhaniR';
     font-size: 18px;
-    line-height: 18px;
     font-weight: 600;
+    line-height: 18px;
 
     .info-icon {
       display: flex;
@@ -40,7 +40,7 @@
       &:hover {
         .description {
           max-width: 300px;
-          transition: max-width .4s;
+          transition: max-width 0.4s;
         }
       }
 
@@ -49,24 +49,24 @@
       }
 
       .description {
+        z-index: 0;
+        overflow: hidden;
         width: auto;
         max-width: 0;
-        overflow: hidden;
-        transition: max-width .3s;
-        z-index: 0;
+        margin-left: -1rem;
+        color: #eb9700;
         font-family: 'RajdhaniR';
         font-size: 14px;
         line-height: 14px;
-        color: #EB9700;
-        margin-left: -1rem;
+        transition: max-width 0.3s;
 
         span {
+          display: inline-block;
+          padding: 4px 1rem 4px 1.5rem;
           border: 1px solid #707070;
           background: #fff;
           border-radius: 10px;
           white-space: nowrap;
-          display: inline-block;
-          padding: 4px 1rem 4px 1.5rem;
         }
       }
     }
@@ -75,8 +75,8 @@
   .site-designation {
     font-family: 'RajdhaniR';
     font-size: 18px;
-    line-height: 18px;
     font-weight: 400;
+    line-height: 18px;
   }
 
   .site-details-wrapper {

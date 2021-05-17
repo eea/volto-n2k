@@ -6,6 +6,7 @@ import './styles.less';
 
 const View = (props) => {
   const { data = {} } = props;
+  const hasBorder = data.hasBorder ?? true;
   const value = { children: data.value || [], isVoid: Editor.isVoid };
   const valueUndefined =
     !value.children.length || Editor.string(value, []) === '';
@@ -13,7 +14,7 @@ const View = (props) => {
   return (
     <div className={cx('image-text view', data.theme || 'light')}>
       {data.image ? (
-        <p className="with-border rounded-border">
+        <p className={cx(hasBorder ? 'with-border rounded-border' : '')}>
           <img
             src={`${data.image}/@@images/image/mini`}
             alt={data.imageTitle}
