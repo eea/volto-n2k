@@ -12,7 +12,7 @@ const SpeciesGroups = (props) => {
 
   React.useEffect(() => {
     setSpeciesGroups([
-      'All',
+      ...(provider_data.species_group_name?.length ? ['All'] : []),
       ...new Set(provider_data.species_group_name || []),
     ]);
     /* eslint-disable-next-line */

@@ -10,10 +10,14 @@ import installTilesImages from './components/manage/Blocks/TilesImages';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
 import installContactBlock from './components/manage/Blocks/ContactBlock';
 import installSiteBanner from './components/manage/Blocks/SiteBanner';
+import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
 import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
 import installSiteProtectedHabitats from './components/manage/Blocks/SiteProtectedHabitats';
 import installSiteSpeciesList from './components/manage/Blocks/SiteSpeciesList';
 import installAppExtras from './components/theme/AppExtras';
+import { LinkElement } from './components/manage/Blocks/SlateLink/render';
+
+import { LINK } from 'volto-slate/constants';
 
 import { Header, Footer } from '@eeacms/volto-n2k/components';
 
@@ -56,6 +60,8 @@ const applyConfig = (config) => {
     ],
   };
 
+  config.settings.slate.elements[LINK] = LinkElement;
+
   return [
     installCarouselHorizontal,
     installBodyClass,
@@ -64,6 +70,7 @@ const applyConfig = (config) => {
     installExplodedPiesChart,
     installContactBlock,
     installSiteBanner,
+    installSpeciesBanner,
     installSiteProtectedSpecies,
     installSiteProtectedHabitats,
     installSiteSpeciesList,

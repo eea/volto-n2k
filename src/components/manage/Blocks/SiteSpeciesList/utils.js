@@ -1,29 +1,3 @@
-import AmphibiansPNG from './placeholders/Amphibians.png';
-import BirdsPNG from './placeholders/Birds.png';
-import ConifersPNG from './placeholders/Conifers.png';
-import FernsPNG from './placeholders/Ferns.png';
-import FishesPNG from './placeholders/Fishes.png';
-import FloweringPlantsPNG from './placeholders/Flowering Plants.png';
-import FungiPNG from './placeholders/Fungi.png';
-import InvertebratesPNG from './placeholders/Invertebrates.png';
-import MammalsPNG from './placeholders/Mammals.png';
-import MossesLiverwortsPNG from './placeholders/Mosses & Liverworts.png';
-import ReptilesPNG from './placeholders/Reptiles.png';
-
-export const photoPlaceholders = {
-  Amphibians: AmphibiansPNG,
-  Birds: BirdsPNG,
-  Conifers: ConifersPNG,
-  Ferns: FernsPNG,
-  Fishes: FishesPNG,
-  'Flowering Plants': FloweringPlantsPNG,
-  Fungi: FungiPNG,
-  Invertebrates: InvertebratesPNG,
-  Mammals: MammalsPNG,
-  'Mosses & Liverworts': MossesLiverwortsPNG,
-  Reptiles: ReptilesPNG,
-};
-
 export const filtersLabels = {
   // type: {
   //   p: 'Permanent',

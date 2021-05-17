@@ -23,13 +23,13 @@
 
 @font-face {
   font-family: 'RajdhaniR';
-  font-weight: 700;
+  font-weight: 400;
   src: url('../fonts/Rajdhani-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'RajdhaniB';
-  font-weight: 700;
+  font-weight: 600;
   src: url('../fonts/Rajdhani-Bold.ttf') format('truetype');
 }
 
@@ -45,6 +45,10 @@
       left: -100%;
       transform: translateX(calc(-50% - 20px));
       top: -50%;
+
+      @media only screen and (max-width: @largestMobileScreen + 53px)  {
+        display: none;
+      }
     }
   }
 }
@@ -391,6 +395,10 @@ img.slick-image {
       }
     }
   }
+}
+
+.block-editor-maps .block.maps .block.maps {
+  padding: .5rem;
 }
 
 @media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {

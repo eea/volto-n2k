@@ -18,18 +18,65 @@
     color: #fff;
     font-family: inherit;
     font-size: 54px;
+    line-height: 54px;
     text-transform: uppercase;
   }
 
   .site-name {
+    display: flex;
+    align-items: center;
+    margin-bottom: .5rem;
     font-family: 'RajdhaniR';
     font-size: 18px;
+    line-height: 18px;
+    font-weight: 600;
+
+    .info-icon {
+      display: flex;
+      align-items: center;
+      margin-left: 15px;
+      filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.4));
+
+      &:hover {
+        .description {
+          max-width: 300px;
+          transition: max-width .4s;
+        }
+      }
+
+      svg {
+        z-index: 1;
+      }
+
+      .description {
+        width: auto;
+        max-width: 0;
+        overflow: hidden;
+        transition: max-width .3s;
+        z-index: 0;
+        font-family: 'RajdhaniR';
+        font-size: 14px;
+        line-height: 14px;
+        color: #EB9700;
+        margin-left: -1rem;
+
+        span {
+          border: 1px solid #707070;
+          background: #fff;
+          border-radius: 10px;
+          white-space: nowrap;
+          display: inline-block;
+          padding: 4px 1rem 4px 1.5rem;
+        }
+      }
+    }
   }
 
-  .info-icon {
-    display: inline-block !important;
-    width: auto !important;
-    margin-left: 15px;
+  .site-designation {
+    font-family: 'RajdhaniR';
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 400;
   }
 
   .site-details-wrapper {

@@ -5,12 +5,6 @@ import './style.less';
 
 import Pie from './Pie';
 
-const getWidth = (items, value_1 = '4', value_2 = '6', value_3 = '12') => {
-  if (items.length > 2) return value_1;
-  if (items.length === 2) return value_2;
-  return value_3;
-};
-
 const View = (props) => {
   const { x = null, y = null, x_colors = [], precision = 2 } = props.data;
   const data = props.provider_data || {};
@@ -40,10 +34,10 @@ const View = (props) => {
                 <Grid.Column
                   key={`x_${index}`}
                   mobile="12"
-                  tablet={getWidth(y_values, 6, 6, 12)}
-                  computer={getWidth(y_values, 6, 6, 12)}
-                  largeScreen={getWidth(y_values)}
-                  widescreen={getWidth(y_values)}
+                  tablet="6"
+                  computer="4"
+                  largeScreen="4"
+                  widescreen="4"
                   className="pie-column"
                 >
                   <Grid>

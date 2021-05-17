@@ -13,7 +13,27 @@ const View = (props) => {
   return (
     <div className="species-banner full-width">
       <div className="species-container">
-        <Container>
+        <Container className="species-wrapper">
+          {/* <Grid size="12">
+            <Grid.Row>
+              {Object.entries(data).map(([item, value], index) => (
+                <Grid.Column
+                  key={index}
+                  mobile="6"
+                  tablet="6"
+                  computer="3"
+                  className="species-box"
+                >
+                  <div className="upper">
+                    <span>{value}</span>
+                  </div>
+                  <div className="lower">
+                    <span>{item}</span>
+                  </div>
+                </Grid.Column>
+              ))}
+            </Grid.Row>
+          </Grid> */}
           <div className="species-wrapper">
             {Object.entries(data).map(([item, value], index) => (
               <div key={index} className="species-box">

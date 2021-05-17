@@ -1,8 +1,12 @@
 import React from 'react';
-import { Grid, Popup, Image } from 'semantic-ui-react';
-import infoSVG from './info.svg';
-
+import { Grid } from 'semantic-ui-react';
+// import { Icon } from '@plone/volto/components';
+// import infoSVG from '@eeacms/volto-n2k/icons/info.svg';
 import './style.less';
+
+const isNumber = (number) => {
+  return typeof number === 'number' && !isNaN(number);
+};
 
 const View = (props) => {
   const provider_data = props.provider_data || {};
@@ -24,14 +28,16 @@ const View = (props) => {
     <div className="site-banner full-width">
       <div className="ui container">
         <Grid columns="equal">
-          <Grid.Column computer="8" mobile="12">
+          <Grid.Column style={{ paddingBottom: 0 }} computer="12" mobile="12">
             <h2 className="country-title">{country_name}</h2>
-            <span className="site-name">{site_name}</span>
-            <Popup
-              content={designation}
-              trigger={<Image src={infoSVG} className="info-icon" />}
-            />
-
+            <p className="site-name">{site_name}</p>
+            {designation ? (
+              <p className="site-designation">{designation}</p>
+            ) : (
+              ''
+            )}
+          </Grid.Column>
+          <Grid.Column style={{ paddingTop: 0 }} computer="8" mobile="12">
             <div className="site-details-wrapper">
               {site_type[0] === 'CDDA' && (
                 <>
@@ -68,7 +74,7 @@ const View = (props) => {
 
               <div className="site-detail">
                 <div className="upper">
-                  {area_km2[0] ? (
+                  {isNumber(area_km2[0]) ? (
                     <div>
                       {area_km2} km
                       <sup>2</sup>
@@ -108,7 +114,7 @@ const View = (props) => {
                 <>
                   <div className="site-detail">
                     <div className="upper">
-                      {number_protected_habitat_types[0] ? (
+                      {isNumber(number_protected_habitat_types[0]) ? (
                         <div>{number_protected_habitat_types}</div>
                       ) : (
                         <div>No data</div>
@@ -119,7 +125,7 @@ const View = (props) => {
 
                   <div className="site-detail">
                     <div className="upper">
-                      {number_protected_species[0] ? (
+                      {isNumber(number_protected_species[0]) ? (
                         <div>{number_protected_species}</div>
                       ) : (
                         <div>No data</div>

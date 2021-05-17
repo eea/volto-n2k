@@ -1,3 +1,29 @@
+import AmphibiansPNG from '@eeacms/volto-n2k/icons/placeholders/Amphibians.png';
+import BirdsPNG from '@eeacms/volto-n2k/icons/placeholders/Birds.png';
+import ConifersPNG from '@eeacms/volto-n2k/icons/placeholders/Conifers.png';
+import FernsPNG from '@eeacms/volto-n2k/icons/placeholders/Ferns.png';
+import FishesPNG from '@eeacms/volto-n2k/icons/placeholders/Fishes.png';
+import FloweringPlantsPNG from '@eeacms/volto-n2k/icons/placeholders/Flowering Plants.png';
+import FungiPNG from '@eeacms/volto-n2k/icons/placeholders/Fungi.png';
+import InvertebratesPNG from '@eeacms/volto-n2k/icons/placeholders/Invertebrates.png';
+import MammalsPNG from '@eeacms/volto-n2k/icons/placeholders/Mammals.png';
+import MossesLiverwortsPNG from '@eeacms/volto-n2k/icons/placeholders/Mosses & Liverworts.png';
+import ReptilesPNG from '@eeacms/volto-n2k/icons/placeholders/Reptiles.png';
+
+export const photoPlaceholders = {
+  Amphibians: AmphibiansPNG,
+  Birds: BirdsPNG,
+  Conifers: ConifersPNG,
+  Ferns: FernsPNG,
+  Fishes: FishesPNG,
+  'Flowering Plants': FloweringPlantsPNG,
+  Fungi: FungiPNG,
+  Invertebrates: InvertebratesPNG,
+  Mammals: MammalsPNG,
+  'Mosses & Liverworts': MossesLiverwortsPNG,
+  Reptiles: ReptilesPNG,
+};
+
 export const getObjectByIndex = (provider_data, index) => {
   const obj = {};
   const keys = Object.keys(provider_data);
