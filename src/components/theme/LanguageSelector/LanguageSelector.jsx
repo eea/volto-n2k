@@ -59,9 +59,6 @@ const LanguageSelector = (props) => {
 
           if (translation && translation.path) {
             const exists = pathExists(translation.path, n2kItems);
-
-            console.log('HERE', exists, translation.path, n2kItems);
-
             if (exists) {
               props.history.push(flattenToAppURL(translation.path));
             } else {
