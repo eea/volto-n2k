@@ -1,15 +1,20 @@
-export const setCookie = (key, value) => {
+export const setLocalStorage = (key, value) => {
   return {
-    type: 'SET_COOKIE',
+    type: 'SET_LOCALSTORAGE',
     key,
     value,
   };
 };
 
-export const deleteCookie = (key, value) => {
+export const deleteLocalStorage = (key) => {
   return {
-    type: 'DELETE_COOKIE',
+    type: 'DELETE_LOCALSTORAGE',
     key,
-    value,
+  };
+};
+
+export const resetLocalStorage = () => {
+  return {
+    type: 'RESET_LOCALSTORAGE',
   };
 };

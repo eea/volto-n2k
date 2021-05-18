@@ -1,7 +1,7 @@
 /* eslint-disable no-extend-native */
 import React from 'react';
 
-import cookies from './store';
+import localStorage from './store';
 
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installBodyClass from './components/manage/Blocks/BodyClass';
@@ -36,18 +36,22 @@ Array.prototype.sortByProperty = function (property, order = 'ASC') {
 };
 
 const applyConfig = (config) => {
-  config.addonReducers = {
-    ...config.addonReducers,
-    cookies,
-  };
-
   config.blocks.groupBlocksOrder = [
     ...config.blocks.groupBlocksOrder,
     { id: 'natura_2000', title: 'Natura 2000' },
   ];
 
+  config.addonReducers = {
+    ...config.addonReducers,
+    localStorage,
+  };
+
+  config.settings.persistentReducers.push('localStorage');
+
   config.settings = {
     ...config.settings,
+    multilingualRoot: '/natura2000/:lang',
+    multilingualPath: '/natura2000/:lang/*',
     defaultLanguage: 'en',
     supportedLanguages: ['en', 'ro'],
   };

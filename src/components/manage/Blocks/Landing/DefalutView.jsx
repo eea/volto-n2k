@@ -1,17 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { generatePath } from 'react-router';
 import { Grid } from 'semantic-ui-react';
 import { UniversalLink } from '@plone/volto/components';
-import { withCookies } from '@eeacms/volto-n2k/hocs';
-import config from '@plone/volto/registry';
+import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import hiker from './images/hiker.png';
 import { tiles, tileProps, getStyle } from './index';
 
 const DefaultView = (props) => {
-  const currentLang = props.cookies.get(
-    'N2K_LANGUAGE',
-    config.settings.defaultLanguage,
-  );
+  const currentLang = props.localStorage.get('N2K_LANGUAGE');
 
   return (
     <>
@@ -49,18 +46,16 @@ const DefaultView = (props) => {
               <Grid style={{ justifyContent: 'space-around' }}>
                 {currentLang
                   ? tiles.map((item, index) => {
+                      const link = generatePath(item.link, {
+                        lang: currentLang,
+                      });
                       return (
                         <Grid.Column
                           key={`item-${index}`}
                           className="item"
                           {...tileProps}
                         >
-                          <UniversalLink
-                            href={
-                              item.link.replace(':lang', currentLang) || '#'
-                            }
-                            title={item.title}
-                          >
+                          <UniversalLink href={link || '#'} title={item.title}>
                             <img
                               className="image"
                               src={item.image}
@@ -84,4 +79,4 @@ const DefaultView = (props) => {
 
 export default connect((state, props) => ({
   screen: state.screen,
-}))(withCookies(DefaultView));
+}))(withLocalStorage(DefaultView));

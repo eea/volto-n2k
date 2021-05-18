@@ -8,7 +8,8 @@ import { withRouter } from 'react-router';
 import { Container, Segment } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import config from '@plone/volto/registry';
+import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import Navigation from '../Navigation/Navigation';
 import Sticky from 'react-stickynode';
 
@@ -36,6 +37,20 @@ class Header extends Component {
   static defaultProps = {
     token: null,
   };
+
+  /**
+   * Component will mount
+   * @method componentWillMount
+   * @returns {undefined}
+   */
+  componentDidMount() {
+    if (!this.props.localStorage.get('N2K_LANGUAGE')) {
+      this.props.localStorage.set(
+        'N2K_LANGUAGE',
+        config.settings.defaultLanguage,
+      );
+    }
+  }
 
   /**
    * Render method.
@@ -86,4 +101,4 @@ class Header extends Component {
 
 export default connect((state) => ({
   token: state.userSession.token,
-}))(withRouter(Header));
+}))(withRouter(withLocalStorage(Header)));

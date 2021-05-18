@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { matchPath } from 'react-router';
 import { Link } from 'react-router-dom';
 import { defineMessages, injectIntl } from 'react-intl';
 import { Menu, Dropdown } from 'semantic-ui-react';
@@ -16,6 +17,7 @@ import { Icon } from '@plone/volto/components';
 
 import { getNavigation } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
+import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 
 import homeSVG from '@eeacms/volto-n2k/icons/home.svg';
@@ -328,40 +330,44 @@ class Navigation extends Component {
   }
 }
 
-const getN2kItems = (items, cookies) => {
+const getN2kItems = (items, localStorage) => {
   if (__SERVER__) return [];
-  const currentLang = cookies.N2K_LANGUAGE || config.settings.defaultLanguage;
-  const languageFolders = config.settings.supportedLanguages.map(
-    (lang) => `/natura2000/${lang}`,
-  );
-
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].url === '/natura2000') {
-      const navItems = [
-        ...(items[i].items || []).filter(
-          (item) => item.url === `/natura2000/${currentLang}`,
-        )[0]?.items,
-        ...(items[i].items || []).filter(
-          (item) =>
-            !languageFolders.includes(item.url) &&
-            item.url !== '/natura2000/sites' &&
-            item.url !== '/natura2000/habitats' &&
-            item.url !== '/natura2000/species',
-        ),
-      ];
-
-      return navItems;
+  const currentLang = localStorage.get('N2K_LANGUAGE');
+  let navItems = [];
+  const natura2000 =
+    items.filter((item) => item.url === '/natura2000')?.[0]?.items || [];
+  natura2000.forEach((item) => {
+    const languageFolder = matchPath(item.url, {
+      path: config.settings.multilingualRoot,
+      exact: true,
+      strict: false,
+    });
+    if (languageFolder && languageFolder.params.lang === currentLang) {
+      navItems = [...navItems, ...(item.items || [])];
     }
-  }
-  return [];
+    if (
+      languageFolder &&
+      !config.settings.supportedLanguages.includes(
+        languageFolder.params.lang,
+      ) &&
+      item.url !== '/natura2000/sites' &&
+      item.url !== '/natura2000/habitats' &&
+      item.url !== '/natura2000/species'
+    ) {
+      navItems.push(item);
+    }
+  });
+
+  return navItems;
 };
 
 export default compose(
+  withLocalStorage,
   injectIntl,
   connect(
     (state, props) => {
       return {
-        items: getN2kItems(state.navigation.items, state.cookies),
+        items: getN2kItems(state.navigation.items, props.localStorage),
         userToken: state?.userSession?.token,
       };
     },
