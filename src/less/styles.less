@@ -127,8 +127,28 @@ body.grey-bg {
               .home-button {
                 position: absolute;
                 top: 50%;
-                left: calc(-32px - 1rem);
-                transform: translateY(-50%);
+                left: -10px;
+                transform: translateX(-100%) translateY(-50%);
+              }
+
+              .language-selector-wrapper {
+                position: absolute;
+                top: 0;
+                right: 0;
+                transform: translateX(100%) translateY(0);
+
+                &::before {
+                  position: absolute;
+                  top: 4px;
+                  left: 50%;
+                  display: block !important;
+                  width: 6px;
+                  height: 6px;
+                  background-color: #3b7f02;
+                  border-radius: 100%;
+                  content: '';
+                  transform: translateX(-50%);
+                }
               }
             }
 
@@ -156,6 +176,13 @@ body.grey-bg {
                 border: 1px solid transparent;
                 font-size: 1.15em;
                 font-weight: bold;
+
+                &.language-selector-wrapper {
+                  .language-selector {
+                    margin-right: 0;
+                  }
+                }
+
 
                 &:hover {
                   color: #3b7f02 !important;
@@ -428,8 +455,18 @@ img.slick-image {
 
 .n2k-green-border {
   .block.maps {
+    > div {
+      height: 100%;
+      
+      > div {
+        display: flex;
+        height: 100%;
+      }
+    }
+
     iframe {
-      height: 300px !important;
+      min-height: 300px !important;
+      height: 100% !important;
     }
   }
 }

@@ -322,7 +322,7 @@ class Navigation extends Component {
             );
           })}
           <Menu.Item className="firstLevel language-selector-wrapper">
-            <LanguageSelector />
+            <LanguageSelector navigation={this.props.navigation} />
           </Menu.Item>
         </Menu>
       </nav>
@@ -367,6 +367,7 @@ export default compose(
   connect(
     (state, props) => {
       return {
+        navigation: state.navigation,
         items: getN2kItems(state.navigation.items, props.localStorage),
         userToken: state?.userSession?.token,
       };

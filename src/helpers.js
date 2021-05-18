@@ -66,3 +66,19 @@ export const adjustBrightness = (col, amt) => {
 
   return (usePound ? '#' : '') + RR + GG + BB;
 };
+
+export const getN2kItems = (items) => {
+  return items.filter((item) => item.url === '/natura2000')?.[0]?.items || [];
+};
+
+export const pathExists = (path, items) => {
+  let ok = false;
+  for (let i = 0; i < items.length; i++) {
+    if (!ok && items[i].url === path) {
+      ok = true;
+    } else if (!ok && items[i].items?.length) {
+      ok = pathExists(path, items[i].items);
+    }
+  }
+  return ok;
+};

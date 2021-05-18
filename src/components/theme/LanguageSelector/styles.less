@@ -1,11 +1,19 @@
 .language-selector {
   .ui.dropdown {
+    &:not(.button) .text,
     &:not(.button) .default.text {
       color: #999999;
+      text-transform: uppercase;
+      font-family: OpenSans, 'Raleway', sans-serif;
+
+      &:hover {
+        color: #3b7f02;
+      }
     }
 
     .menu {
       margin-top: .5rem;
+      margin-left: -0.6rem;
 
       .item {
         background: #fff !important;
@@ -14,6 +22,8 @@
           color: #999999;
           font-weight: bold;
           font-size: 1rem;
+          text-transform: uppercase;
+          font-family: OpenSans, 'Raleway', sans-serif;
         }
 
         &.active.selected {
