@@ -173,7 +173,7 @@ const View = (props) => {
                       <div className="footer-metadata">
                         <p className="orange">
                           {filteredSpecies[index].EU_threat_name ||
-                            'not reported'}{' '}
+                            'Not reported'}{' '}
                           (IUCN)
                         </p>
                         <p className="green">

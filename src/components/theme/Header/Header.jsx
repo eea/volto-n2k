@@ -58,6 +58,8 @@ class Header extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
+    const currentLang = this.props.localStorage.get('N2K_LANGUAGE');
+
     return this.props.location.pathname === '/natura2000' ? (
       ''
     ) : (
@@ -72,7 +74,11 @@ class Header extends Component {
               <div className="header">
                 <div className="logo-nav-wrapper">
                   <div className="tools-search-wrapper">
-                    <Navigation pathname={this.props.pathname} />
+                    {currentLang ? (
+                      <Navigation pathname={this.props.pathname} />
+                    ) : (
+                      ''
+                    )}
                   </div>
                 </div>
               </div>

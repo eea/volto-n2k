@@ -219,8 +219,13 @@ div#view .site-species-list .species-list .ui.container > * {
         }
 
         .footer-metadata {
+          display: flex;
           padding: 1rem 2rem;
           border-top: 1px solid #e8e8e8;
+
+          p:not(.last-child) {
+            margin-right: 1rem;
+          }
 
           .orange {
             color: #FF9300;

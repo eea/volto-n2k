@@ -14,6 +14,7 @@ import installContactBlock from './components/manage/Blocks/ContactBlock';
 import installSiteShape from './components/manage/Blocks/SiteShape';
 import installSiteBanner from './components/manage/Blocks/SiteBanner';
 import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
+import installHabitatsBanner from './components/manage/Blocks/HabitatsBanner';
 import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
 import installSiteProtectedHabitats from './components/manage/Blocks/SiteProtectedHabitats';
 import installSiteSpeciesList from './components/manage/Blocks/SiteSpeciesList';
@@ -90,6 +91,7 @@ const applyConfig = (config) => {
     installSiteShape,
     installSiteBanner,
     installSpeciesBanner,
+    installHabitatsBanner,
     installSiteProtectedSpecies,
     installSiteProtectedHabitats,
     installSiteSpeciesList,

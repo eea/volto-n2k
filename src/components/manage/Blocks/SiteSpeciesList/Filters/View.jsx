@@ -108,7 +108,7 @@ const View = (props) => {
   };
 
   React.useEffect(() => {
-    if (species.length) {
+    if (provider_data && species.length) {
       updateFilters();
     }
     /* eslint-disable-next-line */
