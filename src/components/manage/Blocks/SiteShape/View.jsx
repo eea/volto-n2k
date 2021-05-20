@@ -1,84 +1,93 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Map from '@eeacms/volto-openlayers-map/Map';
-import MapContext from '@eeacms/volto-openlayers-map/Map/MapContext';
-import { TileLayer, VectorLayer } from '@eeacms/volto-openlayers-map/Layers';
+import { Interactions } from '@eeacms/volto-openlayers-map/Interactions';
+import { Controls } from '@eeacms/volto-openlayers-map/Controls';
+import { Layers, Layer } from '@eeacms/volto-openlayers-map/Layers';
 import { openlayers } from '@eeacms/volto-openlayers-map';
+import { getSiteShapeURL } from './index';
 import './style.less';
 
-const Layers = ({ provider_data }) => {
-  const { map } = useContext(MapContext);
-  const { ol, extent, format, style, source } = openlayers;
-  const [vectorSource, setVectorSource] = useState(new source.Vector());
-  const { site_code = [], site_name = [] } = provider_data;
-  let esrijsonFormat = new format.EsriJSON();
+const View = (props) => {
+  const [options, setOptions] = React.useState({});
+  const [vectorSource, setVectorSource] = useState(null);
+  const { format, proj, style, source } = openlayers;
+  const provider_data = props.provider_data || {};
+  const { site_code = [] } = provider_data;
 
   useEffect(() => {
-    if (!map) return;
-    const url = `https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Sites/MapServer/2/query?f=json&where=SITECODE LIKE '%${site_code[0].toUpperCase()}%'&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=SITECODE,SITENAME,OBJECTID&outSR=102100`;
-    fetch(encodeURI(url)).then(function (response) {
+    if (__SERVER__) return;
+    setVectorSource(new source.Vector());
+    /* eslint-disable-next-line */
+  }, []);
+
+  useEffect(() => {
+    if (__SERVER__ || !vectorSource || !site_code[0]) return;
+    const esrijsonFormat = new format.EsriJSON();
+    // Get site shape
+    fetch(getSiteShapeURL(site_code[0])).then(function (response) {
       if (response.status !== 200) return;
-      // Examine the text in the response
       response.json().then(function (data) {
         if (data.features && data.features.length > 0) {
           const features = esrijsonFormat.readFeatures(data);
           if (features.length > 0) {
             vectorSource.addFeatures(features);
-            map.getView().fit(features[0].getGeometry().getExtent());
-            const size = extent.getSize(vectorSource.getExtent());
-            map.setView(
-              new ol.View({
-                maxZoom: 16,
-                extent: new extent.buffer(
-                  vectorSource.getExtent(),
-                  size[0] * 0.1,
-                ),
-                showFullExtent: true,
-              }),
-            );
-            map
-              .getView()
-              .fit(new extent.buffer(vectorSource.getExtent(), size[0] * 0.1));
+            setOptions({
+              ...options,
+              extent: features[0].getGeometry().getExtent(),
+              zoom: 10,
+            });
           }
         }
       });
     });
     /* eslint-disable-next-line */
-  }, [map]);
+  }, [site_code?.[0]]);
 
+  if (__SERVER__ || !vectorSource) return '';
   return (
-    <>
-      <TileLayer source={new source.OSM()} zIndex={0} />
-      <VectorLayer
-        source={vectorSource}
-        style={
-          new style.Style({
-            fill: new style.Fill({
-              color: 'rgba(255,255,255,0.4)',
-            }),
-            stroke: new style.Stroke({
-              color: 'blue',
-              width: 3,
-              lineDash: [5, 7],
-            }),
-          })
-        }
-      />
-    </>
-  );
-};
-
-const View = (props) => {
-  const [zoom, setZoom] = useState(4.5);
-  const { proj } = openlayers;
-  const provider_data = props.provider_data || {};
-  const { site_code = [], site_name = [] } = provider_data;
-
-  if (__SERVER__ || !site_code[0]) return '';
-  return (
-    <div className="site-shape full-width">
-      <Map center={proj.fromLonLat([20, 50])} zoom={zoom}>
-        <Layers provider_data={provider_data} />
-      </Map>
+    <div className="site-shape-wrapper full-width">
+      <div className="site-shape full-width">
+        <Map
+          view={{
+            center: proj.fromLonLat([20, 50]),
+            showFullExtent: true,
+            maxZoom: 10,
+            minZoom: 10,
+          }}
+          {...options}
+        >
+          <Layers>
+            <Layer.Tile zIndex={0} />
+            <Layer.Vector
+              source={vectorSource}
+              style={
+                new style.Style({
+                  fill: new style.Fill({
+                    color: 'rgba(255,255,255,0.4)',
+                  }),
+                  stroke: new style.Stroke({
+                    color: '#04A77D',
+                    width: 3,
+                    lineDash: [5, 7],
+                  }),
+                })
+              }
+              zIndex={1}
+            />
+          </Layers>
+          <Controls attribution={false} zoom={false} />
+          <Interactions
+            doubleClickZoom={false}
+            dragAndDrop={false}
+            dragPan={false}
+            keyboardPan={false}
+            keyboardZoom={false}
+            mouseWheelZoom={false}
+            pointer={false}
+            select={false}
+          />
+        </Map>
+      </div>
     </div>
   );
 };
