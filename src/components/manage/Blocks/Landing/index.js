@@ -12,10 +12,22 @@ import natura2000 from './images/natura2000.png';
 
 export const tiles = [
   {
+    image: natura2000,
+    title: 'Natura 2000',
+    description: 'NATURA 2000',
+    link: '/natura2000/natura2000',
+  },
+  {
     image: coasts_and_seas,
     title: 'Coasts and seas',
     description: 'COASTS AND SEAS',
     link: '/natura2000/:lang/coasts-and-seas',
+  },
+  {
+    image: people_and_nature,
+    title: 'People and nature',
+    description: 'PEOPLE AND NATURE',
+    link: '/natura2000/:lang/people-and-nature',
   },
   {
     image: forests,
@@ -46,18 +58,6 @@ export const tiles = [
     title: 'Islands',
     description: 'ISLANDS',
     link: '/natura2000/:lang/islands',
-  },
-  {
-    image: people_and_nature,
-    title: 'People and nature',
-    description: 'PEOPLE AND NATURE',
-    link: '/natura2000/:lang/people-and-nature',
-  },
-  {
-    image: natura2000,
-    title: 'Natura 2000',
-    description: 'NATURA 2000',
-    link: '/natura2000/natura2000',
   },
 ];
 
