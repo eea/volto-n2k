@@ -70,8 +70,7 @@ const ArrowsGroup = (props) => {
         >
           {currentSlide === 0 ? (
             <p className="learn-more">
-              Learn more about the status, threats and protection efforts around
-              Europe’s coasts and seas
+              Learn more about the status of our coasts and seas
             </p>
           ) : (
             ''
