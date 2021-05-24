@@ -53,6 +53,7 @@ const View = (props) => {
             showFullExtent: true,
             maxZoom: 10,
             minZoom: 10,
+            zoom: 10,
           }}
           {...options}
         >

@@ -3,23 +3,24 @@ import React from 'react';
 
 import localStorage from './store';
 
-import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
+import installAppExtras from './components/theme/AppExtras';
 import installBodyClass from './components/manage/Blocks/BodyClass';
+import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
+import installCddaShape from './components/manage/Blocks/CddaShape';
+import installContactBlock from './components/manage/Blocks/ContactBlock';
+import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
+import installHabitatsBanner from './components/manage/Blocks/HabitatsBanner';
+import installImageText from './components/manage/Blocks/ImageText';
 import installLandingBlock from './components/manage/Blocks/Landing';
 import installNavigationAnchors from './components/manage/Blocks/NavigationAnchors';
-import installImageText from './components/manage/Blocks/ImageText';
-import installTilesImages from './components/manage/Blocks/TilesImages';
-import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
-import installContactBlock from './components/manage/Blocks/ContactBlock';
-import installCddaShape from './components/manage/Blocks/CddaShape';
-import installSiteShape from './components/manage/Blocks/SiteShape';
+import installSimpleDataTable from './components/manage/Blocks/SimpleDataTable';
 import installSiteBanner from './components/manage/Blocks/SiteBanner';
-import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
-import installHabitatsBanner from './components/manage/Blocks/HabitatsBanner';
-import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
 import installSiteProtectedHabitats from './components/manage/Blocks/SiteProtectedHabitats';
+import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
+import installSiteShape from './components/manage/Blocks/SiteShape';
 import installSiteSpeciesList from './components/manage/Blocks/SiteSpeciesList';
-import installAppExtras from './components/theme/AppExtras';
+import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
+import installTilesImages from './components/manage/Blocks/TilesImages';
 import { LinkElement } from './components/manage/Blocks/SlateLink/render';
 
 import { LINK } from 'volto-slate/constants';
@@ -83,22 +84,23 @@ const applyConfig = (config) => {
   config.settings.slate.elements[LINK] = LinkElement;
 
   return [
-    installCarouselHorizontal,
+    installAppExtras,
     installBodyClass,
+    installCarouselHorizontal,
+    installCddaShape,
+    installContactBlock,
+    installExplodedPiesChart,
+    installHabitatsBanner,
+    installImageText,
     installLandingBlock,
     installNavigationAnchors,
-    installExplodedPiesChart,
-    installContactBlock,
-    installCddaShape,
-    installSiteShape,
+    installSimpleDataTable,
     installSiteBanner,
-    installSpeciesBanner,
-    installHabitatsBanner,
-    installSiteProtectedSpecies,
     installSiteProtectedHabitats,
+    installSiteProtectedSpecies,
+    installSiteShape,
     installSiteSpeciesList,
-    installAppExtras,
-    installImageText,
+    installSpeciesBanner,
     installTilesImages,
   ].reduce((acc, apply) => apply(acc), config);
 };
