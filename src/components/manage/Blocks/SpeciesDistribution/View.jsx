@@ -23,10 +23,16 @@ const View = (props) => {
   useEffect(() => {
     if (__SERVER__ || !vectorSource || !code_2000[0]) return;
     const esrijsonFormat = new format.EsriJSON();
-    // Get site shape
+    // Get species location on sites
     fetch(getSpeciesDistributionURL(code_2000[0])).then(function (response) {
       if (response.status !== 200) return;
       response.json().then(function (data) {
+        for (var i = data.features.length - 1; i >= 0; i--) {
+          if (data.features[i].geometry.x === 'NaN') {
+            data.features.splice(i, 1);
+          }
+        }
+
         if (data.features && data.features.length > 0) {
           const features = esrijsonFormat.readFeatures(data);
           if (features.length > 0) {
