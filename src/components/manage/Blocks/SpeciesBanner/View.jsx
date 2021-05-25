@@ -15,34 +15,33 @@ const View = (props) => {
     species_group_names = [],
   } = provider_data;
 
+  if (!id_eunis[0]) return '';
   return (
-    <Transition visible={!!id_eunis[0] || props.mode === 'edit'}>
-      <div className="species-banner-details full-width">
-        <Container>
-          <div className="species-details">
-            <div className="species-metadata">
-              <h2 className="name">{scientific_name[0]}</h2>
-              <p className="info">
-                {common_name[0]} {author[0]}
-              </p>
-              {common_name_list[0] ? (
-                <p className="info">Common names: {common_name_list[0]}</p>
-              ) : (
-                ''
-              )}
-            </div>
-            <img
-              src={
-                picture_url[0] ||
-                photoPlaceholders[species_group_names[0]] ||
-                photoPlaceholders.Birds
-              }
-              alt={species_group_names[0]}
-            />
+    <div className="species-banner-details full-width">
+      <Container>
+        <div className="species-details">
+          <div className="species-metadata">
+            <h2 className="name">{scientific_name[0]}</h2>
+            <p className="info">
+              {common_name[0]} {author[0]}
+            </p>
+            {common_name_list[0] ? (
+              <p className="info">Common names: {common_name_list[0]}</p>
+            ) : (
+              ''
+            )}
           </div>
-        </Container>
-      </div>
-    </Transition>
+          <img
+            src={
+              picture_url[0] ||
+              photoPlaceholders[species_group_names[0]] ||
+              photoPlaceholders.Birds
+            }
+            alt={species_group_names[0]}
+          />
+        </div>
+      </Container>
+    </div>
   );
 };
 

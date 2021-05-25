@@ -4,11 +4,15 @@ import React from 'react';
 import localStorage from './store';
 
 import installAppExtras from './components/theme/AppExtras';
+
+import { LinkElement } from './components/manage/Blocks/SlateLink/render';
 import installBodyClass from './components/manage/Blocks/BodyClass';
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installCddaShape from './components/manage/Blocks/CddaShape';
+import installConnectedList from './components/manage/Blocks/List';
 import installContactBlock from './components/manage/Blocks/ContactBlock';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
+import installHabitatClassification from './components/manage/Blocks/HabitatClassification';
 import installHabitatsBanner from './components/manage/Blocks/HabitatsBanner';
 import installImageText from './components/manage/Blocks/ImageText';
 import installLandingBlock from './components/manage/Blocks/Landing';
@@ -19,10 +23,10 @@ import installSiteProtectedHabitats from './components/manage/Blocks/SiteProtect
 import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
 import installSiteShape from './components/manage/Blocks/SiteShape';
 import installSiteSpeciesList from './components/manage/Blocks/SiteSpeciesList';
-import installSpeciesDistribution from './components/manage/Blocks/SpeciesDistribution';
 import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
+import installSpeciesClassification from './components/manage/Blocks/SpeciesClassification';
+import installSpeciesDistribution from './components/manage/Blocks/SpeciesDistribution';
 import installTilesImages from './components/manage/Blocks/TilesImages';
-import { LinkElement } from './components/manage/Blocks/SlateLink/render';
 
 import { LINK } from 'volto-slate/constants';
 
@@ -89,9 +93,12 @@ const applyConfig = (config) => {
     installBodyClass,
     installCarouselHorizontal,
     installCddaShape,
+    installConnectedList,
     installContactBlock,
     installExplodedPiesChart,
+    installHabitatClassification,
     installHabitatsBanner,
+    installSpeciesClassification,
     installImageText,
     installLandingBlock,
     installNavigationAnchors,
@@ -101,8 +108,8 @@ const applyConfig = (config) => {
     installSiteProtectedSpecies,
     installSiteShape,
     installSiteSpeciesList,
-    installSpeciesDistribution,
     installSpeciesBanner,
+    installSpeciesDistribution,
     installTilesImages,
   ].reduce((acc, apply) => apply(acc), config);
 };

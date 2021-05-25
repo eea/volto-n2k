@@ -37,17 +37,11 @@ const coloredTableSchema = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['th_color', 'td_color'],
+        fields: ['td_color'],
       },
     ],
 
     properties: {
-      th_color: {
-        title: 'Table header color',
-        widget: 'simple_color',
-        available_colors:
-          config.blocks.blocksConfig.simpleDataConnectedTable.available_colors,
-      },
       td_color: {
         title: 'Table rows color',
         widget: 'objectlist',
