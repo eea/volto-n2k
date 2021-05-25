@@ -10,7 +10,7 @@ import './style.less';
 const View = (props) => {
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
-  const { format, proj, style, source } = openlayers;
+  const { extent, format, proj, style, source } = openlayers;
   const provider_data = props.provider_data || {};
   const { code_2000 = [] } = provider_data;
 
@@ -31,29 +31,28 @@ const View = (props) => {
           const features = esrijsonFormat.readFeatures(data);
           if (features.length > 0) {
             vectorSource.addFeatures(features);
+            const vectorExtent = vectorSource.getExtent();
+            let size = extent.getSize(vectorExtent);
             setOptions({
               ...options,
-              extent: features[0].getGeometry().getExtent(),
-              zoom: 10,
+              extent: new extent.buffer(vectorExtent, size[0] * 0.1),
             });
           }
         }
       });
     });
     /* eslint-disable-next-line */
-  }, [site_code?.[0]]);
+  }, [code_2000?.[0]]);
 
   if (__SERVER__ || !vectorSource) return '';
   return (
-    <div className="site-shape-wrapper full-width">
-      <div className="site-shape full-width">
+    <div className="site-shape-wrapper">
+      <div className="site-shape">
         <Map
           view={{
             center: proj.fromLonLat([20, 50]),
             showFullExtent: true,
-            maxZoom: 10,
-            minZoom: 10,
-            zoom: 10,
+            zoom: 5,
           }}
           {...options}
         >
@@ -71,6 +70,7 @@ const View = (props) => {
                       color: '#04A77D',
                       width: 1.25,
                     }),
+                    radius: 5,
                   }),
                 })
               }
