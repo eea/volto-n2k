@@ -19,6 +19,7 @@ import installSiteProtectedHabitats from './components/manage/Blocks/SiteProtect
 import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
 import installSiteShape from './components/manage/Blocks/SiteShape';
 import installSiteSpeciesList from './components/manage/Blocks/SiteSpeciesList';
+import installSpeciesDistribution from './components/manage/Blocks/SpeciesDistribution';
 import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
 import installTilesImages from './components/manage/Blocks/TilesImages';
 import { LinkElement } from './components/manage/Blocks/SlateLink/render';
@@ -100,6 +101,7 @@ const applyConfig = (config) => {
     installSiteProtectedSpecies,
     installSiteShape,
     installSiteSpeciesList,
+    installSpeciesDistribution,
     installSpeciesBanner,
     installTilesImages,
   ].reduce((acc, apply) => apply(acc), config);
