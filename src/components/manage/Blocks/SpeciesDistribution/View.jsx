@@ -46,8 +46,8 @@ const View = (props) => {
 
   if (__SERVER__ || !vectorSource) return '';
   return (
-    <div className="site-shape-wrapper">
-      <div className="site-shape">
+    <div className="species-distribution-wrapper">
+      <div className="species-distribution">
         <Map
           view={{
             center: proj.fromLonLat([20, 50]),

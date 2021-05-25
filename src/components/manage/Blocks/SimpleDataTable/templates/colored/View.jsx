@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from '@plone/volto/components';
 import { Table, Menu } from 'semantic-ui-react';
 import RenderComponent from 'volto-datablocks/components/manage/Blocks/SimpleDataTable/components';
+import cx from 'classnames';
 
 import leftSVG from '@plone/volto/icons/left-key.svg';
 import rightSVG from '@plone/volto/icons/right-key.svg';
@@ -24,7 +25,7 @@ const View = (props) => {
     row_size,
   } = props;
 
-  const { th_color, td_color } = data;
+  const { td_color } = data;
 
   const getColorOfTableCell = (i) => {
     return selectedColumns
@@ -38,8 +39,14 @@ const View = (props) => {
       .filter((v) => v);
   };
 
+  const getColorOfField = (field, index) => {
+    return td_color.filter(
+      (td) => td.label === tableData[field.column][index],
+    )[0]?.color;
+  };
+
   return (
-    <div className="colored-table">
+    <div className="colored-table-v2">
       {row_size ? (
         <Table
           textAlign="left"
@@ -48,7 +55,7 @@ const View = (props) => {
           ${data.compact_table ? 'compact-table' : ''}`}
         >
           {show_header ? (
-            <Table.Header style={{ backgroundColor: th_color }}>
+            <Table.Header>
               <Table.Row>
                 {td_color && td_color.length > 0 && <Table.HeaderCell />}
                 {selectedColumns.map((colDef, j) => (
@@ -67,30 +74,32 @@ const View = (props) => {
               .fill()
               .map((_, i) => (
                 <Table.Row key={i}>
-                  {td_color && td_color.length > 0 && (
-                    <Table.Cell className="colored-cell">
-                      <span
-                        style={{
-                          backgroundColor: td_color
-                            ? getColorOfTableCell(i)
-                            : '',
-                        }}
-                      />
-                    </Table.Cell>
-                  )}
-                  {selectedColumns.map((colDef, j) => (
-                    <Table.Cell
-                      key={`${i}-${getNameOfColumn(colDef)}`}
-                      textAlign={getAlignmentOfColumn(colDef, j)}
-                    >
-                      <RenderComponent
-                        tableData={tableData}
-                        colDef={colDef}
-                        row={i}
-                        {...props}
-                      />
-                    </Table.Cell>
-                  ))}
+                  {selectedColumns.map((colDef, j) => {
+                    const color = getColorOfField(colDef, i);
+                    return (
+                      <Table.Cell
+                        className={cx({ colored: !!color })}
+                        key={`${i}-${getNameOfColumn(colDef)}`}
+                        textAlign={getAlignmentOfColumn(colDef, j)}
+                        style={color ? { color } : {}}
+                      >
+                        {color ? (
+                          <span
+                            style={{ backgroundColor: color }}
+                            className="bullet"
+                          />
+                        ) : (
+                          ''
+                        )}
+                        <RenderComponent
+                          tableData={tableData}
+                          colDef={colDef}
+                          row={i}
+                          {...props}
+                        />
+                      </Table.Cell>
+                    );
+                  })}
                 </Table.Row>
               ))}
           </Table.Body>
