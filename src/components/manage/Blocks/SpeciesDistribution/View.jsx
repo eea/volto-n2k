@@ -77,17 +77,8 @@ const View = (props) => {
               zIndex={1}
             />
           </Layers>
-          <Controls attribution={false} zoom={false} />
-          <Interactions
-            doubleClickZoom={false}
-            dragAndDrop={false}
-            dragPan={false}
-            keyboardPan={false}
-            keyboardZoom={false}
-            mouseWheelZoom={false}
-            pointer={false}
-            select={false}
-          />
+          <Controls attribution={false} />
+          <Interactions pointer={false} select={false} />
         </Map>
       </div>
     </div>
