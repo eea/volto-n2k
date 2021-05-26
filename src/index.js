@@ -26,6 +26,7 @@ import installSiteSpeciesList from './components/manage/Blocks/SiteSpeciesList';
 import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
 import installSpeciesClassification from './components/manage/Blocks/SpeciesClassification';
 import installSpeciesDistribution from './components/manage/Blocks/SpeciesDistribution';
+import installSpeciesProtectedSites from './components/manage/Blocks/SpeciesProtectedSites';
 import installTilesImages from './components/manage/Blocks/TilesImages';
 
 import { LINK } from 'volto-slate/constants';
@@ -110,6 +111,7 @@ const applyConfig = (config) => {
     installSiteSpeciesList,
     installSpeciesBanner,
     installSpeciesDistribution,
+    installSpeciesProtectedSites,
     installTilesImages,
   ].reduce((acc, apply) => apply(acc), config);
 };
