@@ -3,7 +3,7 @@ import getSchema from './schema';
 
 export function getSpeciesDistributionURL(code_2000) {
   return encodeURI(
-    `https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Species/MapServer/0/query?f=json&where=SpeciesCode LIKE '%${code_2000.toUpperCase()}%'&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=SpeciesCode&outSR=102100`,
+    `https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Species/MapServer/0/query?f=json&where=(SpeciesCode LIKE '%${code_2000.toUpperCase()}%') AND (NaturaSitePolygon_WM_Public_SITECODE IS NOT null)&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=SpeciesCode&outSR=102100`,
   );
 }
 
