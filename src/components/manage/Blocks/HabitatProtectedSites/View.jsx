@@ -58,7 +58,7 @@ const View = (props) => {
         >
           <Layers>
             <Layer.Tile zIndex={0} />
-            <Layer.Vector
+            <Layer.VectorImage
               source={vectorSource}
               style={
                 new style.Style({

@@ -19,28 +19,15 @@ const View = (props) => {
     getNameOfColumn,
     selectedColumns,
     tableData,
-    provider_data,
     has_pagination,
     show_header,
     row_size,
   } = props;
 
-  const { td_color } = data;
-
-  const getColorOfTableCell = (i) => {
-    return selectedColumns
-      .map((col) => {
-        const column = col.column;
-        const cell = td_color?.find(
-          (c) => c.label === provider_data[column][i],
-        );
-        return cell?.color;
-      })
-      .filter((v) => v);
-  };
+  const { td_color = [] } = data;
 
   const getColorOfField = (field, index) => {
-    return td_color.filter(
+    return td_color?.filter(
       (td) => td.label === tableData[field.column][index],
     )[0]?.color;
   };

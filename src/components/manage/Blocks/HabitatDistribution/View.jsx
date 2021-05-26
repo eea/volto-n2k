@@ -10,7 +10,7 @@ import './style.less';
 const View = (props) => {
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
-  const { extent, format, proj, style, source } = openlayers;
+  const { extent, format, proj, source } = openlayers;
   const provider_data = props.provider_data || {};
   const { code_2000 = [] } = provider_data;
 
@@ -58,36 +58,23 @@ const View = (props) => {
         >
           <Layers>
             <Layer.Tile zIndex={0} />
-            <Layer.Vector
+            <Layer.WebGLPoints
               source={vectorSource}
-              style={
-                new style.Style({
-                  image: new style.Circle({
-                    fill: new style.Fill({
-                      color: 'rgba(255,255,255,0.4)',
-                    }),
-                    stroke: new style.Stroke({
-                      color: '#04A77D',
-                      width: 1.25,
-                    }),
-                    radius: 5,
-                  }),
-                })
-              }
+              style={{
+                symbol: {
+                  symbolType: 'circle',
+                  size: 8,
+                  color: '#04A77D',
+                  rotateWithView: false,
+                  offset: [0, 0],
+                  opacity: 0.8,
+                },
+              }}
               zIndex={1}
             />
           </Layers>
-          <Controls attribution={false} zoom={false} />
-          <Interactions
-            doubleClickZoom={false}
-            dragAndDrop={false}
-            dragPan={false}
-            keyboardPan={false}
-            keyboardZoom={false}
-            mouseWheelZoom={false}
-            pointer={false}
-            select={false}
-          />
+          <Controls attribution={false} />
+          <Interactions pointer={false} select={false} />
         </Map>
       </div>
     </div>

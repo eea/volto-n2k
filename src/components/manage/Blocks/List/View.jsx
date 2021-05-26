@@ -5,7 +5,7 @@ import './style.less';
 const View = (props) => {
   const { data = {} } = props;
   const provider_data = props.provider_data || {};
-  const columns = Object.keys(provider_data || {})?.[0]?.length || 0;
+  const columns = provider_data[Object.keys(provider_data)?.[0]]?.length || 0;
 
   return (
     <div className="connected-list">
@@ -16,12 +16,16 @@ const View = (props) => {
             .fill()
             .map((_, column) => (
               <Grid.Column key={`connected-list-${column}`}>
-                {data.labeled ?? true ? (
+                {(data.labeled ?? true) && data.label ? (
                   <p className="label">{provider_data[data.label][column]}</p>
                 ) : (
                   ''
                 )}
-                <p className="value">{provider_data[data.value][column]}</p>
+                {data.value ? (
+                  <p className="value">{provider_data[data.value][column]}</p>
+                ) : (
+                  ''
+                )}
               </Grid.Column>
             ))}
         </Grid.Row>
