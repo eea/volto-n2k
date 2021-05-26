@@ -4,7 +4,7 @@ import { generatePath } from 'react-router';
 import { Grid } from 'semantic-ui-react';
 import { UniversalLink } from '@plone/volto/components';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
-import hiker from './images/hiker.png';
+import hiker from './images/hiker.webp';
 import { tiles, tileProps, getStyle } from './index';
 
 const DefaultView = (props) => {

@@ -11,7 +11,7 @@ import settingsSVG from '@plone/volto/icons/settings.svg';
 import { withScreenSize } from '@eeacms/volto-n2k/hocs';
 import DefaultView from './DefalutView';
 import getSchema from './schema';
-import hiker from './images/hiker.png';
+import hiker from './images/hiker.webp';
 import { tileProps, getStyle } from './index';
 import './style.less';
 

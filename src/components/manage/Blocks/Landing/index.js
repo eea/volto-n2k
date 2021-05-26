@@ -1,14 +1,14 @@
 import worldSVG from '@plone/volto/icons/world.svg';
 import Edit from './Edit';
 import View from './View';
-import coasts_and_seas from './images/coasts_and_seas.png';
-import forests from './images/forests.png';
-import mountains from './images/mountains.png';
-import grasslands from './images/grasslands.png';
-import rivers from './images/rivers.png';
-import islands from './images/islands.png';
-import people_and_nature from './images/people_and_nature.png';
-import natura2000 from './images/natura2000.png';
+import coasts_and_seas from './images/coasts_and_seas.webp';
+import forests from './images/forests.webp';
+import mountains from './images/mountains.webp';
+import grasslands from './images/grasslands.webp';
+import rivers from './images/rivers.webp';
+import islands from './images/islands.webp';
+import people_and_nature from './images/people_and_nature.webp';
+import natura2000 from './images/natura2000.webp';
 
 export const tiles = [
   {

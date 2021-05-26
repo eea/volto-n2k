@@ -3,7 +3,7 @@ import { Grid } from 'semantic-ui-react';
 import { RenderBlocks, UniversalLink } from '@plone/volto/components';
 import { withScreenSize } from '@eeacms/volto-n2k/hocs';
 import DefaultView from './DefalutView';
-import hiker from './images/hiker.png';
+import hiker from './images/hiker.webp';
 import { tileProps, getStyle } from './index';
 import './style.less';
 
