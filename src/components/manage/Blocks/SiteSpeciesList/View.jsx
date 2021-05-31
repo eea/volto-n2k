@@ -148,7 +148,7 @@ const View = (props) => {
                             as="h3"
                             to={`/natura2000/species/s/${filteredSpecies[index].id_eunis}`}
                           >
-                            {filteredSpecies[index].scientific_name}
+                            {filteredSpecies[index].common_name}{' '}<em>{filteredSpecies[index].scientific_name}</em>
                             <span className="code-2000">
                               {' '}
                               - {filteredSpecies[index].code_2000 || 'NA'}
