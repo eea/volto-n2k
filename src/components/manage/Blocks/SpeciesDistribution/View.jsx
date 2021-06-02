@@ -10,7 +10,7 @@ import './style.less';
 const View = (props) => {
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
-  const { extent, format, proj, style, source } = openlayers;
+  const { extent, format, proj, source } = openlayers;
   const provider_data = props.provider_data || {};
   const { code_2000 = [] } = provider_data;
 

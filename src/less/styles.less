@@ -107,9 +107,9 @@ body.grey-bg {
   }
 
   .ui.segment.sticky-header-wrapper {
-    margin-bottom: 0;
-    padding: 0;
     z-index: 1;
+    padding: 0;
+    margin-bottom: 0;
 
     > div {
       background-color: rgba(255, 255, 255, 1);
@@ -121,8 +121,8 @@ body.grey-bg {
         background-color: rgba(255, 255, 255, 0.8);
 
         @media only screen and (max-width: @largestMobileScreen) {
-          background-color: transparent;
           backdrop-filter: blur(0);
+          background-color: transparent;
         }
       }
     }
@@ -151,12 +151,12 @@ body.grey-bg {
             justify-content: flex-end;
 
             .ui.secondary.pointing.menu {
-              margin-right: 0 !important;
-              justify-content: flex-start;
-              width: 100%;
               top: 0;
+              width: 100%;
               flex-wrap: wrap;
+              justify-content: flex-start;
               padding: 4px 0;
+              margin-right: 0 !important;
 
               &.is-sticky {
                 justify-content: center;
@@ -164,15 +164,15 @@ body.grey-bg {
               }
 
               &:not(.is-sdf) {
-                padding: 4px 0;
                 justify-content: flex-start;
+                padding: 4px 0;
               }
 
               .home-button {
-                padding-right: 0 !important;
-                padding-left: 0 !important;
                 width: 56px !important;
                 height: 40px !important;
+                padding-right: 0 !important;
+                padding-left: 0 !important;
                 margin: 4px 0;
 
                 &.logo {
@@ -184,11 +184,11 @@ body.grey-bg {
               }
 
               .item.firstLevel.at-glance {
-                background: #04A87D 0% 0% no-repeat padding-box;
-                color: #fff !important;
                 padding-bottom: 1.5rem !important;
                 margin-bottom: -0.5rem;
+                background: #04a87d 0% 0% no-repeat padding-box;
                 border-radius: 0px 0px 10px 10px;
+                color: #fff !important;
                 cursor: pointer;
 
                 &:hover {
@@ -228,10 +228,10 @@ body.grey-bg {
 
               &.open {
                 .hamburger-wrapper {
-                  z-index: 0;
                   position: absolute;
-                  right: 15px;
+                  z-index: 0;
                   top: 1rem;
+                  right: 15px;
                 }
 
                 .home-button {
@@ -244,9 +244,9 @@ body.grey-bg {
               }
 
               &.stackable.open {
-                margin-top: 0;
                 top: 0 !important;
                 height: 100vh !important;
+                margin-top: 0;
               }
 
               .item {
@@ -254,8 +254,8 @@ body.grey-bg {
                 color: #999999;
 
                 &:not(.home-button) {
-                  padding-left: 0.8rem !important;
                   padding-right: 0.8rem !important;
+                  padding-left: 0.8rem !important;
                 }
 
                 &:not(.active),
@@ -316,7 +316,7 @@ body.grey-bg {
                     }
                   }
                 }
-              } 
+              }
             }
 
             .hamburger-wrapper {
@@ -475,8 +475,8 @@ img.slick-image {
     }
 
     iframe {
-      min-height: 500px !important;
       height: 100% !important;
+      min-height: 500px !important;
     }
   }
 }

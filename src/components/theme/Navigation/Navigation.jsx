@@ -14,13 +14,11 @@ import { Menu, Dropdown } from 'semantic-ui-react';
 import cx from 'classnames';
 import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers';
 import { UniversalLink } from '@plone/volto/components';
-import { Icon } from '@plone/volto/components';
 import qs from 'querystring';
 import { getNavigation } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import homeSVG from '@eeacms/volto-n2k/icons/home.svg';
 import n2kLogo from '@eeacms/volto-n2k/icons/n2k-logo-transparent.png';
 
 const messages = defineMessages({

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Transition } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { photoPlaceholders } from '@eeacms/volto-n2k/helpers';
 import './style.less';
 
