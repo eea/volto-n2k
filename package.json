@@ -14,7 +14,9 @@
   ],
   "addons": [
     "volto-slate:asDefault",
-    "@eeacms/volto-datablocks"
+    "@eeacms/volto-datablocks",
+    "@eeacms/volto-openlayers-map",
+    "@eeacms/volto-tabs-block"
   ],
   "repository": {
     "type": "git",
@@ -22,10 +24,14 @@
   },
   "dependencies": {
     "@eeacms/volto-datablocks": "^2.0.1",
+    "@eeacms/volto-openlayers-map": "0.1.1",
+    "@eeacms/volto-tabs-block": "1.2.4",
     "d3": "^3.5.17",
     "d3-shape": "^1.3.7",
+    "react-lazy-load-image-component": "1.5.1",
     "react-stickynode": "^3.0.4",
     "react-use-localstorage": "^3.5.3",
+    "slick-carousel": "1.8.1",
     "volto-slate": "^2.5.0"
   },
   "devDependencies": {
