@@ -27,12 +27,13 @@ const DefaultView = (props) => {
               mobile="12"
             >
               <p>
-                EUROPE IS HOME TO A STUNNING DIVERSITY OF WILD PLANTS, ANIMALS
-                AND LANDSCAPES, MANY OF WHICH ARE FOUND NOWHERE ELSE IN THE
-                WORLD.
+                DISCOVER EUROPE'S NATURE WITH ITS STUNNING DIVERSITY OF WILD
+                PLANTS, ANIMALS AND LANDSCAPES, MANY OF WHICH ARE FOUND NOWHERE
+                ELSE IN THE WORLD.
               </p>
               <p>
-                DISCOVER EU'S NATURE AND THE ACTIONS UNDERWAY TO PROTECT IT.
+                WELCOME TO <strong>NATURA 2000</strong>, THE EUROPEAN NETWORK OF
+                PROTECTED NATURAL AREAS.
               </p>
             </Grid.Column>
             <Grid.Column
