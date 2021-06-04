@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from '@plone/volto/components';
+import cx from 'classnames';
 import domainSVG from './icons/domain.svg';
 import locationSVG from './icons/location.svg';
 import emailSVG from './icons/email.svg';
@@ -14,7 +15,7 @@ const icons = {
 
 const View = (props) => {
   const { mode = 'view', data = {} } = props;
-  const { contactFields = [] } = data;
+  const { contactFields = [], placeholder = 'No contact information' } = data;
   const provider_data = props.provider_data || {};
 
   const contacts = contactFields.length
@@ -25,9 +26,8 @@ const View = (props) => {
       ]
     : [];
 
-  return (
+  return contacts.length ? (
     <div className="contact-block">
-      {mode === 'edit' ? <p>Contact block</p> : ''}
       {contacts.map((index) => (
         <div key={`contact-${index}`} className="contact">
           {contactFields.map((field) => (
@@ -41,6 +41,10 @@ const View = (props) => {
           ))}
         </div>
       ))}
+    </div>
+  ) : (
+    <div className={cx('contact-block no-data', mode)}>
+      <p>{placeholder}</p>
     </div>
   );
 };

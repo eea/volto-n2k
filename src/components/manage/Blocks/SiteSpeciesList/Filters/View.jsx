@@ -92,16 +92,13 @@ const View = (props) => {
   const updateFilters = () => {
     const newFilters = {};
     Object.keys(filtersLabels).forEach((filter) => {
-      const fields = [...new Set(provider_data[filter] || [])].filter(
-        (field) => field,
-      );
-      if (fields.length) {
-        newFilters[filter] = {};
-        fields.forEach((field) => {
-          newFilters[filter][field] = filteredSpecies.filter(
-            (species) => species[filter] === field,
-          ).length;
-        });
+      newFilters[filter] = {};
+      for (let key in filtersLabels[filter]) {
+        if (key !== 'getTitle') {
+          newFilters[filter][key] =
+            filteredSpecies.filter((species) => species[filter] === key)
+              .length || 'none';
+        }
       }
     });
     setFilters(newFilters);

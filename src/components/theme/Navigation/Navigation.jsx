@@ -243,7 +243,7 @@ class Navigation extends Component {
           className={cx({
             open: this.state.isMobileMenuOpen,
             'is-sdf': this.state.isSdf,
-            'is-sticky': this.props.isSticky,
+            'is-sticky': this.state.isSdf || this.props.isSticky,
             'tablet computer large screen widescreen only': !this.state
               .isMobileMenuOpen,
           })}
@@ -260,9 +260,7 @@ class Navigation extends Component {
               <img src={n2kLogo} alt="Natura 2000" />
             </Link>
           </Menu.Item>
-          {!this.state.isMobileMenuOpen &&
-          this.state.isSdf &&
-          this.props.isSticky ? (
+          {!this.state.isMobileMenuOpen && this.state.isSdf ? (
             <>
               <button
                 to={this.props.pathname}
@@ -295,9 +293,7 @@ class Navigation extends Component {
             ''
           )}
 
-          {this.state.isMobileMenuOpen ||
-          (this.state.isSdf && !this.props.isSticky) ||
-          !this.state.isSdf
+          {this.state.isMobileMenuOpen || !this.state.isSdf
             ? this.props.items.map((item) => {
                 const flatUrl = flattenToAppURL(item.url);
                 const itemID = item.title.split(' ').join('-').toLowerCase();
@@ -390,9 +386,13 @@ class Navigation extends Component {
                 );
               })
             : ''}
-          <Menu.Item className="firstLevel language-selector-wrapper">
-            <LanguageSelector navigation={this.props.navigation} />
-          </Menu.Item>
+          {this.state.isMobileMenuOpen || !this.state.isSdf ? (
+            <Menu.Item className="firstLevel language-selector-wrapper">
+              <LanguageSelector navigation={this.props.navigation} />
+            </Menu.Item>
+          ) : (
+            ''
+          )}
         </Menu>
       </nav>
     );

@@ -27,6 +27,6 @@ export const getPopulationString = (min, max) => {
 
 export const getLabelString = (label, key) => {
   return `, ${filtersLabels[label].getTitle()}: ${
-    filtersLabels[label]?.[key]?.toLowerCase() || 'not reported'
+    filtersLabels[label]?.[key]?.toLowerCase() || key || 'not reported'
   }`;
 };
