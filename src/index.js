@@ -6,6 +6,7 @@ import localStorage from './store';
 import installAppExtras from './components/theme/AppExtras';
 
 import { LinkElement } from './components/manage/Blocks/SlateLink/render';
+import installBarChart from './components/manage/Blocks/BarChart';
 import installBodyClass from './components/manage/Blocks/BodyClass';
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installCddaShape from './components/manage/Blocks/CddaShape';
@@ -93,6 +94,7 @@ const applyConfig = (config) => {
 
   return [
     installAppExtras,
+    installBarChart,
     installBodyClass,
     installCarouselHorizontal,
     installCddaShape,
