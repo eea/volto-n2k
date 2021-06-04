@@ -16,6 +16,7 @@ const View = (props) => {
     site_type = [],
     site_code = [],
     area_km2 = [],
+    area_ha = [],
     year_stablished = [],
     number_protected_habitat_types = [],
     number_protected_species = [],
@@ -69,11 +70,14 @@ const View = (props) => {
 
               <div className="site-detail">
                 <div className="upper">
-                  {isNumber(area_km2[0]) ? (
-                    <div>
-                      {area_km2} km
-                      <sup>2</sup>
-                    </div>
+                  {isNumber(area_km2[0]) || isNumber(area_ha[0]) ? (
+                    area_km2 > 1 ? (
+                      <div>
+                        {area_km2} km<sup>2</sup>
+                      </div>
+                    ) : (
+                      <div>{area_ha} ha</div>
+                    )
                   ) : (
                     <div>No data</div>
                   )}

@@ -12,16 +12,17 @@ import './style.less';
 const View = (props) => {
   const {
     data = {},
-    pagination = {},
-    updatePagination = () => {},
     getAlignmentOfColumn,
-    getTitleOfColumn,
     getNameOfColumn,
-    selectedColumns,
-    tableData,
+    getTitleOfColumn,
     has_pagination,
-    show_header,
+    pagination = {},
+    placeholder,
     row_size,
+    selectedColumns,
+    show_header,
+    tableData,
+    updatePagination = () => {},
   } = props;
 
   const { td_color = [] } = data;
@@ -138,7 +139,39 @@ const View = (props) => {
           ) : null}
         </Table>
       ) : (
-        'No results'
+        // TODO: find a better solution to keep headers
+        <Table
+          textAlign="left"
+          striped={data.striped}
+          className={`unstackable ${data.bordered ? 'no-borders' : ''}
+          ${data.compact_table ? 'compact-table' : ''}`}
+        >
+          {show_header ? (
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell />
+                {data?.columns?.map((header) => (
+                  <Table.HeaderCell
+                    key={header.column}
+                    className={header.textAlign || 'left'}
+                  >
+                    <p>{header.title}</p>
+                  </Table.HeaderCell>
+                ))}
+              </Table.Row>
+            </Table.Header>
+          ) : null}
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell className="colored-cell">
+                <span />
+              </Table.Cell>
+              <Table.Cell colSpan={data?.columns?.length || 1}>
+                <p>{placeholder}</p>
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
       )}
     </div>
   );

@@ -38,7 +38,7 @@ const getSchema = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['contactFields', 'placeholder'],
+        fields: ['contactFields'],
       },
     ],
 
@@ -47,11 +47,6 @@ const getSchema = (props) => {
         title: 'Contact fields',
         widget: 'objectlist',
         schema: getContactFields(props),
-      },
-      placeholder: {
-        title: 'Placeholder',
-        widget: 'textarea',
-        defaultValue: 'No contact information',
       },
     },
 

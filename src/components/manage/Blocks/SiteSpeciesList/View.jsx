@@ -18,7 +18,10 @@ const getCurrentPageLength = (pagination, arr) => {
 };
 
 const View = (props) => {
-  const { provider_data = {} } = props;
+  const {
+    provider_data = {},
+    placeholder = 'This site does not host any protected species',
+  } = props;
   const dataReady = React.useRef(false);
   const [activeSpeciesGroup, setActiveSpeciesGroup] = React.useState('All');
   const [filters, setFilters] = React.useState({});
@@ -84,7 +87,7 @@ const View = (props) => {
 
   return (
     <div className="site-species-list full-width">
-      {props.mode !== 'edit' ? (
+      {props.mode !== 'edit' && species.length ? (
         <Filters
           {...props}
           activeSpeciesGroup={activeSpeciesGroup}
@@ -191,9 +194,12 @@ const View = (props) => {
                 </Grid>
               );
             })
+          ) : species.length ? (
+            <div className="empty">No results</div>
           ) : (
-            <div className="empty">No data</div>
+            ''
           )}
+          {!species?.lenght ? <div className="empty">{placeholder}</div> : ''}
           {pagination.totalItems > 0 ? (
             <Pagination
               activePage={pagination.activePage}
