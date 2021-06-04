@@ -69,7 +69,8 @@ const View = (props) => {
                       {item.habitat_description}
                     </Link>
                     <p className="coverage">
-                      {item.coverage_ha} ha ({item.coverage_ha / 100} km
+                      {item.coverage_ha.toFixed(2)} ha (
+                      {(item.coverage_ha / 100).toFixed(4)} km
                       <sup>2</sup>)
                     </p>
                   </div>
