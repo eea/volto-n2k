@@ -63,7 +63,6 @@ body.grey-bg {
 .sticky {
   z-index: 1;
 }
-
 .natura2000-theme {
   .styled-with-bg {
     padding: 0 !important;
@@ -93,11 +92,11 @@ body.grey-bg {
   }
 
   a {
-    color: @lightGreen;
+    color: @darkGreen;
     font-weight: 600;
 
     &:hover {
-      color: @darkGreen;
+      color: @lightGreen;
     }
   }
 
@@ -251,7 +250,7 @@ body.grey-bg {
 
               .item {
                 position: relative;
-                color: #999999;
+                color: @darkGreen;
 
                 &:not(.home-button) {
                   padding-right: 0.8rem !important;
@@ -260,7 +259,7 @@ body.grey-bg {
 
                 &:not(.active),
                 &:not(.menuActive) > a {
-                  color: #999999;
+                  color: @darkGreen;
                 }
 
                 &.firstLevel {
@@ -275,14 +274,14 @@ body.grey-bg {
                   }
 
                   &:hover {
-                    color: #3b7f02 !important;
+                    color: @lightGreen !important;
 
                     &.language-selector-wrapper {
                       border-color: transparent !important;
                     }
 
                     > a {
-                      color: #3b7f02 !important;
+                      color: @darkGreen !important;
                     }
                   }
                 }
