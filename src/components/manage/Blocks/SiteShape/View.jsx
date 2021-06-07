@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Message } from 'semantic-ui-react';
 import Map from '@eeacms/volto-openlayers-map/Map';
 import { Interactions } from '@eeacms/volto-openlayers-map/Interactions';
 import { Controls } from '@eeacms/volto-openlayers-map/Controls';
@@ -75,7 +76,7 @@ const View = (props) => {
               zIndex={1}
             />
           </Layers>
-          <Controls attribution={false} zoom={false} />
+          <Controls attribution={true} zoom={false} />
           <Interactions
             doubleClickZoom={false}
             dragAndDrop={false}
@@ -87,6 +88,17 @@ const View = (props) => {
             select={false}
           />
         </Map>
+      </div>
+      <div className="map-info-notice">
+        <Message>
+          <p>
+            The designations employed and the presentation of material on this
+            map do not imply the expression of any opinion whatsoever on the
+            part of the European Union concerning the legal status of any
+            country, territory, city or area or of its authorities, or
+            concerning the delimitation of its frontiers or boundaries.
+          </p>
+        </Message>
       </div>
     </div>
   );
