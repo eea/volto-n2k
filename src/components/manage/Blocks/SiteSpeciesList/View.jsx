@@ -199,7 +199,7 @@ const View = (props) => {
           ) : (
             ''
           )}
-          {!species?.lenght ? <div className="empty">{placeholder}</div> : ''}
+          {!species?.length ? <div className="empty">{placeholder}</div> : ''}
           {pagination.totalItems > 0 ? (
             <Pagination
               activePage={pagination.activePage}

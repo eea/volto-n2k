@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Message } from 'semantic-ui-react';
+import { Message, Container } from 'semantic-ui-react';
 import Map from '@eeacms/volto-openlayers-map/Map';
 import { Interactions } from '@eeacms/volto-openlayers-map/Interactions';
 import { Controls } from '@eeacms/volto-openlayers-map/Controls';
@@ -80,7 +80,7 @@ const View = (props) => {
           <Interactions pointer={false} select={false} />
         </Map>
       </div>
-      <div className="map-info-notice">
+      <Container className="map-info-notice">
         <Message>
           <p>
             The designations employed and the presentation of material on this
@@ -90,7 +90,7 @@ const View = (props) => {
             concerning the delimitation of its frontiers or boundaries.
           </p>
         </Message>
-      </div>
+      </Container>
     </div>
   );
 };

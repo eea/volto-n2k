@@ -121,7 +121,7 @@ const Footer = ({ intl }) => (
                 </p>{' '}
               </div>
               <div className="site-info-logos">
-                <a href="https://ec.europa.eu/">
+                <a href="https://ec.europa.eu/" aria-label="European Comission">
                   <LazyLoadImage
                     className="footerLogo"
                     src={ecLogo}
@@ -129,7 +129,10 @@ const Footer = ({ intl }) => (
                     alt="European Commission"
                   />
                 </a>
-                <a href="https://www.eea.europa.eu/">
+                <a
+                  href="https://www.eea.europa.eu/"
+                  aria-label="European Environment Agency"
+                >
                   <LazyLoadImage
                     className="footerLogo"
                     src={eeaLogo}
@@ -150,7 +153,10 @@ const Footer = ({ intl }) => (
                 <p>Other European Information Systems</p>
               </div>
               <div className="footerLogos">
-                <a href="https://water.europa.eu/">
+                <a
+                  href="https://water.europa.eu/"
+                  aria-label="Water Information System for Europe"
+                >
                   <LazyLoadImage
                     className="footerLogo"
                     src={wiseLogo}
@@ -158,7 +164,10 @@ const Footer = ({ intl }) => (
                     alt="Water Information System for Europe"
                   />
                 </a>
-                <a href="https://forest.eea.europa.eu/">
+                <a
+                  href="https://forest.eea.europa.eu/"
+                  aria-label="Forest Information System for Europe"
+                >
                   <LazyLoadImage
                     className="footerLogo"
                     src={fiseLogo}
@@ -166,7 +175,10 @@ const Footer = ({ intl }) => (
                     alt="Forest Information System for Europe"
                   />
                 </a>
-                <a href="https://climate-adapt.eea.europa.eu/">
+                <a
+                  href="https://climate-adapt.eea.europa.eu/"
+                  aria-label="Climate-Adapt"
+                >
                   <LazyLoadImage
                     className="footerLogo"
                     src={ccaLogo}

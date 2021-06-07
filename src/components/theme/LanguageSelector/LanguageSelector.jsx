@@ -46,6 +46,7 @@ const LanguageSelector = (props) => {
   return (
     <div className="language-selector">
       <Dropdown
+        aria-label="Language selector"
         disabled={content.get.loading}
         placeholder="Select a language"
         value={currentLang}

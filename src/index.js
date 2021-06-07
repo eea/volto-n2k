@@ -22,6 +22,7 @@ import installLandingBlock from './components/manage/Blocks/Landing';
 import installNavigationAnchors from './components/manage/Blocks/NavigationAnchors';
 import installSimpleDataTable from './components/manage/Blocks/SimpleDataTable';
 import installSiteBanner from './components/manage/Blocks/SiteBanner';
+import installSiteHabitatsList from './components/manage/Blocks/SiteHabitatsList';
 import installSiteProtectedHabitats from './components/manage/Blocks/SiteProtectedHabitats';
 import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
 import installSiteShape from './components/manage/Blocks/SiteShape';
@@ -111,6 +112,7 @@ const applyConfig = (config) => {
     installNavigationAnchors,
     installSimpleDataTable,
     installSiteBanner,
+    installSiteHabitatsList,
     installSiteProtectedHabitats,
     installSiteProtectedSpecies,
     installSiteShape,

@@ -25,7 +25,7 @@ const View = (props) => {
   //   ? format(y_values.reduce((a1, a2) => a1 + a2, 0))
   //   : null;
 
-  console.log('HERE', provider_data);
+  // console.log('HERE', provider_data);
 
   React.useEffect(() => {
     const newData = {};

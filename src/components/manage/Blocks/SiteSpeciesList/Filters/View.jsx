@@ -148,6 +148,7 @@ const View = (props) => {
         <div className="toolbar">
           <SortBy sortBy={sortBy} setSortBy={setSortBy} />
           <Dropdown
+            aria-label="Set number of species per page"
             placeholder="Items per page"
             value={pagination.itemsPerPage}
             floating
@@ -157,7 +158,7 @@ const View = (props) => {
               setPagination({ ...pagination, itemsPerPage: data.value });
             }}
           />
-          <button onClick={() => setVisible(!visible)}>
+          <button aria-label="Set filters" onClick={() => setVisible(!visible)}>
             <Icon name={filterSVG} size="24px" />
           </button>
         </div>
