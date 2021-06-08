@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import * as d3 from 'd3';
