@@ -8,7 +8,9 @@ import { withRouter } from 'react-router';
 import { Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Portal } from 'react-portal';
 import config from '@plone/volto/registry';
+import { Anontools } from '@plone/volto/components';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import Navigation from '../Navigation/Navigation';
 import { Sticky } from '~/components';
@@ -34,6 +36,11 @@ const Navbar = (props) => {
           </div>
         </div>
       </div>
+      {!props.token && (
+        <Portal node={__CLIENT__ && document.querySelector('#footer_links')}>
+          <Anontools />
+        </Portal>
+      )}
     </Container>
   );
 };

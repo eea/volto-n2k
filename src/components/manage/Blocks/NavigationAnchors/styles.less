@@ -29,9 +29,23 @@ div#view .ui.container > .sticky-navigation-anchors {
         color: #000;
         font-size: 16px;
         font-weight: normal;
+        position: relative;
 
         &:hover {
           opacity: 0.9;
+        }
+
+        &[target="_blank"]::after {
+          content: '';
+          background-image: url('./assets/external.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+          width: 16px;
+          line-height: 16px;
+          height: 16px;
+          position: absolute;
+          right: -6px;
+          transform: translateX(16px);
         }
       }
 
