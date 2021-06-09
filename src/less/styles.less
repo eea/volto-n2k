@@ -61,7 +61,7 @@ body.grey-bg {
 }
 
 .sticky {
-  z-index: 1;
+  z-index: 2;
 }
 
 .natura2000-theme {
@@ -227,9 +227,15 @@ body.grey-bg {
               &:not(.open) {
                 .home-button {
                   position: absolute;
-                  top: 0;
+                  top: 50%;
                   left: -10px;
-                  transform: translateX(-100%);
+                  margin: 0;
+                  padding: 0 !important;
+                  transform: translate(-100%, -50%);
+
+                  > a {
+                    display: flex;
+                  }
                 }
 
                 .language-selector-wrapper {
