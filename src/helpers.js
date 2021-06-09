@@ -1,4 +1,4 @@
-import AmphibiansPNG from '@eeacms/volto-n2k/icons/placeholders/Amphibians.png';
+import AmphibiansPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 import BirdsPNG from '@eeacms/volto-n2k/icons/placeholders/Birds.png';
 import ConifersPNG from '@eeacms/volto-n2k/icons/placeholders/Conifers.png';
 import FernsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
@@ -6,11 +6,11 @@ import FishesPNG from '@eeacms/volto-n2k/icons/placeholders/Fishes.png';
 import FloweringPlantsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 import FungiPNG from '@eeacms/volto-n2k/icons/placeholders/Fungi.png';
 import InvertebratesPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
-import MammalsPNG from '@eeacms/volto-n2k/icons/placeholders/Mammals.png';
+import MammalsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 import MossesLiverwortsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
-import ReptilesPNG from '@eeacms/volto-n2k/icons/placeholders/Reptiles.png';
+import ReptilesPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 import AlgaePNG from '@eeacms/volto-n2k/icons/placeholders/Algae.png';
-import PlantsPNG from '@eeacms/volto-n2k/icons/placeholders/Plants.png';
+import PlantsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 
 export const photoPlaceholders = {
   Amphibians: AmphibiansPNG,
