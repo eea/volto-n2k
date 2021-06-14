@@ -182,7 +182,7 @@ const View = (props) => {
                         <p className="orange">
                           {filteredSpecies[index].EU_threat_name ||
                             'Not reported'}{' '}
-                          (IUCN)
+                          (IUCN European Red List)
                         </p>
                         <p className="green">
                           Appears in{' '}
