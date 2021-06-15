@@ -23,7 +23,7 @@ const View = (props) => {
   const { stickyRef } = useContext(StickyContext);
   const anchorsRef = useRef();
   const { data = {}, screen = {} } = props;
-  const links = data.links;
+  const links = data.links || [];
 
   const params = {
     ...props.match.params,
@@ -69,7 +69,7 @@ const View = (props) => {
       <div className="navigation-anchors" ref={anchorsRef}>
         <Container>
           <Menu stackable>
-            {links.map((link, index) => {
+            {links?.map((link, index) => {
               const href = formatLink(link.href, params);
               const hash = link.hash?.[0] || {};
 
