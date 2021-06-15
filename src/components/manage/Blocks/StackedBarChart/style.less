@@ -1,0 +1,37 @@
+.chart-wrapper {
+  display: flex;
+  // position: relative;
+  margin: 0;
+  padding: 0;
+
+  .chart-popup {
+    position: absolute;
+    transform: translate(-50%, calc(-50% - 1rem)) !important;
+    width: fit-content;
+  }
+
+  svg {
+    // width: 100%;
+
+    .legend-wrapper {
+      display: flex;
+      justify-content: center;
+
+      .legend  {
+        display: flex;
+  
+        p {
+          font-size: 12px;
+          line-height: 12px;
+          margin-right: 1rem;
+        }
+
+        .square {
+          width: 12px;
+          height: 12px;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+}

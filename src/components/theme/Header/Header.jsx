@@ -3,17 +3,16 @@
  * @module components/theme/Header/Header
  */
 
-import React, { Component } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { withRouter } from 'react-router';
-import { Container } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
+import { Container, Sticky } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Portal } from 'react-portal';
 import config from '@plone/volto/registry';
 import { Anontools } from '@plone/volto/components';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import Navigation from '../Navigation/Navigation';
-import { Sticky } from '~/components';
+import { StickyContext } from '~/components';
 
 const Navbar = (props) => {
   const currentLang = props.localStorage.get('N2K_LANGUAGE');
@@ -45,65 +44,37 @@ const Navbar = (props) => {
   );
 };
 
-/**
- * Header component class.
- * @class Header
- * @extends Component
- */
-class Header extends Component {
-  /**
-   * Property types.
-   * @property {Object} propTypes Property types.
-   * @static
-   */
-  static propTypes = {
-    token: PropTypes.string,
-    pathname: PropTypes.string.isRequired,
-  };
+const Header = (props) => {
+  const [isSticky, setIsSticky] = React.useState(false);
+  const { stickyRef } = useContext(StickyContext);
 
-  /**
-   * Default properties.
-   * @property {Object} defaultProps Default properties.
-   * @static
-   */
-  static defaultProps = {
-    token: null,
-  };
-
-  /**
-   * Component will mount
-   * @method componentWillMount
-   * @returns {undefined}
-   */
-  componentDidMount() {
-    if (!this.props.localStorage.get('N2K_LANGUAGE')) {
-      this.props.localStorage.set(
-        'N2K_LANGUAGE',
-        config.settings.defaultLanguage,
-      );
+  useEffect(() => {
+    if (!props.localStorage.get('N2K_LANGUAGE')) {
+      props.localStorage.set('N2K_LANGUAGE', config.settings.defaultLanguage);
     }
-  }
+    /* eslint-disable-next-line */
+  }, []);
 
-  /**
-   * Render method.
-   * @method render
-   * @returns {string} Markup for the component.
-   */
-  render() {
-    return this.props.location.pathname === '/natura2000' ? (
-      ''
-    ) : (
-      <>
-        <Sticky
-          className="ui basic segment sticky-header-wrapper"
-          role="banner"
-        >
-          <Navbar {...this.props} />
-        </Sticky>
-      </>
-    );
-  }
-}
+  return props.location.pathname === '/natura2000' ? (
+    ''
+  ) : (
+    <>
+      <Sticky
+        context={stickyRef}
+        className="ui basic segment sticky-header-wrapper"
+        role="banner"
+        onStick={() => {
+          setIsSticky(true);
+        }}
+        onUnstick={() => {
+          setIsSticky(false);
+        }}
+      >
+        <Navbar {...props} isSticky={isSticky} />
+      </Sticky>
+    </>
+  );
+};
 
 export default connect((state) => ({
   token: state.userSession.token,

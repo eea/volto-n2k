@@ -71,20 +71,13 @@ export const tileProps = {
 
 export const getStyle = (props) => {
   if (!props.screen) return {};
-  if (!props.screen.screenWidth || !props.screen.screenHeight) return {};
-  if (props.screen.screenWidth < 1071)
-    return {
-      maxHeight: props.screen.screenHeight.toPixel(),
-      minHeight:
-        props.screen.screenHeight > 768
-          ? props.screen.screenHeight.toPixel()
-          : '768px',
-    };
+  if (!props.screen.width || !props.screen.height) return {};
   return {
-    minHeight:
-      props.screen.screenHeight > 768
-        ? props.screen.screenHeight.toPixel()
-        : '768px',
+    minHeight: (
+      props.screen.height -
+      props.screen.browserToolbarHeight -
+      props.screen.content.offsetTop
+    ).toPixel(),
   };
 };
 

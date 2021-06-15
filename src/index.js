@@ -6,7 +6,6 @@ import localStorage from './store';
 import installAppExtras from './components/theme/AppExtras';
 
 import { LinkElement } from './components/manage/Blocks/SlateLink/render';
-import installBarChart from './components/manage/Blocks/BarChart';
 import installBodyClass from './components/manage/Blocks/BodyClass';
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installCddaShape from './components/manage/Blocks/CddaShape';
@@ -14,9 +13,9 @@ import installConnectedList from './components/manage/Blocks/List';
 import installContactBlock from './components/manage/Blocks/ContactBlock';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
 import installHabitatClassification from './components/manage/Blocks/HabitatClassification';
-import installHabitatsBanner from './components/manage/Blocks/HabitatsBanner';
 import installHabitatDistribution from './components/manage/Blocks/HabitatDistribution';
 import installHabitatProtectedSites from './components/manage/Blocks/HabitatProtectedSites';
+import installHabitatsBanner from './components/manage/Blocks/HabitatsBanner';
 import installImageText from './components/manage/Blocks/ImageText';
 import installLandingBlock from './components/manage/Blocks/Landing';
 import installNavigationAnchors from './components/manage/Blocks/NavigationAnchors';
@@ -31,6 +30,7 @@ import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
 import installSpeciesClassification from './components/manage/Blocks/SpeciesClassification';
 import installSpeciesDistribution from './components/manage/Blocks/SpeciesDistribution';
 import installSpeciesProtectedSites from './components/manage/Blocks/SpeciesProtectedSites';
+import installStackedBarChart from './components/manage/Blocks/StackedBarChart';
 import installTilesImages from './components/manage/Blocks/TilesImages';
 
 import { LINK } from 'volto-slate/constants';
@@ -67,7 +67,30 @@ const applyConfig = (config) => {
     multilingualRoot: '/natura2000/:lang',
     multilingualPath: '/natura2000/:lang/*',
     defaultLanguage: 'en',
-    supportedLanguages: ['en', 'ro'],
+    supportedLanguages: [
+      'bg',
+      'hr',
+      'cs',
+      'da',
+      'nl',
+      'en',
+      'et',
+      'fi',
+      'fr',
+      'de',
+      'el',
+      'hu',
+      'it',
+      'lv',
+      'lt',
+      'pl',
+      'pt',
+      'ro',
+      'sk',
+      'sl',
+      'es',
+      'sv',
+    ],
   };
 
   config.settings.themes = {
@@ -95,7 +118,6 @@ const applyConfig = (config) => {
 
   return [
     installAppExtras,
-    installBarChart,
     installBodyClass,
     installCarouselHorizontal,
     installCddaShape,
@@ -103,10 +125,9 @@ const applyConfig = (config) => {
     installContactBlock,
     installExplodedPiesChart,
     installHabitatClassification,
-    installHabitatsBanner,
     installHabitatDistribution,
     installHabitatProtectedSites,
-    installSpeciesClassification,
+    installHabitatsBanner,
     installImageText,
     installLandingBlock,
     installNavigationAnchors,
@@ -118,8 +139,10 @@ const applyConfig = (config) => {
     installSiteShape,
     installSiteSpeciesList,
     installSpeciesBanner,
+    installSpeciesClassification,
     installSpeciesDistribution,
     installSpeciesProtectedSites,
+    installStackedBarChart,
     installTilesImages,
   ].reduce((acc, apply) => apply(acc), config);
 };

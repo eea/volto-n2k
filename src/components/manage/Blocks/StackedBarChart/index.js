@@ -1,4 +1,4 @@
-import BarChart from './View';
+import StackedBarChart from './View';
 import getSchema from './schema';
 
 export default (config) => {
@@ -6,10 +6,10 @@ export default (config) => {
     ...config.blocks.blocksConfig.custom_connected_block,
     blocks: {
       ...config.blocks.blocksConfig.custom_connected_block.blocks,
-      bar_chart: {
-        view: BarChart,
+      stacked_bar_chart: {
+        view: StackedBarChart,
         getSchema: getSchema,
-        title: 'Bar chart',
+        title: 'Stacked bar chart',
       },
     },
   };

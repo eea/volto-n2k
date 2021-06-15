@@ -78,6 +78,6 @@ const DefaultView = (props) => {
   );
 };
 
-export default connect((state, props) => ({
+export default connect((state) => ({
   screen: state.screen,
 }))(withLocalStorage(DefaultView));

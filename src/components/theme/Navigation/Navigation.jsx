@@ -13,13 +13,13 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import cx from 'classnames';
 import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers';
-import { UniversalLink } from '@plone/volto/components';
+import { UniversalLink, Icon } from '@plone/volto/components';
 import qs from 'querystring';
 import { getNavigation } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import n2kLogo from '@eeacms/volto-n2k/icons/n2k-logo-transparent.png';
+import n2kLogo from '@eeacms/volto-n2k/icons/natura2000.svg';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -231,11 +231,13 @@ class Navigation extends Component {
         className={cx('navigation', this.props.className || '')}
         ref={this.container}
       >
-        <Hamburger
-          {...this.props}
-          isMobileMenuOpen={this.state.isMobileMenuOpen}
-          toggleMobileMenu={this.toggleMobileMenu}
-        />
+        <div className="mobile only">
+          <Hamburger
+            {...this.props}
+            isMobileMenuOpen={this.state.isMobileMenuOpen}
+            toggleMobileMenu={this.toggleMobileMenu}
+          />
+        </div>
         <Menu
           stackable
           pointing
@@ -244,23 +246,25 @@ class Navigation extends Component {
             open: this.state.isMobileMenuOpen,
             'is-sdf': this.state.isSdf,
             'is-sticky': this.state.isSdf || this.props.isSticky,
-            'tablet computer large screen widescreen only': !this.state
-              .isMobileMenuOpen,
+            'mobile hidden': !this.state.isMobileMenuOpen,
+            'mobile only': this.state.isMobileMenuOpen,
           })}
           onClick={this.closeMobileMenu}
           onBlur={() => this.closeMobileMenu}
         >
-          <Hamburger
-            {...this.props}
-            isMobileMenuOpen={this.state.isMobileMenuOpen}
-            toggleMobileMenu={this.toggleMobileMenu}
-          />
+          <div className="mobile only">
+            <Hamburger
+              {...this.props}
+              isMobileMenuOpen={this.state.isMobileMenuOpen}
+              toggleMobileMenu={this.toggleMobileMenu}
+            />
+          </div>
           <Menu.Item className="home-button logo">
             <Link to="/natura2000">
-              <img src={n2kLogo} alt="Natura 2000" />
+              <Icon name={n2kLogo} size={44} />
             </Link>
           </Menu.Item>
-          {!this.state.isMobileMenuOpen && this.state.isSdf ? (
+          {this.state.isSdf ? (
             <>
               <button
                 to={this.props.pathname}
@@ -293,7 +297,7 @@ class Navigation extends Component {
             ''
           )}
 
-          {this.state.isMobileMenuOpen || !this.state.isSdf
+          {!this.state.isSdf
             ? this.props.items.map((item) => {
                 const flatUrl = flattenToAppURL(item.url);
                 const itemID = item.title.split(' ').join('-').toLowerCase();
@@ -386,7 +390,7 @@ class Navigation extends Component {
                 );
               })
             : ''}
-          {this.state.isMobileMenuOpen || !this.state.isSdf ? (
+          {!this.state.isSdf ? (
             <Menu.Item className="firstLevel language-selector-wrapper">
               <LanguageSelector navigation={this.props.navigation} />
             </Menu.Item>
