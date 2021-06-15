@@ -59,7 +59,8 @@ function StackedBars(props) {
                     setPopup({
                       id: `${serieIndex}_${rectIndex}_${rect.key}`,
                       clientX: event.clientX,
-                      clientY: event.clientY,
+                      clientY:
+                        event.clientY + document.documentElement.scrollTop,
                       content: (
                         <>
                           <p>{rect.data[rect.key] * rect.data.total} Forests</p>
