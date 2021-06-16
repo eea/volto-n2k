@@ -260,7 +260,7 @@ class Navigation extends Component {
             />
           </div>
           <Menu.Item className="home-button logo">
-            <Link to="/natura2000">
+            <Link title="Natura 2000" to="/natura2000">
               <Icon name={n2kLogo} size={44} />
             </Link>
           </Menu.Item>

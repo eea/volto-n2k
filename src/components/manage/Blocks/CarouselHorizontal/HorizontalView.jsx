@@ -157,10 +157,14 @@ const View = (props) => {
       const parent = document.getElementById(parentId);
       // TODO: Find the best way to add offset relative to header
       //       The header can be static on mobile and relative on > mobile
-      // const headerWrapper = document.querySelector('.header-wrapper');
-      // const offsetHeight = headerWrapper?.offsetHeight || 0;
-      const offsetHeight = 0;
-      if (id !== parentId && index > -1 && parent) {
+      const headerWrapper = document.querySelector('.header-wrapper');
+      const offsetHeight = headerWrapper?.offsetHeight || 0;
+      if (
+        id !== parentId &&
+        parentId === hashlink.data.parentId &&
+        index > -1 &&
+        parent
+      ) {
         if (activeTabIndex !== index) {
           slider.current.slickGoTo(index);
         }

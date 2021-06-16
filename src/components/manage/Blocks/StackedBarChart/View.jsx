@@ -30,10 +30,10 @@ const View = (props) => {
       if (!yValues[x]) {
         yValues[x] = {
           x,
+          total: total[x],
         };
       }
       yValues[x][y] = data[y_value_key][index] / total[x];
-      yValues[x].total = total[x];
     });
 
     setXValues([...new Set(data[x_label_key])]);

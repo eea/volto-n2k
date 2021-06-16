@@ -179,7 +179,7 @@ body.grey-bg {
               width: 100%;
               min-height: 50px;
               flex-wrap: wrap;
-              justify-content: flex-start;
+              justify-content: center;
               padding: 4px 0;
               margin-right: 0 !important;
 
@@ -193,7 +193,7 @@ body.grey-bg {
               }
 
               &:not(.is-sdf) {
-                justify-content: flex-start;
+                justify-content: center;
                 padding: 4px 0;
               }
 
@@ -250,7 +250,7 @@ body.grey-bg {
                 .home-button {
                   position: absolute;
                   top: 50%;
-                  left: -10px;
+                  left: -20px;
                   margin: 0;
                   padding: 0 !important;
                   transform: translate(-100%, -50%);
@@ -327,6 +327,12 @@ body.grey-bg {
                   &.language-selector-wrapper {
                     .language-selector {
                       margin-right: 0;
+                      
+                      .visible.menu {
+                        min-width: 70px !important;
+                        transform: translate(-50%, 0);
+                        left: 50%;
+                      }
                     }
                   }
 
