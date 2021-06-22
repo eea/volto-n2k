@@ -37,6 +37,19 @@ export const getObjectByIndex = (provider_data, index) => {
   return obj;
 };
 
+function sortBy(obj, property, order = 'ASC') {
+  return Object.keys(obj)
+    .sort((a, b) =>
+      order === 'ASC'
+        ? obj[a][property] - obj[b][property]
+        : obj[b][property] - obj[a][property],
+    )
+    .reduce((newObj, key) => {
+      newObj[key] = { ...obj[key] };
+      return newObj;
+    }, {});
+}
+
 export const adjustBrightness = (col, amt) => {
   var usePound = false;
 

@@ -1,6 +1,6 @@
 .chart-wrapper {
   display: flex;
-  // position: relative;
+  position: relative;
   margin: 0;
   padding: 0;
 
@@ -8,6 +8,13 @@
     position: absolute;
     transform: translate(-50%, calc(-50% - 1rem)) !important;
     width: fit-content;
+    opacity: 0;
+    transition: opacity 5.3s;
+
+    &.visible {
+      opacity: 1;
+      transition: opacity 5.3s;
+    }
   }
 
   svg {

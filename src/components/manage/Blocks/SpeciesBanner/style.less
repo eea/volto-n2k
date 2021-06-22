@@ -1,5 +1,6 @@
 div#view .species-banner-details .ui.container > * {
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .species-banner-details {
@@ -9,21 +10,13 @@ div#view .species-banner-details .ui.container > * {
   font-family: 'RajdhaniB';
 
   .species-details {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-
-    @media only screen and (max-width: 765px) {
-      flex-flow: column;
-
-      .species-metadata {
-        margin-bottom: 1rem;
-      }
+    > .row {
+      align-items: center !important;
     }
 
     .species-metadata {
       .name {
-        margin-top: 0.5em !important;
+        margin-top: 0 !important;
         margin-bottom: 0 !important;
         color: #fff;
         font-family: inherit;
@@ -37,13 +30,53 @@ div#view .species-banner-details .ui.container > * {
         font-size: 18px;
         font-weight: 600;
         line-height: 18px;
+        margin-bottom: 1rem;
       }
     }
 
-    img {
-      max-height: 200px;
-      border-radius: 10px;
-      filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.4));
+    .slick-slider {
+      .slick-arrow {
+        display: block !important;
+      }
     }
+
+    .picture-wrapper {
+      position: relative;
+      display: flex;
+      flex-flow: column;
+      border-radius: 10px;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.4));
+      }
+
+      .source {
+        position: absolute;
+        background-color: #000;
+        opacity: 0.7;
+        bottom: 0;
+        padding: 0.5rem 1rem;
+        width: calc(100% - 1rem);
+        left: 0.5rem;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+
+        a {
+          margin-top: 1rem;
+          color: #fff;
+         
+          &:hover {
+            color: #fff;
+            text-decoration: underline;
+          }
+        }
+      }
+
+    }
+
   }
 }

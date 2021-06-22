@@ -11,9 +11,15 @@ const getSerieData = (serie) => {
 };
 
 function StackedBars(props) {
-  const { height, width, margin, scales, popup, setPopup } = React.useContext(
-    ChartContext,
-  );
+  const {
+    element,
+    height,
+    width,
+    margin,
+    scales,
+    popup,
+    setPopup,
+  } = React.useContext(ChartContext);
   const { data = {}, keys = [] } = props;
 
   if (!keys?.length || !scales?.xScale || !scales?.yScale) {
@@ -56,11 +62,11 @@ function StackedBars(props) {
                   onFocus={() => {}}
                   onBlur={() => {}}
                   onMouseMoveCapture={(event) => {
+                    const elementPosition = element.parentNode.getBoundingClientRect();
                     setPopup({
                       id: `${serieIndex}_${rectIndex}_${rect.key}`,
-                      clientX: event.clientX,
-                      clientY:
-                        event.clientY + document.documentElement.scrollTop,
+                      clientX: event.clientX - elementPosition.x,
+                      clientY: event.clientY - elementPosition.y,
                       content: (
                         <>
                           <p>{rect.data[rect.key] * rect.data.total} Forests</p>

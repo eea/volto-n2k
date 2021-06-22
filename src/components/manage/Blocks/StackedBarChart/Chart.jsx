@@ -7,6 +7,7 @@ import {
   scaleBand,
   scaleLinear,
 } from 'd3';
+import cx from 'classnames';
 import ChartContext from './ChartContext';
 
 /**
@@ -110,7 +111,10 @@ function Chart(props) {
                 }
               : {}
           }
-          className="chart-popup ui top center popup transition visible"
+          className={cx(
+            'chart-popup ui top center popup',
+            popup?.content ? 'visible' : {},
+          )}
           ref={popupRef}
         >
           <div className="content">{popup ? popup.content : ''}</div>
