@@ -11,6 +11,7 @@ import MossesLiverwortsPNG from '@eeacms/volto-n2k/icons/placeholders/default.pn
 import ReptilesPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 import AlgaePNG from '@eeacms/volto-n2k/icons/placeholders/Algae.png';
 import PlantsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
+import defaultPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 
 export const photoPlaceholders = {
   Amphibians: AmphibiansPNG,
@@ -26,6 +27,7 @@ export const photoPlaceholders = {
   Reptiles: ReptilesPNG,
   Algae: AlgaePNG,
   Plants: PlantsPNG,
+  default: defaultPNG,
 };
 
 export const getObjectByIndex = (provider_data, index) => {

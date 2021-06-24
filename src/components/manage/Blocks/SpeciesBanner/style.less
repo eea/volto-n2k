@@ -10,8 +10,13 @@ div#view .species-banner-details .ui.container > * {
   font-family: 'RajdhaniB';
 
   .species-details {
-    > .row {
-      align-items: center !important;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+
+    @media only screen and (max-width: 800px) {
+      flex-flow: column;
     }
 
     .species-metadata {
@@ -40,43 +45,71 @@ div#view .species-banner-details .ui.container > * {
       }
     }
 
-    .picture-wrapper {
-      position: relative;
-      display: flex;
-      flex-flow: column;
-      border-radius: 10px;
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-      overflow: hidden;
+    .species-pictures {
+      width: 400px;
+      height: 400px;
+      margin-bottom: 1rem;
 
-      img {
-        width: 100%;
-        filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.4));
-      }
-
-      .source {
-        position: absolute;
+      .picture-wrapper {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        display: flex !important;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        overflow: hidden;
         background-color: #000;
-        opacity: 0.7;
-        bottom: 0;
-        padding: 0.5rem 1rem;
-        width: calc(100% - 1rem);
-        left: 0.5rem;
-        border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px;
 
-        a {
-          margin-top: 1rem;
-          color: #fff;
-         
-          &:hover {
+        img {
+          max-width: 400px;
+          max-height: 400px;
+          width: auto;
+          height: auto;
+          filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.4));
+        }
+
+        .source {
+          position: absolute;
+          background-color: rgba(0,0,0,0.7);
+          bottom: 0;
+          padding: 0.5rem 1rem;
+          width: 100%;
+          left: 0;
+          border-bottom-left-radius: 3px;
+          border-bottom-right-radius: 3px;
+
+          a {
+            margin-top: 1rem;
             color: #fff;
-            text-decoration: underline;
+          
+            &:hover {
+              color: #fff;
+              text-decoration: underline;
+            }
           }
         }
       }
 
-    }
+      &:not(.with-slider) {
+        display: flex;
+        align-items: center;
 
+        .picture-wrapper {
+          height: fit-content;
+        }
+      }
+    }
+  }
+
+  .slick-slide:not(.slick-active) {
+    opacity: 0;
+    transition: opacity 0.6s;
+  }
+
+  .slick-slide {
+    opacity: 1;
+    transition: opacity 0.4s;
   }
 }
