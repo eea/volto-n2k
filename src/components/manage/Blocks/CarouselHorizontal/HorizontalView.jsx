@@ -69,10 +69,8 @@ const ArrowsGroup = (props) => {
           className="slick-arrow slick-next"
           onClick={slider.current.slickNext}
         >
-          {currentSlide === 0 ? (
-            <p className="learn-more">
-              Learn more about the status of our coasts and seas
-            </p>
+          {currentSlide === 0 && props.learnMore ? (
+            <p className="learn-more">{props.learnMore}</p>
           ) : (
             ''
           )}
@@ -201,7 +199,12 @@ const View = (props) => {
         src={`${image}/@@images/image/preview`}
         alt="Logo"
       />
-      <ArrowsGroup activeTab={activeTab} tabsList={tabsList} slider={slider} />
+      <ArrowsGroup
+        activeTab={activeTab}
+        tabsList={tabsList}
+        slider={slider}
+        learnMore={data.learnMore}
+      />
       <Dots activeTab={activeTab} tabsList={tabsList} slider={slider} />
     </>
   );
