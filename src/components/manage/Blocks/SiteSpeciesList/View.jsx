@@ -37,7 +37,14 @@ const View = (props) => {
   const getSortedSpecies = (species = []) => {
     const property = sortBy[0];
     const order = sortBy[1];
-    return species.sortByProperty(property, order);
+
+    return species.sort((a, b) => {
+      const a_value = a[0][property];
+      const b_value = b[0][property];
+      if (a_value < b_value) return order === 'ASC' ? -1 : 1;
+      if (a_value > b_value) return order === 'ASC' ? 1 : -1;
+      return 0;
+    });
   };
 
   const getFilteredSpecies = (species = []) => {
@@ -48,14 +55,20 @@ const View = (props) => {
         : {}),
     };
 
-    const filteredSpecies = species.filter((item) => {
-      let ok = true;
+    const filteredSpecies = species.filter((items, index) => {
+      let itemsHaveFilter = true;
       Object.keys(activeFilters).forEach((filter) => {
-        if (!activeFilters[filter].includes(item[filter])) {
-          ok = false;
+        let specimenHasFilter = false;
+        items.forEach((item) => {
+          if (activeFilters[filter].includes(item[filter])) {
+            specimenHasFilter = true;
+          }
+        });
+        if (!specimenHasFilter) {
+          itemsHaveFilter = false;
         }
       });
-      return ok;
+      return itemsHaveFilter;
     });
 
     setPagination({
@@ -69,19 +82,27 @@ const View = (props) => {
 
   React.useEffect(() => {
     dataReady.current = false;
+    const speciesIndex = {};
     const newSpecies = [];
     if (provider_data.scientific_name?.length) {
-      provider_data.scientific_name.forEach((animal, index) => {
-        newSpecies.push(getObjectByIndex(provider_data, index));
+      provider_data.scientific_name.forEach((_, index) => {
+        const specimen = getObjectByIndex(provider_data, index);
+        if (!speciesIndex[specimen.id_eunis]) {
+          speciesIndex[specimen.id_eunis] = index;
+        }
+        if (!newSpecies[speciesIndex[specimen.id_eunis]]) {
+          newSpecies[speciesIndex[specimen.id_eunis]] = [];
+        }
+        newSpecies[speciesIndex[specimen.id_eunis]].push(specimen);
       });
     }
-    setSpecies(getSortedSpecies(newSpecies));
-    setPagination({ ...pagination, totalItems: newSpecies.length });
+    setSpecies(getSortedSpecies(newSpecies.filter((species) => species)));
     /* eslint-disable-next-line */
   }, [JSON.stringify(provider_data)]);
 
   React.useEffect(() => {
-    setFilteredSpecies(getSortedSpecies(getFilteredSpecies([...species])));
+    const filteredSpecies = getSortedSpecies(getFilteredSpecies([...species]));
+    setFilteredSpecies(filteredSpecies);
     /* eslint-disable-next-line */
   }, [species, sortBy, activeSpeciesGroup, filters]);
 
@@ -115,10 +136,12 @@ const View = (props) => {
               (v, k) =>
                 k + (pagination.activePage - 1) * pagination.itemsPerPage,
             ).map((index) => {
+              const speciesData = filteredSpecies[index][0];
+
               return (
                 <Grid
                   className="species"
-                  key={`${index}-${filteredSpecies[index].id_eunis}`}
+                  key={`${index}-${speciesData.id_eunis}`}
                   columns="12"
                 >
                   <Grid.Row>
@@ -130,13 +153,11 @@ const View = (props) => {
                     >
                       <img
                         src={
-                          filteredSpecies[index].picture_url ||
-                          photoPlaceholders[
-                            filteredSpecies[index].species_group_name
-                          ] ||
+                          speciesData.picture_url ||
+                          photoPlaceholders[speciesData.species_group_name] ||
                           photoPlaceholders.Birds
                         }
-                        alt={filteredSpecies[index].species_group_name}
+                        alt={speciesData.species_group_name}
                       />
                     </Grid.Column>
                     <Grid.Column
@@ -149,42 +170,52 @@ const View = (props) => {
                         <div className="name">
                           <Link
                             as="h3"
-                            to={`/natura2000/species/s/${filteredSpecies[index].id_eunis}`}
+                            to={`/natura2000/species/s/${speciesData.id_eunis}`}
                           >
-                            {filteredSpecies[index].common_name
-                              ? filteredSpecies[index].common_name + ' '
+                            {speciesData.common_name
+                              ? speciesData.common_name + ' '
                               : ''}
-                            <em>{filteredSpecies[index].scientific_name}</em>
+                            <em>{speciesData.scientific_name}</em>
                             <span className="code-2000">
                               {' '}
-                              - {filteredSpecies[index].code_2000 || 'NA'}
+                              - {speciesData.code_2000 || 'NA'}
                             </span>
                           </Link>
                         </div>
-                        <p>
-                          {getPopulationString(
-                            filteredSpecies[index].lower_bound,
-                            filteredSpecies[index].upper_bound,
-                          )}
-                          {getLabelString(
-                            'counting_unit',
-                            filteredSpecies[index].counting_unit,
-                          )}
-                          {getLabelString(
-                            'abundance_category',
-                            filteredSpecies[index].abundance_category,
-                          )}
-                        </p>
+                        {filteredSpecies[index].map((specimen, index) => (
+                          <p
+                            className="specimen-data"
+                            key={`specimen-${index}-${specimen.id_eunis}`}
+                          >
+                            {getLabelString(
+                              'population_type',
+                              specimen.population_type,
+                            )}
+                            {getPopulationString(
+                              specimen.lower_bound,
+                              specimen.upper_bound,
+                              ', ',
+                            )}
+                            {getLabelString(
+                              'counting_unit',
+                              specimen.counting_unit,
+                              ', ',
+                            )}
+                            {getLabelString(
+                              'abundance_category',
+                              specimen.abundance_category,
+                              ', ',
+                            )}
+                          </p>
+                        ))}
                       </div>
                       <div className="footer-metadata">
                         <p className="orange">
-                          {filteredSpecies[index].EU_threat_name ||
-                            'Not reported'}{' '}
-                          (IUCN European Red List)
+                          {speciesData.EU_threat_name || 'Not reported'} (IUCN
+                          European Red List)
                         </p>
                         <p className="green">
-                          Appears in{' '}
-                          {filteredSpecies[index].appears_number_sites} sites
+                          Appears in {speciesData.appears_number_sites} sites
                         </p>
                       </div>
                     </Grid.Column>

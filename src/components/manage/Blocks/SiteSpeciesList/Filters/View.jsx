@@ -96,8 +96,10 @@ const View = (props) => {
       for (let key in filtersLabels[filter]) {
         if (key !== 'getTitle') {
           newFilters[filter][key] =
-            filteredSpecies.filter((species) => species[filter] === key)
-              .length || 'none';
+            filteredSpecies.filter((species) => {
+              return !!species.filter((specimen) => specimen[filter] === key)
+                .length;
+            }).length || 'none';
         }
       }
     });
