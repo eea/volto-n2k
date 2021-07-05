@@ -7,6 +7,7 @@ import installAppExtras from './components/theme/AppExtras';
 
 import { LinkElement } from './components/manage/Blocks/SlateLink/render';
 import installBodyClass from './components/manage/Blocks/BodyClass';
+import installBubbleChart from './components/manage/Blocks/BubbleChart';
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installCddaShape from './components/manage/Blocks/CddaShape';
 import installConnectedList from './components/manage/Blocks/List';
@@ -121,6 +122,7 @@ const applyConfig = (config) => {
   return [
     installAppExtras,
     installBodyClass,
+    installBubbleChart,
     installCarouselHorizontal,
     installCddaShape,
     installConnectedList,

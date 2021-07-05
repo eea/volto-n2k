@@ -35,7 +35,7 @@ const getSchema = (props) => {
   const choices = Object.keys(data).map((key) => [key, key]);
 
   return {
-    title: 'Exploded pies chart',
+    title: 'Stacked bars chart',
 
     fieldsets: [
       {

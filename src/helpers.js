@@ -52,8 +52,53 @@ function sortBy(obj, property, order = 'ASC') {
     }, {});
 }
 
+export const componentToHex = (c) => {
+  var hex = parseInt(c).toString(16);
+  return hex.length === 1 ? '0' + hex : hex;
+};
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+      ]
+    : [0, 0, 0];
+}
+
+export const getContrastColor = (rgb) => {
+  if (rgb.includes('rgb(')) {
+    rgb = rgb
+      .substring(4, rgb.length - 1)
+      .replace(/ /g, '')
+      .split(',');
+  } else if (rgb[0] === '#') {
+    rgb = hexToRgb(rgb);
+  }
+  const brightness = Math.round(
+    (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) /
+      1000,
+  );
+
+  return brightness > 125 ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
+};
+
 export const adjustBrightness = (col, amt) => {
   var usePound = false;
+
+  if (col.includes('rgb(')) {
+    const rgb = col
+      .substring(4, col.length - 1)
+      .replace(/ /g, '')
+      .split(',');
+    col =
+      '#' +
+      componentToHex(rgb[0]) +
+      componentToHex(rgb[1]) +
+      componentToHex(rgb[2]);
+  }
 
   if (col[0] === '#') {
     col = col.slice(1);
