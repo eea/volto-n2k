@@ -49,7 +49,7 @@ const View = (props) => {
           <div className="species-metadata">
             <h2 className="name">{scientific_name[0]}</h2>
             <p className="info">
-              {common_name[0]} {author[0]}
+              {common_name[0] ? common_name[0] + ' - ' : ''} {author[0]}
             </p>
             {common_name_list[0] ? (
               <p className="info">Common names: {common_name_list[0]}</p>
