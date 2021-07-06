@@ -1,14 +1,14 @@
 import React from 'react';
 import _uniqueId from 'lodash/uniqueId';
-import { pack, hierarchy, schemeSpectral } from 'd3';
+import { pack, hierarchy } from 'd3';
 import * as d3 from 'd3';
-import cx from 'classnames';
 import { adjustBrightness, getContrastColor } from '@eeacms/volto-n2k/helpers';
+import { FormattedValue } from '@eeacms/volto-datablocks/Utils';
 import ChartContext from './ChartContext';
 
 function BubbleChart(props) {
-  const { x, y, chartData, interpolation } = props;
-  const { element, height, width, margin, popup, setPopup } = React.useContext(
+  const { chartData, interpolation } = props;
+  const { element, height, width, popup, setPopup } = React.useContext(
     ChartContext,
   );
   const root = pack().size([width, height]).padding(10)(
@@ -42,7 +42,7 @@ function BubbleChart(props) {
           <g
             key={`leaf-${data.name}`}
             style={{
-              transform: `translate(${leaf.x}px, ${leaf.y - leaf.r / 2}px)`,
+              transform: `translate(${leaf.x}px, ${leaf.y}px)`,
             }}
           >
             <circle
@@ -64,9 +64,6 @@ function BubbleChart(props) {
                   content: (
                     <>
                       <p>{data.name}</p>
-                      <p>
-                        {leaf.value} ({format(data.percentage * 100)}%)
-                      </p>
                     </>
                   ),
                 });
@@ -80,10 +77,20 @@ function BubbleChart(props) {
               fill={getContrastColor(backgroundColor(leaf.value))}
             >
               <tspan x={0} y={0}>
-                {data.name}
+                <FormattedValue
+                  value={data.name}
+                  textTemplate={props.data.yTextTemplate}
+                  specifier={props.data.ySpecifier}
+                  wrapped={false}
+                />
               </tspan>
               <tspan x={0} y={'28px'}>
-                {leaf.value}
+                <FormattedValue
+                  value={data.value}
+                  textTemplate={props.data.xTextTemplate}
+                  specifier={props.data.xSpecifier}
+                  wrapped={false}
+                />
               </tspan>
             </text>
           </g>

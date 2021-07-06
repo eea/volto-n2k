@@ -87,7 +87,7 @@ const View = (props) => {
     if (provider_data.scientific_name?.length) {
       provider_data.scientific_name.forEach((_, index) => {
         const specimen = getObjectByIndex(provider_data, index);
-        if (!speciesIndex[specimen.id_eunis]) {
+        if (!(speciesIndex[specimen.id_eunis] >= 0)) {
           speciesIndex[specimen.id_eunis] = index;
         }
         if (!newSpecies[speciesIndex[specimen.id_eunis]]) {

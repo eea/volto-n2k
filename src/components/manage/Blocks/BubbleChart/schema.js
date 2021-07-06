@@ -1,3 +1,5 @@
+import React from 'react';
+
 const getSchema = (props) => {
   const data = props.provider_data || {};
   const choices = Object.keys(data).map((key) => [key, key]);
@@ -10,6 +12,16 @@ const getSchema = (props) => {
         id: 'default',
         title: 'Default',
         fields: ['x', 'y', 'interpolation'],
+      },
+      {
+        id: 'size_column',
+        title: 'Size column',
+        fields: ['xSpecifier', 'xTextTemplate'],
+      },
+      {
+        id: 'label_column',
+        title: 'Label column',
+        fields: ['ySpecifier', 'yTextTemplate'],
       },
     ],
 
@@ -64,6 +76,44 @@ const getSchema = (props) => {
           'interpolateYlOrBr',
           'interpolateYlOrRd',
         ].map((item) => [item, item]),
+      },
+      xSpecifier: {
+        title: 'Format specifier',
+        description: (
+          <>
+            See{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/d3/d3-format"
+            >
+              D3 format documentation
+            </a>
+          </>
+        ),
+      },
+      xTextTemplate: {
+        title: 'Text template',
+        description: 'Add suffix/prefix to text. Use {} for value placeholder',
+      },
+      ySpecifier: {
+        title: 'Format specifier',
+        description: (
+          <>
+            See{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/d3/d3-format"
+            >
+              D3 format documentation
+            </a>
+          </>
+        ),
+      },
+      yTextTemplate: {
+        title: 'Text template',
+        description: 'Add suffix/prefix to text. Use {} for value placeholder',
       },
     },
 

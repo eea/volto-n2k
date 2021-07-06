@@ -39,8 +39,17 @@ const View = (props) => {
   return (
     <React.Fragment>
       <div className="bubble-chart">
+        {data?.[x]?.length ? (
+          <p style={{ textAlign: 'center' }}>
+            The <span className="highlight">{data[x].length}</span> Member
+            States with the highest number of sites
+          </p>
+        ) : (
+          ''
+        )}
         <Chart width={800} height={800}>
           <BubbleChart
+            data={props.data}
             x={x}
             y={y}
             chartData={chartData}
