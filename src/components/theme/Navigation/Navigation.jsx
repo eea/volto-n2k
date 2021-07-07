@@ -425,7 +425,8 @@ const getN2kItems = (items, localStorage) => {
       ) &&
       item.url !== '/natura2000/sites' &&
       item.url !== '/natura2000/habitats' &&
-      item.url !== '/natura2000/species'
+      item.url !== '/natura2000/species' &&
+      item.url !== '/natura2000/copyright-notice'
     ) {
       navItems.push(item);
     }
