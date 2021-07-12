@@ -13,6 +13,7 @@ import installCddaShape from './components/manage/Blocks/CddaShape';
 import installConnectedList from './components/manage/Blocks/List';
 import installContactBlock from './components/manage/Blocks/ContactBlock';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
+import installExploreSites from './components/manage/Blocks/ExploreSites';
 import installHabitatClassification from './components/manage/Blocks/HabitatClassification';
 import installHabitatDistribution from './components/manage/Blocks/HabitatDistribution';
 import installHabitatProtectedSites from './components/manage/Blocks/HabitatProtectedSites';
@@ -128,6 +129,7 @@ const applyConfig = (config) => {
     installConnectedList,
     installContactBlock,
     installExplodedPiesChart,
+    installExploreSites,
     installHabitatClassification,
     installHabitatDistribution,
     installHabitatProtectedSites,
