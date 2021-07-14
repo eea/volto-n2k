@@ -21,13 +21,32 @@ const View = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log('HERE', props.search?.value?.length, props.search);
+
     if (
       __SERVER__ ||
       !vectorSource ||
       !props.search?.results?.length ||
-      props.search?.results?.length > 30
-    )
+      props.search?.results?.length > 300
+    ) {
+      if (props.search?.results?.length === 0 && vectorSource) {
+        vectorSource.clear();
+        setOptions({
+          ...options,
+          extent: new extent.buffer(
+            [
+              -3603195.606899999,
+              3197087.8112000003,
+              3796164.5945000015,
+              1.1077138825000003e7,
+            ],
+            -3603195.606899999 * 0.01,
+          ),
+        });
+      }
       return;
+    }
+
     const esrijsonFormat = new format.EsriJSON();
 
     // Get sites
@@ -47,7 +66,7 @@ const View = (props) => {
             let size = extent.getSize(vectorExtent);
             setOptions({
               ...options,
-              extent: new extent.buffer(vectorExtent, size[0] * 0.01),
+              extent: new extent.buffer(vectorExtent, size[0] * 0.03),
             });
           }
         }
@@ -70,8 +89,28 @@ const View = (props) => {
         >
           <Layers>
             <Layer.Tile zIndex={0} />
+            <Layer.Tile
+              source={
+                new source.TileWMS({
+                  extent: [
+                    -3603195.606899999,
+                    3197087.8112000003,
+                    3796164.5945000015,
+                    1.1077138825000003e7,
+                  ],
+                  url:
+                    'https://bio.discomap.eea.europa.eu/arcgis/services/ProtectedSites/Natura2000Sites/MapServer/WMSServer',
+                  params: { LAYERS: '2', TILED: true },
+                  serverType: 'geoserver',
+                  // Countries have transparency, so do not fade tiles:
+                  transition: 0,
+                })
+              }
+              zIndex={1}
+            />
             <Layer.Vector
               source={vectorSource}
+              title="highlightLayer"
               style={
                 new style.Style({
                   fill: new style.Fill({
@@ -79,11 +118,21 @@ const View = (props) => {
                   }),
                   stroke: new style.Stroke({
                     color: '#04A77D',
+                    // color: '#F8E473',
                     width: 3,
+                  }),
+                  image: new style.Circle({
+                    radius: 5,
+                    fill: new style.Fill({ color: 'rgba(4, 167, 125,0.6)' }),
+                    // fill: new style.Fill({ color: 'rgba(248,228,115,0.6)' }),
+                    stroke: new style.Stroke({
+                      color: 'rgba(242, 180, 87, 1)',
+                      width: 2,
+                    }),
                   }),
                 })
               }
-              zIndex={1}
+              zIndex={2}
             />
           </Layers>
           <Controls attribution={true} zoom={false} />
