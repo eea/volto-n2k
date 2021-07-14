@@ -21,7 +21,7 @@ const View = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log('HERE', props.search?.value?.length, props.search);
+    // console.log('HERE', props.search?.value?.length, props.search);
 
     if (
       __SERVER__ ||
