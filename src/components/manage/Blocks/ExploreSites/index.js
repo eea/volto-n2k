@@ -8,8 +8,6 @@ export function getAllSitesURL(site_codes) {
     `https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Sites/MapServer/2/query?f=json&where=SITECODE IN (${site_codes.join(
       ',',
     )})&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=OBJECTID&outSR=102100`,
-    // `https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Sites/MapServer/2/query?f=json&where=SITECODE IS NOT NULL&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=SITECODE,SITENAME,OBJECTID&outSR=102100`,
-    // `https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Sites/MapServer/2/query?f=json&geometry=-3603195.606899999,3197087.8112000003,3796164.5945000015,1.1077138825000003E7&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=OBJECTID&outSR=102100`,
   );
 }
 
