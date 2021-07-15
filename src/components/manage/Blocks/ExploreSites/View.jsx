@@ -12,38 +12,59 @@ import './style.less';
 const View = (props) => {
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
+  const [tileWMSSource, setTileWMSSource] = useState(null);
   const { extent, format, proj, style, source } = openlayers;
+
+  const { results = [], payload = {} } = props.search || {};
+
+  const activePageResults = results.filter((_, index) => {
+    return (
+      index >= (payload?.activePage - 1) * payload?.row_size &&
+      index <= payload?.activePage * payload?.row_size - 1
+    );
+  });
 
   useEffect(() => {
     if (__SERVER__) return;
     setVectorSource(new source.Vector());
+    setTileWMSSource(
+      new source.TileWMS({
+        extent: [
+          -3603195.606899999,
+          3197087.8112000003,
+          3796164.5945000015,
+          1.1077138825000003e7,
+        ],
+        url:
+          'https://bio.discomap.eea.europa.eu/arcgis/services/ProtectedSites/Natura2000Sites/MapServer/WMSServer',
+        params: { LAYERS: '2', TILED: true },
+        serverType: 'geoserver',
+        // Countries have transparency, so do not fade tiles:
+        transition: 0,
+      }),
+    );
     /* eslint-disable-next-line */
   }, []);
 
   useEffect(() => {
-    // console.log('HERE', props.search?.value?.length, props.search);
+    if (__SERVER__ || !vectorSource) {
+      return;
+    }
 
-    if (
-      __SERVER__ ||
-      !vectorSource ||
-      !props.search?.results?.length ||
-      props.search?.results?.length > 300
-    ) {
-      if (props.search?.results?.length === 0 && vectorSource) {
-        vectorSource.clear();
-        setOptions({
-          ...options,
-          extent: new extent.buffer(
-            [
-              -3603195.606899999,
-              3197087.8112000003,
-              3796164.5945000015,
-              1.1077138825000003e7,
-            ],
-            -3603195.606899999 * 0.01,
-          ),
-        });
-      }
+    if (activePageResults.length === 0 && vectorSource) {
+      vectorSource.clear();
+      setOptions({
+        ...options,
+        extent: new extent.buffer(
+          [
+            -3603195.606899999,
+            3197087.8112000003,
+            3796164.5945000015,
+            1.1077138825000003e7,
+          ],
+          -3603195.606899999 * 0.01,
+        ),
+      });
       return;
     }
 
@@ -51,7 +72,7 @@ const View = (props) => {
 
     // Get sites
     fetch(
-      getAllSitesURL(props.search.results.map((item) => `'${item.site_code}'`)),
+      getAllSitesURL(activePageResults.map((item) => `'${item.site_code}'`)),
     ).then(function (response) {
       if (response.status !== 200) return;
 
@@ -73,7 +94,7 @@ const View = (props) => {
       });
     });
     /* eslint-disable-next-line */
-  }, [props.search]);
+  }, [JSON.stringify(activePageResults)]);
 
   if (__SERVER__ || !vectorSource) return '';
   return (
@@ -89,25 +110,7 @@ const View = (props) => {
         >
           <Layers>
             <Layer.Tile zIndex={0} />
-            <Layer.Tile
-              source={
-                new source.TileWMS({
-                  extent: [
-                    -3603195.606899999,
-                    3197087.8112000003,
-                    3796164.5945000015,
-                    1.1077138825000003e7,
-                  ],
-                  url:
-                    'https://bio.discomap.eea.europa.eu/arcgis/services/ProtectedSites/Natura2000Sites/MapServer/WMSServer',
-                  params: { LAYERS: '2', TILED: true },
-                  serverType: 'geoserver',
-                  // Countries have transparency, so do not fade tiles:
-                  transition: 0,
-                })
-              }
-              zIndex={1}
-            />
+            <Layer.Tile source={tileWMSSource} zIndex={1} />
             <Layer.Vector
               source={vectorSource}
               title="highlightLayer"
