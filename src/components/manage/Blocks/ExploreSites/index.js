@@ -3,7 +3,7 @@ import ExploreSitesView from './View';
 
 import worldSVG from '@plone/volto/icons/world.svg';
 
-export function getAllSitesURL(site_codes) {
+export function getActiveSitesURL(site_codes) {
   return encodeURI(
     `https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Sites/MapServer/2/query?f=json&where=SITECODE IN (${site_codes.join(
       ',',

@@ -6,7 +6,7 @@ import { Interactions } from '@eeacms/volto-openlayers-map/Interactions';
 import { Controls } from '@eeacms/volto-openlayers-map/Controls';
 import { Layers, Layer } from '@eeacms/volto-openlayers-map/Layers';
 import { openlayers } from '@eeacms/volto-openlayers-map';
-import { getAllSitesURL } from './index';
+import { getActiveSitesURL } from './index';
 import './style.less';
 
 const View = (props) => {
@@ -72,7 +72,7 @@ const View = (props) => {
 
     // Get sites
     fetch(
-      getAllSitesURL(activePageResults.map((item) => `'${item.site_code}'`)),
+      getActiveSitesURL(activePageResults.map((item) => `'${item.site_code}'`)),
     ).then(function (response) {
       if (response.status !== 200) return;
 
