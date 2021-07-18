@@ -7,7 +7,7 @@ import mountains from './images/mountains.webp';
 import grasslands from './images/grasslands.webp';
 import rivers from './images/rivers.webp';
 import islands from './images/islands.webp';
-import people_and_nature from './images/people_and_nature.webp';
+import peatlands from './images/peatlands.webp';
 import natura2000 from './images/natura2000.webp';
 
 export const tiles = [
@@ -24,10 +24,10 @@ export const tiles = [
     link: '/natura2000/:lang/coasts-and-seas',
   },
   {
-    image: people_and_nature,
-    title: 'People and nature',
-    description: 'PEOPLE AND NATURE',
-    link: '/natura2000/:lang/people-and-nature',
+    image: peatlands,
+    title: 'Peatlands',
+    description: 'PEATLANDS',
+    link: '/natura2000/:lang/peatlands',
   },
   {
     image: forests,
@@ -71,20 +71,14 @@ export const tileProps = {
 
 export const getStyle = (props) => {
   if (!props.screen) return {};
-  if (!props.screen.screenWidth || !props.screen.screenHeight) return {};
-  if (props.screen.screenWidth < 1071)
-    return {
-      maxHeight: props.screen.screenHeight.toPixel(),
-      minHeight:
-        props.screen.screenHeight > 768
-          ? props.screen.screenHeight.toPixel()
-          : '768px',
-    };
+  if (!props.screen.width || !props.screen.height) return {};
   return {
-    minHeight:
-      props.screen.screenHeight > 768
-        ? props.screen.screenHeight.toPixel()
-        : '768px',
+    minHeight: (
+      props.screen.height - props.screen.browserToolbarHeight
+    ).toPixel(),
+    maxHeight: (
+      props.screen.height - props.screen.browserToolbarHeight
+    ).toPixel(),
   };
 };
 

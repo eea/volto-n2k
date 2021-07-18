@@ -8,7 +8,6 @@ import { SidebarPortal, UniversalLink } from '@plone/volto/components';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import config from '@plone/volto/registry';
 import settingsSVG from '@plone/volto/icons/settings.svg';
-import { withScreenSize } from '@eeacms/volto-n2k/hocs';
 import DefaultView from './DefalutView';
 import getSchema from './schema';
 import hiker from './images/hiker.webp';
@@ -217,4 +216,4 @@ const Edit = (props) => {
   );
 };
 
-export default withScreenSize(Edit);
+export default Edit;

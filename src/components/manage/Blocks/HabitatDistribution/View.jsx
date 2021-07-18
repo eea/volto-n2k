@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Message, Container } from 'semantic-ui-react';
 import Map from '@eeacms/volto-openlayers-map/Map';
 import { Interactions } from '@eeacms/volto-openlayers-map/Interactions';
 import { Controls } from '@eeacms/volto-openlayers-map/Controls';
@@ -10,7 +11,7 @@ import './style.less';
 const View = (props) => {
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
-  const { extent, format, proj, source } = openlayers;
+  const { extent, format, proj, style, source } = openlayers;
   const provider_data = props.provider_data || {};
   const { code_2000 = [] } = provider_data;
 
@@ -58,25 +59,37 @@ const View = (props) => {
         >
           <Layers>
             <Layer.Tile zIndex={0} />
-            <Layer.WebGLPoints
+            <Layer.Vector
               source={vectorSource}
-              style={{
-                symbol: {
-                  symbolType: 'circle',
-                  size: 8,
-                  color: '#04A77D',
-                  rotateWithView: false,
-                  offset: [0, 0],
-                  opacity: 0.8,
-                },
-              }}
+              style={
+                new style.Style({
+                  fill: new style.Fill({
+                    color: 'rgba(255,255,255,0.4)',
+                  }),
+                  stroke: new style.Stroke({
+                    color: '#04A77D',
+                    width: 3,
+                  }),
+                })
+              }
               zIndex={1}
             />
           </Layers>
-          <Controls attribution={false} />
+          <Controls attribution={true} />
           <Interactions pointer={false} select={false} />
         </Map>
       </div>
+      <Container className="map-info-notice">
+        <Message>
+          <p>
+            The designations employed and the presentation of material on this
+            map do not imply the expression of any opinion whatsoever on the
+            part of the European Union concerning the legal status of any
+            country, territory, city or area or of its authorities, or
+            concerning the delimitation of its frontiers or boundaries.
+          </p>
+        </Message>
+      </Container>
     </div>
   );
 };

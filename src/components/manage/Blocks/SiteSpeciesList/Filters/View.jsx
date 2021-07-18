@@ -92,16 +92,15 @@ const View = (props) => {
   const updateFilters = () => {
     const newFilters = {};
     Object.keys(filtersLabels).forEach((filter) => {
-      const fields = [...new Set(provider_data[filter] || [])].filter(
-        (field) => field,
-      );
-      if (fields.length) {
-        newFilters[filter] = {};
-        fields.forEach((field) => {
-          newFilters[filter][field] = filteredSpecies.filter(
-            (species) => species[filter] === field,
-          ).length;
-        });
+      newFilters[filter] = {};
+      for (let key in filtersLabels[filter]) {
+        if (key !== 'getTitle') {
+          newFilters[filter][key] =
+            filteredSpecies.filter((species) => {
+              return !!species.filter((specimen) => specimen[filter] === key)
+                .length;
+            }).length || 'none';
+        }
       }
     });
     setFilters(newFilters);
@@ -151,6 +150,7 @@ const View = (props) => {
         <div className="toolbar">
           <SortBy sortBy={sortBy} setSortBy={setSortBy} />
           <Dropdown
+            aria-label="Set number of species per page"
             placeholder="Items per page"
             value={pagination.itemsPerPage}
             floating
@@ -160,7 +160,7 @@ const View = (props) => {
               setPagination({ ...pagination, itemsPerPage: data.value });
             }}
           />
-          <button onClick={() => setVisible(!visible)}>
+          <button aria-label="Set filters" onClick={() => setVisible(!visible)}>
             <Icon name={filterSVG} size="24px" />
           </button>
         </div>

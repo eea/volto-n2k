@@ -6,6 +6,7 @@ import './style.less';
 import Pie from './Pie';
 
 const View = (props) => {
+  const { placeholder = 'No results' } = props;
   const { x = null, y = null, x_colors = [], precision = 2 } = props.data;
   const data = props.provider_data || {};
   const x_values = data?.[x] || [];
@@ -70,7 +71,7 @@ const View = (props) => {
             : ''}
         </Grid>
       ) : (
-        ''
+        <p>{placeholder}</p>
       )}
     </>
   );

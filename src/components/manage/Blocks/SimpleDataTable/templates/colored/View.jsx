@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from '@plone/volto/components';
 import { Table, Menu } from 'semantic-ui-react';
-import RenderComponent from 'volto-datablocks/components/manage/Blocks/SimpleDataTable/components';
+import RenderComponent from '@eeacms/volto-datablocks/components/manage/Blocks/SimpleDataTable/components';
 import cx from 'classnames';
 
 import leftSVG from '@plone/volto/icons/left-key.svg';
@@ -12,16 +12,17 @@ import './style.less';
 const View = (props) => {
   const {
     data = {},
-    pagination = {},
-    updatePagination = () => {},
     getAlignmentOfColumn,
-    getTitleOfColumn,
     getNameOfColumn,
-    selectedColumns,
-    tableData,
+    getTitleOfColumn,
     has_pagination,
-    show_header,
+    pagination = {},
+    placeholder,
     row_size,
+    selectedColumns,
+    show_header,
+    tableData,
+    updatePagination = () => {},
   } = props;
 
   const { td_color = [] } = data;
@@ -117,9 +118,7 @@ const View = (props) => {
                       icon
                       disabled={
                         props.isPending ||
-                        row_size < pagination.itemsPerPage ||
-                        pagination.activePage * pagination.itemsPerPage >=
-                          pagination.maxItems
+                        pagination.activePage === pagination.lastPage
                       }
                       onClick={() => {
                         if (row_size === pagination.itemsPerPage) {
@@ -138,7 +137,39 @@ const View = (props) => {
           ) : null}
         </Table>
       ) : (
-        'No results'
+        // TODO: find a better solution to keep headers
+        <Table
+          textAlign="left"
+          striped={data.striped}
+          className={`unstackable ${data.bordered ? 'no-borders' : ''}
+          ${data.compact_table ? 'compact-table' : ''}`}
+        >
+          {show_header ? (
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell />
+                {data?.columns?.map((header) => (
+                  <Table.HeaderCell
+                    key={header.column}
+                    className={header.textAlign || 'left'}
+                  >
+                    <p>{header.title}</p>
+                  </Table.HeaderCell>
+                ))}
+              </Table.Row>
+            </Table.Header>
+          ) : null}
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell className="colored-cell">
+                <span />
+              </Table.Cell>
+              <Table.Cell colSpan={data?.columns?.length || 1}>
+                <p>{placeholder}</p>
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
       )}
     </div>
   );

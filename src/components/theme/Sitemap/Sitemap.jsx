@@ -7,12 +7,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { matchPath } from 'react-router';
 import { asyncConnect } from '@plone/volto/helpers';
 import { defineMessages, injectIntl } from 'react-intl';
 import { Container } from 'semantic-ui-react';
 import { Helmet } from '@plone/volto/helpers';
 import { Link } from 'react-router-dom';
 import config from '@plone/volto/registry';
+import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 
 import { getNavigation } from '@plone/volto/actions';
 
@@ -81,13 +83,35 @@ class Sitemap extends Component {
   }
 }
 
-const getN2kItems = (items) => {
-  for (let i = 0; i < items.length; i++) {
-    if (items[i].url === '/natura2000') {
-      return [...(items[i].items || [])];
+const getN2kItems = (items, localStorage) => {
+  if (__SERVER__) return [];
+  const currentLang = localStorage.get('N2K_LANGUAGE');
+  let navItems = [];
+  const natura2000 =
+    items.filter((item) => item.url === '/natura2000')?.[0]?.items || [];
+  natura2000.forEach((item) => {
+    const languageFolder = matchPath(item.url, {
+      path: config.settings.multilingualRoot,
+      exact: true,
+      strict: false,
+    });
+    if (languageFolder && languageFolder.params.lang === currentLang) {
+      navItems = [...navItems, ...(item.items || [])];
     }
-  }
-  return [];
+    if (
+      languageFolder &&
+      !config.settings.supportedLanguages.includes(
+        languageFolder.params.lang,
+      ) &&
+      item.url !== '/natura2000/sites' &&
+      item.url !== '/natura2000/habitats' &&
+      item.url !== '/natura2000/species'
+    ) {
+      navItems.push(item);
+    }
+  });
+
+  return navItems;
 };
 
 export const __test__ = compose(
@@ -103,9 +127,10 @@ export const __test__ = compose(
 
 export default compose(
   injectIntl,
+  withLocalStorage,
   connect(
-    (state) => ({
-      items: getN2kItems(state.navigation.items),
+    (state, props) => ({
+      items: getN2kItems(state.navigation.items, props.localStorage),
       lang: state.intl.locale,
     }),
     { getNavigation },

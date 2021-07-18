@@ -73,11 +73,11 @@ const Arc = ({ data, index, createArc, format, size }) => {
 };
 
 const Pie = (props) => {
-  const createPie = d3.layout
+  const createPie = d3
     .pie()
     .value((d) => d.value)
     .sort(null);
-  const createArc = d3.svg
+  const createArc = d3
     .arc()
     .innerRadius((d) => d.data.innerRadius || props.innerRadius)
     .outerRadius((d) => d.data.outerRadius || props.outerRadius)

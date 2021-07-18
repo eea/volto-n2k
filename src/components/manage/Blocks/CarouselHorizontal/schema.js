@@ -4,7 +4,7 @@ export default () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['theme', 'image'],
+      fields: ['theme', 'image', 'learnMore'],
     },
   ],
   properties: {
@@ -21,6 +21,11 @@ export default () => ({
     image: {
       title: 'Image',
       widget: 'object_by_path',
+    },
+    learnMore: {
+      title: 'Learn more',
+      widget: 'textarea',
+      description: 'Learn more placeholder apearing only on first slide',
     },
   },
   required: [],

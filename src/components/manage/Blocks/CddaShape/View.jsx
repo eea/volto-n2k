@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Message, Container } from 'semantic-ui-react';
 import Map from '@eeacms/volto-openlayers-map/Map';
 import { Interactions } from '@eeacms/volto-openlayers-map/Interactions';
 import { Controls } from '@eeacms/volto-openlayers-map/Controls';
@@ -10,7 +11,7 @@ import './style.less';
 const View = (props) => {
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
-  const { format, proj, style, source } = openlayers;
+  const { extent, format, proj, style, source } = openlayers;
   const provider_data = props.provider_data || {};
   const { site_code = [] } = provider_data;
 
@@ -31,10 +32,11 @@ const View = (props) => {
           const features = esrijsonFormat.readFeatures(data);
           if (features.length > 0) {
             vectorSource.addFeatures(features);
+            const vectorExtent = vectorSource.getExtent();
+            let size = extent.getSize(vectorExtent);
             setOptions({
               ...options,
-              extent: features[0].getGeometry().getExtent(),
-              zoom: 10,
+              extent: new extent.buffer(vectorExtent, size[0] * 0.1),
             });
           }
         }
@@ -76,7 +78,7 @@ const View = (props) => {
               zIndex={1}
             />
           </Layers>
-          <Controls attribution={false} zoom={false} />
+          <Controls attribution={true} zoom={false} />
           <Interactions
             doubleClickZoom={false}
             dragAndDrop={false}
@@ -89,6 +91,17 @@ const View = (props) => {
           />
         </Map>
       </div>
+      <Container className="map-info-notice">
+        <Message>
+          <p>
+            The designations employed and the presentation of material on this
+            map do not imply the expression of any opinion whatsoever on the
+            part of the European Union concerning the legal status of any
+            country, territory, city or area or of its authorities, or
+            concerning the delimitation of its frontiers or boundaries.
+          </p>
+        </Message>
+      </Container>
     </div>
   );
 };

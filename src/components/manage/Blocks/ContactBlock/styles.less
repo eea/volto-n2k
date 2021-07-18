@@ -1,6 +1,11 @@
 .contact-block {
   margin-left: 1rem;
 
+  &.no-data:not(.edit) {
+    margin-top: -1.5rem;
+    margin-left: 0;
+  }
+
   .contact {
     &:not(:last-child) {
       border-bottom: 1px solid #dadada;
