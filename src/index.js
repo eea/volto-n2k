@@ -14,6 +14,7 @@ import installConnectedList from './components/manage/Blocks/List';
 import installContactBlock from './components/manage/Blocks/ContactBlock';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
 import installExploreSites from './components/manage/Blocks/ExploreSites';
+import installExploreHabitats from './components/manage/Blocks/ExploreHabitats';
 import installHabitatClassification from './components/manage/Blocks/HabitatClassification';
 import installHabitatDistribution from './components/manage/Blocks/HabitatDistribution';
 import installHabitatProtectedSites from './components/manage/Blocks/HabitatProtectedSites';
@@ -130,6 +131,7 @@ const applyConfig = (config) => {
     installContactBlock,
     installExplodedPiesChart,
     installExploreSites,
+    installExploreHabitats,
     installHabitatClassification,
     installHabitatDistribution,
     installHabitatProtectedSites,
