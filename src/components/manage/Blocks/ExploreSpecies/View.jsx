@@ -6,7 +6,7 @@ import { Interactions } from '@eeacms/volto-openlayers-map/Interactions';
 import { Controls } from '@eeacms/volto-openlayers-map/Controls';
 import { Layers, Layer } from '@eeacms/volto-openlayers-map/Layers';
 import { openlayers } from '@eeacms/volto-openlayers-map';
-import { getActiveSitesURL } from './index';
+import { getActiveSpeciesURL } from './index';
 import './style.less';
 
 const View = (props) => {
@@ -30,14 +30,14 @@ const View = (props) => {
     setTileWMSSource(
       new source.TileWMS({
         extent: [
-          -3603195.606899999,
-          3197087.8112000003,
-          3796164.5945000015,
-          1.1077138825000003e7,
+          -3690067.3068000004,
+          3129776.6937999986,
+          3858418.0045999996,
+          1.1124223900300004e7,
         ],
         url:
-          'https://bio.discomap.eea.europa.eu/arcgis/services/ProtectedSites/Natura2000Sites/MapServer/WMSServer',
-        params: { LAYERS: '2', TILED: true },
+          'https://bio.discomap.eea.europa.eu/arcgis/services/Article17/HabitatsDirective_ART_17_WMS_version_2020_08_public/MapServer/WmsServer',
+        params: { LAYERS: '3', TILED: true },
         serverType: 'geoserver',
         // Countries have transparency, so do not fade tiles:
         transition: 0,
@@ -57,12 +57,12 @@ const View = (props) => {
         ...options,
         extent: new extent.buffer(
           [
-            -3603195.606899999,
-            3197087.8112000003,
-            3796164.5945000015,
-            1.1077138825000003e7,
+            -3690067.3068000004,
+            3129776.6937999986,
+            3858418.0045999996,
+            1.1124223900300004e7,
           ],
-          -3603195.606899999 * 0.01,
+          -3690067.3068000004 * 0.01,
         ),
       });
       return;
@@ -70,9 +70,11 @@ const View = (props) => {
 
     const esrijsonFormat = new format.EsriJSON();
 
-    // Get sites of active page
+    // Get species of active page
     fetch(
-      getActiveSitesURL(activePageResults.map((item) => `'${item.site_code}'`)),
+      getActiveSpeciesURL(
+        activePageResults.map((item) => `'${item.code_2000}'`),
+      ),
     ).then(function (response) {
       if (response.status !== 200) return;
 
@@ -98,8 +100,8 @@ const View = (props) => {
 
   if (__SERVER__ || !vectorSource) return '';
   return (
-    <div className="explore-sites-wrapper full-width">
-      <div className="explore-sites">
+    <div className="explore-species-wrapper full-width">
+      <div className="explore-species">
         <Map
           view={{
             center: proj.fromLonLat([20, 50]),

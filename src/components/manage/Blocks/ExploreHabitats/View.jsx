@@ -30,10 +30,10 @@ const View = (props) => {
     setTileWMSSource(
       new source.TileWMS({
         extent: [
-          -3603195.606899999,
-          3197087.8112000003,
-          3796164.5945000015,
-          1.1077138825000003e7,
+          -3959514.742799999,
+          3193117.280200001,
+          3804815.2795,
+          1.1124223900300004e7,
         ],
         url:
           'https://bio.discomap.eea.europa.eu/arcgis/services/Article17/HabitatsDirective_ART_17_WMS_version_2020_08_public/MapServer/WmsServer',
@@ -70,7 +70,7 @@ const View = (props) => {
 
     const esrijsonFormat = new format.EsriJSON();
 
-    // Get sites
+    // Get habitats of active page
     fetch(
       getActiveHabitatsURL(
         activePageResults.map((item) => `'${item.code_2000}'`),
