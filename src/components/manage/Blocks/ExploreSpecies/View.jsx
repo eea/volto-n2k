@@ -37,7 +37,7 @@ const View = (props) => {
         ],
         url:
           'https://bio.discomap.eea.europa.eu/arcgis/services/Article17/HabitatsDirective_ART_17_WMS_version_2020_08_public/MapServer/WmsServer',
-        params: { LAYERS: '3', TILED: true },
+        params: { LAYERS: '7', TILED: true },
         serverType: 'geoserver',
         // Countries have transparency, so do not fade tiles:
         transition: 0,
