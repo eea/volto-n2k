@@ -44,10 +44,24 @@ export default () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['links'],
+      fields: ['sticky', 'align', 'links'],
     },
   ],
   properties: {
+    sticky: {
+      title: 'Sticky',
+      type: 'boolean',
+      default: true,
+    },
+    align: {
+      title: 'Align',
+      choices: [
+        ['flex-start', 'Left'],
+        ['flex-end', 'Right'],
+        ['center', 'Center'],
+      ],
+      defaultValue: 'flex-start',
+    },
     links: {
       title: 'Links',
       schema: linksSchema(),

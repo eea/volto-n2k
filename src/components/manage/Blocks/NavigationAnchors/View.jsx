@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Menu, Container, Sticky } from 'semantic-ui-react';
 import qs from 'querystring';
+import cx from 'classnames';
 import { UniversalLink } from '@plone/volto/components';
 import { withHashLink } from 'volto-slate/hooks';
 import { StickyContext } from '~/components';
@@ -24,6 +25,7 @@ const View = (props) => {
   const anchorsRef = useRef();
   const { data = {}, screen = {} } = props;
   const links = data.links || [];
+  const sticky = data.sticky ?? true;
 
   const params = {
     ...props.match.params,
@@ -62,13 +64,19 @@ const View = (props) => {
 
   return (
     <Sticky
-      active={screen.page?.width > 765}
+      active={sticky && screen.page?.width > 765}
       context={stickyRef}
-      className="sticky-navigation-anchors full-width"
+      className={cx('sticky-navigation-anchors', {
+        'full-width': sticky,
+        'is-sticky': sticky,
+      })}
     >
       <div className="navigation-anchors" ref={anchorsRef}>
         <Container>
-          <Menu stackable>
+          <Menu
+            stackable
+            style={{ justifyContent: data.align || 'flex-start' }}
+          >
             {links?.map((link, index) => {
               const href = formatLink(link.href, params);
               const hash = link.hash?.[0] || {};
@@ -76,7 +84,12 @@ const View = (props) => {
               return (
                 <Menu.Item
                   key={`anchor-${link.title}-${index}`}
-                  active={hash.id && activeHash && hash.id === activeHash}
+                  active={
+                    (hash.id && activeHash && hash.id === activeHash) ||
+                    (!hash.id &&
+                      !link.isHash &&
+                      props.location.pathname === href.replace(/\/$/, ''))
+                  }
                 >
                   {link.isHash ? (
                     <a

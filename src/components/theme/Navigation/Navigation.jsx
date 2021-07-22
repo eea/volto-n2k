@@ -301,7 +301,7 @@ class Navigation extends Component {
             ? this.props.items.map((item) => {
                 const flatUrl = flattenToAppURL(item.url);
                 const itemID = item.title.split(' ').join('-').toLowerCase();
-                return item.items && item.items.length ? (
+                return item.items && item.items.length && false ? (
                   <Dropdown
                     id={itemID}
                     className={cx({
