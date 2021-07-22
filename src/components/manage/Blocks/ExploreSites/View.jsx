@@ -161,6 +161,13 @@ const View = (props) => {
             concerning the delimitation of its frontiers or boundaries.
           </p>
         </Message>
+        <Message info>
+          <Message.Header>Note:</Message.Header>
+          <p>
+            When you perform a search we will highlight only the results
+            available on the active page of the results table.
+          </p>
+        </Message>
       </Container>
     </div>
   );
