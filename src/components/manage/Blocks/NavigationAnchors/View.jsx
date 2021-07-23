@@ -71,7 +71,10 @@ const View = (props) => {
         'is-sticky': sticky,
       })}
     >
-      <div className="navigation-anchors" ref={anchorsRef}>
+      <div
+        className={cx('navigation-anchors', data.className)}
+        ref={anchorsRef}
+      >
         <Container>
           <Menu
             stackable

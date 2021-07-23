@@ -154,7 +154,7 @@ const View = (props) => {
         </Map>
       </div>
       <Container className="map-info-notice">
-        <Message>
+        <Message style={{ color: '#3B7f02' }}>
           <p>
             The designations employed and the presentation of material on this
             map do not imply the expression of any opinion whatsoever on the
@@ -162,12 +162,9 @@ const View = (props) => {
             country, territory, city or area or of its authorities, or
             concerning the delimitation of its frontiers or boundaries.
           </p>
-        </Message>
-        <Message info>
-          <Message.Header>Note:</Message.Header>
           <p>
-            When you perform a search we will highlight only the results
-            available on the active page of the results table.
+            <strong>Note:</strong> When you perform a search we will highlight
+            only the results available on the active page of the results table.
           </p>
         </Message>
       </Container>

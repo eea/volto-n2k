@@ -76,4 +76,27 @@ div#view .ui.container > .sticky-navigation-anchors {
       }
     }
   }
+
+  &.natura-2000 {
+    .ui.container > .ui.menu {
+      .item {
+        &.active {
+          p, a {
+            color: #3b7f02;
+            font-weight: bold;
+          }
+        }
+
+        &:hover {
+          p, a {
+            color: #3b7f02;
+          }
+        }
+  
+        &::before {
+          display: none;
+        }
+      }
+    }
+  }
 }

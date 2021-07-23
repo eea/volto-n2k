@@ -14,7 +14,7 @@ export default () => ({
     {
       id: 'link',
       title: 'Link',
-      fields: ['linkTitle', 'href', 'target', 'external'],
+      fields: ['linkTitle', 'href', 'target'],
     },
   ],
   properties: {
@@ -63,11 +63,6 @@ export default () => ({
         ['_self', 'Same tab'],
       ],
       defaultValue: '_self',
-    },
-    external: {
-      title: 'Is external',
-      type: 'boolean',
-      default: false,
     },
   },
   required: [],

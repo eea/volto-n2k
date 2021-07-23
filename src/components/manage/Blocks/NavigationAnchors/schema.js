@@ -44,7 +44,7 @@ export default () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['sticky', 'align', 'links'],
+      fields: ['sticky', 'className', 'align', 'links'],
     },
   ],
   properties: {
@@ -52,6 +52,10 @@ export default () => ({
       title: 'Sticky',
       type: 'boolean',
       default: true,
+    },
+    className: {
+      title: 'Class',
+      widget: 'textarea',
     },
     align: {
       title: 'Align',

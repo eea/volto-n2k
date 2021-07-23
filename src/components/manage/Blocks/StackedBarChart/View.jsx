@@ -53,6 +53,7 @@ const View = (props) => {
         >
           <StackedBars
             data={Object.keys(yValues).map((label) => yValues[label])}
+            hoverText={props.data.hoverText}
             keys={yLabels}
           />
         </Chart>

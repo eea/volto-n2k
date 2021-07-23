@@ -20,7 +20,7 @@ function StackedBars(props) {
     popup,
     setPopup,
   } = React.useContext(ChartContext);
-  const { data = {}, keys = [] } = props;
+  const { data = {}, keys = [], hoverText = '{}' } = props;
 
   if (!keys?.length || !scales?.xScale || !scales?.yScale) {
     return <></>;
@@ -69,7 +69,12 @@ function StackedBars(props) {
                       clientY: event.clientY - elementPosition.y,
                       content: (
                         <>
-                          <p>{rect.data[rect.key] * rect.data.total} Forests</p>
+                          <p>
+                            {hoverText.replace(
+                              '{}',
+                              rect.data[rect.key] * rect.data.total,
+                            )}
+                          </p>
                         </>
                       ),
                     });
