@@ -34,13 +34,23 @@ export default () => ({
     {
       id: 'advanced',
       title: 'Advanced',
-      fields: ['size'],
+      fields: ['size', 'hasBorder', 'rounded'],
     },
   ],
   properties: {
     size: {
       title: 'Tiles size',
       type: 'number',
+    },
+    hasBorder: {
+      title: 'With border',
+      type: 'boolean',
+      default: true,
+    },
+    rounded: {
+      title: 'Rounded',
+      type: 'boolean',
+      default: true,
     },
     theme: {
       title: 'Theme',

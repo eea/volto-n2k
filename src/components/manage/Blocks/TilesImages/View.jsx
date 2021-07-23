@@ -11,7 +11,12 @@ const View = (props) => {
     <div className={cx('tiles-images', mode, data.theme || 'light')}>
       {mode === 'edit' && !images.length ? <p>Tiles images block</p> : ''}
       {images.map((image) => (
-        <p className="with-border rounded-border">
+        <p
+          className={cx('p-image', {
+            'with-border': data.hasBorder ?? true,
+            'rounded-border': data.rounded ?? true,
+          })}
+        >
           <UniversalLink href={image.link || '#'} title={image.title}>
             <img
               src={`${image.image}/@@images/image/mini`}

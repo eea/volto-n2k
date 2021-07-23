@@ -1,35 +1,19 @@
+a.image-text:hover {
+  opacity: 0.9;
+}
+
 .image-text {
   display: flex;
   flex-flow: row;
   align-items: center;
   margin-bottom: 1rem;
 
-  p {
-    margin-bottom: 0 !important;
-
-    &.rounded-border {
-      border-radius: 50%;
-
-      img {
-        border-radius: 50%;
-      }
-    }
-  }
-
-  p img {
-    width: 130px;
-    height: 130px;
-    padding: 6px;
-    margin-right: 1rem;
-    margin-bottom: 0;
-  }
-
   .slate-editor {
     width: 100%;
   }
 
   &.light {
-    p.with-border img {
+    .p-image.with-border img {
       border: 1px solid #fff;
     }
 
@@ -44,7 +28,7 @@
   }
 
   &.grey {
-    p.with-border img {
+    .p-image.with-border img {
       border: 1px solid #c9c9c9;
     }
 
@@ -59,7 +43,7 @@
   }
 
   &.dark {
-    p.with-border img {
+    .p-image.with-border img {
       border: 1px solid #000;
     }
 
@@ -71,5 +55,33 @@
     span {
       color: #000;
     }
+  }
+
+  .p-image {
+    margin-bottom: 0 !important;
+
+    a {
+      display: block;
+    }
+
+    img {
+      width: 130px;
+      height: 130px;
+      padding: 6px;
+      margin-right: 1rem;
+      margin-bottom: 0;
+    }
+  }
+
+  .p-image.rounded-border {
+    border-radius: 50%;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  .p-image.with-border {
+    margin: 0 0.5rem;
   }
 }
