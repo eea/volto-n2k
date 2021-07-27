@@ -37,7 +37,12 @@ const View = (props) => {
         ) : (
           ''
         )}
-        {!valueUndefined ? serializeNodes(value.children) : ''}
+
+        {!valueUndefined ? (
+          <div className="text-wrapper">{serializeNodes(value.children)}</div>
+        ) : (
+          ''
+        )}
       </>
     );
   };
