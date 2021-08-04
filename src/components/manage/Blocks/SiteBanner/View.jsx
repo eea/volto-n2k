@@ -119,7 +119,7 @@ const View = (props) => {
                         <div>No data</div>
                       )}
                     </div>
-                    <div className="lower">Protected habitats</div>
+                    <div className="lower">EU Protected habitats</div>
                   </div>
 
                   <div className="site-detail">
@@ -130,7 +130,7 @@ const View = (props) => {
                         <div>No data</div>
                       )}
                     </div>
-                    <div className="lower">Protected species</div>
+                    <div className="lower">EU Protected species</div>
                   </div>
                 </>
               )}
