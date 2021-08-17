@@ -11,7 +11,7 @@ export const SlateSvgElement = ({
 }) => {
   return mode === 'view' ? (
     <>
-      <svg width="100%" height="100%">
+      <svg width="100%" height="100%" viewBox="0 0 280 280">
         <foreignObject
           width="100%"
           height="100%"
