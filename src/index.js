@@ -13,8 +13,8 @@ import installCddaShape from './components/manage/Blocks/CddaShape';
 import installConnectedList from './components/manage/Blocks/List';
 import installContactBlock from './components/manage/Blocks/ContactBlock';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
-import installExploreSites from './components/manage/Blocks/ExploreSites';
 import installExploreHabitats from './components/manage/Blocks/ExploreHabitats';
+import installExploreSites from './components/manage/Blocks/ExploreSites';
 import installExploreSpecies from './components/manage/Blocks/ExploreSpecies';
 import installHabitatClassification from './components/manage/Blocks/HabitatClassification';
 import installHabitatDistribution from './components/manage/Blocks/HabitatDistribution';
@@ -30,6 +30,7 @@ import installSiteProtectedHabitats from './components/manage/Blocks/SiteProtect
 import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
 import installSiteShape from './components/manage/Blocks/SiteShape';
 import installSiteSpeciesList from './components/manage/Blocks/SiteSpeciesList';
+import installSlateSvg from './components/manage/Blocks/SlateSVG';
 import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
 import installSpeciesClassification from './components/manage/Blocks/SpeciesClassification';
 import installSpeciesDistribution from './components/manage/Blocks/SpeciesDistribution';
@@ -124,6 +125,7 @@ const applyConfig = (config) => {
 
   return [
     installAppExtras,
+
     installBodyClass,
     installBubbleChart,
     installCarouselHorizontal,
@@ -131,8 +133,8 @@ const applyConfig = (config) => {
     installConnectedList,
     installContactBlock,
     installExplodedPiesChart,
-    installExploreSites,
     installExploreHabitats,
+    installExploreSites,
     installExploreSpecies,
     installHabitatClassification,
     installHabitatDistribution,
@@ -148,6 +150,7 @@ const applyConfig = (config) => {
     installSiteProtectedSpecies,
     installSiteShape,
     installSiteSpeciesList,
+    installSlateSvg,
     installSpeciesBanner,
     installSpeciesClassification,
     installSpeciesDistribution,

@@ -178,6 +178,7 @@ const View = (props) => {
   }, [hashlink.counter]);
 
   React.useEffect(() => {
+    updateImageHeight();
     img.current.onload = () => {
       updateImageHeight();
     };
