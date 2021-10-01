@@ -39,7 +39,7 @@ export const getObjectByIndex = (provider_data, index) => {
   return obj;
 };
 
-function sortBy(obj, property, order = 'ASC') {
+export function sortBy(obj, property, order = 'ASC') {
   return Object.keys(obj)
     .sort((a, b) =>
       order === 'ASC'

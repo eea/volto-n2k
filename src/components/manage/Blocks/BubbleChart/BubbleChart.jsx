@@ -16,7 +16,6 @@ function BubbleChart(props) {
       .sum((d) => d.value)
       .sort((a, b) => b.value - a.value),
   );
-  const format = d3.format(`.${props.precision || 2}f`);
   const backgroundColor = React.useCallback(
     (value) => {
       if (chartData?.[0]?.maxValue && chartData?.[0]?.minValue) {

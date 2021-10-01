@@ -106,8 +106,6 @@ const View = (props) => {
     /* eslint-disable-next-line */
   }, [species, sortBy, activeSpeciesGroup, filters]);
 
-  console.log('HERE', species);
-
   return (
     <div className="site-species-list full-width">
       {props.mode !== 'edit' && species.length ? (

@@ -1,6 +1,4 @@
 import React from 'react';
-import { DataConnectedValue } from '@eeacms/volto-datablocks/Utils';
-import { wrapInlineMarkupText } from 'volto-slate/utils';
 
 export const SlateSvgElement = ({
   attributes,
