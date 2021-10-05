@@ -24,14 +24,14 @@
     "url": "git@github.com:eea/volto-n2k.git"
   },
   "dependencies": {
-    "@eeacms/volto-datablocks": "github:eea/volto-datablocks#develop",
+    "@eeacms/volto-datablocks": "^2.0.13",
     "@eeacms/volto-resize-helper": "^0.2.4",
     "@eeacms/volto-openlayers-map": "0.1.2",
     "@eeacms/volto-tabs-block": "1.2.7",
-    "d3": "^7.0.4",
+    "d3": "^7.1.1",
     "d3-shape": "^3.0.1",
     "react-lazy-load-image-component": "1.5.1",
-    "react-stickynode": "^3.0.4",
+    "react-stickynode": "^4.0.0",
     "react-use-localstorage": "^3.5.3",
     "resize-observer-polyfill": "1.5.1",
     "slick-carousel": "1.8.1",
