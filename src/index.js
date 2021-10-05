@@ -7,28 +7,35 @@ import installAppExtras from './components/theme/AppExtras';
 
 import { LinkElement } from './components/manage/Blocks/SlateLink/render';
 import installBodyClass from './components/manage/Blocks/BodyClass';
+// import installBubbleChart from './components/manage/Blocks/BubbleChart';
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installCddaShape from './components/manage/Blocks/CddaShape';
 import installConnectedList from './components/manage/Blocks/List';
 import installContactBlock from './components/manage/Blocks/ContactBlock';
-import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
+// import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
+import installExploreHabitats from './components/manage/Blocks/ExploreHabitats';
+import installExploreSites from './components/manage/Blocks/ExploreSites';
+import installExploreSpecies from './components/manage/Blocks/ExploreSpecies';
 import installHabitatClassification from './components/manage/Blocks/HabitatClassification';
-import installHabitatsBanner from './components/manage/Blocks/HabitatsBanner';
 import installHabitatDistribution from './components/manage/Blocks/HabitatDistribution';
 import installHabitatProtectedSites from './components/manage/Blocks/HabitatProtectedSites';
+import installHabitatsBanner from './components/manage/Blocks/HabitatsBanner';
 import installImageText from './components/manage/Blocks/ImageText';
 import installLandingBlock from './components/manage/Blocks/Landing';
 import installNavigationAnchors from './components/manage/Blocks/NavigationAnchors';
 import installSimpleDataTable from './components/manage/Blocks/SimpleDataTable';
 import installSiteBanner from './components/manage/Blocks/SiteBanner';
+import installSiteHabitatsList from './components/manage/Blocks/SiteHabitatsList';
 import installSiteProtectedHabitats from './components/manage/Blocks/SiteProtectedHabitats';
 import installSiteProtectedSpecies from './components/manage/Blocks/SiteProtectedSpecies';
 import installSiteShape from './components/manage/Blocks/SiteShape';
 import installSiteSpeciesList from './components/manage/Blocks/SiteSpeciesList';
+import installSlateSvg from './components/manage/Blocks/SlateSVG';
 import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
 import installSpeciesClassification from './components/manage/Blocks/SpeciesClassification';
 import installSpeciesDistribution from './components/manage/Blocks/SpeciesDistribution';
 import installSpeciesProtectedSites from './components/manage/Blocks/SpeciesProtectedSites';
+// import installStackedBarChart from './components/manage/Blocks/StackedBarChart';
 import installTilesImages from './components/manage/Blocks/TilesImages';
 
 import { LINK } from 'volto-slate/constants';
@@ -65,7 +72,32 @@ const applyConfig = (config) => {
     multilingualRoot: '/natura2000/:lang',
     multilingualPath: '/natura2000/:lang/*',
     defaultLanguage: 'en',
-    supportedLanguages: ['en', 'ro'],
+    supportedLanguages: [
+      'bg',
+      'hr',
+      'cs',
+      'da',
+      'nl',
+      'en',
+      'et',
+      'fi',
+      'fr',
+      'de',
+      'el',
+      'hu',
+      'ga',
+      'it',
+      'lv',
+      'lt',
+      'mt',
+      'pl',
+      'pt',
+      'ro',
+      'sk',
+      'sl',
+      'es',
+      'sv',
+    ],
   };
 
   config.settings.themes = {
@@ -93,29 +125,37 @@ const applyConfig = (config) => {
 
   return [
     installAppExtras,
+
     installBodyClass,
+    // installBubbleChart,
     installCarouselHorizontal,
     installCddaShape,
     installConnectedList,
     installContactBlock,
-    installExplodedPiesChart,
+    // installExplodedPiesChart,
+    installExploreHabitats,
+    installExploreSites,
+    installExploreSpecies,
     installHabitatClassification,
-    installHabitatsBanner,
     installHabitatDistribution,
     installHabitatProtectedSites,
-    installSpeciesClassification,
+    installHabitatsBanner,
     installImageText,
     installLandingBlock,
     installNavigationAnchors,
     installSimpleDataTable,
     installSiteBanner,
+    installSiteHabitatsList,
     installSiteProtectedHabitats,
     installSiteProtectedSpecies,
     installSiteShape,
     installSiteSpeciesList,
+    installSlateSvg,
     installSpeciesBanner,
+    installSpeciesClassification,
     installSpeciesDistribution,
     installSpeciesProtectedSites,
+    // installStackedBarChart,
     installTilesImages,
   ].reduce((acc, apply) => apply(acc), config);
 };

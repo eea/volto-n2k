@@ -1,29 +1,27 @@
 div#view .species-banner-details .ui.container > * {
+  margin-top: 0;
   margin-bottom: 0;
 }
 
 .species-banner-details {
-  background-color: #04a77d;
   padding: 1.5em 0;
+  background-color: #04a77d;
   color: #fff;
   font-family: 'RajdhaniB';
 
   .species-details {
     display: flex;
-    align-items: flex-start;
+    flex-flow: row;
+    align-items: center;
     justify-content: space-between;
 
-    @media only screen and (max-width: 765px) {
+    @media only screen and (max-width: 800px) {
       flex-flow: column;
-
-      .species-metadata {
-        margin-bottom: 1rem;
-      }
     }
 
     .species-metadata {
       .name {
-        margin-top: 0.5em !important;
+        margin-top: 0 !important;
         margin-bottom: 0 !important;
         color: #fff;
         font-family: inherit;
@@ -33,6 +31,7 @@ div#view .species-banner-details .ui.container > * {
       }
 
       .info {
+        margin-bottom: 1rem;
         font-family: 'RajdhaniR';
         font-size: 18px;
         font-weight: 600;
@@ -40,10 +39,77 @@ div#view .species-banner-details .ui.container > * {
       }
     }
 
-    img {
-      max-height: 200px;
-      border-radius: 10px;
-      filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.4));
+    .slick-slider {
+      .slick-arrow {
+        display: block !important;
+      }
     }
+
+    .species-pictures {
+      width: 400px;
+      height: 400px;
+      margin-bottom: 1rem;
+
+      .picture-wrapper {
+        position: relative;
+        display: flex !important;
+        overflow: hidden;
+        width: 400px;
+        height: 400px;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #000;
+        border-radius: 10px;
+
+        img {
+          width: auto;
+          max-width: 400px;
+          height: auto;
+          max-height: 400px;
+          filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.4));
+        }
+
+        .source {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          padding: 0.5rem 1rem;
+          background-color: rgba(0, 0, 0, 0.7);
+          border-bottom-left-radius: 3px;
+          border-bottom-right-radius: 3px;
+
+          a {
+            margin-top: 1rem;
+            color: #fff;
+
+            &:hover {
+              color: #fff;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      &:not(.with-slider) {
+        display: flex;
+        align-items: center;
+
+        .picture-wrapper {
+          height: fit-content;
+        }
+      }
+    }
+  }
+
+  .slick-slide:not(.slick-active) {
+    opacity: 0;
+    transition: opacity 0.6s;
+  }
+
+  .slick-slide {
+    opacity: 1;
+    transition: opacity 0.4s;
   }
 }

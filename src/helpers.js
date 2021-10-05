@@ -1,14 +1,17 @@
-import AmphibiansPNG from '@eeacms/volto-n2k/icons/placeholders/Amphibians.png';
+import AmphibiansPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 import BirdsPNG from '@eeacms/volto-n2k/icons/placeholders/Birds.png';
 import ConifersPNG from '@eeacms/volto-n2k/icons/placeholders/Conifers.png';
-import FernsPNG from '@eeacms/volto-n2k/icons/placeholders/Ferns.png';
+import FernsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 import FishesPNG from '@eeacms/volto-n2k/icons/placeholders/Fishes.png';
-import FloweringPlantsPNG from '@eeacms/volto-n2k/icons/placeholders/Flowering Plants.png';
+import FloweringPlantsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 import FungiPNG from '@eeacms/volto-n2k/icons/placeholders/Fungi.png';
-import InvertebratesPNG from '@eeacms/volto-n2k/icons/placeholders/Invertebrates.png';
-import MammalsPNG from '@eeacms/volto-n2k/icons/placeholders/Mammals.png';
-import MossesLiverwortsPNG from '@eeacms/volto-n2k/icons/placeholders/Mosses & Liverworts.png';
-import ReptilesPNG from '@eeacms/volto-n2k/icons/placeholders/Reptiles.png';
+import InvertebratesPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
+import MammalsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
+import MossesLiverwortsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
+import ReptilesPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
+import AlgaePNG from '@eeacms/volto-n2k/icons/placeholders/Algae.png';
+import PlantsPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
+import defaultPNG from '@eeacms/volto-n2k/icons/placeholders/default.png';
 
 export const photoPlaceholders = {
   Amphibians: AmphibiansPNG,
@@ -22,6 +25,9 @@ export const photoPlaceholders = {
   Mammals: MammalsPNG,
   'Mosses & Liverworts': MossesLiverwortsPNG,
   Reptiles: ReptilesPNG,
+  Algae: AlgaePNG,
+  Plants: PlantsPNG,
+  default: defaultPNG,
 };
 
 export const getObjectByIndex = (provider_data, index) => {
@@ -33,8 +39,66 @@ export const getObjectByIndex = (provider_data, index) => {
   return obj;
 };
 
+export function sortBy(obj, property, order = 'ASC') {
+  return Object.keys(obj)
+    .sort((a, b) =>
+      order === 'ASC'
+        ? obj[a][property] - obj[b][property]
+        : obj[b][property] - obj[a][property],
+    )
+    .reduce((newObj, key) => {
+      newObj[key] = { ...obj[key] };
+      return newObj;
+    }, {});
+}
+
+export const componentToHex = (c) => {
+  var hex = parseInt(c).toString(16);
+  return hex.length === 1 ? '0' + hex : hex;
+};
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+      ]
+    : [0, 0, 0];
+}
+
+export const getContrastColor = (rgb) => {
+  if (rgb.includes('rgb(')) {
+    rgb = rgb
+      .substring(4, rgb.length - 1)
+      .replace(/ /g, '')
+      .split(',');
+  } else if (rgb[0] === '#') {
+    rgb = hexToRgb(rgb);
+  }
+  const brightness = Math.round(
+    (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) /
+      1000,
+  );
+
+  return brightness > 125 ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
+};
+
 export const adjustBrightness = (col, amt) => {
   var usePound = false;
+
+  if (col.includes('rgb(')) {
+    const rgb = col
+      .substring(4, col.length - 1)
+      .replace(/ /g, '')
+      .split(',');
+    col =
+      '#' +
+      componentToHex(rgb[0]) +
+      componentToHex(rgb[1]) +
+      componentToHex(rgb[2]);
+  }
 
   if (col[0] === '#') {
     col = col.slice(1);

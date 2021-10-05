@@ -1,10 +1,11 @@
 export const filtersLabels = {
-  // type: {
-  //   p: 'Permanent',
-  //   r: 'Reproducing',
-  //   c: 'Concentration',
-  //   w: 'Wintering',
-  // },
+  population_type: {
+    p: 'Permanent',
+    r: 'Reproducing',
+    c: 'Concentration',
+    w: 'Wintering',
+    getTitle: () => 'Population type',
+  },
   counting_unit: {
     i: 'Individuals',
     p: 'Pairs',
@@ -19,14 +20,14 @@ export const filtersLabels = {
   },
 };
 
-export const getPopulationString = (min, max) => {
-  return `Population: min: ${min || 'not reported'}, max: ${
+export const getPopulationString = (min, max, prefix = '') => {
+  return `${prefix}Population: min: ${min || 'not reported'}, max: ${
     max || 'not reported'
   }`;
 };
 
-export const getLabelString = (label, key) => {
-  return `, ${filtersLabels[label].getTitle()}: ${
-    filtersLabels[label]?.[key]?.toLowerCase() || 'not reported'
+export const getLabelString = (label, key, prefix = '') => {
+  return `${prefix}${filtersLabels[label].getTitle()}: ${
+    filtersLabels[label]?.[key]?.toLowerCase() || key || 'not reported'
   }`;
 };

@@ -26,6 +26,7 @@ const Dots = (props) => {
             className={cx({ 'slick-active': activeTab === tab })}
           >
             <button
+              aria-label={`Select slide ${index + 1}`}
               onClick={() => {
                 slider.current.slickGoTo(index);
               }}
@@ -53,7 +54,7 @@ const ArrowsGroup = (props) => {
     >
       {currentSlide > 0 ? (
         <button
-          data-role="none"
+          aria-label="Previous slide"
           className="slick-arrow slick-prev"
           onClick={slider.current.slickPrev}
         >
@@ -64,14 +65,12 @@ const ArrowsGroup = (props) => {
       )}
       {currentSlide < slideCount - 1 ? (
         <button
-          data-role="none"
+          aria-label="Next slide"
           className="slick-arrow slick-next"
           onClick={slider.current.slickNext}
         >
-          {currentSlide === 0 ? (
-            <p className="learn-more">
-              Learn more about the status of our coasts and seas
-            </p>
+          {currentSlide === 0 && props.learnMore ? (
+            <p className="learn-more">{props.learnMore}</p>
           ) : (
             ''
           )}
@@ -156,10 +155,14 @@ const View = (props) => {
       const parent = document.getElementById(parentId);
       // TODO: Find the best way to add offset relative to header
       //       The header can be static on mobile and relative on > mobile
-      // const headerWrapper = document.querySelector('.header-wrapper');
-      // const offsetHeight = headerWrapper?.offsetHeight || 0;
-      const offsetHeight = 0;
-      if (id !== parentId && index > -1 && parent) {
+      const headerWrapper = document.querySelector('.header-wrapper');
+      const offsetHeight = headerWrapper?.offsetHeight || 0;
+      if (
+        id !== parentId &&
+        parentId === hashlink.data.parentId &&
+        index > -1 &&
+        parent
+      ) {
         if (activeTabIndex !== index) {
           slider.current.slickGoTo(index);
         }
@@ -175,6 +178,7 @@ const View = (props) => {
   }, [hashlink.counter]);
 
   React.useEffect(() => {
+    updateImageHeight();
     img.current.onload = () => {
       updateImageHeight();
     };
@@ -196,7 +200,12 @@ const View = (props) => {
         src={`${image}/@@images/image/preview`}
         alt="Logo"
       />
-      <ArrowsGroup activeTab={activeTab} tabsList={tabsList} slider={slider} />
+      <ArrowsGroup
+        activeTab={activeTab}
+        tabsList={tabsList}
+        slider={slider}
+        learnMore={data.learnMore}
+      />
       <Dots activeTab={activeTab} tabsList={tabsList} slider={slider} />
     </>
   );

@@ -13,15 +13,13 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import cx from 'classnames';
 import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers';
-import { UniversalLink } from '@plone/volto/components';
-import { Icon } from '@plone/volto/components';
+import { UniversalLink, Icon } from '@plone/volto/components';
 import qs from 'querystring';
 import { getNavigation } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import homeSVG from '@eeacms/volto-n2k/icons/home.svg';
-import n2kLogo from '@eeacms/volto-n2k/icons/n2k-logo-transparent.png';
+import n2kLogo from '@eeacms/volto-n2k/icons/natura2000.svg';
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -135,18 +133,18 @@ class Navigation extends Component {
   };
 
   /**
-   * Component will receive props
-   * @method componentWillReceiveProps
-   * @param {Object} nextProps Next properties
+   * Component did update
+   * @method componentDidUpdate
+   * @param {Object} prevProps Prev properties
    * @returns {undefined}
    */
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(prevProps) {
     if (
-      nextProps.pathname !== this.props.pathname ||
-      nextProps.userToken !== this.props.userToken
+      prevProps.pathname !== this.props.pathname ||
+      prevProps.userToken !== this.props.userToken
     ) {
       this.props.getNavigation(
-        getBaseUrl(nextProps.pathname),
+        getBaseUrl(this.props.pathname),
         config.settings.navDepth,
       );
       this.closeMobileMenu();
@@ -233,11 +231,13 @@ class Navigation extends Component {
         className={cx('navigation', this.props.className || '')}
         ref={this.container}
       >
-        <Hamburger
-          {...this.props}
-          isMobileMenuOpen={this.state.isMobileMenuOpen}
-          toggleMobileMenu={this.toggleMobileMenu}
-        />
+        <div className="mobile only">
+          <Hamburger
+            {...this.props}
+            isMobileMenuOpen={this.state.isMobileMenuOpen}
+            toggleMobileMenu={this.toggleMobileMenu}
+          />
+        </div>
         <Menu
           stackable
           pointing
@@ -245,26 +245,26 @@ class Navigation extends Component {
           className={cx({
             open: this.state.isMobileMenuOpen,
             'is-sdf': this.state.isSdf,
-            'is-sticky': this.props.isSticky,
-            'tablet computer large screen widescreen only': !this.state
-              .isMobileMenuOpen,
+            'is-sticky': this.state.isSdf || this.props.isSticky,
+            'mobile hidden': !this.state.isMobileMenuOpen,
+            'mobile only': this.state.isMobileMenuOpen,
           })}
           onClick={this.closeMobileMenu}
           onBlur={() => this.closeMobileMenu}
         >
-          <Hamburger
-            {...this.props}
-            isMobileMenuOpen={this.state.isMobileMenuOpen}
-            toggleMobileMenu={this.toggleMobileMenu}
-          />
+          <div className="mobile only">
+            <Hamburger
+              {...this.props}
+              isMobileMenuOpen={this.state.isMobileMenuOpen}
+              toggleMobileMenu={this.toggleMobileMenu}
+            />
+          </div>
           <Menu.Item className="home-button logo">
-            <Link to="/natura2000">
-              <img src={n2kLogo} alt="Natura 2000" />
+            <Link title="Natura 2000" to="/natura2000">
+              <Icon name={n2kLogo} size={44} />
             </Link>
           </Menu.Item>
-          {!this.state.isMobileMenuOpen &&
-          this.state.isSdf &&
-          this.props.isSticky ? (
+          {this.state.isSdf ? (
             <>
               <button
                 to={this.props.pathname}
@@ -297,13 +297,11 @@ class Navigation extends Component {
             ''
           )}
 
-          {this.state.isMobileMenuOpen ||
-          (this.state.isSdf && !this.props.isSticky) ||
-          !this.state.isSdf
+          {!this.state.isSdf
             ? this.props.items.map((item) => {
                 const flatUrl = flattenToAppURL(item.url);
                 const itemID = item.title.split(' ').join('-').toLowerCase();
-                return item.items && item.items.length ? (
+                return item.items && item.items.length && false ? (
                   <Dropdown
                     id={itemID}
                     className={cx({
@@ -392,9 +390,13 @@ class Navigation extends Component {
                 );
               })
             : ''}
-          <Menu.Item className="firstLevel language-selector-wrapper">
-            <LanguageSelector navigation={this.props.navigation} />
-          </Menu.Item>
+          {!this.state.isSdf ? (
+            <Menu.Item className="firstLevel language-selector-wrapper">
+              <LanguageSelector navigation={this.props.navigation} />
+            </Menu.Item>
+          ) : (
+            ''
+          )}
         </Menu>
       </nav>
     );
@@ -423,7 +425,8 @@ const getN2kItems = (items, localStorage) => {
       ) &&
       item.url !== '/natura2000/sites' &&
       item.url !== '/natura2000/habitats' &&
-      item.url !== '/natura2000/species'
+      item.url !== '/natura2000/species' &&
+      item.url !== '/natura2000/copyright-notice'
     ) {
       navItems.push(item);
     }

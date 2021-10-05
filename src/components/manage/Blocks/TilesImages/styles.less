@@ -8,29 +8,25 @@
   }
 
   &.light {
-    p.with-border img {
+    .p-image.with-border img {
       border: 1px solid #fff;
     }
   }
 
   &.grey {
-    p.with-border img {
+    .p-image.with-border img {
       border: 1px solid #c9c9c9;
     }
   }
 
   &.dark {
-    p.with-border img {
+    .p-image.with-border img {
       border: 1px solid #000;
     }
   }
 
-  p.with-border {
-    margin: 0 0.5rem;
-
-    &.rounded-border img {
-      border-radius: 50%;
-    }
+  .p-image {
+    margin-bottom: 0 !important;
 
     a {
       display: block;
@@ -45,5 +41,17 @@
         opacity: 0.9;
       }
     }
+  }
+
+  .p-image.rounded-border {
+    border-radius: 50%;
+
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  .p-image.with-border {
+    margin: 0 0.5rem;
   }
 }

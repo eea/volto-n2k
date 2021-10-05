@@ -13,6 +13,7 @@ export default (config) => {
     restricted: false,
     mostUsed: false,
     sidebarTab: 1,
+    blockHasOwnFocusManagement: true,
     blocks: {},
     security: {
       addPermission: [],

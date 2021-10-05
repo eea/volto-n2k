@@ -12,11 +12,11 @@ import LogoImage from '@plone/volto/components/theme/Logo/Logo.svg';
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import ecLogo from 'volto-bise/static/ec.png';
-import eeaLogo from 'volto-bise/static/eea.png';
-import fiseLogo from 'volto-bise/static/forest.svg';
-import ccaLogo from 'volto-bise/static/cca.svg';
-import wiseLogo from 'volto-bise/static/wise.png';
+import ecLogo from '../../../static/ec.png';
+import eeaLogo from '../../../static/eea.png';
+import fiseLogo from '../../../static/forest.svg';
+import ccaLogo from '../../../static/cca.svg';
+import wiseLogo from '../../../static/wise.png';
 
 // const messages = defineMessages({
 //   copyright: {
@@ -121,7 +121,7 @@ const Footer = ({ intl }) => (
                 </p>{' '}
               </div>
               <div className="site-info-logos">
-                <a href="https://ec.europa.eu/">
+                <a href="https://ec.europa.eu/" aria-label="European Comission">
                   <LazyLoadImage
                     className="footerLogo"
                     src={ecLogo}
@@ -129,7 +129,10 @@ const Footer = ({ intl }) => (
                     alt="European Commission"
                   />
                 </a>
-                <a href="https://www.eea.europa.eu/">
+                <a
+                  href="https://www.eea.europa.eu/"
+                  aria-label="European Environment Agency"
+                >
                   <LazyLoadImage
                     className="footerLogo"
                     src={eeaLogo}
@@ -150,7 +153,10 @@ const Footer = ({ intl }) => (
                 <p>Other European Information Systems</p>
               </div>
               <div className="footerLogos">
-                <a href="https://water.europa.eu/">
+                <a
+                  href="https://water.europa.eu/"
+                  aria-label="Water Information System for Europe"
+                >
                   <LazyLoadImage
                     className="footerLogo"
                     src={wiseLogo}
@@ -158,7 +164,10 @@ const Footer = ({ intl }) => (
                     alt="Water Information System for Europe"
                   />
                 </a>
-                <a href="https://forest.eea.europa.eu/">
+                <a
+                  href="https://forest.eea.europa.eu/"
+                  aria-label="Forest Information System for Europe"
+                >
                   <LazyLoadImage
                     className="footerLogo"
                     src={fiseLogo}
@@ -166,7 +175,10 @@ const Footer = ({ intl }) => (
                     alt="Forest Information System for Europe"
                   />
                 </a>
-                <a href="https://climate-adapt.eea.europa.eu/">
+                <a
+                  href="https://climate-adapt.eea.europa.eu/"
+                  aria-label="Climate-Adapt"
+                >
                   <LazyLoadImage
                     className="footerLogo"
                     src={ccaLogo}

@@ -4,12 +4,17 @@ export default () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['theme', 'hasBorder'],
+      fields: ['theme', 'hasBorder', 'rounded'],
     },
     {
       id: 'image',
       title: 'Image',
       fields: ['image', 'imageSize', 'imageTitle'],
+    },
+    {
+      id: 'link',
+      title: 'Link',
+      fields: ['linkTitle', 'href', 'target'],
     },
   ],
   properties: {
@@ -24,7 +29,12 @@ export default () => ({
       default: 'light',
     },
     hasBorder: {
-      title: 'Border',
+      title: 'With border',
+      type: 'boolean',
+      default: true,
+    },
+    rounded: {
+      title: 'Rounded',
       type: 'boolean',
       default: true,
     },
@@ -38,6 +48,21 @@ export default () => ({
     },
     imageTitle: {
       title: 'Title',
+    },
+    linkTitle: {
+      title: 'Title',
+    },
+    href: {
+      title: 'Url',
+      widget: 'textarea',
+    },
+    target: {
+      title: 'Target',
+      choices: [
+        ['_blank', 'New tab'],
+        ['_self', 'Same tab'],
+      ],
+      defaultValue: '_self',
     },
   },
   required: [],
