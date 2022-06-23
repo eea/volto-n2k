@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-n2k",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "volto-n2k: Volto add-on",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -24,18 +24,18 @@
     "url": "git@github.com:eea/volto-n2k.git"
   },
   "dependencies": {
-    "@eeacms/volto-datablocks": "^2.0.13",
-    "@eeacms/volto-resize-helper": "^0.2.4",
-    "@eeacms/volto-openlayers-map": "0.1.2",
-    "@eeacms/volto-tabs-block": "1.2.7",
+    "@eeacms/volto-datablocks": "*",
+    "@eeacms/volto-resize-helper": "*",
+    "@eeacms/volto-openlayers-map": "*",
+    "@eeacms/volto-tabs-block": "*",
+    "volto-slate": "*",
     "d3": "^7.1.1",
     "d3-shape": "^3.0.1",
     "react-lazy-load-image-component": "1.5.1",
     "react-stickynode": "^4.0.0",
     "react-use-localstorage": "^3.5.3",
     "resize-observer-polyfill": "1.5.1",
-    "slick-carousel": "1.8.1",
-    "volto-slate": "^4.0.3"
+    "slick-carousel": "1.8.1"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.5",
@@ -43,6 +43,8 @@
   },
   "scripts": {
     "release": "release-it",
+    "release-major-beta": "release-it major --preRelease=beta",
+    "release-beta": "release-it --preRelease=beta",
     "bootstrap": "npm install -g ejs; npm link ejs; node bootstrap",
     "stylelint": "../../../node_modules/stylelint/bin/stylelint.js --allow-empty-input 'src/**/*.{css,less}'",
     "stylelint:overrides": "../../../node_modules/.bin/stylelint --syntax less --allow-empty-input 'theme/**/*.overrides' 'src/**/*.overrides'",

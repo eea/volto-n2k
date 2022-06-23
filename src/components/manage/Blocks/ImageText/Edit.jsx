@@ -3,7 +3,7 @@ import config from '@plone/volto/registry';
 import { SidebarPortal } from '@plone/volto/components';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import SlateEditor from 'volto-slate/editor/SlateEditor';
-import { Editor } from 'volto-slate/utils';
+import { Editor } from 'slate';
 import getSchema from './schema';
 import cx from 'classnames';
 import './styles.less';
