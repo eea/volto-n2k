@@ -1,6 +1,6 @@
 import React from 'react';
-import * as d3 from 'd3';
 import { Popup } from 'semantic-ui-react';
+import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import { adjustBrightness } from '@eeacms/volto-n2k/helpers';
 
 const Arc = ({ data, index, createArc, format, size }) => {
@@ -73,6 +73,8 @@ const Arc = ({ data, index, createArc, format, size }) => {
 };
 
 const Pie = (props) => {
+  const { d3 } = props;
+
   const createPie = d3
     .pie()
     .value((d) => d.value)
@@ -122,4 +124,4 @@ const Pie = (props) => {
   );
 };
 
-export default Pie;
+export default injectLazyLibs(['d3'])(Pie);

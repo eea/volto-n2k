@@ -1,18 +1,18 @@
 import React from 'react';
 import _uniqueId from 'lodash/uniqueId';
-import { pack, hierarchy } from 'd3';
-import * as d3 from 'd3';
+import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import { adjustBrightness, getContrastColor } from '@eeacms/volto-n2k/helpers';
 import { FormattedValue } from '@eeacms/volto-datablocks/Utils';
 import ChartContext from './ChartContext';
 
 function BubbleChart(props) {
-  const { chartData, interpolation } = props;
+  const { d3, chartData, interpolation } = props;
   const { element, height, width, popup, setPopup } = React.useContext(
     ChartContext,
   );
-  const root = pack().size([width, height]).padding(10)(
-    hierarchy({ children: chartData })
+  const root = d3.pack().size([width, height]).padding(10)(
+    d3
+      .hierarchy({ children: chartData })
       .sum((d) => d.value)
       .sort((a, b) => b.value - a.value),
   );
@@ -98,4 +98,4 @@ function BubbleChart(props) {
     </React.Fragment>
   );
 }
-export default BubbleChart;
+export default injectLazyLibs(['d3'])(BubbleChart);

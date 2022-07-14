@@ -1,5 +1,6 @@
 /* eslint-disable no-extend-native */
 import React from 'react';
+import loadable from '@loadable/component';
 
 import localStorage from './store';
 
@@ -7,12 +8,12 @@ import installAppExtras from './components/theme/AppExtras';
 
 import { LinkElement } from './components/manage/Blocks/SlateLink/render';
 import installBodyClass from './components/manage/Blocks/BodyClass';
-// import installBubbleChart from './components/manage/Blocks/BubbleChart';
+import installBubbleChart from './components/manage/Blocks/BubbleChart';
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installCddaShape from './components/manage/Blocks/CddaShape';
 import installConnectedList from './components/manage/Blocks/List';
 import installContactBlock from './components/manage/Blocks/ContactBlock';
-// import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
+import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
 import installExploreHabitats from './components/manage/Blocks/ExploreHabitats';
 import installExploreSites from './components/manage/Blocks/ExploreSites';
 import installExploreSpecies from './components/manage/Blocks/ExploreSpecies';
@@ -35,7 +36,7 @@ import installSpeciesBanner from './components/manage/Blocks/SpeciesBanner';
 import installSpeciesClassification from './components/manage/Blocks/SpeciesClassification';
 import installSpeciesDistribution from './components/manage/Blocks/SpeciesDistribution';
 import installSpeciesProtectedSites from './components/manage/Blocks/SpeciesProtectedSites';
-// import installStackedBarChart from './components/manage/Blocks/StackedBarChart';
+import installStackedBarChart from './components/manage/Blocks/StackedBarChart';
 import installTilesImages from './components/manage/Blocks/TilesImages';
 
 import { LINK } from 'volto-slate/constants';
@@ -123,16 +124,21 @@ const applyConfig = (config) => {
 
   config.settings.slate.elements[LINK] = LinkElement;
 
+  config.settings.loadables = {
+    ...config.settings.loadables,
+    d3: loadable.lib(() => import('d3')),
+  };
+
   return [
     installAppExtras,
 
     installBodyClass,
-    // installBubbleChart,
+    installBubbleChart,
     installCarouselHorizontal,
     installCddaShape,
     installConnectedList,
     installContactBlock,
-    // installExplodedPiesChart,
+    installExplodedPiesChart,
     installExploreHabitats,
     installExploreSites,
     installExploreSpecies,
@@ -155,7 +161,7 @@ const applyConfig = (config) => {
     installSpeciesClassification,
     installSpeciesDistribution,
     installSpeciesProtectedSites,
-    // installStackedBarChart,
+    installStackedBarChart,
     installTilesImages,
   ].reduce((acc, apply) => apply(acc), config);
 };
