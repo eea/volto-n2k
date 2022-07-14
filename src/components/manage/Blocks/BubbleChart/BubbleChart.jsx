@@ -7,8 +7,9 @@ import ChartContext from './ChartContext';
 
 function BubbleChart(props) {
   const { d3, chartData, interpolation } = props;
-  const { element, height, width, popup, setPopup } =
-    React.useContext(ChartContext);
+  const { element, height, width, popup, setPopup } = React.useContext(
+    ChartContext,
+  );
   const root = d3.pack().size([width, height]).padding(10)(
     d3
       .hierarchy({ children: chartData })
@@ -54,8 +55,7 @@ function BubbleChart(props) {
               onFocus={() => {}}
               onBlur={() => {}}
               onMouseMoveCapture={(event) => {
-                const elementPosition =
-                  element.parentNode.getBoundingClientRect();
+                const elementPosition = element.parentNode.getBoundingClientRect();
                 setPopup({
                   id: `${index}_leaf_${data.name}`,
                   clientX: event.clientX - elementPosition.x,
