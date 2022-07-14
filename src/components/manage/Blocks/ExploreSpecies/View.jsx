@@ -30,13 +30,10 @@ const View = (props) => {
     setTileWMSSource(
       new source.TileWMS({
         extent: [
-          -3690067.3068000004,
-          3129776.6937999986,
-          3858418.0045999996,
+          -3690067.3068000004, 3129776.6937999986, 3858418.0045999996,
           1.1124223900300004e7,
         ],
-        url:
-          'https://bio.discomap.eea.europa.eu/arcgis/services/Article17/HabitatsDirective_ART_17_WMS_version_2020_08_public/MapServer/WmsServer',
+        url: 'https://bio.discomap.eea.europa.eu/arcgis/services/Article17/HabitatsDirective_ART_17_WMS_version_2020_08_public/MapServer/WmsServer',
         params: { LAYERS: '7', TILED: true },
         serverType: 'geoserver',
         // Countries have transparency, so do not fade tiles:
@@ -57,9 +54,7 @@ const View = (props) => {
         ...options,
         extent: new extent.buffer(
           [
-            -3690067.3068000004,
-            3129776.6937999986,
-            3858418.0045999996,
+            -3690067.3068000004, 3129776.6937999986, 3858418.0045999996,
             1.1124223900300004e7,
           ],
           -3690067.3068000004 * 0.01,
