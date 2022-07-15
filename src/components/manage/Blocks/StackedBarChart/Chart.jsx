@@ -1,13 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  axisBottom,
-  axisLeft,
-  format,
-  select,
-  scaleBand,
-  scaleLinear,
-} from 'd3';
 import cx from 'classnames';
+import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import ChartContext from './ChartContext';
 
 /**
@@ -19,6 +12,8 @@ import ChartContext from './ChartContext';
  */
 
 function Chart(props) {
+  const { d3 } = props;
+  const { axisBottom, axisLeft, format, select, scaleBand, scaleLinear } = d3;
   const [scales, setScales] = useState();
   const [popup, setPopup] = useState();
   const chartWrapper = useRef();
@@ -124,4 +119,4 @@ function Chart(props) {
   );
 }
 
-export default Chart;
+export default injectLazyLibs(['d3'])(Chart);

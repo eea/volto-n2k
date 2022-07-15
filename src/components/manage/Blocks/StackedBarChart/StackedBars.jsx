@@ -1,6 +1,6 @@
 import React from 'react';
-import { scaleOrdinal, schemeSpectral, stack } from 'd3';
 import cx from 'classnames';
+import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import { adjustBrightness } from '@eeacms/volto-n2k/helpers';
 import ChartContext from './ChartContext';
 
@@ -11,6 +11,8 @@ const getSerieData = (serie) => {
 };
 
 function StackedBars(props) {
+  const { d3 } = props;
+  const { scaleOrdinal, schemeSpectral, stack } = d3;
   const {
     element,
     height,
@@ -113,4 +115,4 @@ function StackedBars(props) {
     </React.Fragment>
   );
 }
-export default StackedBars;
+export default injectLazyLibs(['d3'])(StackedBars);

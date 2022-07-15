@@ -1,12 +1,13 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
-import * as d3 from 'd3';
-import './style.less';
+import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 
 import Pie from './Pie';
 
+import './style.less';
+
 const View = (props) => {
-  const { placeholder = 'No results' } = props;
+  const { d3, placeholder = 'No results' } = props;
   const { x = null, y = null, x_colors = [], precision = 2 } = props.data;
   const data = props.provider_data || {};
   const x_values = data?.[x] || [];
@@ -77,4 +78,4 @@ const View = (props) => {
   );
 };
 
-export default View;
+export default injectLazyLibs(['d3'])(View);
