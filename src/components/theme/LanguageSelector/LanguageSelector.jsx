@@ -6,7 +6,7 @@
 import React from 'react';
 import { withRouter, matchPath, generatePath } from 'react-router';
 import { useSelector } from 'react-redux';
-// import langmap from 'langmap';
+import { langmap } from '@plone/volto/helpers';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { Dropdown } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
@@ -15,32 +15,32 @@ import { getN2kItems, pathExists } from '@eeacms/volto-n2k/helpers';
 import './styles.less';
 
 const LanguageSelector = (props) => {
+  const { settings } = config;
   const content = useSelector((state) => state.content);
   const n2kItems = getN2kItems(props.navigation.items);
   const localStorage = props.localStorage;
   const pathname = props.location.pathname;
   const currentLang = localStorage.get('N2K_LANGUAGE');
   const match = matchPath(pathname, {
-    path: config.settings.multilingualPath,
+    path: settings.multilingualPath,
     exact: true,
     strict: false,
   });
   const hasMultilingualSupport =
-    match && config.settings.supportedLanguages.includes(match.params.lang);
+    match && settings.supportedLanguages.includes(match.params.lang);
   const translations = hasMultilingualSupport
-    ? config.settings.supportedLanguages.map((lang) => ({
-        path: generatePath(config.settings.multilingualPath, {
+    ? settings.supportedLanguages.map((lang) => ({
+        path: generatePath(settings.multilingualPath, {
           ...match.params,
           lang,
         }),
         lang,
       }))
     : [];
-  const { settings } = config;
   const supportedLanguagesOptions = settings.supportedLanguages.map((lang) => ({
     key: lang,
     value: lang,
-    text: lang,
+    text: langmap[lang].nativeName,
   }));
 
   return (
