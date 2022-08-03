@@ -123,7 +123,7 @@ const CopyPaste = (props) => {
         onMouseEnter={(e) => {
           if (
             e.altKey &&
-            e.ctrlKey &&
+            e.shiftKey &&
             toolbar.current &&
             !toolbar.current.classList.contains('__dev_on')
           ) {

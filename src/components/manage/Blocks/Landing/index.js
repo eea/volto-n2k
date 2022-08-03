@@ -6,7 +6,7 @@ import forests from './images/forests.webp';
 import mountains from './images/mountains.webp';
 import grasslands from './images/grasslands.webp';
 import rivers from './images/rivers.webp';
-import islands from './images/islands.webp';
+import toolkit from './images/toolkit_icon.webp';
 import peatlands from './images/peatlands.webp';
 import natura2000 from './images/natura2000.webp';
 
@@ -15,7 +15,7 @@ export const tiles = [
     image: natura2000,
     title: 'Natura 2000',
     description: 'NATURA 2000',
-    link: '/natura2000/natura2000',
+    link: '/natura2000/explore-natura2000',
   },
   {
     image: coasts_and_seas,
@@ -54,10 +54,10 @@ export const tiles = [
     link: '/natura2000/:lang/rivers-and-lakes',
   },
   {
-    image: islands,
-    title: 'Islands',
-    description: 'ISLANDS',
-    link: '/natura2000/:lang/islands',
+    image: toolkit,
+    title: 'Toolkit',
+    description: 'TOOLKIT',
+    link: '/natura2000/:lang/toolkit',
   },
 ];
 
