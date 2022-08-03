@@ -15,7 +15,7 @@ export const tiles = [
     image: natura2000,
     title: 'Natura 2000',
     description: 'NATURA 2000',
-    link: '/natura2000/explore-natura2000',
+    link: '/natura2000/natura2000',
   },
   {
     image: coasts_and_seas,
