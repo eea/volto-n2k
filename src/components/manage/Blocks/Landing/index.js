@@ -57,7 +57,7 @@ export const tiles = [
     image: toolkit,
     title: 'Toolkit',
     description: 'TOOLKIT',
-    link: '/natura2000/:lang/toolkit',
+    link: 'https://europa.eu/youth/year-of-youth/eu_initiative/pdf/32289_en',
   },
 ];
 
