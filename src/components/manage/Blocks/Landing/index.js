@@ -15,7 +15,7 @@ export const tiles = [
     image: natura2000,
     title: 'Natura 2000',
     description: 'NATURA 2000',
-    link: '/natura2000/explore-natura2000',
+    link: '/natura2000/natura2000',
   },
   {
     image: coasts_and_seas,
@@ -57,7 +57,7 @@ export const tiles = [
     image: toolkit,
     title: 'Toolkit',
     description: 'TOOLKIT',
-    link: '/natura2000/:lang/toolkit',
+    link: 'https://europa.eu/youth/year-of-youth/eu_initiative/pdf/32289_en',
   },
 ];
 
