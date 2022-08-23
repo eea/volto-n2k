@@ -590,27 +590,6 @@ img.slick-image {
   padding: 0.5rem;
 }
 
-@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
-  img.slick-image {
-    left: -200px;
-    width: 550px;
-  }
-}
-
-@media only screen and (min-width: @computerBreakpoint) and (max-width: @largestSmallMonitor) {
-  img.slick-image {
-    left: -200px;
-    width: 650px;
-  }
-}
-
-@media only screen and (min-width: @largeMonitorBreakpoint) {
-  img.slick-image {
-    left: -150px;
-    width: 650px;
-  }
-}
-
 .n2k-green-border {
   .block.maps {
     > div {
@@ -688,4 +667,140 @@ img.slick-image {
 
 .dark-green-background {
   background-color: #04a87d;
+}
+
+.tabs-block .slick-slider {
+  order: 1;
+}
+
+.tabs-block .slick-arrow {
+  order: 2;
+}
+
+.tabs-block .slick-dots-wrapper {
+  order: 3;
+}
+
+.tabs-block .slick-dots-wrapper .slick-dots li {
+  width: 20px;
+  height: 20px;
+}
+
+.tabs-block .slick-dots-wrapper .slick-dots li button {
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.tabs-block .slick-dots-wrapper .slick-dots li.slick-active::before {
+  // display: none;
+  top: -9px;
+  left: -9px;
+  width: calc(20px + 2 * 9px);
+  height: calc(20px + 2 * 9px);
+}
+
+.tabs-block .slick-dots-wrapper .slick-dots li.slick-active button {
+  background-color: #3b7f02 !important;
+  border-color: #3b7f02;
+}
+
+.tabs-block.light .slick-dots-wrapper .slick-dots li.slick-active::before {
+  border: 3px solid #fff;
+}
+
+.tabs-block.grey .slick-dots-wrapper .slick-dots li.slick-active::before {
+  border: 3px solid #B3B3B3;
+}
+
+.tabs-block.dark .slick-dots-wrapper .slick-dots li.slick-active::before {
+  border: 3px solid #000;
+}
+
+.tabs-block.light .slick-dots-wrapper .slick-dots li button {
+  border: 2px solid #fff;
+}
+
+.tabs-block .slick-arrows button.slick-arrow {
+  display: flex !important;
+  align-items: center;
+}
+
+.tabs-block.light .slick-arrows button.slick-arrow svg {
+  fill: #fff;
+
+  path {
+    fill: #fff;
+  }
+}
+
+.tabs-block.grey .slick-arrows button.slick-arrow svg {
+  fill: #B3B3B3;
+
+  path {
+    fill: #B3B3B3;
+  }
+}
+
+.tabs-block.dark .slick-arrows button.slick-arrow svg {
+  fill: #000;
+
+  path {
+    fill: #000;
+  }
+}
+
+.tabs-block.carousel_n2k .slick-arrows .learn-more {
+  margin-bottom: 0 !important;
+}
+
+@media only screen and (max-width: @largestTabletScreen) {
+  .tabs-block .slick-slider {
+    order: 2;
+
+    .slick-slide {
+      padding-top: 0 !important;
+    }
+  }
+  
+  .tabs-block .slick-arrows {
+    order: 1;
+    padding: 1rem;
+    justify-content: end;
+  }
+  
+  .tabs-block .slick-dots-wrapper {
+    order: 3;
+  }
+
+  .tabs-block .slick-arrow.slick-prev {
+    left: unset !important;
+  }
+
+  .tabs-block .slick-arrow.slick-next {
+    right: unset !important;
+    margin-left: 2rem;
+  }
+}
+
+
+@media only screen and (min-width: @tabletBreakpoint) and (max-width: @largestTabletScreen) {
+  img.slick-image {
+    left: -200px;
+    width: 550px;
+  }
+}
+
+@media only screen and (min-width: @computerBreakpoint) and (max-width: @largestSmallMonitor) {
+  img.slick-image {
+    left: -200px;
+    width: 650px;
+  }
+}
+
+@media only screen and (min-width: @largeMonitorBreakpoint) {
+  img.slick-image {
+    left: -150px;
+    width: 650px;
+  }
 }
