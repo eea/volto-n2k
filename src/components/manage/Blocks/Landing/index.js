@@ -57,7 +57,8 @@ export const tiles = [
     image: toolkit,
     title: 'Toolkit',
     description: 'TOOLKIT',
-    link: 'https://europa.eu/youth/year-of-youth/eu_initiative/pdf/32289_en',
+    link:
+      'https://op.europa.eu/fr/publication-detail/:lang/publication/e33a1119-8fa2-11ec-8c40-01aa75ed71a1',
   },
 ];
 
