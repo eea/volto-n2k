@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router';
 import loadable from '@loadable/component';
+import cx from 'classnames';
 import { Icon, RenderBlocks } from '@plone/volto/components';
 import { withScrollToTarget } from '@eeacms/volto-tabs-block/hocs';
+
 import rightArrowSVG from '@eeacms/volto-n2k/icons/right-key.svg';
 import leftArrowSVG from '@eeacms/volto-n2k/icons/left-key.svg';
-import cx from 'classnames';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '@eeacms/volto-tabs-block/less/carousel.less';
@@ -16,7 +18,7 @@ const Slider = loadable(() => import('react-slick'));
 
 const Dots = (props) => {
   const { activeTab = null, tabsList = [], slider = {} } = props;
-  return slider.current && tabsList.length > 1 ? (
+  return tabsList.length > 1 ? (
     <div className="slick-dots-wrapper">
       <div className="slick-line" />
       <ul className={cx('slick-dots ui container', props.uiContainer)}>
@@ -28,7 +30,9 @@ const Dots = (props) => {
             <button
               aria-label={`Select slide ${index + 1}`}
               onClick={() => {
-                slider.current.slickGoTo(index);
+                if (slider.current) {
+                  slider.current.slickGoTo(index);
+                }
               }}
             />
           </li>
@@ -45,7 +49,7 @@ const ArrowsGroup = (props) => {
   const currentSlide = tabsList.indexOf(activeTab);
   const slideCount = tabsList.length;
 
-  return slider.current ? (
+  return (
     <div
       className={cx({
         'slick-arrows': true,
@@ -56,7 +60,11 @@ const ArrowsGroup = (props) => {
         <button
           aria-label="Previous slide"
           className="slick-arrow slick-prev"
-          onClick={slider.current.slickPrev}
+          onClick={() => {
+            if (slider.current) {
+              slider.current.slickPrev();
+            }
+          }}
         >
           <Icon name={leftArrowSVG} size="50px" />
         </button>
@@ -67,28 +75,23 @@ const ArrowsGroup = (props) => {
         <button
           aria-label="Next slide"
           className="slick-arrow slick-next"
-          onClick={slider.current.slickNext}
+          onClick={() => {
+            if (slider.current) {
+              slider.current.slickNext();
+            }
+          }}
         >
-          {currentSlide === 0 && props.learnMore ? (
-            <p className="learn-more">{props.learnMore}</p>
-          ) : (
-            ''
-          )}
           <Icon name={rightArrowSVG} size="50px" />
         </button>
       ) : (
         ''
       )}
     </div>
-  ) : (
-    ''
   );
 };
 
 const View = (props) => {
   const slider = React.useRef(null);
-  const img = React.useRef(null);
-  const [imgHeight, setImgHeight] = React.useState(0);
   const [hashlinkOnMount, setHashlinkOnMount] = React.useState(false);
   const {
     activeTab = null,
@@ -100,9 +103,7 @@ const View = (props) => {
     setActiveTab = () => {},
   } = props;
   const activeTabIndex = tabsList.indexOf(activeTab);
-  // const tabData = tabs[activeTab] || {};
   const uiContainer = data.align === 'full' ? 'ui container' : false;
-  const image = data.image || null;
 
   const settings = {
     autoplay: false,
@@ -120,28 +121,17 @@ const View = (props) => {
     },
   };
 
-  const panes = tabsList.map((tab, index) => {
-    return {
-      id: tab,
-      renderItem: (
-        <React.Fragment key={`slide-${tab}`}>
-          <RenderBlocks {...props} metadata={metadata} content={tabs[tab]} />
-          {index === 0 ? (
-            <div
-              className="divider"
-              style={{ height: `${imgHeight - 80}px` }}
-            />
-          ) : (
-            ''
-          )}
-        </React.Fragment>
-      ),
-    };
-  });
-
-  const updateImageHeight = () => {
-    setImgHeight(img.current?.height || 0);
-  };
+  React.useEffect(() => {
+    if (!slider.current?.innerSlider?.list) return;
+    const unfocuseElements = ['a', 'button', 'input'];
+    unfocuseElements.forEach((tag) => {
+      for (let element of slider.current.innerSlider.list.querySelectorAll(
+        ".slick-slide[aria-hidden='true'] a",
+      )) {
+        element.setAttribute('aria-hiden', 'true');
+      }
+    });
+  }, [activeTab]);
 
   React.useEffect(() => {
     const urlHash = props.location.hash.substring(1) || '';
@@ -177,35 +167,26 @@ const View = (props) => {
     /* eslint-disable-next-line */
   }, [hashlink.counter]);
 
-  React.useEffect(() => {
-    updateImageHeight();
-    img.current.onload = () => {
-      updateImageHeight();
+  const panes = tabsList.map((tab, index) => {
+    return {
+      id: tab,
+      renderItem: (
+        <RenderBlocks
+          key={`slide-${tab}`}
+          {...props}
+          metadata={metadata}
+          content={tabs[tab]}
+        />
+      ),
     };
-    window.addEventListener('resize', updateImageHeight);
-    return () => {
-      window.removeEventListener('resize', updateImageHeight);
-    };
-    /* eslint-disable-next-line */
-  }, []);
+  });
 
   return (
     <>
       <Slider {...settings} ref={slider} className={cx(uiContainer)}>
         {panes.length ? panes.map((pane) => pane.renderItem) : ''}
       </Slider>
-      <img
-        ref={img}
-        className={cx('slick-image', { hidden: activeTabIndex !== 0 })}
-        src={`${image}/@@images/image/preview`}
-        alt="Logo"
-      />
-      <ArrowsGroup
-        activeTab={activeTab}
-        tabsList={tabsList}
-        slider={slider}
-        learnMore={data.learnMore}
-      />
+      <ArrowsGroup activeTab={activeTab} tabsList={tabsList} slider={slider} />
       <Dots activeTab={activeTab} tabsList={tabsList} slider={slider} />
     </>
   );
