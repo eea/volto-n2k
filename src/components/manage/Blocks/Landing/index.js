@@ -58,7 +58,7 @@ export const tiles = [
     title: 'Toolkit',
     description: 'TOOLKIT',
     link:
-      'https://op.europa.eu/fr/publication-detail/:lang/publication/e33a1119-8fa2-11ec-8c40-01aa75ed71a1',
+      'https://op.europa.eu/:lang/publication-detail/-/publication/e33a1119-8fa2-11ec-8c40-01aa75ed71a1',
   },
 ];
 
