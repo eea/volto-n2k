@@ -102,6 +102,7 @@ class Navigation extends Component {
     this.state = {
       isMobileMenuOpen: false,
       isSdf: false,
+      language: this.props.localStorage.get('N2K_LANGUAGE'),
     };
     this.container = React.createRef();
   }
@@ -260,7 +261,7 @@ class Navigation extends Component {
             />
           </div>
           <Menu.Item className="home-button logo">
-            <Link title="Natura 2000" to="/natura2000">
+            <Link title="Natura 2000" to={`/natura2000/${this.state.language}`}>
               <Icon name={n2kLogo} size={44} />
             </Link>
           </Menu.Item>
