@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Grid, Button } from 'semantic-ui-react';
 import { isEmpty } from 'lodash';
 import EditBlockWrapper from './EditBlockWrapper';
@@ -8,6 +9,7 @@ import { SidebarPortal, UniversalLink } from '@plone/volto/components';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import config from '@plone/volto/registry';
 import settingsSVG from '@plone/volto/icons/settings.svg';
+import LanguageSelector from '@eeacms/volto-n2k/components/theme/LanguageSelector/LanguageSelector';
 import DefaultView from './DefalutView';
 import getSchema from './schema';
 import hiker from './images/hiker.webp';
@@ -98,6 +100,21 @@ const Edit = (props) => {
         >
           <Grid className="landing-page" container columns="12">
             <Grid.Row>
+              <Grid.Column
+                {...{
+                  mobile: 12,
+                  tablet: 12,
+                  computer: 12,
+                  largeScreen: 12,
+                  widescreen: 12,
+                }}
+                style={{ zIndex: 1, marginBottom: '1rem' }}
+              >
+                <LanguageSelector
+                  navigation={props.navigation}
+                  className="landingpage-variation"
+                />
+              </Grid.Column>
               <Grid.Column
                 className="landing-page-description"
                 widescreen="6"
@@ -216,4 +233,6 @@ const Edit = (props) => {
   );
 };
 
-export default Edit;
+export default connect((state) => ({
+  navigation: state.navigation,
+}))(Edit);

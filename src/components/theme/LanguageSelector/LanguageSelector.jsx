@@ -6,6 +6,7 @@
 import React from 'react';
 import { withRouter, matchPath, generatePath } from 'react-router';
 import { useSelector } from 'react-redux';
+import cx from 'classnames';
 import { langmap } from '@plone/volto/helpers';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import { Dropdown } from 'semantic-ui-react';
@@ -21,21 +22,31 @@ const LanguageSelector = (props) => {
   const localStorage = props.localStorage;
   const pathname = props.location.pathname;
   const currentLang = localStorage.get('N2K_LANGUAGE');
-  const match = matchPath(pathname, {
+  const matchRoot = matchPath(pathname, {
+    path: settings.multilingualRoot,
+    exact: true,
+    strict: false,
+  });
+  const matchChild = matchPath(pathname, {
     path: settings.multilingualPath,
     exact: true,
     strict: false,
   });
+  const match = matchRoot || matchChild;
   const hasMultilingualSupport =
     match && settings.supportedLanguages.includes(match.params.lang);
   const translations = hasMultilingualSupport
-    ? settings.supportedLanguages.map((lang) => ({
-        path: generatePath(settings.multilingualPath, {
-          ...match.params,
+    ? settings.supportedLanguages.map((lang) => {
+        return {
+          path: matchRoot
+            ? `/natura2000/${lang}`
+            : generatePath(settings.multilingualPath, {
+                ...match.params,
+                lang,
+              }),
           lang,
-        }),
-        lang,
-      }))
+        };
+      })
     : [];
   const supportedLanguagesOptions = settings.supportedLanguages.map((lang) => ({
     key: lang,
@@ -44,7 +55,7 @@ const LanguageSelector = (props) => {
   }));
 
   return (
-    <div className="language-selector">
+    <div className={cx('language-selector', props.className)}>
       <Dropdown
         aria-label="Language selector"
         disabled={content.get.loading}

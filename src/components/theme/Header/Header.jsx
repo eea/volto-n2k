@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useContext } from 'react';
-import { withRouter } from 'react-router';
+import { matchPath, withRouter } from 'react-router';
 import { Container, Sticky } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Portal } from 'react-portal';
@@ -47,6 +47,11 @@ const Navbar = (props) => {
 const Header = (props) => {
   const [isSticky, setIsSticky] = React.useState(false);
   const { stickyRef } = useContext(StickyContext);
+  const isRoot = !!matchPath(props.pathname, {
+    path: config.settings.multilingualRoot,
+    exact: true,
+    strict: false,
+  });
 
   useEffect(() => {
     if (!props.localStorage.get('N2K_LANGUAGE')) {
@@ -55,7 +60,7 @@ const Header = (props) => {
     /* eslint-disable-next-line */
   }, []);
 
-  return props.location.pathname === '/natura2000' ? (
+  return isRoot ? (
     ''
   ) : (
     <>
