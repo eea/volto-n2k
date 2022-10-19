@@ -17,24 +17,27 @@ const View = (props) => {
   return useDefault ? (
     <DefaultView {...props} />
   ) : (
-    <div className="landing-page-wrapper full-width" style={getStyle(props)}>
+    <div
+      className="landing-page-wrapper default full-width"
+      style={getStyle(props)}
+    >
       <Grid className="landing-page" container columns="12">
-        <Grid.Column
-          {...{
-            mobile: 12,
-            tablet: 12,
-            computer: 12,
-            largeScreen: 12,
-            widescreen: 12,
-          }}
-          style={{ zIndex: 1, marginBottom: '1rem' }}
-        >
-          <LanguageSelector
-            navigation={props.navigation}
-            className="landingpage-variation"
-          />
-        </Grid.Column>
         <Grid.Row>
+          <Grid.Column
+            {...{
+              mobile: 12,
+              tablet: 12,
+              computer: 12,
+              largeScreen: 12,
+              widescreen: 12,
+            }}
+            style={{ zIndex: 1, marginBottom: '1rem' }}
+          >
+            <LanguageSelector
+              navigation={props.navigation}
+              className="landingpage-variation"
+            />
+          </Grid.Column>
           <Grid.Column
             className="landing-page-description"
             widescreen="6"
@@ -81,4 +84,5 @@ const View = (props) => {
 
 export default connect((state) => ({
   navigation: state.navigation,
+  screen: state.screen,
 }))(View);
