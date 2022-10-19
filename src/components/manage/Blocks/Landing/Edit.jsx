@@ -235,4 +235,5 @@ const Edit = (props) => {
 
 export default connect((state) => ({
   navigation: state.navigation,
+  screen: state.screen,
 }))(Edit);
