@@ -347,24 +347,22 @@ body.grey-bg {
                   position: absolute;
                   top: 0;
                   right: 0;
-                  margin: 4px 0;
+                  margin: 0;
+                  margin-bottom: 0;
                   transform: translateX(100%) translateY(0);
 
                   &:hover {
                     background-color: transparent !important;
                   }
 
-                  &::before {
-                    position: absolute;
-                    top: 4px;
-                    left: 50%;
-                    display: block !important;
-                    width: 6px;
-                    height: 6px;
-                    background-color: #3b7f02;
-                    border-radius: 100%;
-                    content: '';
-                    transform: translateX(-50%);
+                  .language-selector .ui.dropdown {
+                    display: flex;
+                    flex-direction: row-reverse;
+                    align-items: center;
+
+                    img {
+                      margin-right: 0.25rem;
+                    }
                   }
                 }
               }

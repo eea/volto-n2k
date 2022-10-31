@@ -9,11 +9,13 @@ import { useSelector } from 'react-redux';
 import cx from 'classnames';
 import { langmap } from '@plone/volto/helpers';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Image } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import { getN2kItems, pathExists } from '@eeacms/volto-n2k/helpers';
 import './styles.less';
+
+import globeIcon from '@eeacms/volto-n2k/static/global-line.svg';
 
 const LanguageSelector = (props) => {
   const { settings } = config;
@@ -56,12 +58,56 @@ const LanguageSelector = (props) => {
 
   return (
     <div className={cx('language-selector', props.className)}>
+      {/* <Header.TopDropdownMenu
+        id="language-switcher"
+        className="item"
+        text={`${language.toUpperCase()}`}
+        mobileText={`${language.toUpperCase()}`}
+        icon={
+          <Image src={globeIcon} alt="language dropdown globe icon"></Image>
+        }
+        viewportWidth={width}
+      >
+        <ul
+          className="wrapper language-list"
+          role="listbox"
+          aria-label="language switcher"
+        >
+          {eea.languages.map((item, index) => (
+            <Dropdown.Item
+              as="li"
+              key={index}
+              text={
+                <span>
+                  {item.name}
+                  <span className="country-code">
+                    {item.code.toUpperCase()}
+                  </span>
+                </span>
+              }
+              onClick={() => {
+                const translation = find(translations, {
+                  language: item.code,
+                });
+                const to = translation
+                  ? flattenToAppURL(translation['@id'])
+                  : `/${item.code}`;
+                setLanguage(item.code);
+                history.push(to);
+              }}
+            ></Dropdown.Item>
+          ))}
+        </ul>
+      </Header.TopDropdownMenu> */}
       <Dropdown
         aria-label="Language selector"
         disabled={content.get.loading}
         placeholder="Select a language"
-        value={currentLang}
+        text={currentLang}
         scrolling
+        icon={
+          <Image src={globeIcon} alt="language dropdown globe icon"></Image>
+        }
         options={supportedLanguagesOptions}
         onChange={(e, data) => {
           const lang = data.value;

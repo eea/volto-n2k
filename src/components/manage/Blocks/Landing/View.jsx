@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 import { RenderBlocks, UniversalLink } from '@plone/volto/components';
-import LanguageSelector from '@eeacms/volto-n2k/components/theme/LanguageSelector/LanguageSelector';
 import DefaultView from './DefalutView';
 import hiker from './images/hiker.webp';
 import { tileProps, getStyle } from './index';
@@ -23,21 +22,6 @@ const View = (props) => {
     >
       <Grid className="landing-page" container columns="12">
         <Grid.Row>
-          <Grid.Column
-            {...{
-              mobile: 12,
-              tablet: 12,
-              computer: 12,
-              largeScreen: 12,
-              widescreen: 12,
-            }}
-            style={{ zIndex: 1, marginBottom: '1rem' }}
-          >
-            <LanguageSelector
-              navigation={props.navigation}
-              className="landingpage-variation"
-            />
-          </Grid.Column>
           <Grid.Column
             className="landing-page-description"
             widescreen="6"
