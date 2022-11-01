@@ -12,7 +12,7 @@ import './style.less';
 const View = (props) => {
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
-  const [tileWMSSource, setTileWMSSource] = useState(null);
+  const [tileWMSSources, setTileWMSSources] = useState([]);
   const { extent, format, proj, style, source } = openlayers;
 
   const { results = [], payload = {} } = props.search || {};
@@ -27,7 +27,13 @@ const View = (props) => {
   useEffect(() => {
     if (__SERVER__) return;
     setVectorSource(new source.Vector());
-    setTileWMSSource(
+    setTileWMSSources([
+      new source.TileWMS({
+        url: 'https://gisco-services.ec.europa.eu/maps/service',
+        params: { LAYERS: 'OSMPositronComposite', TILED: true },
+        serverType: 'geoserver',
+        transition: 0,
+      }),
       new source.TileWMS({
         extent: [
           -3603195.606899999,
@@ -39,12 +45,13 @@ const View = (props) => {
           'https://bio.discomap.eea.europa.eu/arcgis/services/ProtectedSites/Natura2000Sites/MapServer/WMSServer',
         params: { LAYERS: '2', TILED: true },
         serverType: 'geoserver',
-        // Countries have transparency, so do not fade tiles:
         transition: 0,
       }),
-    );
+    ]);
     /* eslint-disable-next-line */
   }, []);
+
+  console.log('HERE', tileWMSSources);
 
   useEffect(() => {
     if (__SERVER__ || !vectorSource) {
@@ -109,8 +116,8 @@ const View = (props) => {
           {...options}
         >
           <Layers>
-            <Layer.Tile zIndex={0} />
-            <Layer.Tile source={tileWMSSource} zIndex={1} />
+            <Layer.Tile source={tileWMSSources[1]} zIndex={0} />
+            {/* <Layer.Tile source={tileWMSSources[1]} zIndex={1} /> */}
             <Layer.Vector
               source={vectorSource}
               title="highlightLayer"
