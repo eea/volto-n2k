@@ -30,6 +30,7 @@
     "@eeacms/volto-openlayers-map": "*",
     "@eeacms/volto-tabs-block": "*",
     "@eeacms/volto-bise": "*",
+    "@sentry/browser": "7.17.3",
     "volto-slate": "*",
     "d3": "^7.6.1",
     "d3-shape": "^3.1.0",

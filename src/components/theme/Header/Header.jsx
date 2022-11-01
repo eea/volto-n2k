@@ -3,8 +3,8 @@
  * @module components/theme/Header/Header
  */
 
-import React, { useEffect, useContext } from 'react';
-import { withRouter } from 'react-router';
+import React, { useEffect, useContext, useMemo } from 'react';
+import { matchPath, withRouter } from 'react-router';
 import { Container, Sticky } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Portal } from 'react-portal';
@@ -26,6 +26,8 @@ const Navbar = (props) => {
               {currentLang ? (
                 <Navigation
                   isSticky={props.isSticky}
+                  isRoot={props.isRoot}
+                  isExplorer={props.isExplorer}
                   pathname={props.pathname}
                 />
               ) : (
@@ -47,6 +49,27 @@ const Navbar = (props) => {
 const Header = (props) => {
   const [isSticky, setIsSticky] = React.useState(false);
   const { stickyRef } = useContext(StickyContext);
+  const isRoot = useMemo(
+    () =>
+      matchPath(props.pathname, {
+        path: config.settings.n2k.multilingualRoot,
+        exact: true,
+        strict: false,
+      }),
+    [props.pathname],
+  );
+
+  const isExplorer = useMemo(
+    () =>
+      (isRoot &&
+        !config.settings.n2k.supportedLanguages.includes(isRoot.params.lang)) ||
+      matchPath(props.pathname, {
+        path: '/natura2000/explore-natura2000/*',
+        exact: true,
+        strict: false,
+      }),
+    [props.pathname, isRoot],
+  );
 
   useEffect(() => {
     if (!props.localStorage.get('N2K_LANGUAGE')) {
@@ -58,7 +81,16 @@ const Header = (props) => {
     /* eslint-disable-next-line */
   }, []);
 
-  return (
+  return isRoot || isExplorer ? (
+    <div className="ui basic segment sticky-header-wrapper" role="banner">
+      <Navbar
+        {...props}
+        isSticky={false}
+        isRoot={isRoot}
+        isExplorer={isExplorer}
+      />
+    </div>
+  ) : (
     <Sticky
       context={stickyRef}
       className="ui basic segment sticky-header-wrapper"
@@ -70,7 +102,12 @@ const Header = (props) => {
         setIsSticky(false);
       }}
     >
-      <Navbar {...props} isSticky={isSticky} />
+      <Navbar
+        {...props}
+        isSticky={isSticky}
+        isRoot={isRoot}
+        isExplorer={isExplorer}
+      />
     </Sticky>
   );
 };

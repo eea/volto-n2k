@@ -203,19 +203,6 @@ class Navigation extends Component {
     return false;
   }
 
-  isRoot() {
-    if (
-      matchPath(this.props.pathname, {
-        path: config.settings.n2k.multilingualRoot,
-        exact: true,
-        strict: false,
-      })
-    ) {
-      return true;
-    }
-    return false;
-  }
-
   /**
    * Toggle mobile menu's open state
    * @method toggleMobileMenu
@@ -325,7 +312,7 @@ class Navigation extends Component {
             ''
           )}
 
-          {!this.state.isSdf && !this.isRoot()
+          {!this.state.isSdf && !this.props.isRoot && !this.props.isExplorer
             ? this.props.items.map((item) => {
                 const flatUrl = flattenToAppURL(item.url);
                 const itemID = item.title.split(' ').join('-').toLowerCase();
@@ -418,7 +405,7 @@ class Navigation extends Component {
                 );
               })
             : ''}
-          {!this.state.isSdf ? (
+          {!this.state.isSdf && !this.props.isExplorer ? (
             <Menu.Item className="firstLevel language-selector-wrapper">
               <LanguageSelector navigation={this.props.navigation} />
             </Menu.Item>
