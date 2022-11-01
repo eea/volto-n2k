@@ -91,7 +91,7 @@ const getN2kItems = (items, localStorage) => {
     items.filter((item) => item.url === '/natura2000')?.[0]?.items || [];
   natura2000.forEach((item) => {
     const languageFolder = matchPath(item.url, {
-      path: config.settings.multilingualRoot,
+      path: config.settings.n2k.multilingualRoot,
       exact: true,
       strict: false,
     });
@@ -100,7 +100,7 @@ const getN2kItems = (items, localStorage) => {
     }
     if (
       languageFolder &&
-      !config.settings.supportedLanguages.includes(
+      !config.settings.n2k.supportedLanguages.includes(
         languageFolder.params.lang,
       ) &&
       item.url !== '/natura2000/sites' &&

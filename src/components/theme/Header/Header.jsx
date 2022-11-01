@@ -12,7 +12,7 @@ import config from '@plone/volto/registry';
 import { Anontools } from '@plone/volto/components';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import Navigation from '../Navigation/Navigation';
-import { StickyContext } from '~/components';
+import { StickyContext } from '@eeacms/volto-bise/components';
 
 const Navbar = (props) => {
   const currentLang = props.localStorage.get('N2K_LANGUAGE');
@@ -50,7 +50,10 @@ const Header = (props) => {
 
   useEffect(() => {
     if (!props.localStorage.get('N2K_LANGUAGE')) {
-      props.localStorage.set('N2K_LANGUAGE', config.settings.defaultLanguage);
+      props.localStorage.set(
+        'N2K_LANGUAGE',
+        config.settings.n2k.defaultLanguage,
+      );
     }
     /* eslint-disable-next-line */
   }, []);

@@ -9,12 +9,12 @@ const MultilingualRedirector = (props) => {
   const { settings } = config;
   const { pathname, children } = props;
   const currentLanguage =
-    cookie.load('N2K_LANGUAGE') || settings.defaultLanguage;
-  const redirectToLanguage = settings.supportedLanguages.includes(
+    cookie.load('N2K_LANGUAGE') || settings.n2k.defaultLanguage;
+  const redirectToLanguage = settings.n2k.supportedLanguages.includes(
     currentLanguage,
   )
     ? currentLanguage
-    : settings.defaultLanguage;
+    : settings.n2k.defaultLanguage;
   const dispatch = useDispatch();
 
   React.useEffect(() => {

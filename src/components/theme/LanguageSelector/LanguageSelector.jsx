@@ -25,24 +25,24 @@ const LanguageSelector = (props) => {
   const pathname = props.location.pathname;
   const currentLang = localStorage.get('N2K_LANGUAGE');
   const matchRoot = matchPath(pathname, {
-    path: settings.multilingualRoot,
+    path: settings.n2k.multilingualRoot,
     exact: true,
     strict: false,
   });
   const matchChild = matchPath(pathname, {
-    path: settings.multilingualPath,
+    path: settings.n2k.multilingualPath,
     exact: true,
     strict: false,
   });
   const match = matchRoot || matchChild;
   const hasMultilingualSupport =
-    match && settings.supportedLanguages.includes(match.params.lang);
+    match && settings.n2k.supportedLanguages.includes(match.params.lang);
   const translations = hasMultilingualSupport
-    ? settings.supportedLanguages.map((lang) => {
+    ? settings.n2k.supportedLanguages.map((lang) => {
         return {
           path: matchRoot
             ? `/natura2000/${lang}`
-            : generatePath(settings.multilingualPath, {
+            : generatePath(settings.n2k.multilingualPath, {
                 ...match.params,
                 lang,
               }),
@@ -50,11 +50,13 @@ const LanguageSelector = (props) => {
         };
       })
     : [];
-  const supportedLanguagesOptions = settings.supportedLanguages.map((lang) => ({
-    key: lang,
-    value: lang,
-    text: langmap[lang].nativeName,
-  }));
+  const supportedLanguagesOptions = settings.n2k.supportedLanguages.map(
+    (lang) => ({
+      key: lang,
+      value: lang,
+      text: langmap[lang].nativeName,
+    }),
+  );
 
   return (
     <div className={cx('language-selector', props.className)}>
@@ -124,7 +126,7 @@ const LanguageSelector = (props) => {
             }
           }
 
-          if (config.settings.supportedLanguages.includes(lang)) {
+          if (config.settings.n2k.supportedLanguages.includes(lang)) {
             localStorage.set('N2K_LANGUAGE', lang);
           }
         }}
