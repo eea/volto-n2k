@@ -9,11 +9,13 @@ import { useSelector } from 'react-redux';
 import cx from 'classnames';
 import { langmap } from '@plone/volto/helpers';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { Dropdown } from 'semantic-ui-react';
+import { Dropdown, Image } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import { getN2kItems, pathExists } from '@eeacms/volto-n2k/helpers';
 import './styles.less';
+
+import globeIcon from '@eeacms/volto-n2k/static/global-line.svg';
 
 const LanguageSelector = (props) => {
   const { settings } = config;
@@ -23,24 +25,24 @@ const LanguageSelector = (props) => {
   const pathname = props.location.pathname;
   const currentLang = localStorage.get('N2K_LANGUAGE');
   const matchRoot = matchPath(pathname, {
-    path: settings.multilingualRoot,
+    path: settings.n2k.multilingualRoot,
     exact: true,
     strict: false,
   });
   const matchChild = matchPath(pathname, {
-    path: settings.multilingualPath,
+    path: settings.n2k.multilingualPath,
     exact: true,
     strict: false,
   });
   const match = matchRoot || matchChild;
   const hasMultilingualSupport =
-    match && settings.supportedLanguages.includes(match.params.lang);
+    match && settings.n2k.supportedLanguages.includes(match.params.lang);
   const translations = hasMultilingualSupport
-    ? settings.supportedLanguages.map((lang) => {
+    ? settings.n2k.supportedLanguages.map((lang) => {
         return {
           path: matchRoot
             ? `/natura2000/${lang}`
-            : generatePath(settings.multilingualPath, {
+            : generatePath(settings.n2k.multilingualPath, {
                 ...match.params,
                 lang,
               }),
@@ -48,20 +50,66 @@ const LanguageSelector = (props) => {
         };
       })
     : [];
-  const supportedLanguagesOptions = settings.supportedLanguages.map((lang) => ({
-    key: lang,
-    value: lang,
-    text: langmap[lang].nativeName,
-  }));
+  const supportedLanguagesOptions = settings.n2k.supportedLanguages.map(
+    (lang) => ({
+      key: lang,
+      value: lang,
+      text: langmap[lang].nativeName,
+    }),
+  );
 
   return (
     <div className={cx('language-selector', props.className)}>
+      {/* <Header.TopDropdownMenu
+        id="language-switcher"
+        className="item"
+        text={`${language.toUpperCase()}`}
+        mobileText={`${language.toUpperCase()}`}
+        icon={
+          <Image src={globeIcon} alt="language dropdown globe icon"></Image>
+        }
+        viewportWidth={width}
+      >
+        <ul
+          className="wrapper language-list"
+          role="listbox"
+          aria-label="language switcher"
+        >
+          {eea.languages.map((item, index) => (
+            <Dropdown.Item
+              as="li"
+              key={index}
+              text={
+                <span>
+                  {item.name}
+                  <span className="country-code">
+                    {item.code.toUpperCase()}
+                  </span>
+                </span>
+              }
+              onClick={() => {
+                const translation = find(translations, {
+                  language: item.code,
+                });
+                const to = translation
+                  ? flattenToAppURL(translation['@id'])
+                  : `/${item.code}`;
+                setLanguage(item.code);
+                history.push(to);
+              }}
+            ></Dropdown.Item>
+          ))}
+        </ul>
+      </Header.TopDropdownMenu> */}
       <Dropdown
         aria-label="Language selector"
         disabled={content.get.loading}
         placeholder="Select a language"
-        value={currentLang}
+        text={currentLang}
         scrolling
+        icon={
+          <Image src={globeIcon} alt="language dropdown globe icon"></Image>
+        }
         options={supportedLanguagesOptions}
         onChange={(e, data) => {
           const lang = data.value;
@@ -78,7 +126,7 @@ const LanguageSelector = (props) => {
             }
           }
 
-          if (config.settings.supportedLanguages.includes(lang)) {
+          if (config.settings.n2k.supportedLanguages.includes(lang)) {
             localStorage.set('N2K_LANGUAGE', lang);
           }
         }}

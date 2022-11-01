@@ -6,7 +6,7 @@ import qs from 'querystring';
 import cx from 'classnames';
 import { UniversalLink } from '@plone/volto/components';
 import { withHashLink } from 'volto-slate/hooks';
-import { StickyContext } from '~/components';
+import { StickyContext } from '@eeacms/volto-bise/components';
 import './styles.less';
 
 const formatLink = (str, obj) => {

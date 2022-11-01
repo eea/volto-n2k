@@ -12,7 +12,11 @@ import { Link } from 'react-router-dom';
 import { defineMessages, injectIntl } from 'react-intl';
 import { Menu, Dropdown } from 'semantic-ui-react';
 import cx from 'classnames';
-import { getBaseUrl, flattenToAppURL } from '@plone/volto/helpers';
+import {
+  getBaseUrl,
+  flattenToAppURL,
+  hasApiExpander,
+} from '@plone/volto/helpers';
 import { UniversalLink, Icon } from '@plone/volto/components';
 import qs from 'querystring';
 import { getNavigation } from '@plone/volto/actions';
@@ -89,6 +93,10 @@ class Navigation extends Component {
     ).isRequired,
   };
 
+  static defaultProps = {
+    token: null,
+  };
+
   /**
    * Constructor
    * @method constructor
@@ -113,10 +121,13 @@ class Navigation extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    this.props.getNavigation(
-      getBaseUrl(this.props.pathname),
-      config.settings.navDepth,
-    );
+    const { settings } = config;
+    if (!hasApiExpander('navigation', getBaseUrl(this.props.pathname))) {
+      this.props.getNavigation(
+        getBaseUrl(this.props.pathname),
+        settings.navDepth,
+      );
+    }
     this.setState({
       isSdf: this.isSdf(),
     });
@@ -134,20 +145,23 @@ class Navigation extends Component {
   };
 
   /**
-   * Component did update
-   * @method componentDidUpdate
-   * @param {Object} prevProps Prev properties
+   * Component will receive props
+   * @method componentWillReceiveProps
+   * @param {Object} nextProps Next properties
    * @returns {undefined}
    */
-  componentDidUpdate(prevProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { settings } = config;
     if (
-      prevProps.pathname !== this.props.pathname ||
-      prevProps.userToken !== this.props.userToken
+      nextProps.pathname !== this.props.pathname ||
+      nextProps.token !== this.props.token
     ) {
-      this.props.getNavigation(
-        getBaseUrl(this.props.pathname),
-        config.settings.navDepth,
-      );
+      if (!hasApiExpander('navigation', getBaseUrl(this.props.pathname))) {
+        this.props.getNavigation(
+          getBaseUrl(nextProps.pathname),
+          settings.navDepth,
+        );
+      }
       this.closeMobileMenu();
     }
 
@@ -298,7 +312,7 @@ class Navigation extends Component {
             ''
           )}
 
-          {!this.state.isSdf
+          {!this.state.isSdf && !this.props.isRoot && !this.props.isExplorer
             ? this.props.items.map((item) => {
                 const flatUrl = flattenToAppURL(item.url);
                 const itemID = item.title.split(' ').join('-').toLowerCase();
@@ -391,7 +405,7 @@ class Navigation extends Component {
                 );
               })
             : ''}
-          {!this.state.isSdf ? (
+          {!this.state.isSdf && !this.props.isExplorer ? (
             <Menu.Item className="firstLevel language-selector-wrapper">
               <LanguageSelector navigation={this.props.navigation} />
             </Menu.Item>
@@ -412,7 +426,7 @@ const getN2kItems = (items, localStorage) => {
     items.filter((item) => item.url === '/natura2000')?.[0]?.items || [];
   natura2000.forEach((item) => {
     const languageFolder = matchPath(item.url, {
-      path: config.settings.multilingualRoot,
+      path: config.settings.n2k.multilingualRoot,
       exact: true,
       strict: false,
     });
@@ -421,7 +435,7 @@ const getN2kItems = (items, localStorage) => {
     }
     if (
       languageFolder &&
-      !config.settings.supportedLanguages.includes(
+      !config.settings.n2k.supportedLanguages.includes(
         languageFolder.params.lang,
       ) &&
       item.url !== '/natura2000/sites' &&
@@ -443,10 +457,10 @@ export default compose(
   connect(
     (state, props) => {
       return {
+        token: state.userSession.token,
         route_parameters: state.route_parameters,
         navigation: state.navigation,
         items: getN2kItems(state.navigation.items, props.localStorage),
-        userToken: state?.userSession?.token,
       };
     },
     { getNavigation },
