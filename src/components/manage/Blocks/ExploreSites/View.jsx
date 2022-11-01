@@ -51,8 +51,6 @@ const View = (props) => {
     /* eslint-disable-next-line */
   }, []);
 
-  console.log('HERE', tileWMSSources);
-
   useEffect(() => {
     if (__SERVER__ || !vectorSource) {
       return;
@@ -116,8 +114,8 @@ const View = (props) => {
           {...options}
         >
           <Layers>
-            <Layer.Tile source={tileWMSSources[1]} zIndex={0} />
-            {/* <Layer.Tile source={tileWMSSources[1]} zIndex={1} /> */}
+            <Layer.Tile zIndex={0} />
+            <Layer.Tile source={tileWMSSources[1]} zIndex={1} />
             <Layer.Vector
               source={vectorSource}
               title="highlightLayer"
