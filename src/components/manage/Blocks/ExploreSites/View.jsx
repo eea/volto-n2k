@@ -30,7 +30,10 @@ const View = (props) => {
     setTileWMSSources([
       new source.TileWMS({
         url: 'https://gisco-services.ec.europa.eu/maps/service',
-        params: { LAYERS: 'OSMPositronComposite', TILED: true },
+        params: {
+          LAYERS: 'OSMPositronComposite',
+          TILED: true,
+        },
         serverType: 'geoserver',
         transition: 0,
       }),
@@ -111,10 +114,11 @@ const View = (props) => {
             showFullExtent: true,
             zoom: 5,
           }}
+          pixelRatio={1}
           {...options}
         >
           <Layers>
-            <Layer.Tile zIndex={0} />
+            <Layer.Tile source={tileWMSSources[0]} zIndex={0} />
             <Layer.Tile source={tileWMSSources[1]} zIndex={1} />
             <Layer.Vector
               source={vectorSource}

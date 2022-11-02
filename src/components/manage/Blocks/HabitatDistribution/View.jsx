@@ -11,6 +11,7 @@ import './style.less';
 const View = (props) => {
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
+  const [tileWMSSources, setTileWMSSources] = useState([]);
   const { extent, format, proj, style, source } = openlayers;
   const provider_data = props.provider_data || {};
   const { code_2000 = [] } = provider_data;
@@ -18,6 +19,17 @@ const View = (props) => {
   useEffect(() => {
     if (__SERVER__) return;
     setVectorSource(new source.Vector());
+    setTileWMSSources([
+      new source.TileWMS({
+        url: 'https://gisco-services.ec.europa.eu/maps/service',
+        params: {
+          LAYERS: 'OSMPositronComposite',
+          TILED: true,
+        },
+        serverType: 'geoserver',
+        transition: 0,
+      }),
+    ]);
     /* eslint-disable-next-line */
   }, []);
 
@@ -55,10 +67,11 @@ const View = (props) => {
             showFullExtent: true,
             zoom: 5,
           }}
+          pixelRatio={1}
           {...options}
         >
           <Layers>
-            <Layer.Tile zIndex={0} />
+            <Layer.Tile source={tileWMSSources[0]} zIndex={0} />
             <Layer.Vector
               source={vectorSource}
               style={

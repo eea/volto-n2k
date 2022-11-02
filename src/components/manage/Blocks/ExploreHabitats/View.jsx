@@ -12,7 +12,7 @@ import './style.less';
 const View = (props) => {
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
-  const [tileWMSSource, setTileWMSSource] = useState(null);
+  const [tileWMSSources, setTileWMSSources] = useState([]);
   const { extent, format, proj, style, source } = openlayers;
 
   const { results = [], payload = {} } = props.search || {};
@@ -27,7 +27,18 @@ const View = (props) => {
   useEffect(() => {
     if (__SERVER__) return;
     setVectorSource(new source.Vector());
-    setTileWMSSource(
+    setTileWMSSources([
+      new source.TileWMS({
+        url: 'https://gisco-services.ec.europa.eu/maps/service',
+        params: {
+          LAYERS: 'OSMPositronComposite',
+          TILED: true,
+          with: 256,
+          height: 256,
+        },
+        serverType: 'geoserver',
+        transition: 0,
+      }),
       new source.TileWMS({
         extent: [
           -3959514.742799999,
@@ -42,7 +53,7 @@ const View = (props) => {
         // Countries have transparency, so do not fade tiles:
         transition: 0,
       }),
-    );
+    ]);
     /* eslint-disable-next-line */
   }, []);
 
@@ -108,11 +119,12 @@ const View = (props) => {
             showFullExtent: true,
             zoom: 5,
           }}
+          pixelRatio={1}
           {...options}
         >
           <Layers>
-            <Layer.Tile zIndex={0} />
-            <Layer.Tile source={tileWMSSource} zIndex={1} />
+            <Layer.Tile source={tileWMSSources[0]} zIndex={0} />
+            <Layer.Tile source={tileWMSSources[1]} zIndex={1} />
             <Layer.Vector
               source={vectorSource}
               title="highlightLayer"

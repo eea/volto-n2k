@@ -60,47 +60,6 @@ const LanguageSelector = (props) => {
 
   return (
     <div className={cx('language-selector', props.className)}>
-      {/* <Header.TopDropdownMenu
-        id="language-switcher"
-        className="item"
-        text={`${language.toUpperCase()}`}
-        mobileText={`${language.toUpperCase()}`}
-        icon={
-          <Image src={globeIcon} alt="language dropdown globe icon"></Image>
-        }
-        viewportWidth={width}
-      >
-        <ul
-          className="wrapper language-list"
-          role="listbox"
-          aria-label="language switcher"
-        >
-          {eea.languages.map((item, index) => (
-            <Dropdown.Item
-              as="li"
-              key={index}
-              text={
-                <span>
-                  {item.name}
-                  <span className="country-code">
-                    {item.code.toUpperCase()}
-                  </span>
-                </span>
-              }
-              onClick={() => {
-                const translation = find(translations, {
-                  language: item.code,
-                });
-                const to = translation
-                  ? flattenToAppURL(translation['@id'])
-                  : `/${item.code}`;
-                setLanguage(item.code);
-                history.push(to);
-              }}
-            ></Dropdown.Item>
-          ))}
-        </ul>
-      </Header.TopDropdownMenu> */}
       <Dropdown
         aria-label="Language selector"
         disabled={content.get.loading}
@@ -111,7 +70,8 @@ const LanguageSelector = (props) => {
           <Image src={globeIcon} alt="language dropdown globe icon"></Image>
         }
         options={supportedLanguagesOptions}
-        onChange={(e, data) => {
+        value={currentLang}
+        onChange={(_, data) => {
           const lang = data.value;
           const translation = translations.filter(
             (item) => item.lang === lang,
