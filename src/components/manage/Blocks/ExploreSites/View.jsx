@@ -33,8 +33,6 @@ const View = (props) => {
         params: {
           LAYERS: 'OSMPositronComposite',
           TILED: true,
-          with: 256,
-          height: 256,
         },
         serverType: 'geoserver',
         transition: 0,
@@ -116,6 +114,7 @@ const View = (props) => {
             showFullExtent: true,
             zoom: 5,
           }}
+          pixelRatio={1}
           {...options}
         >
           <Layers>

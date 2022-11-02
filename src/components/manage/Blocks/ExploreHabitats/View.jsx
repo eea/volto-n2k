@@ -119,6 +119,7 @@ const View = (props) => {
             showFullExtent: true,
             zoom: 5,
           }}
+          pixelRatio={1}
           {...options}
         >
           <Layers>
