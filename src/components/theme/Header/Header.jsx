@@ -82,13 +82,15 @@ const Header = (props) => {
   }, []);
 
   return isRoot || isExplorer ? (
-    <div className="ui basic segment sticky-header-wrapper" role="banner">
-      <Navbar
-        {...props}
-        isSticky={false}
-        isRoot={isRoot}
-        isExplorer={isExplorer}
-      />
+    <div className="ui basic segment sticky-header-wrapper">
+      <div className="ui sticky">
+        <Navbar
+          {...props}
+          isSticky={false}
+          isRoot={isRoot}
+          isExplorer={isExplorer}
+        />
+      </div>
     </div>
   ) : (
     <Sticky
