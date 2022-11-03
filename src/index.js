@@ -2,7 +2,7 @@
 import React from 'react';
 import loadable from '@loadable/component';
 
-import localStorage from './store';
+import { hashlink, localStorage } from './reducers';
 
 import installAppExtras from './components/theme/AppExtras';
 
@@ -39,7 +39,7 @@ import installSpeciesProtectedSites from './components/manage/Blocks/SpeciesProt
 import installStackedBarChart from './components/manage/Blocks/StackedBarChart';
 import installTilesImages from './components/manage/Blocks/TilesImages';
 
-import { LINK } from 'volto-slate/constants';
+import { LINK } from '@plone/volto-slate/constants';
 
 import { Header, Footer } from '@eeacms/volto-n2k/components';
 
@@ -64,6 +64,7 @@ const applyConfig = (config) => {
   config.addonReducers = {
     ...config.addonReducers,
     localStorage,
+    hashlink,
   };
 
   config.settings.persistentReducers.push('localStorage');
@@ -133,7 +134,6 @@ const applyConfig = (config) => {
 
   return [
     installAppExtras,
-
     installBodyClass,
     installBubbleChart,
     installCarouselHorizontal,

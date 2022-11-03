@@ -5,8 +5,8 @@ import { Menu, Container, Sticky } from 'semantic-ui-react';
 import qs from 'querystring';
 import cx from 'classnames';
 import { UniversalLink } from '@plone/volto/components';
-import { withHashLink } from 'volto-slate/hooks';
 import { StickyContext } from '@eeacms/volto-bise/components';
+import { withHashLink } from '@eeacms/volto-n2k/hocs';
 import './styles.less';
 
 const formatLink = (str, obj) => {

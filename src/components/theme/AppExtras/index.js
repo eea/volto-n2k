@@ -1,4 +1,5 @@
 import CopyPaste from './CopyPaste';
+import HashLink from './HashLink';
 
 export default (config) => {
   config.settings.appExtras = [
@@ -6,6 +7,10 @@ export default (config) => {
     {
       match: '/**/edit',
       component: CopyPaste,
+    },
+    {
+      match: '',
+      component: HashLink,
     },
   ];
 

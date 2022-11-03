@@ -13,7 +13,6 @@
     "react"
   ],
   "addons": [
-    "volto-slate",
     "@eeacms/volto-datablocks",
     "@eeacms/volto-openlayers-map",
     "@eeacms/volto-resize-helper",
@@ -30,7 +29,6 @@
     "@eeacms/volto-openlayers-map": "*",
     "@eeacms/volto-tabs-block": "*",
     "@eeacms/volto-bise": "*",
-    "volto-slate": "*",
     "d3": "^7.6.1",
     "d3-shape": "^3.1.0",
     "react-lazy-load-image-component": "1.5.1",
