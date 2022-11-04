@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-n2k",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "volto-n2k: Volto add-on",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -13,7 +13,6 @@
     "react"
   ],
   "addons": [
-    "volto-slate",
     "@eeacms/volto-datablocks",
     "@eeacms/volto-openlayers-map",
     "@eeacms/volto-resize-helper",
@@ -30,7 +29,6 @@
     "@eeacms/volto-openlayers-map": "*",
     "@eeacms/volto-tabs-block": "*",
     "@eeacms/volto-bise": "*",
-    "volto-slate": "*",
     "d3": "^7.6.1",
     "d3-shape": "^3.1.0",
     "react-lazy-load-image-component": "1.5.1",

@@ -2,7 +2,7 @@ import React from 'react';
 import { UniversalLink } from '@plone/volto/components';
 import { withRouter } from 'react-router';
 import { useSelector } from 'react-redux';
-import { withHashLink } from 'volto-slate/hooks';
+import { withHashLink } from '@eeacms/volto-n2k/hocs';
 import qs from 'querystring';
 import './styles.less';
 

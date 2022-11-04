@@ -1,5 +1,5 @@
 import { defineMessages } from 'react-intl';
-import { makeInlineElementPlugin } from 'volto-slate/components/ElementEditor';
+import { makeInlineElementPlugin } from '@plone/volto-slate/elementEditor';
 import { SlateSvgSchema } from './schema';
 import { withSlateSvg } from './extensions';
 import { SLATESVG } from './constants';
