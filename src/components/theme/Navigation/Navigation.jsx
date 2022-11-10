@@ -313,7 +313,7 @@ class Navigation extends Component {
             ''
           )}
 
-          {!this.state.isSdf && !this.props.isRoot && !this.props.isExplorer
+          {(!this.state.isSdf && !this.props.isRoot) || this.props.isExplorer
             ? this.props.items.map((item) => {
                 const flatUrl = flattenToAppURL(item.url);
                 const itemID = item.title.split(' ').join('-').toLowerCase();
