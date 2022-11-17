@@ -5,7 +5,7 @@ const View = (props) => {
   return (
     <>
       {props.mode === 'edit' ? <p>Body className: {props.data.class}</p> : ''}
-      <BodyClass className={props.data.class || ''} />
+      <BodyClass className={props.data.class.trim() || ''} />
     </>
   );
 };
