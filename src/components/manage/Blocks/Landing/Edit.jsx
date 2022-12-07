@@ -81,6 +81,8 @@ const Edit = (props) => {
     }
   };
 
+  return <DefaultView {...props} />;
+
   return (
     <>
       {useDefault ? (

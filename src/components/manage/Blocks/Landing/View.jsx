@@ -5,7 +5,7 @@ import { RenderBlocks, UniversalLink } from '@plone/volto/components';
 import DefaultView from './DefalutView';
 import hiker from './images/hiker.webp';
 import { tileProps, getStyle } from './index';
-import './style.less';
+// import './style.less';
 
 const View = (props) => {
   const { data = {} } = props;

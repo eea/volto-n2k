@@ -2,29 +2,18 @@
 @type: extra;
 @element: custom;
 
-div#view .ui.container > {
-  .landing-page-wrapper {
-    margin-bottom: 0;
-  }
-}
-
 .landing-page-wrapper {
-  position: relative;
-  padding-top: 4rem;
-  background-image: url('./images/background.webp');
-  background-repeat: no-repeat;
-  background-size: cover;
+  .content-box {
+    margin-bottom: 0;
 
-  &:not(.edit) {
-    overflow-y: hidden;
-
-    .ui.grid.landing-page {
-      overflow-y: auto;
+    &::before {
+      background-image: url('./images/background.webp');
+      background-repeat: no-repeat;
+      background-size: cover;
     }
   }
 
   .ui.grid.landing-page {
-    z-index: 1;
     max-height: inherit;
 
     /* Hide scrollbar for IE, Edge and Firefox */
@@ -32,7 +21,6 @@ div#view .ui.container > {
     scrollbar-width: none; /* Firefox */
 
     > .row {
-      z-index: 1;
       justify-content: space-between;
       padding-bottom: 5rem;
     }
@@ -144,7 +132,6 @@ div#view .ui.container > {
   }
 
   .slick-image {
-    z-index: 0 !important;
     pointer-events: none;
   }
 }

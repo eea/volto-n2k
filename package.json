@@ -16,8 +16,7 @@
     "@eeacms/volto-datablocks",
     "@eeacms/volto-openlayers-map",
     "@eeacms/volto-resize-helper",
-    "@eeacms/volto-tabs-block",
-    "@eeacms/volto-bise"
+    "@eeacms/volto-tabs-block"
   ],
   "repository": {
     "type": "git",
@@ -25,10 +24,9 @@
   },
   "dependencies": {
     "@eeacms/volto-datablocks": "*",
-    "@eeacms/volto-resize-helper": "*",
     "@eeacms/volto-openlayers-map": "*",
+    "@eeacms/volto-resize-helper": "*",
     "@eeacms/volto-tabs-block": "*",
-    "@eeacms/volto-bise": "*",
     "d3": "^7.6.1",
     "d3-shape": "^3.1.0",
     "react-lazy-load-image-component": "1.5.1",
@@ -38,8 +36,8 @@
     "slick-carousel": "1.8.1"
   },
   "devDependencies": {
-    "@plone/scripts": "*",
     "@cypress/code-coverage": "^3.10.0",
+    "@plone/scripts": "*",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "md5": "^2.3.0"
   },
