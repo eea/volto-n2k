@@ -303,10 +303,10 @@ class Navigation extends Component {
                     : '#'
                 }
                 openLinkInNewTab={true}
-                title="Deep dive"
+                title="Go to expert view"
                 className="item firstLevel deep-dive"
               >
-                DEEP DIVE
+                GO TO EXPERT VIEW
               </UniversalLink>
             </>
           ) : (

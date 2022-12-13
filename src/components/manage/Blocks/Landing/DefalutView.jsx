@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { generatePath } from 'react-router';
 import { Grid } from 'semantic-ui-react';
@@ -7,8 +7,19 @@ import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import hiker from './images/hiker.webp';
 import { tiles, tileProps, getStyle } from './index';
 
+function removeTrailingSlash(str) {
+  return str.replace(/\/+$/, '');
+}
+
 const DefaultView = (props) => {
   const currentLang = props.localStorage.get('N2K_LANGUAGE');
+
+  useEffect(() => {
+    if (removeTrailingSlash(props.location.pathname) === '/natura2000') {
+      props.history.push(`/natura2000/${currentLang}`);
+    }
+    /* eslint-disable-next-line */
+  }, []);
 
   return (
     <>
