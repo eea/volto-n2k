@@ -16,7 +16,7 @@ const DefaultView = (props) => {
 
   useEffect(() => {
     if (removeTrailingSlash(props.location.pathname) === '/natura2000') {
-      props.history.push(`/natura2000/${currentLang}`);
+      props.history.push(`/natura2000/${currentLang || 'en'}`);
     }
     /* eslint-disable-next-line */
   }, []);
