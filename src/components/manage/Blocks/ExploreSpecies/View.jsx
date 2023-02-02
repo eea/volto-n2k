@@ -132,7 +132,7 @@ const View = (props) => {
                     color: 'rgba(255,255,255,0.4)',
                   }),
                   stroke: new style.Stroke({
-                    color: '#04A77D',
+                    color: '#00A390',
                     // color: '#F8E473',
                     width: 3,
                   }),
@@ -164,7 +164,7 @@ const View = (props) => {
         </Map>
       </div>
       <Container className="map-info-notice">
-        <Message style={{ color: '#3B7f02' }}>
+        <Message style={{ color: '#005248' }}>
           <p>
             The designations employed and the presentation of material on this
             map do not imply the expression of any opinion whatsoever on the

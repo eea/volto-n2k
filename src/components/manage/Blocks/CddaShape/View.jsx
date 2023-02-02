@@ -82,7 +82,7 @@ const View = (props) => {
                     color: 'rgba(255,255,255,0.4)',
                   }),
                   stroke: new style.Stroke({
-                    color: '#04A77D',
+                    color: '#00A390',
                     width: 3,
                     lineDash: [5, 7],
                   }),

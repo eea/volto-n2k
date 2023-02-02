@@ -1,7 +1,7 @@
 @import './globals.less';
 
-@lightGreen: #7ac943;
-@darkGreen: #3b7f02;
+@lightGreen: #00a390;
+@darkGreen: #005248;
 
 @font-face {
   font-family: 'OpenSans';
@@ -164,8 +164,18 @@ body.grey-bg {
     font-family: OpenSans, 'Raleway', sans-serif;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: @darkGreen !important;
+  }
+
   h2 {
     font-weight: 600;
+    // color: @lightGreen !important;
   }
 
   p,
@@ -176,20 +186,58 @@ body.grey-bg {
   }
 
   a {
-    color: @darkGreen;
+    color: @lightGreen;
     font-weight: 600;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: @lightGreen !important;
+    }
 
     &:hover {
       color: @lightGreen;
+      text-decoration: underline;
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: @lightGreen !important;
+      }
     }
   }
 
   .light-links {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: @lightGreen !important;
+    }
+
     a {
       color: @lightGreen;
 
       &:hover {
-        color: @darkGreen;
+        color: @lightGreen;
+        text-decoration: underline;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          color: @lightGreen !important;
+        }
       }
     }
   }
@@ -199,7 +247,8 @@ body.grey-bg {
       color: @darkGreen;
 
       &:hover {
-        color: @lightGreen;
+        color: @darkGreen;
+        text-decoration: underline;
       }
     }
   }
@@ -285,7 +334,7 @@ body.grey-bg {
                   align-self: stretch;
                   padding-bottom: 1.5rem !important;
                   margin-bottom: -0.5rem;
-                  background: #04a87d 0% 0% no-repeat padding-box;
+                  background: #00a390 0% 0% no-repeat padding-box;
                   border-radius: 0px 0px 10px 10px;
                   color: #fff !important;
                   cursor: pointer;
@@ -312,20 +361,20 @@ body.grey-bg {
               }
 
               .item.firstLevel.at-glance {
-                color: #04a87d !important;
+                color: #00a390 !important;
                 cursor: pointer;
 
                 &:hover {
-                  color: #04a87d !important;
+                  color: #00a390 !important;
                 }
               }
 
               .item.firstLevel.deep-dive {
-                color: #04a87d !important;
+                color: #00a390 !important;
                 cursor: pointer;
 
                 &:hover {
-                  color: #04a87d !important;
+                  color: #00a390 !important;
                 }
               }
 
@@ -438,13 +487,13 @@ body.grey-bg {
                 &.secondLevel {
                   &:hover {
                     background: initial !important;
-                    color: #3b7f02;
+                    color: #005248;
                   }
                 }
 
                 &.active,
                 &.menuActive {
-                  color: #3b7f02;
+                  color: #005248;
                 }
 
                 &.active:not(.secondLevel):not(.thirdLevel),
@@ -457,7 +506,7 @@ body.grey-bg {
                       display: block !important;
                       width: 6px;
                       height: 6px;
-                      background-color: #3b7f02;
+                      background-color: #005248;
                       border-radius: 100%;
                       content: '';
                       transform: translateX(-50%);
@@ -487,7 +536,7 @@ body.grey-bg {
   }
 
   .readmore-button {
-    color: #04a77d;
+    color: #00a390;
   }
 }
 
@@ -628,7 +677,7 @@ img.slick-image {
   .default.tabs {
     .ui.menu {
       border-bottom: none !important;
-      background-color: #04a87d;
+      background-color: #00a390;
 
       .item {
         padding: 1rem;
@@ -666,7 +715,7 @@ img.slick-image {
 }
 
 .dark-green-background {
-  background-color: #04a87d;
+  background-color: #00a390;
 }
 
 .tabs-block .slick-slider {
@@ -701,8 +750,8 @@ img.slick-image {
 }
 
 .tabs-block .slick-dots-wrapper .slick-dots li.slick-active button {
-  border-color: #3b7f02 !important;
-  background-color: #3b7f02 !important;
+  border-color: #005248 !important;
+  background-color: #005248 !important;
 }
 
 .tabs-block.light .slick-dots-wrapper .slick-dots li.slick-active::before {
