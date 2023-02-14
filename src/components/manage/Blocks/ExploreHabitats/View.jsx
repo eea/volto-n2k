@@ -31,7 +31,7 @@ const View = (props) => {
       new source.TileWMS({
         url: 'https://gisco-services.ec.europa.eu/maps/service',
         params: {
-          LAYERS: 'OSMPositronComposite',
+          LAYERS: 'OSMBlossomComposite',
           TILED: true,
           with: 256,
           height: 256,
