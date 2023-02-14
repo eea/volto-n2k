@@ -23,7 +23,7 @@ const View = (props) => {
       new source.TileWMS({
         url: 'https://gisco-services.ec.europa.eu/maps/service',
         params: {
-          LAYERS: 'OSMPositronComposite',
+          LAYERS: 'OSMBlossomComposite',
           TILED: true,
         },
         serverType: 'geoserver',
