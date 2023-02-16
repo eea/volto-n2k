@@ -41,7 +41,7 @@ import installTilesImages from './components/manage/Blocks/TilesImages';
 
 import { LINK } from '@plone/volto-slate/constants';
 
-import { Header, Footer } from '@eeacms/volto-n2k/components';
+import { Header } from '@eeacms/volto-n2k/components';
 
 import { gridSizes, variants } from './grid';
 
@@ -108,7 +108,7 @@ const applyConfig = (config) => {
     ...(config.settings.themes || {}),
     natura2000: {
       Header: Header,
-      Footer: Footer,
+      // Footer: Footer,
       Breadcrumbs: () => <></>,
     },
   };
