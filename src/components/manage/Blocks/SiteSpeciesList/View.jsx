@@ -168,8 +168,7 @@ const View = (props) => {
                     >
                       <div className="metadata">
                         <div className="name">
-                          <Link as="h3" to={`/species/${speciesData.id_eunis}`}
-                          >
+                          <Link as="h3" to={`/species/${speciesData.id_eunis}`}>
                             {speciesData.common_name
                               ? speciesData.common_name + ' '
                               : ''}
