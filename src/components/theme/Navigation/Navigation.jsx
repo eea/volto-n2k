@@ -242,9 +242,6 @@ class Navigation extends Component {
       ...(this.props.route_parameters || {}),
       ...qs.parse(this.props.location.search.replace('?', '')),
     };
-    const currentLang = this.props.localStorage.get('N2K_LANGUAGE');
-
-    console.log('HERE', this.props.isRoot);
 
     return (
       <nav
