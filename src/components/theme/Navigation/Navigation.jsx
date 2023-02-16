@@ -10,20 +10,22 @@ import { compose } from 'redux';
 import { matchPath, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { defineMessages, injectIntl } from 'react-intl';
-import { Menu, Dropdown } from 'semantic-ui-react';
+import { Menu, Dropdown, Image } from 'semantic-ui-react';
 import cx from 'classnames';
 import {
   getBaseUrl,
   flattenToAppURL,
   hasApiExpander,
 } from '@plone/volto/helpers';
-import { UniversalLink, Icon } from '@plone/volto/components';
+import { UniversalLink } from '@plone/volto/components';
 import qs from 'querystring';
 import { getNavigation } from '@plone/volto/actions';
 import config from '@plone/volto/registry';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import n2kLogo from '@eeacms/volto-n2k/icons/natura2000.svg';
+import BISELogo from '@eeacms/volto-bise/customizations/volto/components/theme/Logo/Logo.svg';
+
+const dropdownBlacklist = ['/natura2000'];
 
 const messages = defineMessages({
   closeMobileMenu: {
@@ -240,7 +242,6 @@ class Navigation extends Component {
       ...(this.props.route_parameters || {}),
       ...qs.parse(this.props.location.search.replace('?', '')),
     };
-    const currentLang = this.props.localStorage.get('N2K_LANGUAGE');
 
     return (
       <nav
@@ -275,9 +276,15 @@ class Navigation extends Component {
               toggleMobileMenu={this.toggleMobileMenu}
             />
           </div>
-          <Menu.Item className="home-button logo">
-            <Link title="Natura 2000" to={`/natura2000/${currentLang}`}>
-              <Icon name={n2kLogo} size={44} />
+          <Menu.Item className="home-button">
+            <Link title="Natura 2000" to="/">
+              <Image
+                src={BISELogo}
+                alt="Biodiversity logo"
+                title="Biodiversity logo"
+                height={64}
+                width={192}
+              />
             </Link>
           </Menu.Item>
           {this.state.isSdf ? (
@@ -312,6 +319,133 @@ class Navigation extends Component {
           ) : (
             ''
           )}
+
+          {this.props.isRoot &&
+            this.props.biseItems
+              .filter((item) => !['/natura2000'].includes(item.url))
+              .map((item) => {
+                const flatUrl = flattenToAppURL(item.url);
+                const itemID = item.title.split(' ').join('-').toLowerCase();
+                return item.items &&
+                  item.items.length &&
+                  !dropdownBlacklist.includes(item.url) ? (
+                  <Dropdown
+                    id={itemID}
+                    className={
+                      this.isActive(flatUrl)
+                        ? 'item firstLevel menuActive'
+                        : 'item firstLevel'
+                    }
+                    key={flatUrl}
+                    trigger={
+                      <Link to={flatUrl === '' ? '/' : flatUrl} key={flatUrl}>
+                        {item.title}
+                      </Link>
+                    }
+                    item
+                    simple
+                  >
+                    {item.title === 'Countries' ? (
+                      <Dropdown.Menu>
+                        <div className="submenu-wrapper">
+                          <div className="submenu countries-submenu">
+                            {item.items.map((subsubitem) => {
+                              const flatSubSubUrl = flattenToAppURL(
+                                subsubitem.url,
+                              );
+                              return (
+                                <Link
+                                  to={
+                                    flatSubSubUrl === '' ? '/' : flatSubSubUrl
+                                  }
+                                  title={subsubitem.title}
+                                  key={flatSubSubUrl}
+                                  className={
+                                    this.isActive(flatSubSubUrl)
+                                      ? 'item thirdLevel menuActive'
+                                      : 'item thirdLevel'
+                                  }
+                                >
+                                  {subsubitem.title}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </Dropdown.Menu>
+                    ) : (
+                      <Dropdown.Menu>
+                        {item.items.map((subitem) => {
+                          const flatSubUrl = flattenToAppURL(subitem.url);
+                          const subItemID = subitem.title
+                            .split(' ')
+                            .join('-')
+                            .toLowerCase();
+                          return (
+                            <Dropdown.Item key={flatSubUrl}>
+                              <div className="secondLevel-wrapper">
+                                <Link
+                                  id={subItemID}
+                                  to={flatSubUrl === '' ? '/' : flatSubUrl}
+                                  key={flatSubUrl}
+                                  className={
+                                    this.isActive(flatSubUrl)
+                                      ? 'item secondLevel menuActive'
+                                      : 'item secondLevel'
+                                  }
+                                >
+                                  {subitem.title}
+                                </Link>
+                              </div>
+                              {subitem.items && (
+                                <div className="submenu-wrapper">
+                                  <div className="submenu">
+                                    {subitem.items.map((subsubitem) => {
+                                      const flatSubSubUrl = flattenToAppURL(
+                                        subsubitem.url,
+                                      );
+                                      return (
+                                        <Link
+                                          to={
+                                            flatSubSubUrl === ''
+                                              ? '/'
+                                              : flatSubSubUrl
+                                          }
+                                          title={subsubitem.title}
+                                          key={flatSubSubUrl}
+                                          className={
+                                            this.isActive(flatSubSubUrl)
+                                              ? 'item thirdLevel menuActive'
+                                              : 'item thirdLevel'
+                                          }
+                                        >
+                                          {subsubitem.title}
+                                        </Link>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              )}
+                            </Dropdown.Item>
+                          );
+                        })}
+                      </Dropdown.Menu>
+                    )}
+                  </Dropdown>
+                ) : (
+                  <Link
+                    to={flatUrl === '' ? '/' : flatUrl}
+                    key={flatUrl}
+                    className={
+                      this.isActive(flatUrl)
+                        ? 'item menuActive firstLevel'
+                        : 'item firstLevel'
+                    }
+                  >
+                    {item.title}
+                  </Link>
+                );
+              })}
 
           {(!this.state.isSdf && !this.props.isRoot) || this.props.isExplorer
             ? this.props.items.map((item) => {
@@ -419,6 +553,11 @@ class Navigation extends Component {
   }
 }
 
+const getBiseItems = (items) => {
+  if (__SERVER__) return [];
+  return items.filter((item) => item.url !== '/natura2000') || [];
+};
+
 const getN2kItems = (items, localStorage) => {
   if (__SERVER__) return [];
   const currentLang = localStorage.get('N2K_LANGUAGE');
@@ -462,6 +601,7 @@ export default compose(
         route_parameters: state.route_parameters,
         navigation: state.navigation,
         items: getN2kItems(state.navigation.items, props.localStorage),
+        biseItems: getBiseItems(state.navigation.items),
       };
     },
     { getNavigation },
