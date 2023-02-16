@@ -14,6 +14,10 @@ import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import Navigation from '../Navigation/Navigation';
 import { StickyContext } from '@eeacms/volto-bise/components';
 
+function removeTrailingSlash(str) {
+  return str.replace(/\/+$/, '');
+}
+
 const Navbar = (props) => {
   const currentLang = props.localStorage.get('N2K_LANGUAGE');
 
@@ -51,6 +55,7 @@ const Header = (props) => {
   const { stickyRef } = useContext(StickyContext);
   const isRoot = useMemo(
     () =>
+      removeTrailingSlash(props.pathname) !== '/natura2000/natura2000' &&
       matchPath(props.pathname, {
         path: config.settings.n2k.multilingualRoot,
         exact: true,
