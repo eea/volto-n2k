@@ -81,7 +81,7 @@ const View = (props) => {
                       >
                         <Link
                           className="description"
-                          to={`/natura2000/habitats/h/${item.code_2000}`}
+                          to={`/habitats/${item.code_2000}`}
                         >
                           {item.habitat_description} ({item.code_2000})
                         </Link>

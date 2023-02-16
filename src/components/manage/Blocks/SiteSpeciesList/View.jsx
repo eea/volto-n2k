@@ -170,7 +170,7 @@ const View = (props) => {
                         <div className="name">
                           <Link
                             as="h3"
-                            to={`/natura2000/species/s/${speciesData.id_eunis}`}
+                            to={`/species/${speciesData.id_eunis}`}
                           >
                             {speciesData.common_name
                               ? speciesData.common_name + ' '
