@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 import { Container } from 'semantic-ui-react';
 import loadable from '@loadable/component';
@@ -15,9 +16,10 @@ const View = (props) => {
   const {
     author = [],
     common_name = [],
-    common_name_list = [],
+    code_2000 = [],
     id_eunis = [],
     license = [],
+    number_sites = [],
     picture_url = [],
     scientific_name = [],
     source = [],
@@ -47,15 +49,28 @@ const View = (props) => {
       <Container>
         <div className="species-details">
           <div className="species-metadata">
-            <h2 className="name">{scientific_name[0]}</h2>
-            <p className="info">
-              {common_name[0] ? common_name[0] + ' - ' : ''} {author[0]}
-            </p>
-            {common_name_list[0] ? (
-              <p className="info">Common names: {common_name_list[0]}</p>
-            ) : (
-              ''
+            <h2 className="name">
+              {common_name[0] ? common_name[0] + ' - ' : ''}{' '}
+              <span style={{ fontStyle: 'italic' }}>{scientific_name[0]}</span>
+            </h2>
+            {author[0] && (
+              <p
+                className="info radjhan-bold"
+                style={{ marginBottom: '0.15rem' }}
+              >
+                {author[0]}
+              </p>
             )}
+            {code_2000[0] && (
+              <p className="info">Natura 2000 species code {code_2000[0]}</p>
+            )}
+            <br />
+            {number_sites[0] && (
+              <h3 style={{ marginBottom: '0.15rem' }}>{number_sites[0]}</h3>
+            )}
+            <h4 className="radjhan-normal">
+              NATURA 2000 SITES PROTECTING THIS SPECIES
+            </h4>
           </div>
           <div
             className={cx('species-pictures', {
@@ -99,6 +114,14 @@ const View = (props) => {
                 />
               </div>
             )}
+            <div className="find-image">
+              <a
+                href={`http://images.google.com/images?q=${scientific_name[0]}`}
+                target="_blank"
+              >
+                Find image on the web
+              </a>
+            </div>
           </div>
         </div>
       </Container>
