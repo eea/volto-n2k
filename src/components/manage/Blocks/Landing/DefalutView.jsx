@@ -15,7 +15,10 @@ const DefaultView = (props) => {
   const currentLang = props.localStorage.get('N2K_LANGUAGE');
 
   useEffect(() => {
-    if (removeTrailingSlash(props.location.pathname) === '/natura2000') {
+    if (
+      props.location?.pathname &&
+      removeTrailingSlash(props.location.pathname) === '/natura2000'
+    ) {
       props.history.push(`/natura2000/${currentLang || 'en'}`);
     }
     /* eslint-disable-next-line */
