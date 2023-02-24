@@ -19,7 +19,7 @@ const View = (props) => {
     code_2000 = [],
     id_eunis = [],
     license = [],
-    number_sites = [],
+    // number_sites = [],
     picture_url = [],
     scientific_name = [],
     source = [],
