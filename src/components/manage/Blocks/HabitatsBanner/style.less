@@ -12,6 +12,7 @@ div#view .habitat-banner-details .ui.container > * {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    gap: 1rem;
 
     @media only screen and (max-width: 765px) {
       flex-flow: column;
@@ -27,11 +28,11 @@ div#view .habitat-banner-details .ui.container > * {
         margin-bottom: 0 !important;
         color: #fff !important;
         font-family: inherit;
+
+        font-family: RajdhaniB, 'Helvetica Neue', Arial, Helvetica, sans-serif;
         font-size: 54px;
         line-height: 54px;
         text-transform: uppercase;
-
-        font-family: RajdhaniB, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
         > * {
           font-family: RajdhaniB, 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -58,7 +59,8 @@ div#view .habitat-banner-details .ui.container > * {
         text-transform: uppercase;
       }
 
-      .info {
+      .info,
+      .info > * {
         font-family: 'RajdhaniR', 'Helvetica Neue', Arial, Helvetica, sans-serif;
         font-size: 18px;
         font-weight: 600;

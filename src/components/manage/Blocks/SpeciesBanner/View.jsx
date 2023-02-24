@@ -51,26 +51,30 @@ const View = (props) => {
           <div className="species-metadata">
             <h2 className="name">
               {common_name[0] ? common_name[0] + ' - ' : ''}{' '}
-              <span style={{ fontStyle: 'italic' }}>{scientific_name[0]}</span>
+              <span style={{ fontStyle: 'italic', textTransform: 'none' }}>
+                {scientific_name[0]}
+              </span>
             </h2>
             {author[0] && (
               <p
                 className="info radjhan-bold"
-                style={{ marginBottom: '0.15rem' }}
+                style={{ marginBottom: '0.5rem' }}
               >
                 {author[0]}
               </p>
             )}
             {code_2000[0] && (
-              <p className="info">Natura 2000 species code {code_2000[0]}</p>
+              <p className="info">
+                Natura 2000 species code&nbsp;&nbsp;&nbsp;{code_2000[0]}
+              </p>
             )}
-            <br />
+            {/* <br />
             {number_sites[0] && (
-              <h3 style={{ marginBottom: '0.15rem' }}>{number_sites[0]}</h3>
+              <h3 style={{ marginBottom: '0.5rem' }}>{number_sites[0]}</h3>
             )}
             <h4 className="radjhan-normal">
               NATURA 2000 SITES PROTECTING THIS SPECIES
-            </h4>
+            </h4> */}
           </div>
           <div
             className={cx('species-pictures', {
