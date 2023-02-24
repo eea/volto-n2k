@@ -15,7 +15,7 @@ const View = (props) => {
   const [tileWMSSources, setTileWMSSources] = useState([]);
   const { extent, format, proj, style, source } = openlayers;
   const provider_data = props.provider_data || {};
-  const { code_2000 = [] } = provider_data;
+  const { code_2000 = [], species_group_name = [] } = provider_data;
 
   useEffect(() => {
     if (__SERVER__) return;
@@ -39,7 +39,12 @@ const View = (props) => {
       return;
     const esrijsonFormat = new format.EsriJSON();
     // Get species location on sites
-    fetch(getSpeciesDistributionURL(code_2000[0])).then(function (response) {
+    fetch(
+      getSpeciesDistributionURL(
+        code_2000[0],
+        species_group_name[0] === 'Birds',
+      ),
+    ).then(function (response) {
       if (response.status !== 200) return;
       response.json().then(function (data) {
         dataFetched.current = true;

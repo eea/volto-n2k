@@ -37,6 +37,7 @@ const View = (props) => {
   useEffect(() => {
     if (__SERVER__ || !vectorSource || !code_2000[0] || dataFetched.current)
       return;
+
     const esrijsonFormat = new format.EsriJSON();
     // Get species protected sites
     fetch(getSpeciesProtectedSitesURL(code_2000[0])).then(function (response) {
