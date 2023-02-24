@@ -9,12 +9,13 @@ import { getSpeciesDistributionURL } from './index';
 import './style.less';
 
 const View = (props) => {
+  const dataFetched = React.useRef();
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
   const [tileWMSSources, setTileWMSSources] = useState([]);
   const { extent, format, proj, style, source } = openlayers;
   const provider_data = props.provider_data || {};
-  const { code_2000 = [] } = provider_data;
+  const { code_2000 = [], species_group_name = [] } = provider_data;
 
   useEffect(() => {
     if (__SERVER__) return;
@@ -34,12 +35,19 @@ const View = (props) => {
   }, []);
 
   useEffect(() => {
-    if (__SERVER__ || !vectorSource || !code_2000[0]) return;
+    if (__SERVER__ || !vectorSource || !code_2000[0] || dataFetched.current)
+      return;
     const esrijsonFormat = new format.EsriJSON();
     // Get species location on sites
-    fetch(getSpeciesDistributionURL(code_2000[0])).then(function (response) {
+    fetch(
+      getSpeciesDistributionURL(
+        code_2000[0],
+        species_group_name[0] === 'Birds',
+      ),
+    ).then(function (response) {
       if (response.status !== 200) return;
       response.json().then(function (data) {
+        dataFetched.current = true;
         if (data.features && data.features.length > 0) {
           const features = esrijsonFormat.readFeatures(data);
           if (features.length > 0) {
@@ -55,7 +63,7 @@ const View = (props) => {
       });
     });
     /* eslint-disable-next-line */
-  }, [code_2000?.[0]]);
+  }, [vectorSource, code_2000?.[0]]);
 
   if (__SERVER__ || !vectorSource) return '';
   return (
