@@ -1,6 +1,8 @@
 /* eslint-disable no-extend-native */
 import React from 'react';
 import loadable from '@loadable/component';
+import { compose } from 'redux';
+import { connectToProviderData } from '@eeacms/volto-datablocks/hocs';
 
 import { hashlink, localStorage } from './reducers';
 
@@ -123,6 +125,38 @@ const applyConfig = (config) => {
       ...(config.blocks.blocksConfig.columnsBlock?.variants || []),
       ...variants,
     ],
+  };
+
+  config.blocks.blocksConfig.group = {
+    ...(config.blocks.blocksConfig.group || {}),
+    conditions: {
+      bird: compose(
+        connectToProviderData((props) => ({
+          provider_url: '/data/natura-2000-species',
+        })),
+      )(({ children, provider_data }) => {
+        if (
+          provider_data?.species_group_name?.[0] &&
+          provider_data?.species_group_name?.[0] === 'Birds'
+        ) {
+          return children;
+        }
+        return null;
+      }),
+      species: compose(
+        connectToProviderData((props) => ({
+          provider_url: '/data/natura-2000-species',
+        })),
+      )(({ children, provider_data }) => {
+        if (
+          provider_data?.species_group_name?.[0] &&
+          provider_data?.species_group_name?.[0] !== 'Birds'
+        ) {
+          return children;
+        }
+        return null;
+      }),
+    },
   };
 
   config.settings.slate.elements[LINK] = LinkElement;
