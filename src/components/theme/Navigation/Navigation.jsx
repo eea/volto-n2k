@@ -417,8 +417,7 @@ class Navigation extends Component {
                       )}
                     </Dropdown>
                   ) : (
-                    <Link
-                      to={flatUrl === '' ? '/' : flatUrl}
+                    <div
                       key={flatUrl}
                       className={
                         this.isActive(flatUrl)
@@ -426,8 +425,10 @@ class Navigation extends Component {
                           : 'item firstLevel'
                       }
                     >
-                      {item.title}
-                    </Link>
+                      <Link to={flatUrl === '' ? '/' : flatUrl}>
+                        {item.title}
+                      </Link>
+                    </div>
                   );
                 })}
             </>
