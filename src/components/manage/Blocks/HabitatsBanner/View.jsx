@@ -21,7 +21,7 @@ const View = (props) => {
           <div className="habitat-metadata">
             <h2 className="name">{scientific_name[0]}</h2>
             <p className="info">
-              ANNEX I habitat code&nbsp;&nbsp;&nbsp;{code_2000[0]}
+              Habitats Directive Annex I code&nbsp;&nbsp;&nbsp;{code_2000[0]}
             </p>
             <br />
             {/* {number_sites[0] && (
