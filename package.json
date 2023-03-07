@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-n2k",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "volto-n2k: Volto add-on",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -24,11 +24,11 @@
     "url": "git@github.com:eea/volto-n2k.git"
   },
   "dependencies": {
-    "@eeacms/volto-datablocks": "*",
-    "@eeacms/volto-resize-helper": "*",
-    "@eeacms/volto-openlayers-map": "*",
-    "@eeacms/volto-tabs-block": "*",
     "@eeacms/volto-bise": "*",
+    "@eeacms/volto-datablocks": "*",
+    "@eeacms/volto-openlayers-map": "*",
+    "@eeacms/volto-resize-helper": "*",
+    "@eeacms/volto-tabs-block": "*",
     "d3": "^7.6.1",
     "d3-shape": "^3.1.0",
     "react-lazy-load-image-component": "1.5.1",
@@ -38,8 +38,8 @@
     "slick-carousel": "1.8.1"
   },
   "devDependencies": {
-    "@plone/scripts": "*",
     "@cypress/code-coverage": "^3.10.0",
+    "@plone/scripts": "*",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "md5": "^2.3.0"
   },
