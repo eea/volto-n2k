@@ -2,14 +2,20 @@
 @type: extra;
 @element: custom;
 
-.landing-page-wrapper {
-  .content-box {
-    margin-bottom: 0;
+.landing-page-wrapper,
+[class~="view-defaultview"] [id="page-document"] .landing-page-wrapper {
+  position: relative;
+  padding-top: 4rem;
+  background-image: url('./images/background.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width: 100vw !important;
 
-    &::before {
-      background-image: url('./images/background.webp');
-      background-repeat: no-repeat;
-      background-size: cover;
+  &:not(.edit) {
+    overflow-y: hidden;
+
+    .ui.grid.landing-page {
+      overflow-y: auto;
     }
   }
 
@@ -53,11 +59,12 @@
     .item a {
       display: flex;
       flex-flow: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .item img.image {
       width: 100%;
-      // max-width: 200px;
     }
 
     .item p.description {
@@ -132,30 +139,53 @@
   }
 
   .slick-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 600px;
     pointer-events: none;
   }
 }
 
-// @media only screen and (max-width: @largeMonitorBreakpoint + @offset) {
-//   .natura2000-theme {
-//     .landing-page-wrapper {
-//       .ui.grid.landing-page {
-//         > .row {
-//           justify-content: flex-end;
-//         }
-//       }
-//     }
-//   }
-// }
+@media only screen and (min-width: @mobileBreakpoint) {
+  .landing-page-wrapper {
+    .item a img.image {
+      max-width: 280px;
+    }
 
-@media only screen and (max-width: @largestTabletScreen) {
-  .natura2000-theme {
-    .landing-page-wrapper {
-      .ui.grid.landing-page {
-        > .row {
-          justify-content: flex-end;
-        }
+    .ui.grid.landing-page {
+      > .row {
+        justify-content: flex-end !important;
       }
+    }
+
+    .slick-image {
+      width: 400px !important;
+      transform: translateX(-40%) !important;
+    }
+  }
+}
+
+@media only screen and (min-width: @tabletBreakpoint) {
+  .landing-page-wrapper {
+    .ui.grid.landing-page {
+      > .row {
+        justify-content: flex-end !important;
+      }
+    }
+
+    .slick-image {
+      width: 500px !important;
+      transform: translateX(-25%) !important;
+    }
+  }
+}
+
+@media only screen and (min-width: @computerBreakpoint) {
+  .landing-page-wrapper {
+    .slick-image {
+      width: 600px !important;
+      transform: translateX(0) !important;
     }
   }
 }

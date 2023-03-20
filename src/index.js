@@ -5,7 +5,7 @@ import loadable from '@loadable/component';
 import { hashlink, localStorage } from './reducers';
 
 // import installBubbleChart from './components/manage/Blocks/BubbleChart';
-// import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
+import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 // import installCddaShape from './components/manage/Blocks/CddaShape';
 // import installConnectedList from './components/manage/Blocks/List';
 // import installContactBlock from './components/manage/Blocks/ContactBlock';
@@ -17,7 +17,7 @@ import { hashlink, localStorage } from './reducers';
 // import installHabitatDistribution from './components/manage/Blocks/HabitatDistribution';
 // import installHabitatProtectedSites from './components/manage/Blocks/HabitatProtectedSites';
 // import installHabitatsBanner from './components/manage/Blocks/HabitatsBanner';
-// import installImageText from './components/manage/Blocks/ImageText';
+import installImageText from './components/manage/Blocks/ImageText';
 import installLandingBlock from './components/manage/Blocks/Landing';
 // import installNavigationAnchors from './components/manage/Blocks/NavigationAnchors';
 // import installSimpleDataTable from './components/manage/Blocks/SimpleDataTable';
@@ -122,7 +122,7 @@ const applyConfig = (config) => {
 
   return [
     // installBubbleChart,
-    // installCarouselHorizontal,
+    installCarouselHorizontal,
     // installCddaShape,
     // installConnectedList,
     // installContactBlock,
@@ -134,7 +134,7 @@ const applyConfig = (config) => {
     // installHabitatDistribution,
     // installHabitatProtectedSites,
     // installHabitatsBanner,
-    // installImageText,
+    installImageText,
     installLandingBlock,
     // installNavigationAnchors,
     // installSimpleDataTable,

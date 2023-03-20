@@ -27,8 +27,11 @@ const Dots = (props) => {
           >
             <button
               aria-label={`Select slide ${index + 1}`}
+              tabIndex={0}
               onClick={() => {
-                slider.current.slickGoTo(index);
+                if (slider.current) {
+                  slider.current.slickGoTo(index);
+                }
               }}
             />
           </li>
@@ -56,7 +59,12 @@ const ArrowsGroup = (props) => {
         <button
           aria-label="Previous slide"
           className="slick-arrow slick-prev"
-          onClick={slider.current.slickPrev}
+          onClick={() => {
+            if (slider.current) {
+              slider.current.slickPrev();
+            }
+          }}
+          tabIndex={0}
         >
           <Icon name={leftArrowSVG} size="50px" />
         </button>
@@ -67,7 +75,12 @@ const ArrowsGroup = (props) => {
         <button
           aria-label="Next slide"
           className="slick-arrow slick-next"
-          onClick={slider.current.slickNext}
+          onClick={() => {
+            if (slider.current) {
+              slider.current.slickNext();
+            }
+          }}
+          tabIndex={0}
         >
           {currentSlide === 0 && props.learnMore ? (
             <p className="learn-more">{props.learnMore}</p>
@@ -90,6 +103,7 @@ const View = (props) => {
   const img = React.useRef(null);
   const [imgHeight, setImgHeight] = React.useState(0);
   const [hashlinkOnMount, setHashlinkOnMount] = React.useState(false);
+  const blockId = props.id;
   const {
     activeTab = null,
     data = {},
@@ -100,7 +114,6 @@ const View = (props) => {
     setActiveTab = () => {},
   } = props;
   const activeTabIndex = tabsList.indexOf(activeTab);
-  // const tabData = tabs[activeTab] || {};
   const uiContainer = data.align === 'full' ? 'ui container' : false;
   const image = data.image || null;
 
@@ -120,28 +133,28 @@ const View = (props) => {
     },
   };
 
-  const panes = tabsList.map((tab, index) => {
-    return {
-      id: tab,
-      renderItem: (
-        <React.Fragment key={`slide-${tab}`}>
-          <RenderBlocks {...props} metadata={metadata} content={tabs[tab]} />
-          {index === 0 ? (
-            <div
-              className="divider"
-              style={{ height: `${imgHeight - 80}px` }}
-            />
-          ) : (
-            ''
-          )}
-        </React.Fragment>
-      ),
-    };
-  });
+  // const panes = tabsList.map((tab, index) => {
+  //   return {
+  //     id: tab,
+  //     renderItem: (
+  //       <React.Fragment key={`slide-${tab}`}>
+  //         <RenderBlocks {...props} metadata={metadata} content={tabs[tab]} />
+  //         {index === 0 ? (
+  //           <div
+  //             className="divider"
+  //             style={{ height: `${imgHeight - 80}px` }}
+  //           />
+  //         ) : (
+  //           ''
+  //         )}
+  //       </React.Fragment>
+  //     ),
+  //   };
+  // });
 
-  const updateImageHeight = () => {
-    setImgHeight(img.current?.height || 0);
-  };
+  // const updateImageHeight = () => {
+  //   setImgHeight(img.current?.height || 0);
+  // };
 
   React.useEffect(() => {
     const urlHash = props.location.hash.substring(1) || '';
@@ -177,29 +190,60 @@ const View = (props) => {
     /* eslint-disable-next-line */
   }, [hashlink.counter]);
 
-  React.useEffect(() => {
-    updateImageHeight();
-    img.current.onload = () => {
-      updateImageHeight();
+  const panes = tabsList.map((tab, index) => {
+    return {
+      id: tab,
+      renderItem: (
+        <RenderBlocks
+          key={`slide-${tab}`}
+          {...props}
+          metadata={metadata}
+          content={tabs[tab]}
+        />
+      ),
     };
-    window.addEventListener('resize', updateImageHeight);
-    return () => {
-      window.removeEventListener('resize', updateImageHeight);
-    };
-    /* eslint-disable-next-line */
-  }, []);
+  });
+
+  // React.useEffect(() => {
+  //   updateImageHeight();
+  //   img.current.onload = () => {
+  //     updateImageHeight();
+  //   };
+  //   window.addEventListener('resize', updateImageHeight);
+  //   return () => {
+  //     window.removeEventListener('resize', updateImageHeight);
+  //   };
+  //   /* eslint-disable-next-line */
+  // }, []);
 
   return (
     <>
-      <Slider {...settings} ref={slider} className={cx(uiContainer)}>
+      <Slider
+        {...settings}
+        ref={slider}
+        className={cx(uiContainer, 'tabs-accessibility')}
+        accessibility={true}
+        afterChange={() => {
+          if (
+            document
+              .getElementById(blockId)
+              ?.getElementsByClassName('slick-slider')?.length > 0
+          ) {
+            document
+              .getElementById(blockId)
+              .getElementsByClassName('slick-current')[0]
+              .focus();
+          }
+        }}
+      >
         {panes.length ? panes.map((pane) => pane.renderItem) : ''}
       </Slider>
-      <img
+      {/* <img
         ref={img}
         className={cx('slick-image', { hidden: activeTabIndex !== 0 })}
         src={`${image}/@@images/image/preview`}
         alt="Logo"
-      />
+      /> */}
       <ArrowsGroup
         activeTab={activeTab}
         tabsList={tabsList}
