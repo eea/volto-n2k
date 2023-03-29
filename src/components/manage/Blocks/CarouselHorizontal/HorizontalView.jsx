@@ -102,7 +102,7 @@ const ArrowsGroup = (props) => {
 const View = (props) => {
   const slider = React.useRef(null);
   const img = React.useRef(null);
-  const [imgHeight, setImgHeight] = React.useState(0);
+  // const [imgHeight, setImgHeight] = React.useState(0);
   const [hashlinkOnMount, setHashlinkOnMount] = React.useState(false);
   const blockId = props.id;
   const {
@@ -217,7 +217,7 @@ const View = (props) => {
   //   /* eslint-disable-next-line */
   // }, []);
 
-  console.log('HERE RERENDER');
+  // console.log('HERE RERENDER');
 
   return (
     <>
