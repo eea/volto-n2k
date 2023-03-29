@@ -1,5 +1,4 @@
 /* eslint-disable no-extend-native */
-import React from 'react';
 import loadable from '@loadable/component';
 import { compose } from 'redux';
 import { connectToProviderData } from '@eeacms/volto-datablocks/hocs';
@@ -44,11 +43,9 @@ import installTilesImages from './components/manage/Blocks/TilesImages';
 
 import { LINK } from '@plone/volto-slate/constants';
 
-import { Header } from '@eeacms/volto-n2k/components';
-
 import { gridSizes, variants } from './grid';
 
-import './less/styles.less';
+// import './less/styles.less';
 
 Array.prototype.sortByProperty = function (property, order = 'ASC') {
   return this.sort((a, b) => {
@@ -71,50 +68,6 @@ const applyConfig = (config) => {
   };
 
   config.settings.persistentReducers.push('localStorage');
-
-  config.settings = {
-    ...config.settings,
-    n2k: {
-      multilingualRoot: '/natura2000/:lang',
-      multilingualPath: '/natura2000/:lang/*',
-      defaultLanguage: 'en',
-      supportedLanguages: [
-        'bg',
-        'hr',
-        'cs',
-        'da',
-        'nl',
-        'en',
-        'et',
-        'fi',
-        'fr',
-        'de',
-        'el',
-        'hu',
-        'ga',
-        'it',
-        'lv',
-        'lt',
-        'mt',
-        'pl',
-        'pt',
-        'ro',
-        'sk',
-        'sl',
-        'es',
-        'sv',
-      ],
-    },
-  };
-
-  config.settings.themes = {
-    ...(config.settings.themes || {}),
-    natura2000: {
-      Header: Header,
-      // Footer: Footer,
-      Breadcrumbs: () => <></>,
-    },
-  };
 
   config.blocks.blocksConfig.columnsBlock = {
     ...(config.blocks.blocksConfig.columnsBlock || {}),

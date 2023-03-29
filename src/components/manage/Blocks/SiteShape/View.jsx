@@ -105,8 +105,8 @@ const View = (props) => {
           />
         </Map>
       </div>
-      <Container className="map-info-notice">
-        <Message>
+      <Message className="map-info-notice">
+        <Container>
           <p>
             The designations employed and the presentation of material on this
             map do not imply the expression of any opinion whatsoever on the
@@ -114,8 +114,8 @@ const View = (props) => {
             country, territory, city or area or of its authorities, or
             concerning the delimitation of its frontiers or boundaries.
           </p>
-        </Message>
-      </Container>
+        </Container>
+      </Message>
     </div>
   );
 };

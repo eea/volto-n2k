@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Menu, Container, Sticky } from 'semantic-ui-react';
 import qs from 'querystring';
 import cx from 'classnames';
 import { UniversalLink } from '@plone/volto/components';
-import { StickyContext } from '@eeacms/volto-bise/components';
 import { withHashLink } from '@eeacms/volto-n2k/hocs';
 import './styles.less';
 
@@ -20,8 +19,8 @@ const formatLink = (str, obj) => {
 
 const View = (props) => {
   const [activeHash, setActiveHash] = useState();
+  const [height, setHeight] = useState();
   const [offsetHeight, setOffsetHeight] = useState(0);
-  const { stickyRef } = useContext(StickyContext);
   const anchorsRef = useRef();
   const { data = {}, screen = {} } = props;
   const links = data.links || [];
@@ -39,18 +38,24 @@ const View = (props) => {
 
   const onScroll = () => {
     const top = document.documentElement.scrollTop;
-    const offsetHeight = anchorsRef.current?.offsetHeight + 10;
-    let activeHash,
+    const offsetHeight = anchorsRef.current?.offsetHeight + 16;
+    let newActiveHash,
       maxTop = 0;
     hashList.forEach((hash) => {
       const hashTop = document.getElementById(hash)?.offsetTop;
       if (top >= hashTop - offsetHeight && top >= maxTop) {
         maxTop = top;
-        activeHash = hash;
+        newActiveHash = hash;
       }
     });
-    setActiveHash(activeHash);
-    setOffsetHeight(offsetHeight - 11);
+    if (newActiveHash !== activeHash) {
+      setActiveHash(newActiveHash);
+    }
+    setOffsetHeight(offsetHeight);
+    setHeight(
+      document.querySelector('.eea.header .fixed-container > .ui.sticky')
+        ?.offsetHeight,
+    );
   };
 
   useEffect(() => {
@@ -65,7 +70,7 @@ const View = (props) => {
   return (
     <Sticky
       active={sticky && screen.page?.width > 765}
-      context={stickyRef}
+      context={__CLIENT__ && document.querySelector('.content-area')}
       className={cx('sticky-navigation-anchors', {
         'full-width': sticky,
         'is-sticky': sticky,
@@ -73,6 +78,7 @@ const View = (props) => {
     >
       <div
         className={cx('navigation-anchors', data.className)}
+        style={{ ...(height ? { height: `${height}px` } : {}) }}
         ref={anchorsRef}
       >
         <Container>

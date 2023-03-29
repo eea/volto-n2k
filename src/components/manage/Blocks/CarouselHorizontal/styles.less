@@ -1,0 +1,32 @@
+@import (multiple, reference, optional) '../../theme.config';
+@type: extra;
+@element: custom;
+
+.slick-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 600px;
+  pointer-events: none;
+}
+
+@media only screen and (min-width: @mobileBreakpoint) {
+  .slick-image {
+    width: 450px !important;
+    transform: translateX(-40%) translateY(5%) !important;
+  }
+}
+
+@media only screen and (min-width: @tabletBreakpoint) {
+  .slick-image {
+    width: 500px !important;
+    transform: translateX(-25%) translateY(5%) !important;
+  }
+}
+
+@media only screen and (min-width: @computerBreakpoint) {
+  .slick-image {
+    width: 600px !important;
+    transform: translateX(-20%) translateY(5%) !important;
+  }
+}
