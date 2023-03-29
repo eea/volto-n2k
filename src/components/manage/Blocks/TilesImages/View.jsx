@@ -12,6 +12,7 @@ const View = (props) => {
       {mode === 'edit' && !images.length ? <p>Tiles images block</p> : ''}
       {images.map((image) => (
         <p
+          key={`tile-${image.title}`}
           className={cx('p-image', {
             'with-border': data.hasBorder ?? true,
             'rounded-border': data.rounded ?? true,

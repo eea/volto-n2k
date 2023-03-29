@@ -73,13 +73,13 @@ export const tileProps = {
 export const getStyle = (props) => {
   if (!props.screen) return {};
   if (!props.screen.width || !props.screen.height) return {};
+  const height =
+    props.screen.height -
+    props.screen.browserToolbarHeight -
+    props.screen.content.offsetTop;
   return {
-    minHeight: (
-      props.screen.height - props.screen.browserToolbarHeight
-    ).toPixel(),
-    maxHeight: (
-      props.screen.height - props.screen.browserToolbarHeight
-    ).toPixel(),
+    minHeight: `${height}px`,
+    maxHeight: `${height}px`,
   };
 };
 

@@ -16,15 +16,13 @@
     "@eeacms/volto-datablocks",
     "@eeacms/volto-openlayers-map",
     "@eeacms/volto-resize-helper",
-    "@eeacms/volto-tabs-block",
-    "@eeacms/volto-bise"
+    "@eeacms/volto-tabs-block"
   ],
   "repository": {
     "type": "git",
     "url": "git@github.com:eea/volto-n2k.git"
   },
   "dependencies": {
-    "@eeacms/volto-bise": "*",
     "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-openlayers-map": "*",
     "@eeacms/volto-resize-helper": "*",

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { generatePath } from 'react-router';
+import Cookies from 'universal-cookie';
 import { Grid } from 'semantic-ui-react';
+import config from '@plone/volto/registry';
 import { UniversalLink } from '@plone/volto/components';
-import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 import hiker from './images/hiker.webp';
 import { tiles, tileProps, getStyle } from './index';
 
@@ -11,15 +12,25 @@ function removeTrailingSlash(str) {
   return str.replace(/\/+$/, '');
 }
 
+function getLanguage() {
+  if (__SERVER__) {
+    return config.settings.eea.defaultLanguage;
+  }
+  const cookies = new Cookies();
+
+  if (!cookies.get('LANGUAGE')) {
+    cookies.set('LANGUAGE', config.settings.eea.defaultLanguage || '');
+  }
+
+  return cookies.get('LANGUAGE');
+}
+
 const DefaultView = (props) => {
-  const currentLang = props.localStorage.get('N2K_LANGUAGE');
+  const language = getLanguage();
 
   useEffect(() => {
-    if (
-      props.location?.pathname &&
-      removeTrailingSlash(props.location.pathname) === '/natura2000'
-    ) {
-      props.history.push(`/natura2000/${currentLang || 'en'}`);
+    if (removeTrailingSlash(props.location?.pathname || '') === '/natura2000') {
+      props.history.push(`/natura2000/${language || 'en'}`);
     }
     /* eslint-disable-next-line */
   }, []);
@@ -59,10 +70,10 @@ const DefaultView = (props) => {
               mobile="7"
             >
               <Grid style={{ justifyContent: 'space-around' }}>
-                {currentLang
+                {language
                   ? tiles.map((item, index) => {
                       const link = generatePath(item.link, {
-                        lang: currentLang,
+                        lang: language,
                       });
                       return (
                         <Grid.Column
@@ -93,6 +104,5 @@ const DefaultView = (props) => {
 };
 
 export default connect((state) => ({
-  navigation: state.navigation,
   screen: state.screen,
-}))(withLocalStorage(DefaultView));
+}))(DefaultView);
