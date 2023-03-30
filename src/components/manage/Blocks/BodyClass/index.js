@@ -18,7 +18,7 @@ export default (config) => {
       addPermission: [],
       view: [],
     },
-    blockHasOwnFocusManagement: true,
+    blockHasOwnFocusManagement: false,
   };
   return config;
 };
