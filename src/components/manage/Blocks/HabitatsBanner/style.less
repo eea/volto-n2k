@@ -1,16 +1,20 @@
+@import 'swiper/swiper.less';
+@import 'swiper/modules/navigation/navigation.less';
+@import 'swiper/modules/pagination/pagination.less';
+
 div#view .habitat-banner-details .ui.container > * {
   margin-bottom: 0;
 }
 
 .habitat-banner-details {
-  padding: 1.5em 0;
+  padding: 0;
   background-color: #00a390;
   color: #fff !important;
   font-family: 'RajdhaniB', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
   .habitat-details {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 1rem;
 
@@ -68,10 +72,50 @@ div#view .habitat-banner-details .ui.container > * {
       }
     }
 
-    img {
-      max-height: 200px;
-      border-radius: 10px;
-      filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.4));
+    .swiper {
+      width: 100%;
+    }
+
+    .swiper-slide {
+      filter: grayscale(100%);
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .swiper-slide-active {
+      filter: grayscale(0%);
+    }
+
+    .carousel {
+      right: -348px;
+      width: 788px;
+      position: relative;
+    }
+
+    .icon-left {
+      width: 23px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .icon-right {
+      width: 23px;
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      margin: 0;
+      padding: 0;
+    }
+
+    .arrows {
+      display: flex;
+      z-index: 10;
+      position: absolute;
+      bottom: -6px;
     }
   }
 }

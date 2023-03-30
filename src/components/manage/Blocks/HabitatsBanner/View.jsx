@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+import loadable from '@loadable/component';
 import { Container } from 'semantic-ui-react';
+import arrow from './chevron-left-square-fill-svgrepo-com.svg';
 import './style.less';
 
+const SwiperLoader = loadable.lib(() => import('swiper'));
+const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
+
 const View = (props) => {
+  const [swiperRef, setSwiperRef] = useState(null);
   const provider_data = props.provider_data || {};
-  const {
-    code_2000 = [],
-    // habitat_description = [],
-    // habitat_type = [],
-    // number_countries = [],
-    // number_sites = [],
-    scientific_name = [],
-  } = provider_data;
+  // eslint-disable-next-line no-console
+  console.log(provider_data);
+  const { code_2000 = [], WebURL = [], filename = [] } = provider_data;
 
   if (!code_2000[0]) return '';
   return (
@@ -19,19 +20,50 @@ const View = (props) => {
       <Container>
         <div className="habitat-details">
           <div className="habitat-metadata">
-            <h2 className="name">{scientific_name[0]}</h2>
+            {/* <h2 className="name">{scientific_name[0]}</h2> */}
             <p className="info">
               Habitats Directive Annex I code&nbsp;&nbsp;&nbsp;{code_2000[0]}
             </p>
-            <br />
-            {/* {number_sites[0] && (
-              <>
-                <h3 style={{ marginBottom: '0.15rem' }}>{number_sites[0]}</h3>
-                <h4 className="radjhan-normal">
-                  NATURA 2000 SITES PROTECTING THIS HABITAT
-                </h4>
-              </>
-            )} */}
+          </div>
+          <div className="carousel">
+            <div className="arrows">
+              <div className="swiper-button image-swiper-button-prev">
+                <img className="icon-left" src={arrow} alt="left arrow" />
+              </div>
+              <div className="swiper-button image-swiper-button-next">
+                <img className="icon-right" src={arrow} alt="right arrow" />
+              </div>
+            </div>
+            <SwiperLoader>
+              {({ Navigation, Pagination }) => {
+                return (
+                  <SwiperReactLoader>
+                    {({ Swiper, SwiperSlide }) => {
+                      return (
+                        <Swiper
+                          navigation={{
+                            nextEl: '.image-swiper-button-next',
+                            prevEl: '.image-swiper-button-prev',
+                          }}
+                          onSwiper={setSwiperRef}
+                          slidesPerView={3}
+                          spaceBetween={0}
+                          loop={true}
+                          modules={[Navigation, Pagination]}
+                          className="mySwiper"
+                        >
+                          {WebURL.map((img) => (
+                            <SwiperSlide>
+                              <img src={img} alt={filename} />
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
+                      );
+                    }}
+                  </SwiperReactLoader>
+                );
+              }}
+            </SwiperLoader>
           </div>
         </div>
       </Container>

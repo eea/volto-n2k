@@ -40,6 +40,7 @@ import installSpeciesDistribution from './components/manage/Blocks/SpeciesDistri
 import installSpeciesProtectedSites from './components/manage/Blocks/SpeciesProtectedSites';
 import installStackedBarChart from './components/manage/Blocks/StackedBarChart';
 import installTilesImages from './components/manage/Blocks/TilesImages';
+import installTestComponent from './components/manage/Blocks/HabitatsBannerNew';
 
 import { LINK } from '@plone/volto-slate/constants';
 
@@ -121,6 +122,7 @@ const applyConfig = (config) => {
   };
 
   return [
+    installTestComponent,
     installAppExtras,
     installBodyClass,
     installBubbleChart,
