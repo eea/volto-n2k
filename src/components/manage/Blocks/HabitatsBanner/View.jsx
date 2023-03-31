@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import loadable from '@loadable/component';
 import { compose } from 'redux';
 import { Container } from 'semantic-ui-react';
-import { Icon } from '@plone/volto/components';
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
 import arrowSVG from './chevron-left-square-fill-svgrepo-com.svg';
@@ -12,7 +11,6 @@ const SwiperLoader = loadable.lib(() => import('swiper'));
 const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
 
 const _View = (props) => {
-  const bannerRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
   const { providers = [] } = props.data;
   const habitat = props.providers_data?.[providers[0]?.provider_url] || {};
@@ -28,37 +26,18 @@ const _View = (props) => {
     scientific_name,
   } = habitat;
 
+  console.log('HERE', props);
+
   const pictures = habitat_pictures?.['WebURL'] || [];
   const picture_names = habitat_pictures?.['filename'] || [];
   const copyright = habitat_pictures?.['attribution_copyright'] || [];
-
-  const onResize = () => {
-    setTimeout(() => {
-      if (bannerRef.current) {
-        const el = bannerRef.current;
-        const containerEl = el.querySelector('.ui.container');
-
-        el.style.setProperty('--container-left', `${containerEl.offsetLeft}px`);
-      }
-    }, 300);
-  };
-
-  useEffect(() => {
-    setTimeout(() => {
-      onResize();
-    }, 0);
-    window.addEventListener('resize', onResize);
-    return () => {
-      window.removeEventListener('resize', onResize);
-    };
-  }, [code_2000]);
 
   if (!code_2000 && props.mode === 'edit') {
     return 'Habitat banner block (code_2000 undefined)';
   }
   if (!code_2000) return null;
   return (
-    <div className="habitat-banner-details full-width" ref={bannerRef}>
+    <div className="habitat-banner-details full-width">
       <Container>
         <div className="habitat-details">
           <div className="habitat-metadata">

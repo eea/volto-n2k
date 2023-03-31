@@ -75,8 +75,14 @@ div#view .habitat-banner-details .ui.container > * {
     }
 
     .carousel {
+      @toolbarWidthCSS: var(--toolbar-width, 0px);
+      @sidebarWidthCSS: var(--sidebar-width, 0px);
+      @scrollbarWidthCSS: var(--scrollbar-width, 0px);
+      @fullWidth: calc(100vw - @toolbarWidthCSS - @sidebarWidthCSS - @scrollbarWidthCSS);
+      @gutter: calc((@fullWidth - 100%) / 2);
       position: relative;
-      width: calc(50% + var(--container-left, 0px));
+      width: calc(50% + @gutter);
+      max-width: 960px;
 
       p {
         font-family: 'RajdhaniB', 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -150,7 +156,7 @@ div#view .habitat-banner-details .ui.container > * {
 
       .carousel {
         width: 100% !important;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
       }
     }
   }
