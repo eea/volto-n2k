@@ -4,7 +4,8 @@ import { compose } from 'redux';
 import { Container } from 'semantic-ui-react';
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
-import arrowSVG from './chevron-left-square-fill-svgrepo-com.svg';
+import arrowLeft from './chevron-left-square-fill-svgrepo-com.svg';
+import arrowRight from './chevron-right-square-fill-svgrepo-com.svg';
 import './style.less';
 
 const SwiperLoader = loadable.lib(() => import('swiper'));
@@ -25,8 +26,6 @@ const _View = (props) => {
     // number_sites = [],
     scientific_name,
   } = habitat;
-
-  console.log('HERE', props);
 
   const pictures = habitat_pictures?.['WebURL'] || [];
   const picture_names = habitat_pictures?.['filename'] || [];
@@ -59,7 +58,7 @@ const _View = (props) => {
               <div className="swiper-button image-swiper-button-prev">
                 <img
                   className="icon  icon-left"
-                  src={arrowSVG}
+                  src={arrowLeft}
                   alt="left arrow"
                 />
                 {/* <Icon className="icon-left" name={arrowSVG} size="24px" /> */}
@@ -67,7 +66,7 @@ const _View = (props) => {
               <div className="swiper-button image-swiper-button-next">
                 <img
                   className="icon icon-right"
-                  src={arrowSVG}
+                  src={arrowRight}
                   alt="right arrow"
                 />
                 {/* <Icon className="icon-right" name={arrowSVG} size="24px" /> */}

@@ -78,7 +78,9 @@ div#view .habitat-banner-details .ui.container > * {
       @toolbarWidthCSS: var(--toolbar-width, 0px);
       @sidebarWidthCSS: var(--sidebar-width, 0px);
       @scrollbarWidthCSS: var(--scrollbar-width, 0px);
-      @fullWidth: calc(100vw - @toolbarWidthCSS - @sidebarWidthCSS - @scrollbarWidthCSS);
+      @fullWidth: calc(
+        100vw - @toolbarWidthCSS - @sidebarWidthCSS - @scrollbarWidthCSS
+      );
       @gutter: calc((@fullWidth - 100%) / 2);
       position: relative;
       width: calc(50% + @gutter);
@@ -117,11 +119,6 @@ div#view .habitat-banner-details .ui.container > * {
           background-color: #fff;
         }
 
-        .icon-right {
-          -webkit-transform: scaleX(-1);
-          transform: scaleX(-1);
-        }
-
         p {
           overflow: hidden;
           white-space: nowrap;
@@ -145,7 +142,6 @@ div#view .habitat-banner-details .ui.container > * {
         transition: filter 0.5s;
       }
     }
-
 
     @media only screen and (max-width: 768px) {
       flex-flow: column;
