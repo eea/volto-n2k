@@ -55,9 +55,9 @@ div#view .habitat-banner-details .ui.container > * {
 
   &::before {
     display: block;
-    content: '';
     height: 100%;
     background-color: #00a390;
+    content: '';
   }
 
   .habitat-details {
@@ -67,11 +67,11 @@ div#view .habitat-banner-details .ui.container > * {
 
     .habitat-metadata {
       display: flex;
+      width: 50%;
+      flex: 0 0 50%;
       flex-direction: column;
       justify-content: center;
       margin: 4rem 0;
-      flex: 0 0 50%;
-      width: 50%;
       word-wrap: break-word;
 
       .name {
@@ -134,45 +134,45 @@ div#view .habitat-banner-details .ui.container > * {
 
       .swiper {
         img {
+          display: block;
           // max-height: 300px;
           width: 100%;
           height: 300px;
-          display: block;
           object-fit: cover;
         }
       }
 
       .arrows {
         position: absolute;
-        width: 100%;
-        display: flex;
-        align-items: center;
         z-index: 1;
         bottom: 0;
         left: 0;
+        display: flex;
+        width: 100%;
+        align-items: center;
 
         .icon {
-          width: 32px;
           display: block;
-          cursor: pointer;
+          width: 32px;
           background-color: #fff;
+          cursor: pointer;
         }
 
         p {
           overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
           width: calc(100% - 64px);
-          backdrop-filter: brightness(0.5);
           padding: 0.25rem 0.25rem 0.25rem 1rem;
           margin: 0;
+          backdrop-filter: brightness(0.5);
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }
 
     .swiper {
-      width: 100%;
       z-index: 0;
+      width: 100%;
 
       .swiper-slide:not(.swiper-slide-active) {
         filter: grayscale(100%);
@@ -187,8 +187,8 @@ div#view .habitat-banner-details .ui.container > * {
       flex-flow: column;
 
       .habitat-metadata {
-        margin-top: 2rem;
         width: 100%;
+        margin-top: 2rem;
       }
 
       .carousel {
