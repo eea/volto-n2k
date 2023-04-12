@@ -75,8 +75,9 @@ export const getStyle = (props) => {
   if (!props.screen.width || !props.screen.height) return {};
   const height =
     props.screen.height -
-    props.screen.browserToolbarHeight -
-    props.screen.content.offsetTop;
+    props.screen.content.offsetTop -
+    props.screen.browserToolbarHeight;
+
   return {
     minHeight: `${height}px`,
     maxHeight: `${height}px`,

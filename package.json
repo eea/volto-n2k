@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-n2k",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "volto-n2k: Volto add-on",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -33,7 +33,8 @@
     "react-stickynode": "^4.0.0",
     "react-use-localstorage": "^3.5.3",
     "resize-observer-polyfill": "1.5.1",
-    "slick-carousel": "1.8.1"
+    "slick-carousel": "1.8.1",
+    "swiper": "9.1.1"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",

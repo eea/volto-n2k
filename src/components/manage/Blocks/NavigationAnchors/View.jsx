@@ -69,7 +69,7 @@ const View = (props) => {
 
   return (
     <Sticky
-      active={sticky && screen.page?.width > 765}
+      active={sticky && screen.page?.width > 767}
       context={__CLIENT__ && document.querySelector('.content-area')}
       className={cx('sticky-navigation-anchors', {
         'full-width': sticky,
