@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import loadable from '@loadable/component';
 import { compose } from 'redux';
-import { Container } from 'semantic-ui-react';
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
 import arrowLeft from './chevron-left-square-fill-svgrepo-com.svg';
@@ -35,16 +34,16 @@ const _View = (props) => {
     return 'Habitat banner block (code_2000 undefined)';
   }
   if (!code_2000) return null;
+
   return (
-    <div className="habitat-banner-details full-width">
-      <Container>
-        <div className="habitat-details">
-          <div className="habitat-metadata">
-            <h2 className="name">{scientific_name[0]}</h2>
-            <p className="info">
-              Habitats Directive Annex I code&nbsp;&nbsp;&nbsp;{code_2000[0]}
-            </p>
-            {/* {number_sites[0] && (
+    <div className="habitat-banner-details">
+      <div className="habitat-details">
+        <div className="habitat-metadata">
+          <h2 className="name">{scientific_name[0]}</h2>
+          <p className="info">
+            Habitats Directive Annex I code&nbsp;&nbsp;&nbsp;{code_2000[0]}
+          </p>
+          {/* {number_sites[0] && (
               <>
                 <h3 style={{ marginBottom: '0.15rem' }}>{number_sites[0]}</h3>
                 <h4 className="radjhan-normal">
@@ -52,7 +51,8 @@ const _View = (props) => {
                 </h4>
               </>
             )} */}
-          </div>
+        </div>
+        {pictures?.length > 0 && (
           <div className="carousel">
             <div className="arrows">
               <div className="swiper-button image-swiper-button-prev">
@@ -115,8 +115,8 @@ const _View = (props) => {
               }}
             </SwiperLoader>
           </div>
-        </div>
-      </Container>
+        )}
+      </div>
     </div>
   );
 };

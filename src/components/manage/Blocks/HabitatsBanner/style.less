@@ -1,22 +1,69 @@
+@type: extra;
+@element: custom;
+
+@import (multiple, reference, optional) '../../theme.config';
+
 @import 'swiper/swiper.less';
 @import 'swiper/modules/navigation/navigation.less';
 @import 'swiper/modules/pagination/pagination.less';
+
+@{view} {
+  .habitat-banner-details {
+    &::before {
+      .full-width();
+      position: absolute;
+      z-index: -1;
+    }
+
+    .carousel {
+      .half-width(960px);
+
+      @media @mobile {
+        width: calc(@pageFullWidth - 2rem) !important;
+      }
+    }
+  }
+}
+
+@{edit} {
+  .habitat-banner-details {
+    &::before {
+      .full-width-edit();
+      position: absolute;
+      z-index: -1;
+    }
+
+    .carousel {
+      .half-width-edit(960px);
+
+      @media @mobile {
+        width: calc(@pageFullWidthEdit - 2rem) !important;
+      }
+    }
+  }
+}
 
 div#view .habitat-banner-details .ui.container > * {
   margin-bottom: 0;
 }
 
 .habitat-banner-details {
+  position: relative;
   padding: 0;
-  background-color: #00a390;
   color: #fff !important;
   font-family: 'RajdhaniB', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+  &::before {
+    display: block;
+    content: '';
+    height: 100%;
+    background-color: #00a390;
+  }
 
   .habitat-details {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    // gap: 1rem;
 
     .habitat-metadata {
       display: flex;
@@ -24,6 +71,8 @@ div#view .habitat-banner-details .ui.container > * {
       justify-content: center;
       margin: 4rem 0;
       flex: 0 0 50%;
+      width: 50%;
+      word-wrap: break-word;
 
       .name {
         margin-top: 0 !important;
@@ -75,17 +124,6 @@ div#view .habitat-banner-details .ui.container > * {
     }
 
     .carousel {
-      @toolbarWidthCSS: var(--toolbar-width, 0px);
-      @sidebarWidthCSS: var(--sidebar-width, 0px);
-      @scrollbarWidthCSS: var(--scrollbar-width, 0px);
-      @fullWidth: calc(
-        100vw - @toolbarWidthCSS - @sidebarWidthCSS - @scrollbarWidthCSS
-      );
-      @gutter: calc((@fullWidth - 100%) / 2);
-      position: relative;
-      width: calc(50% + @gutter);
-      max-width: 960px;
-
       p {
         font-family: 'RajdhaniB', 'Helvetica Neue', Arial, Helvetica, sans-serif;
       }
@@ -106,6 +144,7 @@ div#view .habitat-banner-details .ui.container > * {
 
       .arrows {
         position: absolute;
+        width: 100%;
         display: flex;
         align-items: center;
         z-index: 1;
@@ -123,9 +162,10 @@ div#view .habitat-banner-details .ui.container > * {
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;
-          max-width: calc(80% - 64px);
+          width: calc(100% - 64px);
           backdrop-filter: brightness(0.5);
           padding: 0.25rem 0.25rem 0.25rem 1rem;
+          margin: 0;
         }
       }
     }
@@ -143,16 +183,16 @@ div#view .habitat-banner-details .ui.container > * {
       }
     }
 
-    @media only screen and (max-width: 768px) {
+    @media @mobile {
       flex-flow: column;
 
       .habitat-metadata {
         margin-top: 2rem;
+        width: 100%;
       }
 
       .carousel {
-        width: 100% !important;
-        margin-bottom: 1rem;
+        margin: 0 1rem 1rem 1rem;
       }
     }
   }
