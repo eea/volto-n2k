@@ -107,8 +107,8 @@ const View = (props) => {
           />
         </Map>
       </div>
-      <Container className="map-info-notice">
-        <Message>
+      <Container>
+        <Message className="map-info-notice shadow-none">
           <p>
             The designations employed and the presentation of material on this
             map do not imply the expression of any opinion whatsoever on the

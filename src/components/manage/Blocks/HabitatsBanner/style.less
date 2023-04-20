@@ -4,8 +4,6 @@
 @import (multiple, reference, optional) '../../theme.config';
 
 @import 'swiper/swiper.less';
-@import 'swiper/modules/navigation/navigation.less';
-@import 'swiper/modules/pagination/pagination.less';
 
 @{view} {
   .habitat-banner-details {
@@ -44,10 +42,12 @@
 }
 
 div#view .habitat-banner-details .ui.container > * {
+  margin-top: 0;
   margin-bottom: 0;
 }
 
 .habitat-banner-details {
+  margin-bottom: 1rem;
   position: relative;
   padding: 0;
   color: #fff !important;
@@ -71,7 +71,7 @@ div#view .habitat-banner-details .ui.container > * {
       flex: 0 0 50%;
       flex-direction: column;
       justify-content: center;
-      margin: 4rem 0;
+      height: 320px !important;
       word-wrap: break-word;
 
       .name {
@@ -120,10 +120,21 @@ div#view .habitat-banner-details .ui.container > * {
         font-size: 18px;
         font-weight: 600;
         line-height: 18px;
+
+        a {
+          color: #fff;
+
+          &:hover {
+            color: #fff;
+          }
+        }
       }
     }
 
     .carousel {
+      display: flex;
+      height: 320px;
+
       p {
         font-family: 'RajdhaniB', 'Helvetica Neue', Arial, Helvetica, sans-serif;
       }
@@ -132,24 +143,71 @@ div#view .habitat-banner-details .ui.container > * {
         width: 100%;
       }
 
+      &.one-slide .swiper {
+        width: 100%;
+      }
+
+      &.two-slides .swiper {
+        width: 50%;
+
+        @media @mobile {
+          width: 100%;
+
+          &.preview.preview-one {
+            display: none;
+          }
+        }
+      }
+
+      &.three-slides .swiper {
+        width: 33.33%;
+
+        @media @tablet {
+          width: 50%;
+
+          &.preview.preview-two {
+            display: none;
+          }
+        }
+
+        @media @mobile {
+          width: 100%;
+
+          &.preview.preview-two,
+          &.preview.preview-one {
+            display: none;
+          }
+        }
+      }
+
       .swiper {
+        &.preview .swiper-slide {
+          filter: grayscale(100%);
+        }
+
         img {
           display: block;
-          // max-height: 300px;
           width: 100%;
-          height: 300px;
+          height: 100%;
           object-fit: cover;
         }
       }
 
       .arrows {
         position: absolute;
-        z-index: 1;
+        z-index: 2;
         bottom: 0;
         left: 0;
         display: flex;
         width: 100%;
         align-items: center;
+
+        button {
+          padding: 0;
+          margin: 0;
+          background-color: transparent;
+          border: none;
+        }
 
         .icon {
           display: block;
@@ -167,19 +225,6 @@ div#view .habitat-banner-details .ui.container > * {
           text-overflow: ellipsis;
           white-space: nowrap;
         }
-      }
-    }
-
-    .swiper {
-      z-index: 0;
-      width: 100%;
-
-      .swiper-slide:not(.swiper-slide-active) {
-        filter: grayscale(100%);
-      }
-
-      .swiper-slide {
-        transition: filter 0.5s;
       }
     }
 
