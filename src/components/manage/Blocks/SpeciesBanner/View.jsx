@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React, { useRef, useState } from 'react';
-import { Container } from 'semantic-ui-react';
 import cx from 'classnames';
 import loadable from '@loadable/component';
 import { Icon } from '@plone/volto/components';

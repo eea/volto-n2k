@@ -32,13 +32,15 @@ const _View = (props) => {
 
   const pictures = habitat_pictures?.['WebURL'] || [];
   const pictures_length = pictures?.length;
-  const picture_names = habitat_pictures?.['filename'] || [];
-  const copyright = habitat_pictures?.['attribution_copyright'] || [];
+  // const picture_names = habitat_pictures?.['filename'] || [];
+  // const copyright = habitat_pictures?.['attribution_copyright'] || [];
 
   if (!code_2000 && props.mode === 'edit') {
     return 'Habitat banner block (code_2000 undefined)';
   }
   if (!code_2000) return null;
+  if (activeSlide) {
+  }
 
   return (
     <div className="habitat-banner-details">
