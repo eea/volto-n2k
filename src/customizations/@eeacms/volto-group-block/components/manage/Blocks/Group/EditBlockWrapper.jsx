@@ -1,6 +1,9 @@
 import React from 'react';
 import { Icon, BlockChooser } from '@plone/volto/components';
-import { blockHasValue } from '@plone/volto/helpers';
+import {
+  blockHasValue,
+  buildStyleClassNamesFromData,
+} from '@plone/volto/helpers';
 import config from '@plone/volto/registry';
 import { Button } from 'semantic-ui-react';
 import includes from 'lodash/includes';
@@ -86,6 +89,8 @@ class EditBlockWrapper extends React.Component {
       ? data.required
       : includes(config.blocks.requiredBlocks, type);
 
+    const styles = buildStyleClassNamesFromData(data.styles);
+
     // Get editing instructions from block settings or props
     let instructions = data?.instructions?.data || data?.instructions;
     if (!instructions || instructions === '<p><br/></p>') {
@@ -97,7 +102,9 @@ class EditBlockWrapper extends React.Component {
         <div
           ref={draginfo?.innerRef}
           {...(selected ? draginfo?.draggableProps : null)}
-          className={`block-editor-${data['@type']}`}
+          className={cx(`block-editor-${data['@type']}`, styles, {
+            [data.align]: data.align,
+          })}
         >
           {(!selected || !visible || disabled) && (
             <div
