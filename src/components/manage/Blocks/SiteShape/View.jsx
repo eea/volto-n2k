@@ -105,7 +105,7 @@ const View = (props) => {
           />
         </Map>
       </div>
-      <Message className="map-info-notice">
+      <Message className="map-info-notice shadow-none">
         <Container>
           <p>
             The designations employed and the presentation of material on this

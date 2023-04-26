@@ -1,17 +1,19 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React from 'react';
-import { Container } from 'semantic-ui-react';
-import loadable from '@loadable/component';
-import { photoPlaceholders } from '@eeacms/volto-n2k/helpers';
+import React, { useRef, useState } from 'react';
 import cx from 'classnames';
+import loadable from '@loadable/component';
+import { Icon } from '@plone/volto/components';
+import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
+import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
 import './style.less';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
-const Slider = loadable(() => import('react-slick'));
+const SwiperLoader = loadable.lib(() => import('swiper'));
+const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
 
 const View = (props) => {
-  const slider = React.useRef(null);
+  const swiperEl = useRef();
+  const previewEl = useRef();
+  const [activeSlide, setActiveSlide] = useState(0);
   const provider_data = props.provider_data || {};
   const {
     author = [],
@@ -23,112 +25,170 @@ const View = (props) => {
     picture_url = [],
     scientific_name = [],
     source = [],
-    source_url = [],
-    species_group_name = [],
+    // source_url = [],
+    // species_group_name = [],
   } = provider_data;
 
-  const sliderSettings = {
-    adaptiveHeight: true,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    arrows: true,
-    cssEase: 'ease',
-    dots: false,
-    speed: 500,
-    initialSlide: 0,
-    lazyLoad: 'ondemand',
-    swipe: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    touchMove: true,
-  };
+  const pictures_length = picture_url?.length;
 
   if (!id_eunis[0]) return '';
   return (
-    <div className="species-banner-details full-width">
-      <Container>
-        <div className="species-details">
-          <div className="species-metadata">
-            <h2 className="name">
-              {common_name[0] ? common_name[0] + ' - ' : ''}{' '}
-              <span style={{ fontStyle: 'italic', textTransform: 'none' }}>
-                {scientific_name[0]}
-              </span>
-            </h2>
-            {author[0] && (
-              <p
-                className="info radjhan-bold"
-                style={{ marginBottom: '0.5rem' }}
-              >
-                {author[0]}
-              </p>
-            )}
-            {code_2000[0] && (
-              <p className="info">
-                Natura 2000 species code&nbsp;&nbsp;&nbsp;{code_2000[0]}
-              </p>
-            )}
-            {/* <br />
-            {number_sites[0] && (
-              <h3 style={{ marginBottom: '0.5rem' }}>{number_sites[0]}</h3>
-            )}
-            <h4 className="radjhan-normal">
-              NATURA 2000 SITES PROTECTING THIS SPECIES
-            </h4> */}
-          </div>
-          <div
-            className={cx('species-pictures', {
-              'with-slider': picture_url.length > 0 && picture_url[0],
-            })}
-          >
-            {picture_url.length > 0 && picture_url[0] ? (
-              <Slider {...sliderSettings} ref={slider}>
-                {picture_url.map((picture, index) => (
-                  <div key={`${picture}_${index}`} className="picture-wrapper">
-                    <img src={picture} alt={common_name[0]} />
-                    <div className="source">
-                      <a
-                        href={source_url[index]}
-                        title={'Picture source'}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {source[index]}
-                        {license[index] ? (
-                          <>
-                            ,<br />
-                            {license[index]}
-                          </>
-                        ) : (
-                          ''
-                        )}
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </Slider>
-            ) : (
-              <div className="picture-wrapper">
-                <img
-                  src={
-                    photoPlaceholders[species_group_name[0]] ||
-                    photoPlaceholders.default
-                  }
-                  alt={species_group_name[0]}
-                />
-              </div>
-            )}
-            <div className="find-image">
+    <div className="species-banner-details">
+      <div className="species-details">
+        <div className="species-metadata">
+          <h2 className="name">
+            {common_name[0] ? common_name[0] + ' - ' : ''}{' '}
+            <span style={{ fontStyle: 'italic', textTransform: 'none' }}>
+              {scientific_name[0]}
+            </span>
+          </h2>
+          {author[0] && (
+            <p className="info radjhan-bold" style={{ marginBottom: '0.5rem' }}>
+              {author[0]}
+            </p>
+          )}
+          {code_2000[0] && (
+            <p className="info">
+              Natura 2000 species code&nbsp;&nbsp;&nbsp;{code_2000[0]}
+              <br />
+              <br />
               <a
                 href={`http://images.google.com/images?q=${scientific_name[0]}`}
                 target="_blank"
               >
                 Find image on the web
               </a>
-            </div>
-          </div>
+            </p>
+          )}
         </div>
-      </Container>
+
+        {pictures_length > 0 && (
+          <div
+            className={cx('carousel', {
+              'one-slide': pictures_length === 1,
+              'two-slides': pictures_length === 2,
+              'three-slides': pictures_length > 2,
+            })}
+          >
+            <div className="arrows">
+              <button
+                className="swiper-button image-swiper-button-prev"
+                onClick={() => {
+                  swiperEl.current.slidePrev();
+                  if (previewEl.current?.[0]) {
+                    previewEl.current[0].slidePrev();
+                  }
+                  if (previewEl.current?.[1]) {
+                    previewEl.current[1].slidePrev();
+                  }
+                  setActiveSlide(swiperEl.current.realIndex);
+                }}
+              >
+                <Icon
+                  className="icon-left"
+                  color="#000"
+                  name={arrowLeft}
+                  size="32px"
+                />
+              </button>
+              <button
+                className="swiper-button image-swiper-button-next"
+                onClick={() => {
+                  swiperEl.current.slideNext();
+                  if (previewEl.current?.[0]) {
+                    previewEl.current[0].slideNext();
+                  }
+                  if (previewEl.current?.[1]) {
+                    previewEl.current[1].slideNext();
+                  }
+                  setActiveSlide(swiperEl.current.realIndex);
+                }}
+              >
+                <Icon
+                  className="icon-right"
+                  color="#000"
+                  name={arrowRight}
+                  size="32px"
+                />
+              </button>
+              <p title={`${source[activeSlide]} - ${license[activeSlide]}`}>
+                {source[activeSlide]} - {license[activeSlide]}
+              </p>
+            </div>
+            <SwiperLoader>
+              {() => {
+                return (
+                  <SwiperReactLoader>
+                    {({ Swiper, SwiperSlide }) => {
+                      return (
+                        <>
+                          <Swiper
+                            loop={true}
+                            initialSlide={0}
+                            slidesPerView={1}
+                            spaceBetween={0}
+                            onBeforeInit={(swiper) => {
+                              swiperEl.current = swiper;
+                            }}
+                          >
+                            {picture_url.map((source, index) => (
+                              <SwiperSlide>
+                                <img src={source} alt={picture_url[index]} />
+                              </SwiperSlide>
+                            ))}
+                          </Swiper>
+                          {pictures_length > 1 && (
+                            <Swiper
+                              className="preview preview-one"
+                              loop={true}
+                              initialSlide={1}
+                              slidesPerView={1}
+                              spaceBetween={0}
+                              onBeforeInit={(swiper) => {
+                                if (!previewEl.current) {
+                                  previewEl.current = [];
+                                }
+                                previewEl.current[0] = swiper;
+                              }}
+                            >
+                              {picture_url.map((source, index) => (
+                                <SwiperSlide>
+                                  <img src={source} alt={picture_url[index]} />
+                                </SwiperSlide>
+                              ))}
+                            </Swiper>
+                          )}
+                          {pictures_length > 2 && (
+                            <Swiper
+                              className="preview preview-two"
+                              loop={true}
+                              initialSlide={2}
+                              slidesPerView={1}
+                              spaceBetween={0}
+                              onBeforeInit={(swiper) => {
+                                if (!previewEl.current) {
+                                  previewEl.current = [];
+                                }
+                                previewEl.current[1] = swiper;
+                              }}
+                            >
+                              {picture_url.map((source, index) => (
+                                <SwiperSlide>
+                                  <img src={source} alt={picture_url[index]} />
+                                </SwiperSlide>
+                              ))}
+                            </Swiper>
+                          )}
+                        </>
+                      );
+                    }}
+                  </SwiperReactLoader>
+                );
+              }}
+            </SwiperLoader>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

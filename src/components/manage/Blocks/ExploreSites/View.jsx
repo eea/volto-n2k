@@ -160,8 +160,8 @@ const View = (props) => {
           />
         </Map>
       </div>
-      <Container className="map-info-notice">
-        <Message style={{ color: '#005248' }}>
+      <Container>
+        <Message className="map-info-notice" style={{ color: '#005248' }}>
           <p>
             The designations employed and the presentation of material on this
             map do not imply the expression of any opinion whatsoever on the

@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
-import loadable from '@loadable/component';
+import React, { useRef, useState } from 'react';
 import { compose } from 'redux';
+import cx from 'classnames';
+import loadable from '@loadable/component';
+import { Icon } from '@plone/volto/components';
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
-import arrowLeft from './chevron-left-square-fill-svgrepo-com.svg';
-import arrowRight from './chevron-right-square-fill-svgrepo-com.svg';
+import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
+import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
 import './style.less';
 
 const SwiperLoader = loadable.lib(() => import('swiper'));
 const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
 
 const _View = (props) => {
+  const swiperEl = useRef();
+  const previewEl = useRef();
   const [activeSlide, setActiveSlide] = useState(0);
   const { providers = [] } = props.data;
   const habitat = props.providers_data?.[providers[0]?.provider_url] || {};
@@ -27,13 +31,16 @@ const _View = (props) => {
   } = habitat;
 
   const pictures = habitat_pictures?.['WebURL'] || [];
-  const picture_names = habitat_pictures?.['filename'] || [];
-  const copyright = habitat_pictures?.['attribution_copyright'] || [];
+  const pictures_length = pictures?.length;
+  // const picture_names = habitat_pictures?.['filename'] || [];
+  // const copyright = habitat_pictures?.['attribution_copyright'] || [];
 
   if (!code_2000 && props.mode === 'edit') {
     return 'Habitat banner block (code_2000 undefined)';
   }
   if (!code_2000) return null;
+  if (activeSlide) {
+  }
 
   return (
     <div className="habitat-banner-details">
@@ -52,62 +59,124 @@ const _View = (props) => {
               </>
             )} */}
         </div>
-        {pictures?.length > 0 && (
-          <div className="carousel">
+        {pictures_length > 0 && (
+          <div
+            className={cx('carousel', {
+              'one-slide': pictures_length === 1,
+              'two-slides': pictures_length === 2,
+              'three-slides': pictures_length > 2,
+            })}
+          >
             <div className="arrows">
-              <div className="swiper-button image-swiper-button-prev">
-                <img
-                  className="icon  icon-left"
-                  src={arrowLeft}
-                  alt="left arrow"
+              <button
+                className="swiper-button image-swiper-button-prev"
+                onClick={() => {
+                  swiperEl.current.slidePrev();
+                  if (previewEl.current?.[0]) {
+                    previewEl.current[0].slidePrev();
+                  }
+                  if (previewEl.current?.[1]) {
+                    previewEl.current[1].slidePrev();
+                  }
+                  setActiveSlide(swiperEl.current.realIndex);
+                }}
+              >
+                <Icon
+                  className="icon-left"
+                  color="#000"
+                  name={arrowLeft}
+                  size="32px"
                 />
-                {/* <Icon className="icon-left" name={arrowSVG} size="24px" /> */}
-              </div>
-              <div className="swiper-button image-swiper-button-next">
-                <img
-                  className="icon icon-right"
-                  src={arrowRight}
-                  alt="right arrow"
+              </button>
+              <button
+                className="swiper-button image-swiper-button-next"
+                onClick={() => {
+                  swiperEl.current.slideNext();
+                  if (previewEl.current?.[0]) {
+                    previewEl.current[0].slideNext();
+                  }
+                  if (previewEl.current?.[1]) {
+                    previewEl.current[1].slideNext();
+                  }
+                  setActiveSlide(swiperEl.current.realIndex);
+                }}
+              >
+                <Icon
+                  className="icon-right"
+                  color="#000"
+                  name={arrowRight}
+                  size="32px"
                 />
-                {/* <Icon className="icon-right" name={arrowSVG} size="24px" /> */}
-              </div>
-              <p>{copyright[activeSlide]}</p>
+              </button>
+              {/* <p title={`${source[activeSlide]} - ${license[activeSlide]}`}>
+                {source[activeSlide]} - {license[activeSlide]}
+              </p> */}
             </div>
             <SwiperLoader>
-              {({ Navigation, Pagination }) => {
+              {() => {
                 return (
                   <SwiperReactLoader>
                     {({ Swiper, SwiperSlide }) => {
                       return (
-                        <Swiper
-                          modules={[Navigation, Pagination]}
-                          navigation={{
-                            prevEl: '.image-swiper-button-prev',
-                            nextEl: '.image-swiper-button-next',
-                          }}
-                          slidesPerView={3}
-                          spaceBetween={0}
-                          loop={true}
-                          breakpoints={{
-                            320: {
-                              slidesPerView: 1,
-                              spaceBetween: 0,
-                            },
-                            1200: {
-                              slidesPerView: 3,
-                              spaceBetween: 0,
-                            },
-                          }}
-                          onSlideChange={(swiper) => {
-                            setActiveSlide(swiper.activeIndex);
-                          }}
-                        >
-                          {pictures.map((source, index) => (
-                            <SwiperSlide>
-                              <img src={source} alt={picture_names[index]} />
-                            </SwiperSlide>
-                          ))}
-                        </Swiper>
+                        <>
+                          <Swiper
+                            loop={true}
+                            initialSlide={0}
+                            slidesPerView={1}
+                            spaceBetween={0}
+                            onBeforeInit={(swiper) => {
+                              swiperEl.current = swiper;
+                            }}
+                          >
+                            {pictures.map((source, index) => (
+                              <SwiperSlide>
+                                <img src={source} alt={pictures[index]} />
+                              </SwiperSlide>
+                            ))}
+                          </Swiper>
+                          {pictures_length > 1 && (
+                            <Swiper
+                              className="preview preview-one"
+                              loop={true}
+                              initialSlide={1}
+                              slidesPerView={1}
+                              spaceBetween={0}
+                              onBeforeInit={(swiper) => {
+                                if (!previewEl.current) {
+                                  previewEl.current = [];
+                                }
+                                previewEl.current[0] = swiper;
+                              }}
+                            >
+                              {pictures.map((source, index) => (
+                                <SwiperSlide>
+                                  <img src={source} alt={pictures[index]} />
+                                </SwiperSlide>
+                              ))}
+                            </Swiper>
+                          )}
+                          {pictures_length > 2 && (
+                            <Swiper
+                              className="preview preview-two"
+                              loop={true}
+                              initialSlide={2}
+                              slidesPerView={1}
+                              spaceBetween={0}
+                              onBeforeInit={(swiper) => {
+                                if (!previewEl.current) {
+                                  previewEl.current = [];
+                                }
+                                previewEl.current[1] = swiper;
+                              }}
+                            >
+                              {pictures.map((source, index) => (
+                                <SwiperSlide>
+                                  <img src={source} alt={pictures[index]} />
+                                </SwiperSlide>
+                              ))}
+                            </Swiper>
+                          )}
+                        </>
                       );
                     }}
                   </SwiperReactLoader>
