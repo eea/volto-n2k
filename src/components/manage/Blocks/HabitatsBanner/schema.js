@@ -1,60 +1,26 @@
-const SourceSchema = {
-  title: 'Source',
-
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['source', 'source_link'],
-    },
-  ],
-
-  properties: {
-    source: {
-      type: 'string',
-      title: 'Source',
-    },
-    source_link: {
-      type: 'string',
-      title: 'Link',
-    },
-  },
-
-  required: ['source'],
-};
-
-const DataProvidersSchema = {
-  title: 'Data provider',
-  fieldsets: [{ id: 'default', title: 'Default', fields: ['provider_url'] }],
-  properties: {
-    provider_url: {
-      title: 'Provider url',
-      widget: 'object_by_path',
-    },
-  },
-};
-
-const getSchema = (props) => {
+const getSchema = () => {
   return {
     title: 'Habitats Banner',
     fieldsets: [
       {
         id: 'default',
         title: 'Default',
-        fields: ['providers', 'allowedParams'],
-      },
-      {
-        id: 'sources',
-        title: 'Sources',
-        fields: ['sources'],
+        fields: [
+          'habitat_provider',
+          'habitat_pictures_provider',
+          'allowedParams',
+        ],
       },
     ],
 
     properties: {
-      providers: {
-        title: 'Data provider',
-        schema: DataProvidersSchema,
-        widget: 'object_list',
+      habitat_provider: {
+        title: 'Habitat provider',
+        widget: 'url',
+      },
+      habitat_pictures_provider: {
+        title: 'Habitat pictures provider',
+        widget: 'url',
       },
       allowedParams: {
         title: 'Allowed params',
@@ -63,11 +29,6 @@ const getSchema = (props) => {
         items: {
           choices: [],
         },
-      },
-      sources: {
-        title: 'Sources',
-        schema: SourceSchema,
-        widget: 'object_list',
       },
     },
 
