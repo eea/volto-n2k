@@ -17,7 +17,8 @@ const Slider = loadable(() => import('react-slick'));
 
 const Dots = (props) => {
   const { activeTab = null, tabsList = [], slider = {} } = props;
-  return slider.current && tabsList.length > 1 ? (
+
+  return slider && tabsList.length > 1 ? (
     <div className="slick-dots-wrapper">
       <div className="slick-line" />
       <ul className={cx('slick-dots ui container', props.uiContainer)}>
@@ -30,8 +31,8 @@ const Dots = (props) => {
               aria-label={`Select slide ${index + 1}`}
               tabIndex={0}
               onClick={() => {
-                if (slider.current) {
-                  slider.current.slickGoTo(index);
+                if (slider) {
+                  slider.slickGoTo(index);
                 }
               }}
             />
@@ -49,7 +50,7 @@ const ArrowsGroup = (props) => {
   const currentSlide = tabsList.indexOf(activeTab);
   const slideCount = tabsList.length;
 
-  return slider.current ? (
+  return slider ? (
     <div
       className={cx({
         'slick-arrows': true,
@@ -61,8 +62,8 @@ const ArrowsGroup = (props) => {
           aria-label="Previous slide"
           className="slick-arrow slick-prev"
           onClick={() => {
-            if (slider.current) {
-              slider.current.slickPrev();
+            if (slider) {
+              slider.slickPrev();
             }
           }}
           tabIndex={0}
@@ -77,8 +78,8 @@ const ArrowsGroup = (props) => {
           aria-label="Next slide"
           className="slick-arrow slick-next"
           onClick={() => {
-            if (slider.current) {
-              slider.current.slickNext();
+            if (slider) {
+              slider.slickNext();
             }
           }}
           tabIndex={0}
@@ -100,9 +101,9 @@ const ArrowsGroup = (props) => {
 };
 
 const View = (props) => {
-  const slider = React.useRef(null);
   const img = React.useRef(null);
-  // const [imgHeight, setImgHeight] = React.useState(0);
+  const sliderUp = React.useRef(null);
+  const [slider, setSlider] = React.useState(null);
   const [hashlinkOnMount, setHashlinkOnMount] = React.useState(false);
   const blockId = props.id;
   const {
@@ -134,28 +135,12 @@ const View = (props) => {
     },
   };
 
-  // const panes = tabsList.map((tab, index) => {
-  //   return {
-  //     id: tab,
-  //     renderItem: (
-  //       <React.Fragment key={`slide-${tab}`}>
-  //         <RenderBlocks {...props} metadata={metadata} content={tabs[tab]} />
-  //         {index === 0 ? (
-  //           <div
-  //             className="divider"
-  //             style={{ height: `${imgHeight - 80}px` }}
-  //           />
-  //         ) : (
-  //           ''
-  //         )}
-  //       </React.Fragment>
-  //     ),
-  //   };
-  // });
-
-  // const updateImageHeight = () => {
-  //   setImgHeight(img.current?.height || 0);
-  // };
+  React.useEffect(() => {
+    return () => {
+      setSlider(null);
+      sliderUp.current = false;
+    };
+  }, []);
 
   React.useEffect(() => {
     const urlHash = props.location.hash.substring(1) || '';
@@ -178,7 +163,7 @@ const View = (props) => {
         parent
       ) {
         if (activeTabIndex !== index) {
-          slider.current.slickGoTo(index);
+          slider.slickGoTo(index);
         }
         props.scrollToTarget(parent, offsetHeight);
       } else if (id === parentId && parent) {
@@ -205,25 +190,16 @@ const View = (props) => {
     };
   });
 
-  // React.useEffect(() => {
-  //   updateImageHeight();
-  //   img.current.onload = () => {
-  //     updateImageHeight();
-  //   };
-  //   window.addEventListener('resize', updateImageHeight);
-  //   return () => {
-  //     window.removeEventListener('resize', updateImageHeight);
-  //   };
-  //   /* eslint-disable-next-line */
-  // }, []);
-
-  // console.log('HERE RERENDER');
-
   return (
     <>
       <Slider
         {...settings}
-        ref={slider}
+        ref={(sliderRef) => {
+          if (!slider && !sliderUp.current) {
+            setSlider(sliderRef);
+            sliderUp.current = true;
+          }
+        }}
         className={cx(uiContainer, 'tabs-accessibility')}
         accessibility={true}
         afterChange={() => {

@@ -1,10 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { compose } from 'redux';
 import cx from 'classnames';
 import loadable from '@loadable/component';
 import { Icon } from '@plone/volto/components';
+import { flattenToAppURL } from '@plone/volto/helpers';
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
+import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
 import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
 import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
 import './style.less';
@@ -12,34 +14,39 @@ import './style.less';
 const SwiperLoader = loadable.lib(() => import('swiper'));
 const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
 
+const getSource = (source) => {
+  let parsedSource = replaceQueryParam(source, 'x', 300);
+  parsedSource = replaceQueryParam(parsedSource, 'y', 300);
+
+  return parsedSource;
+};
+
 const _View = (props) => {
   const swiperEl = useRef();
   const previewEl = useRef();
   const [activeSlide, setActiveSlide] = useState(0);
-  const { providers = [] } = props.data;
-  const habitat = props.providers_data?.[providers[0]?.provider_url] || {};
+  const habitat_provider = flattenToAppURL(props.data.habitat_provider);
+  const habitat_pictures_provider = flattenToAppURL(
+    props.data.habitat_pictures_provider,
+  );
+  const habitat = props.providers_data?.[habitat_provider] || {};
   const habitat_pictures =
-    props.providers_data?.[providers[1]?.provider_url] || {};
+    props.providers_data?.[habitat_pictures_provider] || {};
 
-  const {
-    code_2000,
-    // habitat_description = [],
-    // habitat_type = [],
-    // number_countries = [],
-    // number_sites = [],
-    scientific_name,
-  } = habitat;
+  const { code_2000 = [], scientific_name = [] } = habitat;
+  const { attribution_copyright = [] } = habitat_pictures;
 
   const pictures = habitat_pictures?.['WebURL'] || [];
-  const pictures_length = pictures?.length;
-  // const picture_names = habitat_pictures?.['filename'] || [];
-  // const copyright = habitat_pictures?.['attribution_copyright'] || [];
+  const pictures_length = useMemo(
+    () => pictures.filter((picture) => !!picture)?.length,
+    [pictures],
+  );
 
-  if (!code_2000 && props.mode === 'edit') {
-    return 'Habitat banner block (code_2000 undefined)';
+  if (!habitat_provider && props.mode === 'edit') {
+    return 'Habitat banner block, habitat provider undefined';
   }
-  if (!code_2000) return null;
-  if (activeSlide) {
+  if (!habitat_pictures_provider && props.mode === 'edit') {
+    return 'Habitat banner block, habitat pictures provider undefined';
   }
 
   return (
@@ -50,14 +57,6 @@ const _View = (props) => {
           <p className="info">
             Habitats Directive Annex I code&nbsp;&nbsp;&nbsp;{code_2000[0]}
           </p>
-          {/* {number_sites[0] && (
-              <>
-                <h3 style={{ marginBottom: '0.15rem' }}>{number_sites[0]}</h3>
-                <h4 className="radjhan-normal">
-                  NATURA 2000 SITES PROTECTING THIS HABITAT
-                </h4>
-              </>
-            )} */}
         </div>
         {pictures_length > 0 && (
           <div
@@ -108,9 +107,9 @@ const _View = (props) => {
                   size="32px"
                 />
               </button>
-              {/* <p title={`${source[activeSlide]} - ${license[activeSlide]}`}>
-                {source[activeSlide]} - {license[activeSlide]}
-              </p> */}
+              {!!attribution_copyright[activeSlide] && (
+                <p>{attribution_copyright[activeSlide]}</p>
+              )}
             </div>
             <SwiperLoader>
               {() => {
@@ -130,7 +129,10 @@ const _View = (props) => {
                           >
                             {pictures.map((source, index) => (
                               <SwiperSlide>
-                                <img src={source} alt={pictures[index]} />
+                                <img
+                                  src={getSource(source)}
+                                  alt={pictures[index]}
+                                />
                               </SwiperSlide>
                             ))}
                           </Swiper>
@@ -150,7 +152,10 @@ const _View = (props) => {
                             >
                               {pictures.map((source, index) => (
                                 <SwiperSlide>
-                                  <img src={source} alt={pictures[index]} />
+                                  <img
+                                    src={getSource(source)}
+                                    alt={pictures[index]}
+                                  />
                                 </SwiperSlide>
                               ))}
                             </Swiper>
@@ -171,7 +176,10 @@ const _View = (props) => {
                             >
                               {pictures.map((source, index) => (
                                 <SwiperSlide>
-                                  <img src={source} alt={pictures[index]} />
+                                  <img
+                                    src={getSource(source)}
+                                    alt={pictures[index]}
+                                  />
                                 </SwiperSlide>
                               ))}
                             </Swiper>
@@ -192,7 +200,12 @@ const _View = (props) => {
 
 const View = compose(
   connectToMultipleProviders((props) => ({
-    providers: props.data?.providers,
+    providers: [
+      {
+        provider_url: props.data?.habitat_provider,
+      },
+      { provider_url: props.data?.habitat_pictures_provider },
+    ],
   })),
 )(_View);
 

@@ -1,8 +1,13 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React, { useRef, useState } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
+import { compose } from 'redux';
 import cx from 'classnames';
 import loadable from '@loadable/component';
+import { flattenToAppURL } from '@plone/volto/helpers';
 import { Icon } from '@plone/volto/components';
+import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
+import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
+import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
 import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
 import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
 import './style.less';
@@ -10,26 +15,56 @@ import './style.less';
 const SwiperLoader = loadable.lib(() => import('swiper'));
 const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
 
-const View = (props) => {
+const getSource = (source) => {
+  let parsedSource = replaceQueryParam(source, 'x', 300);
+  parsedSource = replaceQueryParam(parsedSource, 'y', 300);
+
+  return parsedSource;
+};
+
+const _View = (props) => {
   const swiperEl = useRef();
   const previewEl = useRef();
   const [activeSlide, setActiveSlide] = useState(0);
-  const provider_data = props.provider_data || {};
+  const species_provider = flattenToAppURL(props.data.species_provider);
+  const species_pictures_provider = flattenToAppURL(
+    props.data.species_pictures_provider,
+  );
+  const species = props.providers_data?.[species_provider] || {};
+  const species_pictures =
+    props.providers_data?.[species_pictures_provider] || {};
+
   const {
     author = [],
     common_name = [],
     code_2000 = [],
     id_eunis = [],
-    license = [],
-    // number_sites = [],
     picture_url = [],
     scientific_name = [],
     source = [],
-    // source_url = [],
-    // species_group_name = [],
-  } = provider_data;
+    license = [],
+  } = species;
+  const { attribution_copyright = [] } = species_pictures;
 
-  const pictures_length = picture_url?.length;
+  const pictures = useMemo(() => {
+    const weburls = species_pictures?.['WebURL'] || [];
+    if (weburls.filter((url) => !!url).length > 0) {
+      return weburls;
+    }
+    return picture_url;
+  }, [species_pictures, picture_url]);
+
+  const pictures_length = useMemo(
+    () => pictures.filter((picture) => !!picture)?.length,
+    [pictures],
+  );
+
+  if (!species_provider && props.mode === 'edit') {
+    return 'species banner block, species provider undefined';
+  }
+  if (!species_pictures_provider && props.mode === 'edit') {
+    return 'Species banner block, species pictures provider undefined';
+  }
 
   if (!id_eunis[0]) return '';
   return (
@@ -111,9 +146,13 @@ const View = (props) => {
                   size="32px"
                 />
               </button>
-              <p title={`${source[activeSlide]} - ${license[activeSlide]}`}>
-                {source[activeSlide]} - {license[activeSlide]}
-              </p>
+              {!!attribution_copyright[activeSlide] ? (
+                <p>{attribution_copyright[activeSlide]}</p>
+              ) : !!source[activeSlide] && !!license[activeSlide] ? (
+                <p title={`${source[activeSlide]} - ${license[activeSlide]}`}>
+                  {source[activeSlide]} - {license[activeSlide]}
+                </p>
+              ) : null}
             </div>
             <SwiperLoader>
               {() => {
@@ -131,9 +170,12 @@ const View = (props) => {
                               swiperEl.current = swiper;
                             }}
                           >
-                            {picture_url.map((source, index) => (
+                            {pictures.map((source, index) => (
                               <SwiperSlide>
-                                <img src={source} alt={picture_url[index]} />
+                                <img
+                                  src={getSource(source)}
+                                  alt={pictures[index]}
+                                />
                               </SwiperSlide>
                             ))}
                           </Swiper>
@@ -151,9 +193,12 @@ const View = (props) => {
                                 previewEl.current[0] = swiper;
                               }}
                             >
-                              {picture_url.map((source, index) => (
+                              {pictures.map((source, index) => (
                                 <SwiperSlide>
-                                  <img src={source} alt={picture_url[index]} />
+                                  <img
+                                    src={getSource(source)}
+                                    alt={pictures[index]}
+                                  />
                                 </SwiperSlide>
                               ))}
                             </Swiper>
@@ -172,9 +217,12 @@ const View = (props) => {
                                 previewEl.current[1] = swiper;
                               }}
                             >
-                              {picture_url.map((source, index) => (
+                              {pictures.map((source, index) => (
                                 <SwiperSlide>
-                                  <img src={source} alt={picture_url[index]} />
+                                  <img
+                                    src={getSource(source)}
+                                    alt={pictures[index]}
+                                  />
                                 </SwiperSlide>
                               ))}
                             </Swiper>
@@ -193,4 +241,21 @@ const View = (props) => {
   );
 };
 
-export default View;
+const View = compose(
+  connectToMultipleProviders((props) => ({
+    providers: [
+      {
+        provider_url: props.data?.species_provider,
+      },
+      { provider_url: props.data?.species_pictures_provider },
+    ],
+  })),
+)(_View);
+
+export default (props) => {
+  return (
+    <VisibilitySensor Placeholder={() => <div>loading....&nbsp;</div>}>
+      <View {...props} />
+    </VisibilitySensor>
+  );
+};
