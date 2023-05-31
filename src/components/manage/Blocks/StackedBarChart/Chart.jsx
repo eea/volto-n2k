@@ -26,17 +26,11 @@ function Chart(props) {
   } = props;
 
   useEffect(() => {
-    // dispose();
     if (xDomain.length && yDomain.length) {
       makeAxis();
     }
     /* eslint-disable-next-line */
   }, [JSON.stringify(xDomain), JSON.stringify(yDomain)]);
-
-  // const dispose = () => {
-  //   const svg = select(svgRef.current);
-  //   svg.selectAll('*').remove();
-  // };
 
   const makeAxis = () => {
     const svg = select(svgRef.current);

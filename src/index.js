@@ -45,8 +45,6 @@ import { LINK } from '@plone/volto-slate/constants';
 
 import { gridSizes, variants } from './grid';
 
-// import './less/styles.less';
-
 Array.prototype.sortByProperty = function (property, order = 'ASC') {
   return this.sort((a, b) => {
     if (a[property] < b[property]) return order === 'ASC' ? -1 : 1;
