@@ -38,7 +38,10 @@ const View = (props) => {
 
   const onScroll = () => {
     const top = document.documentElement.scrollTop;
-    const offsetHeight = anchorsRef.current?.offsetHeight + 16;
+    const offsetHeight =
+      screen.page?.width > 767
+        ? anchorsRef.current?.offsetHeight + 32
+        : document.querySelector('.eea.header .ui.sticky')?.offsetHeight + 32;
     let newActiveHash,
       maxTop = 0;
     hashList.forEach((hash) => {
@@ -53,8 +56,7 @@ const View = (props) => {
     }
     setOffsetHeight(offsetHeight);
     setHeight(
-      document.querySelector('.eea.header .fixed-container > .ui.sticky')
-        ?.offsetHeight,
+      document.querySelector('.eea.header .ui.sticky')?.offsetHeight + 16,
     );
   };
 
@@ -74,11 +76,16 @@ const View = (props) => {
       className={cx('sticky-navigation-anchors', {
         'full-width': sticky,
         'is-sticky': sticky,
+        'sticky-broken': screen.page?.width <= 767,
       })}
     >
       <div
         className={cx('navigation-anchors', data.className)}
-        style={{ ...(height ? { height: `${height}px` } : {}) }}
+        style={{
+          ...(height && screen.page?.width > 767
+            ? { height: `${height}px` }
+            : {}),
+        }}
         ref={anchorsRef}
       >
         <Container>
