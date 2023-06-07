@@ -44,7 +44,7 @@ const coloredTableSchema = (props) => {
     properties: {
       td_color: {
         title: 'Table rows color',
-        widget: 'objectlist',
+        widget: 'object_list',
         schema: colorSchema(props),
       },
     },

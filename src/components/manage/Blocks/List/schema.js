@@ -11,9 +11,10 @@ const getSchema = (props) => {
         title: 'Default',
         fields: [
           'labeled',
+          'count',
+          'theme',
           'value',
           ...(props.data.labeled ?? true ? ['label'] : []),
-          'grid_size',
         ],
       },
     ],
@@ -24,21 +25,27 @@ const getSchema = (props) => {
         type: 'boolean',
         default: true,
       },
+      theme: {
+        title: 'Theme',
+        choices: [
+          ['default', 'Default'],
+          ['theme_1', 'Theme 1'],
+          ['theme_2', 'Theme 2'],
+        ],
+      },
       value: {
         title: 'Value',
-        type: 'array',
         choices,
       },
       label: {
         title: 'Label',
-        type: 'array',
         choices,
       },
-      grid_size: {
-        title: 'Grid size',
-        widget: 'number',
-        min: 0,
-        max: 12,
+      count: {
+        title: 'Max items',
+        type: 'number',
+        minimum: 0,
+        maximum: Infinity,
       },
     },
 

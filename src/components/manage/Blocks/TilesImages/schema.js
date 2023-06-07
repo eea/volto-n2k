@@ -54,7 +54,6 @@ export default () => ({
     },
     theme: {
       title: 'Theme',
-      type: 'array',
       choices: [
         ['light', 'Light'],
         ['grey', 'Grey'],

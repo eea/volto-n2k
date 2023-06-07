@@ -17,7 +17,6 @@ const xColorSchema = (props) => {
     properties: {
       label: {
         title: 'Label',
-        type: 'array',
         choices,
       },
       color: {
@@ -48,12 +47,10 @@ const getSchema = (props) => {
     properties: {
       x: {
         title: 'Value',
-        type: 'array',
         choices,
       },
       y: {
         title: 'Label',
-        type: 'array',
         choices,
       },
       x_colors: {

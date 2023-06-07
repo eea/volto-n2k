@@ -14,7 +14,6 @@ const getContactFields = (props) => {
     properties: {
       icon: {
         title: 'Icon',
-        type: 'array',
         choices: [
           ['domain', 'Domain'],
           ['location', 'Location'],
@@ -23,7 +22,6 @@ const getContactFields = (props) => {
       },
       dataEntity: {
         title: 'Data entity',
-        type: 'array',
         choices,
       },
     },

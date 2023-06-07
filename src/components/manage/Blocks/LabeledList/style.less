@@ -1,0 +1,42 @@
+@import (multiple, reference, optional) '../../theme.config';
+
+@type: extra;
+@element: custom;
+
+
+.connected-labeled-list {
+  ul {
+    padding-left: 0;
+    list-style-type: none;
+    margin-left: -0.5rem;
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.5rem;
+      margin: 0.5rem;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    &.default li {
+      background-color: @grey-2;
+    }
+
+    &.primary li {
+      background-color: @primaryColor;
+      color: #fff;
+    }
+
+    &.secondary li {
+      background-color: @secondaryColor;
+      color: #fff;
+    }
+
+    &.tertiary li {
+      background-color: @tertiaryColor;
+      color: #fff;
+    }
+  }
+}
