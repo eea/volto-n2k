@@ -1,0 +1,54 @@
+.connected-status-list {
+  ul {
+    padding-left: 0;
+    margin-left: -0.5rem;
+    list-style-type: none;
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.5rem;
+      margin: 0.5rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: bold;
+
+      .value {
+        padding-right: 0.25rem;
+      }
+
+      .status {
+        padding-left: 0.25rem;
+      }
+
+      &.status-good {
+        background-color: #15957d;
+        color: #fff;
+
+        .icon {
+          rotate: -45deg;
+        }
+      }
+
+      &.status-poor {
+        background-color: #faea8a;
+
+        .icon {
+          rotate: 45deg;
+        }
+      }
+
+      &.status-bad {
+        background-color: #dd552b;
+
+        .icon {
+          rotate: 45deg;
+        }
+      }
+
+      &.status-unkown {
+        background-color: #afb0b3;
+      }
+    }
+  }
+}

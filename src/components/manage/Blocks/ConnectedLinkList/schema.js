@@ -15,12 +15,10 @@ const getSchema = (props) => {
     properties: {
       value: {
         title: 'Value',
-        type: 'array',
         choices,
       },
       linkValue: {
         title: 'Link value',
-        type: 'array',
         choices,
       },
       textTemplate: {

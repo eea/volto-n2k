@@ -13,6 +13,8 @@ import installBubbleChart from './components/manage/Blocks/BubbleChart';
 import installCarouselHorizontal from './components/manage/Blocks/CarouselHorizontal';
 import installCddaShape from './components/manage/Blocks/CddaShape';
 import installConnectedList from './components/manage/Blocks/List';
+import installConnectedStatusList from './components/manage/Blocks/StatusList';
+import installConnectedLabeledList from './components/manage/Blocks/LabeledList';
 import installConnectedLinkList from './components/manage/Blocks/ConnectedLinkList';
 import installContactBlock from './components/manage/Blocks/ContactBlock';
 import installExplodedPiesChart from './components/manage/Blocks/ExplodedPiesChart';
@@ -127,6 +129,8 @@ const applyConfig = (config) => {
     installCarouselHorizontal,
     installCddaShape,
     installConnectedList,
+    installConnectedStatusList,
+    installConnectedLabeledList,
     installConnectedLinkList,
     installContactBlock,
     installExplodedPiesChart,
