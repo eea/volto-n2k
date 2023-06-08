@@ -10,21 +10,24 @@ const View = (props) => {
   return (
     <div className="connected-labeled-list">
       {props.mode === 'edit' ? <p>Connected labeled list</p> : ''}
-      <ul className={data.theme || 'default'}>
-        {Array(Math.max(0, columns))
-          .fill()
-          .map((_, column) => {
-            return (
-              <li key={`connected-list-${column}`}>
-                <span>
-                  {(data.values || [])
-                    .map((value) => provider_data[value.field]?.[column])
-                    .join(data.separator || '')}
-                </span>
-              </li>
-            );
-          })}
-      </ul>
+      {!!columns && (
+        <ul className={data.theme || 'default'}>
+          {Array(Math.max(0, columns))
+            .fill()
+            .map((_, column) => {
+              return (
+                <li key={`connected-list-${column}`}>
+                  <span>
+                    {(data.values || [])
+                      .map((value) => provider_data[value.field]?.[column])
+                      .join(data.separator || '')}
+                  </span>
+                </li>
+              );
+            })}
+        </ul>
+      )}
+      {!columns && <p className="no-results">-</p>}
     </div>
   );
 };

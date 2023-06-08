@@ -20,33 +20,40 @@ const View = (props) => {
   return (
     <div className="connected-list">
       {props.mode === 'edit' ? <p>Connected list</p> : ''}
-      <ul className={data.theme || 'default'}>
-        {Array(Math.max(0, columns))
-          .fill()
-          .map((_, column) => {
-            return (
-              <React.Fragment key={`connected-list-${column}`}>
-                <li>
-                  {(data.labeled ?? true) && data.label ? (
-                    <p className="label">{provider_data[data.label][column]}</p>
-                  ) : (
-                    ''
-                  )}
-                  {data.value ? (
-                    <p className="value">{provider_data[data.value][column]}</p>
-                  ) : (
-                    ''
-                  )}
-                </li>
-                {column < columns - 1 && data.theme === 'theme_1' && (
+      {!!columns && (
+        <ul className={data.theme || 'default'}>
+          {Array(Math.max(0, columns))
+            .fill()
+            .map((_, column) => {
+              return (
+                <React.Fragment key={`connected-list-${column}`}>
                   <li>
-                    <Icon name={arrowSVG} size="64px" />
+                    {(data.labeled ?? true) && data.label ? (
+                      <p className="label">
+                        {provider_data[data.label][column]}
+                      </p>
+                    ) : (
+                      ''
+                    )}
+                    {data.value ? (
+                      <p className="value">
+                        {provider_data[data.value][column]}
+                      </p>
+                    ) : (
+                      ''
+                    )}
                   </li>
-                )}
-              </React.Fragment>
-            );
-          })}
-      </ul>
+                  {column < columns - 1 && data.theme === 'theme_1' && (
+                    <li>
+                      <Icon name={arrowSVG} size="64px" />
+                    </li>
+                  )}
+                </React.Fragment>
+              );
+            })}
+        </ul>
+      )}
+      {!columns && <p className="no-results">-</p>}
     </div>
   );
 };

@@ -31,7 +31,7 @@ const View = (props) => {
     : [];
 
   return contacts.length ? (
-    <div className="contact-block">
+    <div className="_contact-block">
       {contacts.map((index) => (
         <div key={`contact-${index}`} className="contact">
           {contactFields.map((field) => (
