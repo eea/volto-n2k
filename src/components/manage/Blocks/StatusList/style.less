@@ -1,4 +1,11 @@
+@import (multiple, reference, optional) '../../theme.config';
+
+@type: extra;
+@element: custom;
+
 .connected-status-list {
+  margin-bottom: 1rem;
+
   ul {
     padding-left: 0;
     margin-left: -0.5rem;
@@ -40,6 +47,7 @@
 
       &.status-bad {
         background-color: #dd552b;
+        color: #fff;
 
         .icon {
           rotate: 45deg;
@@ -47,7 +55,7 @@
       }
 
       &.status-unkown {
-        background-color: #afb0b3;
+        background-color: @grey-2;
       }
     }
   }

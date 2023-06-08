@@ -33,28 +33,33 @@ const View = (props) => {
   return (
     <div className="connected-status-list">
       {props.mode === 'edit' ? <p>Connected status list</p> : ''}
-      <ul>
-        {Array(Math.max(0, columns))
-          .fill()
-          .map((_, column) => {
-            const status =
-              status_labels[
-                provider_data[data.status]?.[column]?.toLowerCase()
-              ] || status_labels.unknown;
-            return (
-              <li
-                key={`connected-list-${column}`}
-                className={cx(`status-${status.value}`)}
-              >
-                <span className="value">
-                  {provider_data[data.value][column]}
-                </span>
-                <Icon name={arrowSVG} size="16px" />
-                <span className="status">{status.title}</span>
-              </li>
-            );
-          })}
-      </ul>
+      {!!columns && (
+        <ul>
+          {Array(Math.max(0, columns))
+            .fill()
+            .map((_, column) => {
+              const status =
+                status_labels[
+                  provider_data[data.status]?.[column]?.toLowerCase()
+                ] || status_labels.unknown;
+              return (
+                <li
+                  key={`connected-list-${column}`}
+                  className={cx(`status-${status.value}`)}
+                >
+                  {provider_data[data.value] && (
+                    <span className="value">
+                      {provider_data[data.value][column]}
+                    </span>
+                  )}
+                  <Icon name={arrowSVG} size="16px" />
+                  <span className="status">{status.title}</span>
+                </li>
+              );
+            })}
+        </ul>
+      )}
+      {!columns && <p className="no-results">-</p>}
     </div>
   );
 };
