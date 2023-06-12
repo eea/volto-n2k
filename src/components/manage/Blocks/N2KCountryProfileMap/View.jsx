@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 import Map from '@eeacms/volto-openlayers-map/Map';
@@ -22,9 +22,9 @@ let dynamicLayerDefinition = `
           "value":"{country}",
           "label":"{country}",
           "symbol":{
-            "color":[237,81,81,255],
+            "color":[40,149,136,100],
             "outline":{
-              "color":[153,153,153,64],
+              "color":[40,149,136,100],
               "width":0.75,
               "type":"esriSLS",
               "style":"esriSLSSolid"
@@ -43,14 +43,17 @@ let dynamicLayerDefinition = `
 ]`;
 
 const View = (props) => {
+  const mapRef = useRef();
   const [sources, setSources] = useState([]);
   const [tiles, setTiles] = useState([]);
-  const { source } = openlayers;
+  const [extent, setExtent] = useState(null);
+  const { proj, source } = openlayers;
 
   const country = useMemo(() => {
     const query = (props.properties.data_query || []).filter(
       (query) => query.i === 'iso2',
     )[0];
+    if (!query) return null;
     const value = query.v;
     if (isArray(value)) {
       return value[0];
@@ -92,15 +95,53 @@ const View = (props) => {
           'https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Sites/MapServer',
       }),
     ]);
+    fetch(
+      `https://geoenrich.arcgis.com/arcgis/rest/services/World/geoenrichmentserver/Geoenrichment/countries/${country}?f=pjson`,
+    )
+      .then(function (response) {
+        return response.json();
+      })
+      .then(async (data) => {
+        const { fromExtent } = await import('ol/geom/Polygon');
+        if (data && data.countries.length > 0) {
+          const countryInfo = data.countries[0];
+          const countryExtent = [
+            countryInfo.defaultExtent.xmin,
+            countryInfo.defaultExtent.ymin,
+            countryInfo.defaultExtent.xmax,
+            countryInfo.defaultExtent.ymax,
+          ];
+
+          const reprojectedExtent = proj.transformExtent(
+            countryExtent,
+            'EPSG:4326',
+            'EPSG:3857',
+          );
+
+          const polygon = fromExtent(reprojectedExtent);
+          polygon.scale(1.2);
+
+          setExtent(polygon.getExtent());
+        }
+      })
+      .catch(function () {
+        // handle the error
+        setExtent(null);
+      });
     /* eslint-disable-next-line */
   }, [country]);
 
   return (
     <div className="n2k-country-profile-map">
       <Map
+        ref={(map) => {
+          if (map) {
+            mapRef.current = map;
+          }
+        }}
         view={{
           center: [0, 0],
-          extent: [
+          extent: extent || [
             -6319125.804807394,
             3070702.923644739,
             9584655.106275197,

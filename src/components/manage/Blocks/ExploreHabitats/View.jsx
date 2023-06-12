@@ -109,7 +109,6 @@ const View = (props) => {
     /* eslint-disable-next-line */
   }, [JSON.stringify(activePageResults)]);
 
-  if (__SERVER__ || !vectorSource) return '';
   return (
     <div className="explore-habitats-wrapper full-width">
       <div className="explore-habitats">
@@ -118,9 +117,9 @@ const View = (props) => {
             center: proj.fromLonLat([20, 50]),
             showFullExtent: true,
             zoom: 5,
+            ...(options.extent ? { extent: options.extent } : {}),
           }}
           pixelRatio={1}
-          {...options}
         >
           <Layers>
             <Layer.Tile source={tileWMSSources[0]} zIndex={0} />
