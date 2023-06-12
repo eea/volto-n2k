@@ -53,12 +53,12 @@ export function sortBy(obj, property, order = 'ASC') {
 }
 
 export const componentToHex = (c) => {
-  var hex = parseInt(c).toString(16);
+  const hex = parseInt(c).toString(16);
   return hex.length === 1 ? '0' + hex : hex;
 };
 
 function hexToRgb(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? [
         parseInt(result[1], 16),
@@ -86,7 +86,7 @@ export const getContrastColor = (rgb) => {
 };
 
 export const adjustBrightness = (col, amt) => {
-  var usePound = false;
+  let usePound = false;
 
   if (col.includes('rgb(')) {
     const rgb = col
