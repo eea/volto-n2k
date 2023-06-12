@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Pagination, Grid } from 'semantic-ui-react';
-import { getObjectByIndex } from '@eeacms/volto-n2k/helpers';
+import { getObjectByIndex, photoPlaceholders } from '@eeacms/volto-n2k/helpers';
 import { Filters } from './Filters';
-import { photoPlaceholders } from '@eeacms/volto-n2k/helpers';
 import { getPopulationString, getLabelString } from './utils';
 
 import './style.less';

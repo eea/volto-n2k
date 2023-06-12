@@ -17,11 +17,6 @@ function Chart(props) {
   const popupRef = useRef();
   const { margin = { top: 20, right: 30, bottom: 70, left: 40 } } = props;
 
-  // const dispose = () => {
-  //   const svg = select(svgRef.current);
-  //   svg.selectAll('*').remove();
-  // };
-
   return (
     <ChartContext.Provider
       value={{

@@ -42,12 +42,12 @@ import installSpeciesDistribution from './components/manage/Blocks/SpeciesDistri
 import installSpeciesProtectedSites from './components/manage/Blocks/SpeciesProtectedSites';
 import installStackedBarChart from './components/manage/Blocks/StackedBarChart';
 import installTilesImages from './components/manage/Blocks/TilesImages';
+import installN2KCountryProfileMap from './components/manage/Blocks/N2KCountryProfileMap';
+import installCDDACountryProfileMap from './components/manage/Blocks/CDDACountryProfileMap';
 
 import { LINK } from '@plone/volto-slate/constants';
 
 import { gridSizes, variants } from './grid';
-
-// import './less/styles.less';
 
 Array.prototype.sortByProperty = function (property, order = 'ASC') {
   return this.sort((a, b) => {
@@ -158,6 +158,8 @@ const applyConfig = (config) => {
     installSpeciesProtectedSites,
     installStackedBarChart,
     installTilesImages,
+    installN2KCountryProfileMap,
+    installCDDACountryProfileMap,
   ].reduce((acc, apply) => apply(acc), config);
 };
 

@@ -60,7 +60,6 @@ const View = (props) => {
     /* eslint-disable-next-line */
   }, [vectorSource, site_code?.[0]]);
 
-  if (__SERVER__ || !vectorSource) return '';
   return (
     <div className="site-shape-wrapper full-width">
       <div className="site-shape">
@@ -71,9 +70,9 @@ const View = (props) => {
             maxZoom: 10,
             minZoom: 10,
             zoom: 10,
+            ...(options.extent ? { extent: options.extent } : {}),
           }}
           pixelRatio={1}
-          {...options}
         >
           <Layers>
             <Layer.Tile source={tileWMSSources[0]} zIndex={0} />

@@ -69,9 +69,9 @@ const View = (props) => {
             center: proj.fromLonLat([20, 50]),
             showFullExtent: true,
             zoom: 5,
+            ...(options.extent ? { extent: options.extent } : {}),
           }}
           pixelRatio={1}
-          {...options}
         >
           <Layers>
             <Layer.Tile source={tileWMSSources[0]} zIndex={0} />
