@@ -163,6 +163,7 @@ const _View = (props) => {
                         <>
                           <Swiper
                             loop={true}
+                            allowTouchMove={false}
                             initialSlide={0}
                             slidesPerView={1}
                             spaceBetween={0}
@@ -183,6 +184,7 @@ const _View = (props) => {
                             <Swiper
                               className="preview preview-one"
                               loop={true}
+                              allowTouchMove={false}
                               initialSlide={1}
                               slidesPerView={1}
                               spaceBetween={0}
@@ -207,6 +209,7 @@ const _View = (props) => {
                             <Swiper
                               className="preview preview-two"
                               loop={true}
+                              allowTouchMove={false}
                               initialSlide={2}
                               slidesPerView={1}
                               spaceBetween={0}
