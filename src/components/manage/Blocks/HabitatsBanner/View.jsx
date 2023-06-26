@@ -59,13 +59,7 @@ const _View = (props) => {
           </p>
         </div>
         {pictures_length > 0 && (
-          <div
-            className={cx('carousel', {
-              'one-slide': pictures_length === 1,
-              'two-slides': pictures_length === 2,
-              'three-slides': pictures_length > 2,
-            })}
-          >
+          <div className={cx('carousel one-slide')}>
             <div className="arrows">
               <button
                 className="swiper-button image-swiper-button-prev"
@@ -137,56 +131,6 @@ const _View = (props) => {
                               </SwiperSlide>
                             ))}
                           </Swiper>
-                          {pictures_length > 1 && (
-                            <Swiper
-                              className="preview preview-one"
-                              loop={true}
-                              allowTouchMove={false}
-                              initialSlide={1}
-                              slidesPerView={1}
-                              spaceBetween={0}
-                              onBeforeInit={(swiper) => {
-                                if (!previewEl.current) {
-                                  previewEl.current = [];
-                                }
-                                previewEl.current[0] = swiper;
-                              }}
-                            >
-                              {pictures.map((source, index) => (
-                                <SwiperSlide>
-                                  <img
-                                    src={getSource(source)}
-                                    alt={pictures[index]}
-                                  />
-                                </SwiperSlide>
-                              ))}
-                            </Swiper>
-                          )}
-                          {pictures_length > 2 && (
-                            <Swiper
-                              className="preview preview-two"
-                              loop={true}
-                              allowTouchMove={false}
-                              initialSlide={2}
-                              slidesPerView={1}
-                              spaceBetween={0}
-                              onBeforeInit={(swiper) => {
-                                if (!previewEl.current) {
-                                  previewEl.current = [];
-                                }
-                                previewEl.current[1] = swiper;
-                              }}
-                            >
-                              {pictures.map((source, index) => (
-                                <SwiperSlide>
-                                  <img
-                                    src={getSource(source)}
-                                    alt={pictures[index]}
-                                  />
-                                </SwiperSlide>
-                              ))}
-                            </Swiper>
-                          )}
                         </>
                       );
                     }}
