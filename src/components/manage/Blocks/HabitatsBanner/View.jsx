@@ -60,47 +60,53 @@ const _View = (props) => {
         </div>
         {pictures_length > 0 && (
           <div className={cx('carousel one-slide')}>
-            <div className="arrows">
-              <button
-                className="swiper-button image-swiper-button-prev"
-                onClick={() => {
-                  swiperEl.current.slidePrev();
-                  if (previewEl.current?.[0]) {
-                    previewEl.current[0].slidePrev();
-                  }
-                  if (previewEl.current?.[1]) {
-                    previewEl.current[1].slidePrev();
-                  }
-                  setActiveSlide(swiperEl.current.realIndex);
-                }}
-              >
-                <Icon
-                  className="icon-left"
-                  color="#000"
-                  name={arrowLeft}
-                  size="32px"
-                />
-              </button>
-              <button
-                className="swiper-button image-swiper-button-next"
-                onClick={() => {
-                  swiperEl.current.slideNext();
-                  if (previewEl.current?.[0]) {
-                    previewEl.current[0].slideNext();
-                  }
-                  if (previewEl.current?.[1]) {
-                    previewEl.current[1].slideNext();
-                  }
-                  setActiveSlide(swiperEl.current.realIndex);
-                }}
-              >
-                <Icon
-                  className="icon-right"
-                  color="#000"
-                  name={arrowRight}
-                  size="32px"
-                />
-              </button>
+            <div
+              className={cx('arrows', { 'arrows-hidden': pictures_length < 2 })}
+            >
+              {pictures_length > 1 && (
+                <>
+                  <button
+                    className="swiper-button image-swiper-button-prev"
+                    onClick={() => {
+                      swiperEl.current.slidePrev();
+                      if (previewEl.current?.[0]) {
+                        previewEl.current[0].slidePrev();
+                      }
+                      if (previewEl.current?.[1]) {
+                        previewEl.current[1].slidePrev();
+                      }
+                      setActiveSlide(swiperEl.current.realIndex);
+                    }}
+                  >
+                    <Icon
+                      className="icon-left"
+                      color="#000"
+                      name={arrowLeft}
+                      size="32px"
+                    />
+                  </button>
+                  <button
+                    className="swiper-button image-swiper-button-next"
+                    onClick={() => {
+                      swiperEl.current.slideNext();
+                      if (previewEl.current?.[0]) {
+                        previewEl.current[0].slideNext();
+                      }
+                      if (previewEl.current?.[1]) {
+                        previewEl.current[1].slideNext();
+                      }
+                      setActiveSlide(swiperEl.current.realIndex);
+                    }}
+                  >
+                    <Icon
+                      className="icon-right"
+                      color="#000"
+                      name={arrowRight}
+                      size="32px"
+                    />
+                  </button>
+                </>
+              )}
               {!!attribution_copyright[activeSlide] && (
                 <p>{attribution_copyright[activeSlide]}</p>
               )}
