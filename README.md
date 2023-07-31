@@ -14,27 +14,35 @@
 [![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-n2k-develop&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-n2k-develop)
 [![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-n2k-develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-n2k-develop)
 
+
 [Volto](https://github.com/plone/volto) add-on
 
 ## Features
-
-###
 
 Demo GIF
 
 ## Getting started
 
-1. Create new volto project if you don't already have one:
+### Try volto-n2k with Docker
 
+      git clone https://github.com/eea/volto-n2k.git
+      cd volto-n2k
+      make
+      make start
+
+Go to http://localhost:3000
+
+### Add volto-n2k to your Volto project
+
+1. Make sure you have a [Plone backend](https://plone.org/download) up-and-running at http://localhost:8080/Plone
+
+   ```Bash
+   docker compose up backend
    ```
-   $ npm install -g yo @plone/generator-volto
-   $ yo @plone/volto my-volto-project --addon @eeacms/volto-n2k
 
-   $ cd my-volto-project
-   $ yarn add -W @eeacms/volto-n2k
-   ```
+1. Start Volto frontend
 
-1. If you already have a volto project, just update `package.json`:
+* If you already have a volto project, just update `package.json`:
 
    ```JSON
    "addons": [
@@ -42,15 +50,23 @@ Demo GIF
    ],
 
    "dependencies": {
-       "@eeacms/volto-n2k": "^1.0.0"
+       "@eeacms/volto-n2k": "*"
    }
+   ```
+
+* If not, create one:
+
+   ```
+   npm install -g yo @plone/generator-volto
+   yo @plone/volto my-volto-project --canary --addon @eeacms/volto-n2k
+   cd my-volto-project
    ```
 
 1. Install new add-ons and restart Volto:
 
    ```
-   $ yarn
-   $ yarn start
+   yarn
+   yarn start
    ```
 
 1. Go to http://localhost:3000
