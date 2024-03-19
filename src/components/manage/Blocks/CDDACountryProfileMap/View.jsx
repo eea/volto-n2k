@@ -107,8 +107,7 @@ const View = (props) => {
             .replace('{minScale}', largeScaleMinScale)
             .replace('{maxScale}', largeScaleMaxScale),
         },
-        url:
-          'https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer',
+        url: 'https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer',
       }),
       new source.ImageArcGISRest({
         ratio: 1,
@@ -122,8 +121,7 @@ const View = (props) => {
             .replace('{minScale}', mediumScaleMinScale)
             .replace('{maxScale}', mediumScaleMaxScale),
         },
-        url:
-          'https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer',
+        url: 'https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer',
       }),
       new source.ImageArcGISRest({
         ratio: 1,
@@ -137,8 +135,7 @@ const View = (props) => {
             .replace('{minScale}', smallScaleMinScale)
             .replace('{maxScale}', smallScaleMaxScale),
         },
-        url:
-          'https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer',
+        url: 'https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/CDDA_Dyna_WM/MapServer',
       }),
     ]);
     fetch(
@@ -183,9 +180,7 @@ const View = (props) => {
         view={{
           center: [0, 0],
           extent: extent || [
-            -6319125.804807394,
-            3070702.923644739,
-            9584655.106275197,
+            -6319125.804807394, 3070702.923644739, 9584655.106275197,
             12091128.659149397,
           ],
           zoom: 2,
