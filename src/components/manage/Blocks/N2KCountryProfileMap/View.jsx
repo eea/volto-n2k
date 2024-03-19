@@ -91,8 +91,7 @@ const View = (props) => {
             .replaceAll(' ', '')
             .replaceAll('{country}', country),
         },
-        url:
-          'https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Sites/MapServer',
+        url: 'https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Sites/MapServer',
       }),
     ]);
     fetch(
@@ -142,9 +141,7 @@ const View = (props) => {
         view={{
           center: [0, 0],
           extent: extent || [
-            -6319125.804807394,
-            3070702.923644739,
-            9584655.106275197,
+            -6319125.804807394, 3070702.923644739, 9584655.106275197,
             12091128.659149397,
           ],
           zoom: 2,
