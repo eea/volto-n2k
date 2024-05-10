@@ -13,6 +13,7 @@
     "react"
   ],
   "addons": [
+    "@eeacms/volto-spotlight",
     "@eeacms/volto-datablocks",
     "@eeacms/volto-openlayers-map",
     "@eeacms/volto-resize-helper",
@@ -23,6 +24,7 @@
     "url": "git@github.com:eea/volto-n2k.git"
   },
   "dependencies": {
+    "@eeacms/volto-spotlight": "*",
     "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-openlayers-map": "*",
     "@eeacms/volto-resize-helper": "*",

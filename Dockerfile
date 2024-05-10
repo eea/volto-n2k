@@ -5,6 +5,7 @@ FROM eeacms/frontend-builder:${VOLTO_VERSION}
 ARG ADDON_NAME
 ARG ADDON_PATH
 
+COPY --chown=node:node ./theme.js /app/src/theme.js
 COPY --chown=node:node ./ /app/src/addons/${ADDON_PATH}/
 
 RUN /setupAddon
