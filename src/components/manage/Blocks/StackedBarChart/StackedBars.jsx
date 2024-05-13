@@ -12,7 +12,7 @@ const getSerieData = (serie) => {
 
 function StackedBars(props) {
   const { d3 } = props;
-  const { scaleOrdinal, schemeSpectral, stack } = d3;
+  const { scaleOrdinal, stack } = d3;
   const {
     element,
     height,
@@ -35,15 +35,9 @@ function StackedBars(props) {
       return d;
     });
 
-  const defaultColors = ['#70AD47', '#ED7D31', '#FF3F3F', '#AFABAB'];
-  const colorRange =
-    series.length > defaultColors.length
-      ? schemeSpectral[series.length]
-      : defaultColors;
-
   const color = scaleOrdinal()
     .domain(series.map((d) => d.key))
-    .range(colorRange)
+    .range(['#70AD47', '#ED7D31', '#FF3F3F', '#AFABAB'])
     .unknown('#ccc');
 
   return (
