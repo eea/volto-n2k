@@ -31,7 +31,7 @@ const View = (props) => {
     <div className="site-habitats-list">
       {Object.keys(habitats)?.length ? (
         Object.keys(habitats)
-          .sort()
+          .sort((a, b) => a.localeCompare(b))
           .map((habitat) => {
             const expanded = expandedHabitats.includes(habitat);
             return (

@@ -15,8 +15,8 @@ const SwiperLoader = loadable.lib(() => import('swiper'));
 const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
 
 const getSource = (source) => {
-  let parsedSource = replaceQueryParam(source, 'x', 300);
-  parsedSource = replaceQueryParam(parsedSource, 'y', 300);
+  let parsedSource = replaceQueryParam(source, 'x', 800);
+  parsedSource = replaceQueryParam(parsedSource, 'y', 800);
 
   return parsedSource;
 };
