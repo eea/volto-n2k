@@ -34,12 +34,16 @@ function StackedBars(props) {
       d.forEach((v) => (v.key = d.key));
       return d;
     });
+
+  const defaultColors = ['#70AD47', '#ED7D31', '#FF3F3F', '#AFABAB'];
+  const colorRange =
+    series.length > defaultColors.length
+      ? schemeSpectral[series.length]
+      : defaultColors;
+
   const color = scaleOrdinal()
     .domain(series.map((d) => d.key))
-    .range(
-      ['#70AD47', '#ED7D31', '#FF3F3F', '#AFABAB'] ||
-        schemeSpectral[series.length],
-    )
+    .range(colorRange)
     .unknown('#ccc');
 
   return (
