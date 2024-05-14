@@ -63,7 +63,7 @@ export default () => ({
     },
     images: {
       title: 'Images',
-      widget: 'object_list_inline',
+      widget: 'object_list',
       schema: imageSchema,
     },
   },

@@ -51,7 +51,7 @@ const getSchema = () => ({
     },
     tiles: {
       title: 'Tiles',
-      widget: 'object_list_inline',
+      widget: 'object_list',
       description: 'Add a list of tiles',
       schema: tileSchema(),
     },
