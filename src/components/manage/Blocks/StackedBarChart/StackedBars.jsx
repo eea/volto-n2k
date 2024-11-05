@@ -13,15 +13,8 @@ const getSerieData = (serie) => {
 function StackedBars(props) {
   const { d3 } = props;
   const { scaleOrdinal, stack } = d3;
-  const {
-    element,
-    height,
-    width,
-    margin,
-    scales,
-    popup,
-    setPopup,
-  } = React.useContext(ChartContext);
+  const { element, height, width, margin, scales, popup, setPopup } =
+    React.useContext(ChartContext);
   const { data = {}, keys = [], hoverText = '{}' } = props;
 
   if (!keys?.length || !scales?.xScale || !scales?.yScale) {
