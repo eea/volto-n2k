@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Chart from './Chart';
 import StackedBars from './StackedBars';
 
@@ -13,7 +13,7 @@ const View = (props) => {
     y_label_key = 'assessment',
     y_value_key = 'quantity',
   } = props;
-  const data = props.provider_data || {};
+  const data = useMemo(() => props.provider_data || {}, [props.provider_data]);
 
   React.useEffect(() => {
     if (!(data[x_label_key]?.length && data[y_label_key]?.length)) return;

@@ -83,7 +83,7 @@ export const getStyle = (props) => {
   };
 };
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.landing_block = {
     id: 'landing_block',
     title: 'Landing block',
@@ -102,4 +102,4 @@ export default (config) => {
     blockHasOwnFocusManagement: true,
   };
   return config;
-};
+}

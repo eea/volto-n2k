@@ -2,7 +2,7 @@ import ImageTextEdit from './Edit';
 import ImageTextView from './View';
 import worldSVG from '@plone/volto/icons/world.svg';
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.image_text = {
     id: 'image_text',
     title: 'Image text',
@@ -21,4 +21,4 @@ export default (config) => {
     },
   };
   return config;
-};
+}

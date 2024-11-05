@@ -11,7 +11,7 @@ export function getActiveSpeciesURL(site_codes) {
   );
 }
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.explore_species_map = {
     id: 'explore_species_map',
     title: 'Explore species map',
@@ -21,4 +21,4 @@ export default (config) => {
     view: ExploreSpeciesView,
   };
   return config;
-};
+}

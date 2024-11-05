@@ -4,7 +4,7 @@ import carouselSchema from './schema';
 
 export { HorizontalCarouselView, carouselSchema };
 
-export default (config) => {
+export default function applyConfig(config) {
   const carouselVariation =
     config.blocks.blocksConfig.tabs_block.variations.find(
       (variation) => variation.id === 'carousel-horizontal',
@@ -24,4 +24,4 @@ export default (config) => {
   ];
 
   return config;
-};
+}

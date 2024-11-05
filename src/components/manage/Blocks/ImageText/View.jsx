@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { UniversalLink } from '@plone/volto/components';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
-import { createEditor, Editor } from 'slate';
+import { createEditor } from 'slate';
 import cx from 'classnames';
 import './styles.less';
 

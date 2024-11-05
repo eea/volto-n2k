@@ -2,7 +2,7 @@ import worldSVG from '@plone/volto/icons/world.svg';
 import BodyClassEdit from './Edit';
 import BodyClassView from './View';
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.body_classname = {
     id: 'body_classname',
     title: 'Body classname',
@@ -21,4 +21,4 @@ export default (config) => {
     blockHasOwnFocusManagement: false,
   };
   return config;
-};
+}

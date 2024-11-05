@@ -1,6 +1,6 @@
 import { ColoredTableView, coloredTableSchema } from './templates/colored';
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.simpleDataConnectedTable = {
     ...config.blocks.blocksConfig.simpleDataConnectedTable,
     templates: {
@@ -13,4 +13,4 @@ export default (config) => {
     },
   };
   return config;
-};
+}

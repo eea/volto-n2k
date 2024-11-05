@@ -1,4 +1,4 @@
-export default ({ schema }) => {
+export default function getSchema({ schema }) {
   const defaultFieldset = schema.fieldsets.find(
     (fieldset) => fieldset.id === 'default',
   );
@@ -47,4 +47,4 @@ export default ({ schema }) => {
   };
 
   return schema;
-};
+}

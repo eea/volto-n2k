@@ -31,13 +31,18 @@ const _View = (props) => {
     props.data.habitat_pictures_provider,
   );
   const habitat = props.providers_data?.[habitat_provider] || {};
-  const habitat_pictures =
-    props.providers_data?.[habitat_pictures_provider] || {};
+  const habitat_pictures = useMemo(
+    () => props.providers_data?.[habitat_pictures_provider] || {},
+    [props.providers_data, habitat_pictures_provider],
+  );
 
   const { code_2000 = [], scientific_name = [] } = habitat;
   const { attribution_copyright = [] } = habitat_pictures;
 
-  const pictures = habitat_pictures?.['WebURL'] || [];
+  const pictures = useMemo(
+    () => habitat_pictures?.['WebURL'] || [],
+    [habitat_pictures],
+  );
   const pictures_length = useMemo(
     () => pictures.filter((picture) => !!picture)?.length,
     [pictures],
@@ -165,10 +170,10 @@ const View = compose(
   })),
 )(_View);
 
-export default (props) => {
+export default function $View(props) {
   return (
     <VisibilitySensor Placeholder={() => <div>loading....&nbsp;</div>}>
       <View {...props} />
     </VisibilitySensor>
   );
-};
+}

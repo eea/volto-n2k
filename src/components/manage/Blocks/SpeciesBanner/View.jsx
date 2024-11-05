@@ -32,8 +32,10 @@ const _View = (props) => {
     props.data.species_pictures_provider,
   );
   const species = props.providers_data?.[species_provider] || {};
-  const species_pictures =
-    props.providers_data?.[species_pictures_provider] || {};
+  const species_pictures = useMemo(
+    () => props.providers_data?.[species_pictures_provider] || {},
+    [props.providers_data, species_pictures_provider],
+  );
 
   const {
     author = [],
@@ -206,10 +208,10 @@ const View = compose(
   })),
 )(_View);
 
-export default (props) => {
+export default function $View(props) {
   return (
     <VisibilitySensor Placeholder={() => <div>loading....&nbsp;</div>}>
       <View {...props} />
     </VisibilitySensor>
   );
-};
+}
