@@ -3,7 +3,6 @@ import { SidebarPortal } from '@plone/volto/components';
 import BlockDataForm from '@plone/volto/components/manage/Form/BlockDataForm';
 import getSchema from './schema';
 import View from './View';
-import './style.less';
 
 const Edit = (props) => {
   const schema = useMemo(() => getSchema(props), [props]);

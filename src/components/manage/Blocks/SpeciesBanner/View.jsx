@@ -10,6 +10,7 @@ import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
 import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
 import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
 import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
+
 import './style.less';
 
 const SwiperLoader = loadable.lib(() => import('swiper'));
