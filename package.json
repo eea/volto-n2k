@@ -43,6 +43,7 @@
     "cypress": "13.1.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
+    "dotenv": "^16.3.2",
     "md5": "^2.3.0"
   },
   "lint-staged": {

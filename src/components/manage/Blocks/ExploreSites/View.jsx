@@ -39,13 +39,10 @@ const View = (props) => {
       }),
       new source.TileWMS({
         extent: [
-          -3603195.606899999,
-          3197087.8112000003,
-          3796164.5945000015,
+          -3603195.606899999, 3197087.8112000003, 3796164.5945000015,
           1.1077138825000003e7,
         ],
-        url:
-          'https://bio.discomap.eea.europa.eu/arcgis/services/ProtectedSites/Natura2000Sites/MapServer/WMSServer',
+        url: 'https://bio.discomap.eea.europa.eu/arcgis/services/ProtectedSites/Natura2000Sites/MapServer/WMSServer',
         params: { LAYERS: '2', TILED: true },
         serverType: 'geoserver',
         transition: 0,
@@ -65,9 +62,7 @@ const View = (props) => {
         ...options,
         extent: new extent.buffer(
           [
-            -3603195.606899999,
-            3197087.8112000003,
-            3796164.5945000015,
+            -3603195.606899999, 3197087.8112000003, 3796164.5945000015,
             1.1077138825000003e7,
           ],
           -3603195.606899999 * 0.01,

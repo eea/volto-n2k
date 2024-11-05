@@ -62,7 +62,8 @@ function StackedBars(props) {
                   onFocus={() => {}}
                   onBlur={() => {}}
                   onMouseMoveCapture={(event) => {
-                    const elementPosition = element.parentNode.getBoundingClientRect();
+                    const elementPosition =
+                      element.parentNode.getBoundingClientRect();
                     setPopup({
                       id: `${serieIndex}_${rectIndex}_${rect.key}`,
                       clientX: event.clientX - elementPosition.x,
