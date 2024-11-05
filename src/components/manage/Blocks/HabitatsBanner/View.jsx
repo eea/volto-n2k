@@ -9,14 +9,15 @@ import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
 import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
 import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
 import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
+
 import './style.less';
 
 const SwiperLoader = loadable.lib(() => import('swiper'));
 const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
 
 const getSource = (source) => {
-  let parsedSource = replaceQueryParam(source, 'x', 300);
-  parsedSource = replaceQueryParam(parsedSource, 'y', 300);
+  let parsedSource = replaceQueryParam(source, 'x', 800);
+  parsedSource = replaceQueryParam(parsedSource, 'y', 800);
 
   return parsedSource;
 };
@@ -111,39 +112,41 @@ const _View = (props) => {
                 <p>{attribution_copyright[activeSlide]}</p>
               )}
             </div>
-            <SwiperLoader>
-              {() => {
-                return (
-                  <SwiperReactLoader>
-                    {({ Swiper, SwiperSlide }) => {
-                      return (
-                        <>
-                          <Swiper
-                            loop={true}
-                            allowTouchMove={false}
-                            initialSlide={0}
-                            slidesPerView={1}
-                            spaceBetween={0}
-                            onBeforeInit={(swiper) => {
-                              swiperEl.current = swiper;
-                            }}
-                          >
-                            {pictures.map((source, index) => (
-                              <SwiperSlide>
-                                <img
-                                  src={getSource(source)}
-                                  alt={pictures[index]}
-                                />
-                              </SwiperSlide>
-                            ))}
-                          </Swiper>
-                        </>
-                      );
-                    }}
-                  </SwiperReactLoader>
-                );
-              }}
-            </SwiperLoader>
+            {__CLIENT__ && (
+              <SwiperLoader>
+                {() => {
+                  return (
+                    <SwiperReactLoader>
+                      {({ Swiper, SwiperSlide }) => {
+                        return (
+                          <>
+                            <Swiper
+                              loop={true}
+                              allowTouchMove={false}
+                              initialSlide={0}
+                              slidesPerView={1}
+                              spaceBetween={0}
+                              onBeforeInit={(swiper) => {
+                                swiperEl.current = swiper;
+                              }}
+                            >
+                              {pictures.map((source, index) => (
+                                <SwiperSlide>
+                                  <img
+                                    src={getSource(source)}
+                                    alt={pictures[index]}
+                                  />
+                                </SwiperSlide>
+                              ))}
+                            </Swiper>
+                          </>
+                        );
+                      }}
+                    </SwiperReactLoader>
+                  );
+                }}
+              </SwiperLoader>
+            )}
           </div>
         )}
       </div>

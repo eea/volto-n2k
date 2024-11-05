@@ -12,9 +12,16 @@ const getSerieData = (serie) => {
 
 function StackedBars(props) {
   const { d3 } = props;
-  const { scaleOrdinal, schemeSpectral, stack } = d3;
-  const { element, height, width, margin, scales, popup, setPopup } =
-    React.useContext(ChartContext);
+  const { scaleOrdinal, stack } = d3;
+  const {
+    element,
+    height,
+    width,
+    margin,
+    scales,
+    popup,
+    setPopup,
+  } = React.useContext(ChartContext);
   const { data = {}, keys = [], hoverText = '{}' } = props;
 
   if (!keys?.length || !scales?.xScale || !scales?.yScale) {
@@ -27,12 +34,10 @@ function StackedBars(props) {
       d.forEach((v) => (v.key = d.key));
       return d;
     });
+
   const color = scaleOrdinal()
     .domain(series.map((d) => d.key))
-    .range(
-      ['#70AD47', '#ED7D31', '#FF3F3F', '#AFABAB'] ||
-        schemeSpectral[series.length],
-    )
+    .range(['#70AD47', '#ED7D31', '#FF3F3F', '#AFABAB'])
     .unknown('#ccc');
 
   return (

@@ -1,13 +1,31 @@
-export default () => ({
-  title: 'Carousel block',
-  fieldsets: [
+export default ({ schema }) => {
+  const defaultFieldset = schema.fieldsets.find(
+    (fieldset) => fieldset.id === 'default',
+  );
+
+  schema.fieldsets = [
+    ...schema.fieldsets.filter(
+      (fieldset) => !['default', 'style'].includes(fieldset.id),
+    ),
     {
-      id: 'default',
-      title: 'Default',
-      fields: ['theme', 'image', 'learnMore'],
+      ...defaultFieldset,
+      fields: [
+        ...defaultFieldset.fields.filter(
+          (field) => !['image', 'learnMore'].includes(field),
+        ),
+        'image',
+        'learnMore',
+      ],
     },
-  ],
-  properties: {
+    {
+      id: 'style',
+      title: 'Style',
+      fields: ['theme'],
+    },
+  ];
+
+  schema.properties = {
+    ...schema.properties,
     theme: {
       title: 'Theme',
       choices: [
@@ -26,6 +44,7 @@ export default () => ({
       widget: 'textarea',
       description: 'Learn more placeholder apearing only on first slide',
     },
-  },
-  required: [],
-});
+  };
+
+  return schema;
+};
