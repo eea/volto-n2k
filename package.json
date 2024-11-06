@@ -16,7 +16,8 @@
     "@eeacms/volto-datablocks",
     "@eeacms/volto-openlayers-map",
     "@eeacms/volto-resize-helper",
-    "@eeacms/volto-tabs-block"
+    "@eeacms/volto-tabs-block",
+    "@eeacms/volto-spotlight"
   ],
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-openlayers-map": "*",
     "@eeacms/volto-resize-helper": "*",
+    "@eeacms/volto-spotlight": "*",
     "@eeacms/volto-tabs-block": "*",
     "d3": "^7.6.1",
     "d3-shape": "^3.1.0",
