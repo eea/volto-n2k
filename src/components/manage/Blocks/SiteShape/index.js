@@ -7,7 +7,7 @@ export function getSiteShapeURL(site_code) {
   );
 }
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.custom_connected_block = {
     ...config.blocks.blocksConfig.custom_connected_block,
     blocks: {
@@ -20,4 +20,4 @@ export default (config) => {
     },
   };
   return config;
-};
+}

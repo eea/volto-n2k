@@ -2,7 +2,7 @@ import NavigationAnchorsEdit from './Edit';
 import NavigationAnchorsView from './View';
 import worldSVG from '@plone/volto/icons/world.svg';
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.navigation_anchors = {
     id: 'navigation_anchors',
     title: 'Navigation anchors',
@@ -20,4 +20,4 @@ export default (config) => {
     },
   };
   return config;
-};
+}

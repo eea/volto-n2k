@@ -4,21 +4,24 @@ import carouselSchema from './schema';
 
 export { HorizontalCarouselView, carouselSchema };
 
-export default (config) => {
-  config.blocks.blocksConfig.tabs_block = {
-    ...(config.blocks.blocksConfig.tabs_block || {}),
-    templates: {
-      ...(config.blocks.blocksConfig.tabs_block?.templates || {}),
-      carousel: {
-        ...(config.blocks.blocksConfig.tabs_block?.templates?.carousel || {}),
-        view: DefaultHorizontalView,
-      },
-      carousel_n2k: {
-        title: 'Carousel Natura 2000',
-        view: HorizontalCarouselView,
-        schema: carouselSchema,
-      },
+export default function applyConfig(config) {
+  const carouselVariation =
+    config.blocks.blocksConfig.tabs_block.variations.find(
+      (variation) => variation.id === 'carousel-horizontal',
+    );
+
+  config.blocks.blocksConfig.tabs_block.variations = [
+    ...config.blocks.blocksConfig.tabs_block.variations.filter(
+      (variation) => variation.id !== 'carousel-horizontal',
+    ),
+    { ...carouselVariation, view: DefaultHorizontalView, yes: true },
+    {
+      id: 'carousel_n2k',
+      title: 'Carousel Natura 2000',
+      view: HorizontalCarouselView,
+      schemaEnhancer: carouselSchema,
     },
-  };
+  ];
+
   return config;
-};
+}

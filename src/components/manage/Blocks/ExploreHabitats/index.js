@@ -11,7 +11,7 @@ export function getActiveHabitatsURL(code_2000) {
   );
 }
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.explore_habitats_map = {
     id: 'explore_habitats_map',
     title: 'Explore habitats map',
@@ -21,4 +21,4 @@ export default (config) => {
     view: ExploreHabitatsView,
   };
   return config;
-};
+}

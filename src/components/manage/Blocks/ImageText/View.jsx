@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { UniversalLink } from '@plone/volto/components';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
-import { Editor } from 'slate';
+import { createEditor } from 'slate';
 import cx from 'classnames';
 import './styles.less';
 
 const View = (props) => {
   const { data = {} } = props;
-  const value = { children: data.value || [], isVoid: Editor.isVoid };
-  const valueUndefined =
-    !value.children.length || Editor.string(value, []) === '';
+  const [value, setValue] = useState(createEditor());
+
+  useEffect(() => {
+    setValue((value) => {
+      value.children = data.value || [];
+      return value;
+    });
+  }, [data.value]);
+
+  const valueUndefined = !value.children.length || value.string([]) === '';
 
   const ImageText = () => {
     return (

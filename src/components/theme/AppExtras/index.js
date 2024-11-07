@@ -1,6 +1,6 @@
 import HashLink from './HashLink';
 
-export default (config) => {
+export default function applyConfig(config) {
   config.settings.appExtras = [
     ...(config.settings.appExtras || []),
     {
@@ -10,4 +10,4 @@ export default (config) => {
   ];
 
   return config;
-};
+}

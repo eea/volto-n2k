@@ -9,6 +9,7 @@ import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
 import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
 import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
 import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
+
 import './style.less';
 
 const SwiperLoader = loadable.lib(() => import('swiper'));
@@ -30,13 +31,18 @@ const _View = (props) => {
     props.data.habitat_pictures_provider,
   );
   const habitat = props.providers_data?.[habitat_provider] || {};
-  const habitat_pictures =
-    props.providers_data?.[habitat_pictures_provider] || {};
+  const habitat_pictures = useMemo(
+    () => props.providers_data?.[habitat_pictures_provider] || {},
+    [props.providers_data, habitat_pictures_provider],
+  );
 
   const { code_2000 = [], scientific_name = [] } = habitat;
   const { attribution_copyright = [] } = habitat_pictures;
 
-  const pictures = habitat_pictures?.['WebURL'] || [];
+  const pictures = useMemo(
+    () => habitat_pictures?.['WebURL'] || [],
+    [habitat_pictures],
+  );
   const pictures_length = useMemo(
     () => pictures.filter((picture) => !!picture)?.length,
     [pictures],
@@ -111,39 +117,41 @@ const _View = (props) => {
                 <p>{attribution_copyright[activeSlide]}</p>
               )}
             </div>
-            <SwiperLoader>
-              {() => {
-                return (
-                  <SwiperReactLoader>
-                    {({ Swiper, SwiperSlide }) => {
-                      return (
-                        <>
-                          <Swiper
-                            loop={true}
-                            allowTouchMove={false}
-                            initialSlide={0}
-                            slidesPerView={1}
-                            spaceBetween={0}
-                            onBeforeInit={(swiper) => {
-                              swiperEl.current = swiper;
-                            }}
-                          >
-                            {pictures.map((source, index) => (
-                              <SwiperSlide>
-                                <img
-                                  src={getSource(source)}
-                                  alt={pictures[index]}
-                                />
-                              </SwiperSlide>
-                            ))}
-                          </Swiper>
-                        </>
-                      );
-                    }}
-                  </SwiperReactLoader>
-                );
-              }}
-            </SwiperLoader>
+            {__CLIENT__ && (
+              <SwiperLoader>
+                {() => {
+                  return (
+                    <SwiperReactLoader>
+                      {({ Swiper, SwiperSlide }) => {
+                        return (
+                          <>
+                            <Swiper
+                              loop={true}
+                              allowTouchMove={false}
+                              initialSlide={0}
+                              slidesPerView={1}
+                              spaceBetween={0}
+                              onBeforeInit={(swiper) => {
+                                swiperEl.current = swiper;
+                              }}
+                            >
+                              {pictures.map((source, index) => (
+                                <SwiperSlide>
+                                  <img
+                                    src={getSource(source)}
+                                    alt={pictures[index]}
+                                  />
+                                </SwiperSlide>
+                              ))}
+                            </Swiper>
+                          </>
+                        );
+                      }}
+                    </SwiperReactLoader>
+                  );
+                }}
+              </SwiperLoader>
+            )}
           </div>
         )}
       </div>
@@ -162,10 +170,10 @@ const View = compose(
   })),
 )(_View);
 
-export default (props) => {
+export default function $View(props) {
   return (
     <VisibilitySensor Placeholder={() => <div>loading....&nbsp;</div>}>
       <View {...props} />
     </VisibilitySensor>
   );
-};
+}

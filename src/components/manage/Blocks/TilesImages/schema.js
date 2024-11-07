@@ -23,49 +23,51 @@ const imageSchema = {
   required: ['url', 'title'],
 };
 
-export default () => ({
-  title: 'Tiles images',
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['theme', 'images'],
+export default function getSchema() {
+  return {
+    title: 'Tiles images',
+    fieldsets: [
+      {
+        id: 'default',
+        title: 'Default',
+        fields: ['theme', 'images'],
+      },
+      {
+        id: 'advanced',
+        title: 'Advanced',
+        fields: ['size', 'hasBorder', 'rounded'],
+      },
+    ],
+    properties: {
+      size: {
+        title: 'Tiles size',
+        type: 'number',
+      },
+      hasBorder: {
+        title: 'With border',
+        type: 'boolean',
+        default: true,
+      },
+      rounded: {
+        title: 'Rounded',
+        type: 'boolean',
+        default: true,
+      },
+      theme: {
+        title: 'Theme',
+        choices: [
+          ['light', 'Light'],
+          ['grey', 'Grey'],
+          ['dark', 'Dark'],
+        ],
+        default: 'light',
+      },
+      images: {
+        title: 'Images',
+        widget: 'object_list',
+        schema: imageSchema,
+      },
     },
-    {
-      id: 'advanced',
-      title: 'Advanced',
-      fields: ['size', 'hasBorder', 'rounded'],
-    },
-  ],
-  properties: {
-    size: {
-      title: 'Tiles size',
-      type: 'number',
-    },
-    hasBorder: {
-      title: 'With border',
-      type: 'boolean',
-      default: true,
-    },
-    rounded: {
-      title: 'Rounded',
-      type: 'boolean',
-      default: true,
-    },
-    theme: {
-      title: 'Theme',
-      choices: [
-        ['light', 'Light'],
-        ['grey', 'Grey'],
-        ['dark', 'Dark'],
-      ],
-      default: 'light',
-    },
-    images: {
-      title: 'Images',
-      widget: 'object_list',
-      schema: imageSchema,
-    },
-  },
-  required: [],
-});
+    required: [],
+  };
+}

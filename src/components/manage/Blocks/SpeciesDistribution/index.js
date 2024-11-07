@@ -13,7 +13,7 @@ export function getSpeciesDistributionURL(code_2000, isBird) {
   );
 }
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.custom_connected_block = {
     ...config.blocks.blocksConfig.custom_connected_block,
     blocks: {
@@ -26,4 +26,4 @@ export default (config) => {
     },
   };
   return config;
-};
+}

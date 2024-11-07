@@ -2,7 +2,7 @@ import worldSVG from '@plone/volto/icons/world.svg';
 import Edit from './Edit';
 import View from './View';
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.species_banner = {
     id: 'species_banner',
     title: 'Species banner',
@@ -21,4 +21,4 @@ export default (config) => {
     blockHasOwnFocusManagement: false,
   };
   return config;
-};
+}

@@ -38,39 +38,41 @@ const linksSchema = () => ({
   required: [],
 });
 
-export default () => ({
-  title: 'Navigation anchors',
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['sticky', 'className', 'align', 'links'],
+export default function getSchema() {
+  return {
+    title: 'Navigation anchors',
+    fieldsets: [
+      {
+        id: 'default',
+        title: 'Default',
+        fields: ['sticky', 'className', 'align', 'links'],
+      },
+    ],
+    properties: {
+      sticky: {
+        title: 'Sticky',
+        type: 'boolean',
+        default: true,
+      },
+      className: {
+        title: 'Class',
+        widget: 'textarea',
+      },
+      align: {
+        title: 'Align',
+        choices: [
+          ['flex-start', 'Left'],
+          ['flex-end', 'Right'],
+          ['center', 'Center'],
+        ],
+        defaultValue: 'flex-start',
+      },
+      links: {
+        title: 'Links',
+        schema: linksSchema(),
+        widget: 'object_list',
+      },
     },
-  ],
-  properties: {
-    sticky: {
-      title: 'Sticky',
-      type: 'boolean',
-      default: true,
-    },
-    className: {
-      title: 'Class',
-      widget: 'textarea',
-    },
-    align: {
-      title: 'Align',
-      choices: [
-        ['flex-start', 'Left'],
-        ['flex-end', 'Right'],
-        ['center', 'Center'],
-      ],
-      defaultValue: 'flex-start',
-    },
-    links: {
-      title: 'Links',
-      schema: linksSchema(),
-      widget: 'object_list',
-    },
-  },
-  required: [],
-});
+    required: [],
+  };
+}

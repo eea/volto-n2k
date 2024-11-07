@@ -2,7 +2,7 @@ import worldSVG from '@plone/volto/icons/world.svg';
 import Edit from './Edit';
 import View from './View';
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.cdda_country_profile_map = {
     id: 'cdda_country_profile_map',
     title: 'CDDA country profile map',
@@ -21,4 +21,4 @@ export default (config) => {
     blockHasOwnFocusManagement: false,
   };
   return config;
-};
+}

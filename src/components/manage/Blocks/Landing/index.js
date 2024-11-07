@@ -57,8 +57,7 @@ export const tiles = [
     image: toolkit,
     title: 'Toolkit',
     description: 'TOOLKIT',
-    link:
-      'https://op.europa.eu/:lang/publication-detail/-/publication/e33a1119-8fa2-11ec-8c40-01aa75ed71a1',
+    link: 'https://op.europa.eu/:lang/publication-detail/-/publication/e33a1119-8fa2-11ec-8c40-01aa75ed71a1',
   },
 ];
 
@@ -84,7 +83,7 @@ export const getStyle = (props) => {
   };
 };
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.landing_block = {
     id: 'landing_block',
     title: 'Landing block',
@@ -103,4 +102,4 @@ export default (config) => {
     blockHasOwnFocusManagement: true,
   };
   return config;
-};
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Icon } from '@plone/volto/components';
 
 import arrowSVG from '@plone/volto/icons/up-key.svg';
@@ -7,8 +7,11 @@ import './style.less';
 
 const View = (props) => {
   const { data = {} } = props;
-  const provider_data = props.provider_data || {};
-  const columns = React.useMemo(() => {
+  const provider_data = useMemo(
+    () => props.provider_data || {},
+    [props.provider_data],
+  );
+  const columns = useMemo(() => {
     const temp = provider_data[Object.keys(provider_data)?.[0]]?.length || 0;
     if (data.count < temp && data.count > 0) {
       return data.count;

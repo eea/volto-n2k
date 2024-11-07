@@ -11,7 +11,7 @@ export function getActiveSitesURL(site_codes) {
   );
 }
 
-export default (config) => {
+export default function applyConfig(config) {
   config.blocks.blocksConfig.explore_sites_map = {
     id: 'explore_sites_map',
     title: 'Explore sites map',
@@ -21,4 +21,4 @@ export default (config) => {
     view: ExploreSitesView,
   };
   return config;
-};
+}

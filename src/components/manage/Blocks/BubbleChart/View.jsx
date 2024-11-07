@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Chart from './Chart';
 import BubbleChart from './BubbleChart';
 
@@ -7,7 +7,7 @@ import './style.less';
 const View = (props) => {
   const [chartData, setChartData] = React.useState([]);
   const { x, y, interpolation = 'interpolateBlues' } = props.data;
-  const data = props.provider_data || {};
+  const data = useMemo(() => props.provider_data || {}, [props.provider_data]);
 
   React.useEffect(() => {
     if (!x || !y || !data[x]?.length || !data[y]?.length) return;
