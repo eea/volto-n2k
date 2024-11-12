@@ -55,7 +55,7 @@ const getSchema = (props) => {
       },
       x_colors: {
         title: 'Labels color',
-        widget: 'objectlist',
+        widget: 'object_list',
         schema: xColorSchema(props),
       },
       precision: {

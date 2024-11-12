@@ -43,7 +43,7 @@ const getSchema = (props) => {
     properties: {
       contactFields: {
         title: 'Contact fields',
-        widget: 'objectlist',
+        widget: 'object_list',
         schema: getContactFields(props),
       },
     },
