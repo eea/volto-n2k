@@ -11,6 +11,7 @@ import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
 import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
 
 import './style.less';
+import 'swiper/css';
 
 const SwiperLoader = loadable.lib(() => import('swiper'));
 const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
@@ -114,7 +115,9 @@ const _View = (props) => {
                 </>
               )}
               {!!attribution_copyright[activeSlide] && (
-                <p>{attribution_copyright[activeSlide]}</p>
+                <p title={attribution_copyright[activeSlide]}>
+                  {attribution_copyright[activeSlide]}
+                </p>
               )}
             </div>
             {__CLIENT__ && (

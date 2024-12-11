@@ -104,77 +104,82 @@ const View = (props) => {
     /* eslint-disable-next-line */
   }, [JSON.stringify(activePageResults)]);
 
+  if (__SERVER__) return null;
+
   return (
-    <div className="explore-habitats-wrapper full-width">
-      <div className="explore-habitats">
-        <Map
-          view={{
-            center: proj.fromLonLat([20, 50]),
-            showFullExtent: true,
-            zoom: 5,
-            ...(options.extent ? { extent: options.extent } : {}),
-          }}
-          pixelRatio={1}
-        >
-          <Layers>
-            <Layer.Tile source={tileWMSSources[0]} zIndex={0} />
-            <Layer.Tile source={tileWMSSources[1]} zIndex={1} />
-            <Layer.Vector
-              source={vectorSource}
-              title="highlightLayer"
-              style={
-                new style.Style({
-                  fill: new style.Fill({
-                    color: 'rgba(255,255,255,0.4)',
-                  }),
-                  stroke: new style.Stroke({
-                    color: '#00A390',
-                    // color: '#F8E473',
-                    width: 3,
-                  }),
-                  image: new style.Circle({
-                    radius: 5,
-                    fill: new style.Fill({ color: 'rgba(4, 167, 125,0.6)' }),
-                    // fill: new style.Fill({ color: 'rgba(248,228,115,0.6)' }),
-                    stroke: new style.Stroke({
-                      color: 'rgba(242, 180, 87, 1)',
-                      width: 2,
+    __CLIENT__ && (
+      <div className="explore-habitats-wrapper full-width">
+        <div className="explore-habitats">
+          <Map
+            view={{
+              center: proj.fromLonLat([20, 50]),
+              showFullExtent: true,
+              zoom: 5,
+              ...(options.extent ? { extent: options.extent } : {}),
+            }}
+            pixelRatio={1}
+          >
+            <Layers>
+              <Layer.Tile source={tileWMSSources[0]} zIndex={0} />
+              <Layer.Tile source={tileWMSSources[1]} zIndex={1} />
+              <Layer.Vector
+                source={vectorSource}
+                title="highlightLayer"
+                style={
+                  new style.Style({
+                    fill: new style.Fill({
+                      color: 'rgba(255,255,255,0.4)',
                     }),
-                  }),
-                })
-              }
-              zIndex={2}
+                    stroke: new style.Stroke({
+                      color: '#00A390',
+                      // color: '#F8E473',
+                      width: 3,
+                    }),
+                    image: new style.Circle({
+                      radius: 5,
+                      fill: new style.Fill({ color: 'rgba(4, 167, 125,0.6)' }),
+                      // fill: new style.Fill({ color: 'rgba(248,228,115,0.6)' }),
+                      stroke: new style.Stroke({
+                        color: 'rgba(242, 180, 87, 1)',
+                        width: 2,
+                      }),
+                    }),
+                  })
+                }
+                zIndex={2}
+              />
+            </Layers>
+            <Controls attribution={true} zoom={false} />
+            <Interactions
+              doubleClickZoom={true}
+              dragAndDrop={false}
+              dragPan={true}
+              keyboardPan={true}
+              keyboardZoom={true}
+              mouseWheelZoom={true}
+              pointer={false}
+              select={false}
             />
-          </Layers>
-          <Controls attribution={true} zoom={false} />
-          <Interactions
-            doubleClickZoom={true}
-            dragAndDrop={false}
-            dragPan={true}
-            keyboardPan={true}
-            keyboardZoom={true}
-            mouseWheelZoom={true}
-            pointer={false}
-            select={false}
-          />
-        </Map>
+          </Map>
+        </div>
+        <Container>
+          <Message className="map-info-notice" style={{ color: '#005248' }}>
+            <p>
+              The designations employed and the presentation of material on this
+              map do not imply the expression of any opinion whatsoever on the
+              part of the European Union concerning the legal status of any
+              country, territory, city or area or of its authorities, or
+              concerning the delimitation of its frontiers or boundaries.
+            </p>
+            <p>
+              <strong>Note:</strong> When you perform a search we will highlight
+              only the results available on the active page of the results
+              table.
+            </p>
+          </Message>
+        </Container>
       </div>
-      <Container>
-        <Message className="map-info-notice" style={{ color: '#005248' }}>
-          <p>
-            The designations employed and the presentation of material on this
-            map do not imply the expression of any opinion whatsoever on the
-            part of the European Union concerning the legal status of any
-            country, territory, city or area or of its authorities, or
-            concerning the delimitation of its frontiers or boundaries.
-          </p>
-          <p>
-            <strong>Note:</strong> When you perform a search we will highlight
-            only the results available on the active page of the results table.
-          </p>
-        </Message>
-      </Container>
-    </div>
+    )
   );
 };
 
