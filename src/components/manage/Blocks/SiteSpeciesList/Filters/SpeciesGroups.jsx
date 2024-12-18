@@ -11,10 +11,12 @@ const SpeciesGroups = (props) => {
   } = props;
 
   React.useEffect(() => {
-    setSpeciesGroups([
-      ...(provider_data.species_group_name?.length ? ['All'] : []),
-      ...new Set(provider_data.species_group_name || []),
-    ]);
+    setSpeciesGroups(
+      [
+        ...(provider_data.species_group_name?.length ? ['All'] : []),
+        ...new Set(provider_data.species_group_name || []),
+      ].sort(),
+    );
     /* eslint-disable-next-line */
   }, [JSON.stringify(provider_data)]);
 
