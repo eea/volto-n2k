@@ -48,9 +48,9 @@ div#view .site-habitats-list .habitats-list .ui.container > * {
 
     .habitats-groups {
       margin-bottom: 1rem;
+      background-color: #00a390;
       text-align: center;
       white-space: nowrap;
-      background-color: #00a390;
 
       button.habitats-group {
         padding: 1rem;
@@ -62,13 +62,13 @@ div#view .site-habitats-list .habitats-list .ui.container > * {
         text-transform: uppercase;
 
         &::after {
-          content: '';
-          margin-top: 2px;
-          width: calc(100% + 8px);
-          transform: translateX(-4px);
-          height: 3px;
           display: block;
+          width: calc(100% + 8px);
+          height: 3px;
+          margin-top: 2px;
           background: transparent;
+          content: '';
+          transform: translateX(-4px);
         }
 
         &.active,
@@ -80,8 +80,8 @@ div#view .site-habitats-list .habitats-list .ui.container > * {
       }
 
       .ui.container {
-        overflow-x: auto;
         display: block;
+        overflow-x: auto;
         text-align: center;
       }
     }
