@@ -36,7 +36,7 @@ const View = (props) => {
           </Grid> */}
           <div className="species-wrapper">
             {Object.keys(data)
-              .sort()
+              .sort((a, b) => a.localeCompare(b))
               .map((species, index) => (
                 <div key={index} className="species-box">
                   <div className="upper">

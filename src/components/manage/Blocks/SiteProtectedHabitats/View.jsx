@@ -28,7 +28,7 @@ const View = (props) => {
         <Container className="habitats-wrapper">
           <div className="habitats-wrapper">
             {Object.keys(habitats)
-              .sort()
+              .sort((a, b) => a.localeCompare(b))
               .map((habitat, index) => (
                 <div key={index} className="habitat-box">
                   <div className="upper">

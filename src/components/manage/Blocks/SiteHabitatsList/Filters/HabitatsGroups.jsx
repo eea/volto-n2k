@@ -15,7 +15,11 @@ const HabitatsGroups = (props) => {
       [
         ...(provider_data.habitat_group?.length ? ['All'] : []),
         ...new Set(provider_data.habitat_group || []),
-      ].sort(),
+      ].sort((a, b) => {
+        if (a === 'All') return -1;
+        if (b === 'All') return 1;
+        return a.localeCompare(b);
+      }),
     );
     /* eslint-disable-next-line */
   }, [JSON.stringify(provider_data)]);

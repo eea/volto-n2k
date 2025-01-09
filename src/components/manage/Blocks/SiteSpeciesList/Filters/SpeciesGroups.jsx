@@ -15,7 +15,11 @@ const SpeciesGroups = (props) => {
       [
         ...(provider_data.species_group_name?.length ? ['All'] : []),
         ...new Set(provider_data.species_group_name || []),
-      ].sort(),
+      ].sort((a, b) => {
+        if (a === 'All') return -1;
+        if (b === 'All') return 1;
+        return a.localeCompare(b);
+      }),
     );
     /* eslint-disable-next-line */
   }, [JSON.stringify(provider_data)]);
