@@ -35,16 +35,18 @@ const View = (props) => {
             </Grid.Row>
           </Grid> */}
           <div className="species-wrapper">
-            {Object.entries(data).map(([item, value], index) => (
-              <div key={index} className="species-box">
-                <div className="upper">
-                  <span>{value}</span>
+            {Object.keys(data)
+              .sort((a, b) => a.localeCompare(b))
+              .map((species, index) => (
+                <div key={index} className="species-box">
+                  <div className="upper">
+                    <span>{data[species]}</span>
+                  </div>
+                  <div className="lower">
+                    <span>{species}</span>
+                  </div>
                 </div>
-                <div className="lower">
-                  <span>{item}</span>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </Container>
       </div>

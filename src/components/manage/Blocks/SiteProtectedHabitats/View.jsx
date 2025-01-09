@@ -27,16 +27,18 @@ const View = (props) => {
       <div className="habitats-container">
         <Container className="habitats-wrapper">
           <div className="habitats-wrapper">
-            {Object.entries(habitats).map(([habitat, items], index) => (
-              <div key={index} className="habitat-box">
-                <div className="upper">
-                  <span>{items.length}</span>
+            {Object.keys(habitats)
+              .sort((a, b) => a.localeCompare(b))
+              .map((habitat, index) => (
+                <div key={index} className="habitat-box">
+                  <div className="upper">
+                    <span>{habitats[habitat].length}</span>
+                  </div>
+                  <div className="lower">
+                    <span>{habitat}</span>
+                  </div>
                 </div>
-                <div className="lower">
-                  <span>{habitat}</span>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </Container>
       </div>

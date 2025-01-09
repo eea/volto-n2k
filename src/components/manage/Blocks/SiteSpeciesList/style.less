@@ -49,32 +49,39 @@ div#view .site-species-list .species-list .ui.container > * {
     .species-groups {
       margin-bottom: 1rem;
       background-color: #00a390;
+      white-space: nowrap;
 
-      .ui.container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow-x: auto;
+      button.species-group {
+        padding: 1rem;
+        border: none;
+        background-color: transparent;
+        color: #fff !important;
+        cursor: pointer;
+        font-size: 16px;
+        text-transform: uppercase;
 
-        @media only screen and (max-width: 765px) {
-          justify-content: flex-start;
+        &::after {
+          display: block;
+          width: calc(100% + 8px);
+          height: 3px;
+          margin-top: 2px;
+          background: transparent;
+          content: '';
+          transform: translateX(-4px);
         }
 
-        button.species-group {
-          padding: 1rem;
-          border: none;
-          background-color: transparent;
-          color: #fff !important;
-          cursor: pointer;
-          font-size: 16px;
-          text-transform: uppercase;
-
-          &.active,
-          &:hover {
-            padding-bottom: calc(1rem - 3px);
-            border-bottom: 3px solid #fff;
+        &.active,
+        &:hover {
+          &::after {
+            background: #ffffff;
           }
         }
+      }
+
+      .ui.container {
+        display: block;
+        overflow-x: auto;
+        text-align: center;
       }
     }
 
@@ -82,6 +89,7 @@ div#view .site-species-list .species-list .ui.container > * {
       background-color: #fff !important;
 
       &.right.visible {
+        z-index: 800;
         box-shadow: 0px 0px 13px -5px #000000;
       }
 

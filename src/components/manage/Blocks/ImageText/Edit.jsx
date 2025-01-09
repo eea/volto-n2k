@@ -18,8 +18,7 @@ const Edit = (props) => {
   const { data = {}, selected = false } = props;
   const schema = getSchema();
   const value = { children: data.value || [], isVoid: Editor.isVoid };
-  const valueUndefined =
-    !value.children.length || Editor.string(value, []) === '';
+  const valueUndefined = !value.children.length;
 
   const handleKeyDown = (e, index, { disableEnter = false } = {}) => {
     if (e.key === 'Enter' && !e.shiftKey && !disableEnter) {

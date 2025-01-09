@@ -17,7 +17,7 @@ const View = (props) => {
   ];
 
   return (
-    <Dropdown aria-label="Sort species by" text="SORT BY" floating button>
+    <Dropdown aria-label="Sort habitats by" text="SORT BY" floating button>
       <Dropdown.Menu>
         {sortByOptions.map((option) => (
           <Dropdown.Item

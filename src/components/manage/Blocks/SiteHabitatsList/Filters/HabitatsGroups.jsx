@@ -2,19 +2,19 @@ import React from 'react';
 import { Container } from 'semantic-ui-react';
 import cx from 'classnames';
 
-const SpeciesGroups = (props) => {
-  const [speciesGroups, setSpeciesGroups] = React.useState([]);
+const HabitatsGroups = (props) => {
+  const [habitatsGroups, setHabitatsGroups] = React.useState([]);
   const {
     provider_data = {},
-    activeSpeciesGroup = 'All',
-    setActiveSpeciesGroup = () => {},
+    activeHabitatsGroup = 'All',
+    setActiveHabitatsGroup = () => {},
   } = props;
 
   React.useEffect(() => {
-    setSpeciesGroups(
+    setHabitatsGroups(
       [
-        ...(provider_data.species_group_name?.length ? ['All'] : []),
-        ...new Set(provider_data.species_group_name || []),
+        ...(provider_data.habitat_group?.length ? ['All'] : []),
+        ...new Set(provider_data.habitat_group || []),
       ].sort((a, b) => {
         if (a === 'All') return -1;
         if (b === 'All') return 1;
@@ -25,17 +25,17 @@ const SpeciesGroups = (props) => {
   }, [JSON.stringify(provider_data)]);
 
   return (
-    <div className="species-groups">
+    <div className="habitats-groups">
       <Container>
-        {speciesGroups.map((species) => (
+        {habitatsGroups.map((species) => (
           <button
             key={`group-filter-${species}`}
             className={cx({
-              'species-group': true,
-              active: activeSpeciesGroup === species,
+              'habitats-group': true,
+              active: activeHabitatsGroup === species,
             })}
             onClick={() => {
-              setActiveSpeciesGroup(species);
+              setActiveHabitatsGroup(species);
             }}
           >
             {species}
@@ -46,4 +46,4 @@ const SpeciesGroups = (props) => {
   );
 };
 
-export default SpeciesGroups;
+export default HabitatsGroups;

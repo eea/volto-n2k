@@ -7,10 +7,10 @@ import {
   Label,
 } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
-import filterSVG from '@plone/volto/icons/filter.svg';
+// import filterSVG from '@plone/volto/icons/filter.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
 
-import SpeciesGroups from './SpeciesGroups';
+import HabitatsGroups from './HabitatsGroups';
 import SortBy from './SortBy';
 
 import { filtersLabels } from '../utils';
@@ -74,10 +74,10 @@ const View = (props) => {
   const {
     provider_data,
     activeFilters,
-    filteredSpecies,
+    filteredHabitats,
     pagination,
     sortBy,
-    species,
+    habitats,
     setActiveFilters,
     setPagination,
     setSortBy,
@@ -96,8 +96,8 @@ const View = (props) => {
       for (let key in filtersLabels[filter]) {
         if (key !== 'getTitle') {
           newFilters[filter][key] =
-            filteredSpecies.filter((species) => {
-              return !!species.filter((specimen) => specimen[filter] === key)
+            filteredHabitats.filter((habitats) => {
+              return !!habitats.filter((habitat) => habitat[filter] === key)
                 .length;
             }).length || 'none';
         }
@@ -107,15 +107,15 @@ const View = (props) => {
   };
 
   React.useEffect(() => {
-    if (provider_data && species.length) {
+    if (provider_data && habitats.length) {
       updateFilters();
     }
     /* eslint-disable-next-line */
-  }, [filteredSpecies]);
+  }, [filteredHabitats]);
 
   return (
-    <div className="species-filters">
-      <SpeciesGroups {...props} />
+    <div className="habitats-filters">
+      <HabitatsGroups {...props} />
       <Container>
         <div className="active-filters">
           {Object.keys(activeFilters).map((filter) =>
@@ -150,7 +150,7 @@ const View = (props) => {
         <div className="toolbar">
           <SortBy sortBy={sortBy} setSortBy={setSortBy} />
           <Dropdown
-            aria-label="Set number of species per page"
+            aria-label="Set number of habitats per page"
             placeholder="Items per page"
             value={pagination.itemsPerPage}
             floating
@@ -160,9 +160,9 @@ const View = (props) => {
               setPagination({ ...pagination, itemsPerPage: data.value });
             }}
           />
-          <button aria-label="Set filters" onClick={() => setVisible(!visible)}>
+          {/* <button aria-label="Set filters" onClick={() => setVisible(!visible)}>
             <Icon name={filterSVG} size="24px" />
-          </button>
+          </button> */}
         </div>
       </Container>
       <Sidebar
