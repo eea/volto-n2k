@@ -1,5 +1,5 @@
-import SiteHabitatsList from './View';
-import getSchema from './schema';
+// import SiteHabitatsList from './View';
+// import getSchema from './schema';
 
 export default function applyConfig(config) {
   // config.blocks.blocksConfig.custom_connected_block = {

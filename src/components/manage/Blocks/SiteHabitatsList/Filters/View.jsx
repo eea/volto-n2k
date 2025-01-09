@@ -7,7 +7,7 @@ import {
   Label,
 } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
-import filterSVG from '@plone/volto/icons/filter.svg';
+// import filterSVG from '@plone/volto/icons/filter.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
 
 import HabitatsGroups from './HabitatsGroups';
