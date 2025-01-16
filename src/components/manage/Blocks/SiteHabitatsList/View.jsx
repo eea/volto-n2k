@@ -191,7 +191,7 @@ const View = (props) => {
                             Cover: {habitat.coverage_ha.toFixed(2)} ha (
                             {(habitat.coverage_ha / 100).toFixed(4)} km²)
                             {habitat.habitat_prioriy
-                              ? `; Priority habitat type: ${habitat.habitat_prioriy}`
+                              ? `; Priority habitat type`
                               : ''}
                           </p>
                         ))}
