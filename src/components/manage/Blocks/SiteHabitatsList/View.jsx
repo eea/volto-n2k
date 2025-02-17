@@ -188,10 +188,13 @@ const View = (props) => {
                             style={{ fontSize: '1.2rem' }}
                             key={`habitat-${index}-${habitat.code_2000}`}
                           >
+                            {habitat.habitat_prioriy
+                              ? `Priority habitat type; `
+                              : ''}
                             Cover: {habitat.coverage_ha.toFixed(2)} ha (
                             {(habitat.coverage_ha / 100).toFixed(4)} km²)
-                            {habitat.habitat_prioriy
-                              ? `; Priority habitat type`
+                            {habitat.caves > 0
+                              ? `; Number of caves: ${habitat.caves}`
                               : ''}
                           </p>
                         ))}
