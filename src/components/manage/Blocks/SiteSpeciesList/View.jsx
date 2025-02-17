@@ -181,6 +181,7 @@ const View = (props) => {
                         {filteredSpecies[index].map((specimen, index) => (
                           <p
                             className="specimen-data"
+                            style={{ fontSize: '1.2rem' }}
                             key={`specimen-${index}-${specimen.id_eunis}`}
                           >
                             {getLabelString(

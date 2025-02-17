@@ -192,7 +192,7 @@ const View = (props) => {
                               ? `Priority habitat type; `
                               : ''}
                             Cover: {habitat.coverage_ha.toFixed(2)} ha (
-                            {(habitat.coverage_ha / 100).toFixed(4)} km²)
+                            {(habitat.coverage_ha / 100).toFixed(2)} km²)
                             {habitat.caves > 0
                               ? `; Number of caves: ${habitat.caves}`
                               : ''}
