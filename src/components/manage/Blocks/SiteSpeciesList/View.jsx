@@ -181,6 +181,7 @@ const View = (props) => {
                         {filteredSpecies[index].map((specimen, index) => (
                           <p
                             className="specimen-data"
+                            style={{ fontSize: '1.2rem' }}
                             key={`specimen-${index}-${specimen.id_eunis}`}
                           >
                             {getLabelString(
@@ -233,6 +234,10 @@ const View = (props) => {
               )}
               onPageChange={(e, data) => {
                 setPagination({ ...pagination, activePage: data.activePage });
+                const el = document.getElementById('species-banner');
+                el.scrollIntoView({
+                  block: 'start',
+                });
               }}
               prevItem={null}
               nextItem={null}

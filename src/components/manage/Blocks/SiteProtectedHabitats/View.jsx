@@ -23,7 +23,7 @@ const View = (props) => {
   }, [JSON.stringify(provider_data)]);
 
   return (
-    <div className="habitats-banner full-width">
+    <div className="habitats-banner full-width" id="habitats-banner">
       <div className="habitats-container">
         <Container className="habitats-wrapper">
           <div className="habitats-wrapper">

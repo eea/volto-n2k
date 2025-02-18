@@ -188,10 +188,13 @@ const View = (props) => {
                             style={{ fontSize: '1.2rem' }}
                             key={`habitat-${index}-${habitat.code_2000}`}
                           >
-                            Cover: {habitat.coverage_ha.toFixed(2)} ha (
-                            {(habitat.coverage_ha / 100).toFixed(4)} km²)
                             {habitat.habitat_prioriy
-                              ? `; Priority habitat type`
+                              ? `Priority habitat type; `
+                              : ''}
+                            Cover: {habitat.coverage_ha.toFixed(2)} ha (
+                            {(habitat.coverage_ha / 100).toFixed(2)} km²)
+                            {habitat.caves > 0
+                              ? `; Number of caves: ${habitat.caves}`
                               : ''}
                           </p>
                         ))}
@@ -220,6 +223,10 @@ const View = (props) => {
               )}
               onPageChange={(e, data) => {
                 setPagination({ ...pagination, activePage: data.activePage });
+                const el = document.getElementById('habitats-banner');
+                el.scrollIntoView({
+                  block: 'start',
+                });
               }}
               prevItem={null}
               nextItem={null}
