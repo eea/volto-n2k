@@ -234,6 +234,10 @@ const View = (props) => {
               )}
               onPageChange={(e, data) => {
                 setPagination({ ...pagination, activePage: data.activePage });
+                const el = document.getElementById('species-banner');
+                el.scrollIntoView({
+                  block: 'start',
+                });
               }}
               prevItem={null}
               nextItem={null}

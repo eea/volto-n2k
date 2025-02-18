@@ -11,7 +11,7 @@ const View = (props) => {
   }, {});
 
   return (
-    <div className="species-banner full-width">
+    <div className="species-banner full-width" id="species-banner">
       <div className="species-container">
         <Container className="species-wrapper">
           {/* <Grid size="12">

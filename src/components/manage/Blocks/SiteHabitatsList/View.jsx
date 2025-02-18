@@ -223,6 +223,10 @@ const View = (props) => {
               )}
               onPageChange={(e, data) => {
                 setPagination({ ...pagination, activePage: data.activePage });
+                const el = document.getElementById('habitats-banner');
+                el.scrollIntoView({
+                  block: 'start',
+                });
               }}
               prevItem={null}
               nextItem={null}
