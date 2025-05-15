@@ -20,8 +20,8 @@ const SidebarFilter = (props) => {
   const { activeFilters, filters, filter, index, setActiveFilters } = props;
 
   useEffect(() => {
-    console.log({filters})
-  }, [filters])
+    console.log({ filters });
+  }, [filters]);
 
   return (
     <div className="filter">
