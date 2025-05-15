@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container,
   Dropdown,
@@ -7,7 +7,7 @@ import {
   Label,
 } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
-// import filterSVG from '@plone/volto/icons/filter.svg';
+import filterSVG from '@plone/volto/icons/filter.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
 
 import HabitatsGroups from './HabitatsGroups';
@@ -15,8 +15,14 @@ import SortBy from './SortBy';
 
 import { filtersLabels } from '../utils';
 
+// TODO: Display the correct filters for habitats based on existing data
 const SidebarFilter = (props) => {
   const { activeFilters, filters, filter, index, setActiveFilters } = props;
+
+  useEffect(() => {
+    console.log({filters})
+  }, [filters])
+
   return (
     <div className="filter">
       <div className="header">
@@ -160,9 +166,9 @@ const View = (props) => {
               setPagination({ ...pagination, itemsPerPage: data.value });
             }}
           />
-          {/* <button aria-label="Set filters" onClick={() => setVisible(!visible)}>
+          <button aria-label="Set filters" onClick={() => setVisible(!visible)}>
             <Icon name={filterSVG} size="24px" />
-          </button> */}
+          </button>
         </div>
       </Container>
       <Sidebar

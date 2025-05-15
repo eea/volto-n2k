@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from 'semantic-ui-react';
 import { getObjectByIndex } from '@eeacms/volto-n2k/helpers';
 
@@ -25,6 +25,7 @@ const View = (props) => {
   return (
     <div className="habitats-banner full-width" id="habitats-banner">
       <div className="habitats-container">
+
         <Container className="habitats-wrapper">
           <div className="habitats-wrapper">
             {Object.keys(habitats)
