@@ -99,10 +99,9 @@ const View = (props) => {
         if (key !== 'getTitle') {
           newFilters[filter][key] =
             filteredHabitats.filter((habitats) => {
-              return !!habitats.filter((habitat) =>{
-                return  habitat[filter] === filtersLabels[filter][key]
-              })
-                .length;
+              return !!habitats.filter((habitat) => {
+                return habitat[filter] === filtersLabels[filter][key];
+              }).length;
             }).length || 'none';
         }
       }
@@ -144,7 +143,7 @@ const View = (props) => {
                     if (!newActiveFilters[filter].length) {
                       delete newActiveFilters[filter];
                     }
-                    console.log('NEW ACTIVE FILTERS: ', newActiveFilters)
+                    console.log('NEW ACTIVE FILTERS: ', newActiveFilters);
                     setActiveFilters(newActiveFilters);
                   }}
                 />
