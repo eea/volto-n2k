@@ -13,7 +13,7 @@ import clearSVG from '@plone/volto/icons/clear.svg';
 import HabitatsGroups from './HabitatsGroups';
 import SortBy from './SortBy';
 
-import { habitatFiltersLabels as filtersLabels } from '../utils';
+import { filtersLabels } from '../utils';
 
 // TODO: Display the correct filters for habitats based on existing data
 const SidebarFilter = (props) => {

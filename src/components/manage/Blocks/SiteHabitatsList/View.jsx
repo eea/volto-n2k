@@ -5,7 +5,7 @@ import { getObjectByIndex, photoPlaceholders } from '@eeacms/volto-n2k/helpers';
 import { Filters } from './Filters';
 
 import './style.less';
-import { habitatFiltersLabels as filtersLabels } from './utils';
+import { filtersLabels } from './utils';
 
 const getCurrentPageLength = (pagination, arr) => {
   const totalPages = Math.ceil(pagination.totalItems / pagination.itemsPerPage);
