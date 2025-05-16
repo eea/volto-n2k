@@ -1,3 +1,18 @@
+// TODO: Manage filters for habitats
+/**
+ * habitat group
+ * habitat category
+ */
+export const habitatFiltersLabels = {
+  habitat_group: {
+    fo: 'Forests',
+    fr: 'Freshwater',
+    bmf: 'Bogs, mires and fens',
+    gr: 'Grasslands',
+    getTitle: () => 'Habitat groups',
+  },
+};
+
 export const filtersLabels = {
   population_type: {
     p: 'Permanent',

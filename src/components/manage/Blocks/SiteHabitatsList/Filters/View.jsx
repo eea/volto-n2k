@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Container,
   Dropdown,
@@ -13,15 +13,12 @@ import clearSVG from '@plone/volto/icons/clear.svg';
 import HabitatsGroups from './HabitatsGroups';
 import SortBy from './SortBy';
 
-import { filtersLabels } from '../utils';
+import { habitatFiltersLabels as filtersLabels } from '../utils';
 
 // TODO: Display the correct filters for habitats based on existing data
 const SidebarFilter = (props) => {
   const { activeFilters, filters, filter, index, setActiveFilters } = props;
-
-  useEffect(() => {
-    console.log({filters})
-  }, [filters])
+  console.log({filters, filter, filtersLabels})
 
   return (
     <div className="filter">
@@ -103,7 +100,9 @@ const View = (props) => {
         if (key !== 'getTitle') {
           newFilters[filter][key] =
             filteredHabitats.filter((habitats) => {
-              return !!habitats.filter((habitat) => habitat[filter] === key)
+              return !!habitats.filter((habitat) =>{
+                return  habitat[filter] === filtersLabels[filter][key]
+              })
                 .length;
             }).length || 'none';
         }
@@ -146,6 +145,7 @@ const View = (props) => {
                     if (!newActiveFilters[filter].length) {
                       delete newActiveFilters[filter];
                     }
+                    console.log('NEW ACTIVE FILTERS: ', newActiveFilters)
                     setActiveFilters(newActiveFilters);
                   }}
                 />
