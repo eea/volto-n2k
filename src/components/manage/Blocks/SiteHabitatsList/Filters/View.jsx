@@ -18,7 +18,6 @@ import { filtersLabels } from '../utils';
 // TODO: Display the correct filters for habitats based on existing data
 const SidebarFilter = (props) => {
   const { activeFilters, filters, filter, index, setActiveFilters } = props;
-  console.log({filters, filter, filtersLabels})
 
   return (
     <div className="filter">
