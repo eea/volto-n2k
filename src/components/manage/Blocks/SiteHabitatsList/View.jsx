@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Pagination, Grid } from 'semantic-ui-react';
 import { getObjectByIndex, photoPlaceholders } from '@eeacms/volto-n2k/helpers';
