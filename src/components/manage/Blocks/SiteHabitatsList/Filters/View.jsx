@@ -151,7 +151,7 @@ const View = (props) => {
                     if (!newActiveFilters[filter].length) {
                       delete newActiveFilters[filter];
                     }
-                    console.log('NEW ACTIVE FILTERS: ', newActiveFilters)
+                    console.log('NEW ACTIVE FILTERS: ', newActiveFilters);
                     setActiveFilters(newActiveFilters);
                   }}
                 />

@@ -74,12 +74,12 @@ const View = (props) => {
             habitatHasFilter = true;
             return;
           }
-        })
-        
+        });
+
         if (activeFilters[filter].includes(items[0][filter])) {
-            habitatHasFilter = true;
-          }
-       
+          habitatHasFilter = true;
+        }
+
         if (!habitatHasFilter) {
           itemsHaveFilter = false;
         }
