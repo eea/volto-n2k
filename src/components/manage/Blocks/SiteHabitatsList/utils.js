@@ -11,7 +11,7 @@ export const filtersLabels = {
     np: 'Without priority',
     getTitle: () => 'Habitat priority'
   }
-};
+}; 
 
 export const getPopulationString = (min, max, prefix = '') => {
   return `${prefix}Population: min: ${min || 'not reported'}, max: ${
