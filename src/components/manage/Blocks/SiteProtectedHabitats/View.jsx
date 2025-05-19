@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container } from 'semantic-ui-react';
 import { getObjectByIndex } from '@eeacms/volto-n2k/helpers';
 
