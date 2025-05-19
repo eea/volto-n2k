@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Pagination, Grid } from 'semantic-ui-react';
 import { getObjectByIndex, photoPlaceholders } from '@eeacms/volto-n2k/helpers';
@@ -61,6 +61,15 @@ const View = (props) => {
         let habitatHasFilter = false;
 
         activeFilters[filter].forEach((key) => {
+          if (filtersLabels[filter][key] === filtersLabels.habitat_prioriy.wp) {
+            habitatHasFilter = items[0][filter] === 1
+            return
+          }
+          if (filtersLabels[filter][key] === filtersLabels.habitat_prioriy.np) {
+            habitatHasFilter = items[0][filter] === null
+            return
+          }
+          
           if (filtersLabels[filter][key] === items[0][filter]) {
             habitatHasFilter = true;
             return;

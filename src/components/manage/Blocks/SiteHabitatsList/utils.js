@@ -1,8 +1,3 @@
-// TODO: Manage filters for habitats
-/**
- * habitat group
- * habitat category
- */
 export const filtersLabels = {
   habitat_group: {
     fo: 'Forests',
@@ -11,6 +6,11 @@ export const filtersLabels = {
     gr: 'Grasslands',
     getTitle: () => 'Habitat groups',
   },
+  habitat_prioriy: {
+    wp: 'With priority',
+    np: 'Without priority',
+    getTitle: () => 'Habitat priority'
+  }
 };
 
 export const getPopulationString = (min, max, prefix = '') => {
