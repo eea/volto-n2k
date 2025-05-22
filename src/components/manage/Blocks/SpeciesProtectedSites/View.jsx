@@ -44,66 +44,70 @@ const View = (props) => {
     }
 
     const esrijsonFormat = new format.EsriJSON();
-    const urls = getSpeciesProtectedSitesURL(code_2000[0],layers);
-    
+    const urls = getSpeciesProtectedSitesURL(code_2000[0], layers);
+
     let isMounted = true;
     dataFetched.current = false;
 
     // Get species protected sites from all specified layers
     Promise.all(
-      Object.values(urls).map(url => 
+      Object.values(urls).map((url) =>
         fetch(url)
-          .then(response => {
+          .then((response) => {
             if (!isMounted) return { features: [] };
             return response.status == 200 ? response.json() : { features: [] };
           })
           .catch(() => {
             if (!isMounted) return { features: [] };
             return { features: [] };
-          })
-      )
-    ).then( results => {
-      if (!isMounted) return;
+          }),
+      ),
+    )
+      .then((results) => {
+        if (!isMounted) return;
 
-      const validResults = results.filter(r => !r.error);
-      dataFetched.current = true;
+        const validResults = results.filter((r) => !r.error);
+        dataFetched.current = true;
 
-      const allFeatures = validResults.reduce((acc, data) => {
-        return acc.concat(data.features || []);
-      }, []);
+        const allFeatures = validResults.reduce((acc, data) => {
+          return acc.concat(data.features || []);
+        }, []);
 
-      if (allFeatures.length > 0) {
-        // all features from all layers should have the same metadata
-        const metadataTemplate = validResults.find(r => r.features && r.features.length > 0);
+        if (allFeatures.length > 0) {
+          // all features from all layers should have the same metadata
+          const metadataTemplate = validResults.find(
+            (r) => r.features && r.features.length > 0,
+          );
 
-        const features = esrijsonFormat.readFeatures({ 
-          ...metadataTemplate,
-          features: allFeatures 
-        });
+          const features = esrijsonFormat.readFeatures({
+            ...metadataTemplate,
+            features: allFeatures,
+          });
 
-        if (features.length > 0) {
-          vectorSource.addFeatures(features);
-          const vectorExtent = vectorSource.getExtent();
+          if (features.length > 0) {
+            vectorSource.addFeatures(features);
+            const vectorExtent = vectorSource.getExtent();
 
-          if (!extent.isEmpty(vectorExtent)) {
-            let size = extent.getSize(vectorExtent);
-            setOptions({
-              ...options,
-              extent: new extent.buffer(vectorExtent, size[0] * 0.1),
-            });
+            if (!extent.isEmpty(vectorExtent)) {
+              let size = extent.getSize(vectorExtent);
+              setOptions({
+                ...options,
+                extent: new extent.buffer(vectorExtent, size[0] * 0.1),
+              });
+            }
           }
         }
-      }
-    }).catch( error => {
-      if (!isMounted) return;
-      console.error('Error fetching protected sites data:', error);
-      dataFetched.current = false;
-      if (vectorSource) vectorSource.clear();
-      setOptions(currentOptions => ({
-        ...currentOptions,
-        extent: undefined,
-      }));
-    });
+      })
+      .catch((error) => {
+        if (!isMounted) return;
+        console.error('Error fetching protected sites data:', error);
+        dataFetched.current = false;
+        if (vectorSource) vectorSource.clear();
+        setOptions((currentOptions) => ({
+          ...currentOptions,
+          extent: undefined,
+        }));
+      });
 
     return () => {
       isMounted = false;
