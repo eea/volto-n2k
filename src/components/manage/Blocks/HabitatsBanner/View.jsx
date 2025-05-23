@@ -51,13 +51,6 @@ const _View = (props) => {
     [pictures],
   );
 
-  if (!habitat_provider && props.mode === 'edit') {
-    return 'Habitat banner block, habitat provider undefined';
-  }
-  if (!habitat_pictures_provider && props.mode === 'edit') {
-    return 'Habitat banner block, habitat pictures provider undefined';
-  }
-
   const handleSliderPrevious = useCallback(() => {
     swiperEl.current.slidePrev();
     if (previewEl.current?.[0]) {
@@ -79,6 +72,13 @@ const _View = (props) => {
     }
     setActiveSlide(swiperEl.current.realIndex);
   }, [swiperEl.current])
+
+  if (!habitat_provider && props.mode === 'edit') {
+    return 'Habitat banner block, habitat provider undefined';
+  }
+  if (!habitat_pictures_provider && props.mode === 'edit') {
+    return 'Habitat banner block, habitat pictures provider undefined';
+  }
 
   return (
     <div className="habitat-banner-details">
