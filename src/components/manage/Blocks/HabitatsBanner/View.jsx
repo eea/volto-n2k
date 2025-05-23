@@ -28,12 +28,19 @@ const _View = (props) => {
   const previewEl = useRef();
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const habitat_provider = useMemo(() => flattenToAppURL(props.data.habitat_provider), [props.data.habitat_provider]);
-  const habitat_pictures_provider = useMemo(() => flattenToAppURL(
-    props.data.habitat_pictures_provider,
-  ), [props.data.habitat_pictures_provider]);
+  const habitat_provider = useMemo(
+    () => flattenToAppURL(props.data.habitat_provider),
+    [props.data.habitat_provider],
+  );
+  const habitat_pictures_provider = useMemo(
+    () => flattenToAppURL(props.data.habitat_pictures_provider),
+    [props.data.habitat_pictures_provider],
+  );
 
-  const habitat = useMemo(() => props.providers_data?.[habitat_provider] || {}, [props.providers_data, habitat_provider]);
+  const habitat = useMemo(
+    () => props.providers_data?.[habitat_provider] || {},
+    [props.providers_data, habitat_provider],
+  );
   const habitat_pictures = useMemo(
     () => props.providers_data?.[habitat_pictures_provider] || {},
     [props.providers_data, habitat_pictures_provider],
@@ -60,7 +67,7 @@ const _View = (props) => {
       previewEl.current[1].slidePrev();
     }
     setActiveSlide(swiperEl.current.realIndex);
-  }, [swiperEl.current])
+  }, [swiperEl.current]);
 
   const handleSliderNext = useCallback(() => {
     swiperEl.current.slideNext();
@@ -71,7 +78,7 @@ const _View = (props) => {
       previewEl.current[1].slideNext();
     }
     setActiveSlide(swiperEl.current.realIndex);
-  }, [swiperEl.current])
+  }, [swiperEl.current]);
 
   if (!habitat_provider && props.mode === 'edit') {
     return 'Habitat banner block, habitat provider undefined';
