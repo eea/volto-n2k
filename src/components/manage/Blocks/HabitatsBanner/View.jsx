@@ -1,17 +1,17 @@
-import React, { useRef, useMemo, useState } from 'react';
-import { compose } from 'redux';
-import cx from 'classnames';
-import loadable from '@loadable/component';
-import { Icon } from '@plone/volto/components';
-import { flattenToAppURL } from '@plone/volto/helpers';
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
 import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
 import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
 import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
+import loadable from '@loadable/component';
+import { Icon } from '@plone/volto/components';
+import { flattenToAppURL } from '@plone/volto/helpers';
+import cx from 'classnames';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { compose } from 'redux';
 
-import './style.less';
 import 'swiper/css';
+import './style.less';
 
 const SwiperLoader = loadable.lib(() => import('swiper'));
 const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
@@ -27,11 +27,13 @@ const _View = (props) => {
   const swiperEl = useRef();
   const previewEl = useRef();
   const [activeSlide, setActiveSlide] = useState(0);
-  const habitat_provider = flattenToAppURL(props.data.habitat_provider);
-  const habitat_pictures_provider = flattenToAppURL(
+
+  const habitat_provider = useMemo(() => flattenToAppURL(props.data.habitat_provider), [props.data.habitat_provider]);
+  const habitat_pictures_provider = useMemo(() => flattenToAppURL(
     props.data.habitat_pictures_provider,
-  );
-  const habitat = props.providers_data?.[habitat_provider] || {};
+  ), [props.data.habitat_pictures_provider]);
+
+  const habitat = useMemo(() => props.providers_data?.[habitat_provider] || {}, [props.providers_data, habitat_provider]);
   const habitat_pictures = useMemo(
     () => props.providers_data?.[habitat_pictures_provider] || {},
     [props.providers_data, habitat_pictures_provider],
@@ -56,6 +58,28 @@ const _View = (props) => {
     return 'Habitat banner block, habitat pictures provider undefined';
   }
 
+  const handleSliderPrevious = useCallback(() => {
+    swiperEl.current.slidePrev();
+    if (previewEl.current?.[0]) {
+      previewEl.current[0].slidePrev();
+    }
+    if (previewEl.current?.[1]) {
+      previewEl.current[1].slidePrev();
+    }
+    setActiveSlide(swiperEl.current.realIndex);
+  }, [swiperEl.current])
+
+  const handleSliderNext = useCallback(() => {
+    swiperEl.current.slideNext();
+    if (previewEl.current?.[0]) {
+      previewEl.current[0].slideNext();
+    }
+    if (previewEl.current?.[1]) {
+      previewEl.current[1].slideNext();
+    }
+    setActiveSlide(swiperEl.current.realIndex);
+  }, [swiperEl.current])
+
   return (
     <div className="habitat-banner-details">
       <div className="habitat-details">
@@ -74,16 +98,7 @@ const _View = (props) => {
                 <>
                   <button
                     className="swiper-button image-swiper-button-prev"
-                    onClick={() => {
-                      swiperEl.current.slidePrev();
-                      if (previewEl.current?.[0]) {
-                        previewEl.current[0].slidePrev();
-                      }
-                      if (previewEl.current?.[1]) {
-                        previewEl.current[1].slidePrev();
-                      }
-                      setActiveSlide(swiperEl.current.realIndex);
-                    }}
+                    onClick={handleSliderPrevious}
                   >
                     <Icon
                       className="icon-left"
@@ -94,16 +109,7 @@ const _View = (props) => {
                   </button>
                   <button
                     className="swiper-button image-swiper-button-next"
-                    onClick={() => {
-                      swiperEl.current.slideNext();
-                      if (previewEl.current?.[0]) {
-                        previewEl.current[0].slideNext();
-                      }
-                      if (previewEl.current?.[1]) {
-                        previewEl.current[1].slideNext();
-                      }
-                      setActiveSlide(swiperEl.current.realIndex);
-                    }}
+                    onClick={handleSliderNext}
                   >
                     <Icon
                       className="icon-right"
@@ -139,7 +145,7 @@ const _View = (props) => {
                               }}
                             >
                               {pictures.map((source, index) => (
-                                <SwiperSlide>
+                                <SwiperSlide key={source}>
                                   <img
                                     src={getSource(source)}
                                     alt={pictures[index]}
