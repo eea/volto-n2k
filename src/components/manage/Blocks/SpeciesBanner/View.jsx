@@ -28,12 +28,19 @@ const _View = (props) => {
   const swiperEl = useRef();
   const previewEl = useRef();
   const [activeSlide, setActiveSlide] = useState(0);
-  const species_provider = useMemo(() => flattenToAppURL(props.data.species_provider), [props.data.species_provider]);
-  const species_pictures_provider = useMemo(() => flattenToAppURL(
-    props.data.species_pictures_provider,
-  ), [props.data.species_pictures_provider]);
+  const species_provider = useMemo(
+    () => flattenToAppURL(props.data.species_provider),
+    [props.data.species_provider],
+  );
+  const species_pictures_provider = useMemo(
+    () => flattenToAppURL(props.data.species_pictures_provider),
+    [props.data.species_pictures_provider],
+  );
 
-  const species = useMemo(() => props.providers_data?.[species_provider] || {}, [props.providers_data, species_provider]);
+  const species = useMemo(
+    () => props.providers_data?.[species_provider] || {},
+    [props.providers_data, species_provider],
+  );
   const species_pictures = useMemo(
     () => props.providers_data?.[species_pictures_provider] || {},
     [props.providers_data, species_pictures_provider],
@@ -73,7 +80,7 @@ const _View = (props) => {
       previewEl.current[1].slidePrev();
     }
     setActiveSlide(swiperEl.current.realIndex);
-  }, [swiperEl.current])
+  }, [swiperEl.current]);
 
   const handleSliderNext = useCallback(() => {
     swiperEl.current.slideNext();
@@ -84,7 +91,7 @@ const _View = (props) => {
       previewEl.current[1].slideNext();
     }
     setActiveSlide(swiperEl.current.realIndex);
-  }, [swiperEl.current])
+  }, [swiperEl.current]);
 
   if (!species_provider && props.mode === 'edit') {
     return 'species banner block, species provider undefined';
