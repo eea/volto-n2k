@@ -192,4 +192,4 @@ export default function $View(props) {
       <View {...props} />
     </VisibilitySensor>
   );
-}
+} 
