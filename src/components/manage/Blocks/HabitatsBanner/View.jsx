@@ -67,7 +67,7 @@ const _View = (props) => {
       previewEl.current[1].slidePrev();
     }
     setActiveSlide(swiperEl.current.realIndex);
-  }, [swiperEl.current]);
+  }, []);
 
   const handleSliderNext = useCallback(() => {
     swiperEl.current.slideNext();
@@ -78,7 +78,7 @@ const _View = (props) => {
       previewEl.current[1].slideNext();
     }
     setActiveSlide(swiperEl.current.realIndex);
-  }, [swiperEl.current]);
+  }, []);
 
   if (!habitat_provider && props.mode === 'edit') {
     return 'Habitat banner block, habitat provider undefined';
