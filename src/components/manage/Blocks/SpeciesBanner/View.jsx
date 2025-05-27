@@ -24,7 +24,7 @@ const getSource = (source) => {
   return parsedSource;
 };
 
-const _View = (props) => {
+const ViewComponent = (props) => {
   const swiperEl = useRef();
   const previewEl = useRef();
   const [activeSlide, setActiveSlide] = useState(0);
@@ -210,7 +210,7 @@ const _View = (props) => {
   );
 };
 
-const View = compose(
+const ViewCompose = compose(
   connectToMultipleProviders((props) => ({
     providers: [
       {
@@ -219,12 +219,12 @@ const View = compose(
       { provider_url: props.data?.species_pictures_provider },
     ],
   })),
-)(_View);
+)(ViewComponent);
 
-export default function $View(props) {
+export default function View(props) {
   return (
     <VisibilitySensor Placeholder={() => <div>loading....&nbsp;</div>}>
-      <View {...props} />
+      <ViewCompose {...props} />
     </VisibilitySensor>
   );
 }
