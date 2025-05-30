@@ -55,7 +55,7 @@ const View = (props) => {
         fetch(url)
           .then((response) => {
             if (!isMounted) return { features: [] };
-            return response.status == 200 ? response.json() : { features: [] };
+            return response.status === 200 ? response.json() : { features: [] };
           })
           .catch(() => {
             if (!isMounted) return { features: [] };
@@ -100,8 +100,9 @@ const View = (props) => {
       })
       .catch((error) => {
         if (!isMounted) return;
-        console.error('Error fetching protected sites data:', error);
+
         dataFetched.current = false;
+
         if (vectorSource) vectorSource.clear();
         setOptions((currentOptions) => ({
           ...currentOptions,
