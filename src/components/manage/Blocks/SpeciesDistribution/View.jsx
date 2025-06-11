@@ -4,11 +4,12 @@ import Map from '@eeacms/volto-openlayers-map/Map';
 import { Interactions } from '@eeacms/volto-openlayers-map/Interactions';
 import { Controls } from '@eeacms/volto-openlayers-map/Controls';
 import { Layers, Layer } from '@eeacms/volto-openlayers-map/Layers';
-import { openlayers } from '@eeacms/volto-openlayers-map';
+import { withOpenLayers } from '@eeacms/volto-openlayers-map';
 import { getSpeciesDistributionURL } from './index';
 import './style.less';
 
 const View = (props) => {
+  const { ol: openlayers } = props;
   const dataFetched = React.useRef();
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
@@ -115,4 +116,4 @@ const View = (props) => {
   );
 };
 
-export default View;
+export default withOpenLayers(View);
