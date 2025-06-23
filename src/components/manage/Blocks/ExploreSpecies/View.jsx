@@ -5,11 +5,12 @@ import Map from '@eeacms/volto-openlayers-map/Map';
 import { Interactions } from '@eeacms/volto-openlayers-map/Interactions';
 import { Controls } from '@eeacms/volto-openlayers-map/Controls';
 import { Layers, Layer } from '@eeacms/volto-openlayers-map/Layers';
-import { openlayers } from '@eeacms/volto-openlayers-map';
+import { withOpenLayers } from '@eeacms/volto-openlayers-map';
 import { getActiveSpeciesURL } from './index';
 import './style.less';
 
 const View = (props) => {
+  const { ol: openlayers } = props;
   const [options, setOptions] = React.useState({});
   const [vectorSource, setVectorSource] = useState(null);
   const [tileWMSSources, setTileWMSSources] = useState([]);
@@ -179,4 +180,4 @@ const View = (props) => {
 
 export default connect((state) => ({
   search: state.table_search || {},
-}))(View);
+}))(withOpenLayers(View));
