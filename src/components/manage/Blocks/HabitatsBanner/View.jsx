@@ -46,7 +46,11 @@ const ViewComponent = (props) => {
     [props.providers_data, habitat_pictures_provider],
   );
 
-  const { code_2000 = [], scientific_name = [], habitat_prioriy = [] } = habitat;
+  const {
+    code_2000 = [],
+    scientific_name = [],
+    habitat_prioriy = [],
+  } = habitat;
   const { attribution_copyright = [] } = habitat_pictures;
 
   const pictures = useMemo(
@@ -96,7 +100,9 @@ const ViewComponent = (props) => {
             Habitats Directive Annex I code&nbsp;&nbsp;&nbsp;{code_2000[0]}
           </p>
           {habitat_prioriy[0] && (
-            <p className="info" style={{ marginTop: '1rem' }}>Priority habitat type</p>
+            <p className="info" style={{ marginTop: '1rem' }}>
+              Priority habitat type
+            </p>
           )}
         </div>
         {pictures_length > 0 && (
