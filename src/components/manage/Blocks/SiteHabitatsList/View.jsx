@@ -6,7 +6,6 @@ import { Filters } from './Filters';
 
 import './style.less';
 import { filtersLabels } from './utils';
-import { active } from 'd3';
 
 const getCurrentPageLength = (pagination, arr) => {
   const totalPages = Math.ceil(pagination.totalItems / pagination.itemsPerPage);
