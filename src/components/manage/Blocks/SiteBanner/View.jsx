@@ -32,7 +32,9 @@ const View = (props) => {
             <h2 className="country-title">{site_name}</h2>
             <p className="site-name">{country_name}</p>
             {designation ? (
-              <p className="site-designation">Designation type: {designation}</p>
+              <p className="site-designation">
+                Designation type: {designation}
+              </p>
             ) : (
               ''
             )}
@@ -73,7 +75,7 @@ const View = (props) => {
                   {national_id > 0 ? (
                     <div className="site-detail">
                       <div className="upper">
-                          <div>{national_id}</div>
+                        <div>{national_id}</div>
                       </div>
                       <div className="lower">National Site Code</div>
                     </div>
@@ -83,7 +85,11 @@ const View = (props) => {
 
                   <div className="site-detail">
                     <div className="upper">
-                      {iucn_category[0] ? <div>{iucn_category}</div> : <div>Not Reported</div>}
+                      {iucn_category[0] ? (
+                        <div>{iucn_category}</div>
+                      ) : (
+                        <div>Not Reported</div>
+                      )}
                     </div>
                     <div className="lower">IUCN Management Category</div>
                   </div>
@@ -91,7 +97,7 @@ const View = (props) => {
                   {marine_area_percentage > 0 ? (
                     <div className="site-detail">
                       <div className="upper">
-                          <div>{marine_area_percentage} %</div>
+                        <div>{marine_area_percentage} %</div>
                       </div>
                       <div className="lower">Marine Area</div>
                     </div>
