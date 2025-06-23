@@ -1,11 +1,4 @@
 export const filtersLabels = {
-  habitat_group: {
-    fo: 'Forests',
-    fr: 'Freshwater',
-    bmf: 'Bogs, mires and fens',
-    gr: 'Grasslands',
-    getTitle: () => 'Habitat groups',
-  },
   habitat_prioriy: {
     wp: 'With priority',
     np: 'Without priority',

@@ -61,18 +61,24 @@ const View = (props) => {
         let habitatHasFilter = false;
 
         activeFilters[filter].forEach((key) => {
-          if (filtersLabels[filter][key] === filtersLabels.habitat_prioriy.wp) {
-            habitatHasFilter = items[0][filter] === 1;
-            return;
-          }
-          if (filtersLabels[filter][key] === filtersLabels.habitat_prioriy.np) {
-            habitatHasFilter = items[0][filter] === null;
-            return;
-          }
+          if (filter in filtersLabels) {
+            if (
+              filtersLabels[filter][key] === filtersLabels.habitat_prioriy.wp
+            ) {
+              habitatHasFilter = items[0][filter] === 1;
+              return;
+            }
+            if (
+              filtersLabels[filter][key] === filtersLabels.habitat_prioriy.np
+            ) {
+              habitatHasFilter = items[0][filter] === null;
+              return;
+            }
 
-          if (filtersLabels[filter][key] === items[0][filter]) {
-            habitatHasFilter = true;
-            return;
+            if (filtersLabels[filter][key] === items[0][filter]) {
+              habitatHasFilter = true;
+              return;
+            }
           }
         });
 
