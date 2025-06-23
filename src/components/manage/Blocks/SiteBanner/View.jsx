@@ -12,14 +12,15 @@ const View = (props) => {
     country_name,
     site_name,
     designation = [],
-    cdda_designation_national_language = [],
+    iucn_category = [],
     site_type = [],
     site_code = [],
+    national_id = [],
     area_ha = [],
     year_stablished = [],
     number_protected_habitat_types = [],
     number_protected_species = [],
-    major_ecosystem_type = [],
+    marine_area_percentage = [],
   } = provider_data;
 
   if (!site_code[0]) return '';
@@ -31,7 +32,9 @@ const View = (props) => {
             <h2 className="country-title">{site_name}</h2>
             <p className="site-name">{country_name}</p>
             {designation ? (
-              <p className="site-designation">{designation}</p>
+              <p className="site-designation">
+                Designation type: {designation}
+              </p>
             ) : (
               ''
             )}
@@ -42,68 +45,99 @@ const View = (props) => {
                 <>
                   <div className="site-detail">
                     <div className="upper">
-                      {cdda_designation_national_language[0] ? (
-                        <div>{cdda_designation_national_language}</div>
-                      ) : (
-                        <div>-</div>
-                      )}
+                      {site_code[0] ? <div>{site_code}</div> : <div>-</div>}
                     </div>
-                    <div className="lower">Designation (National Language)</div>
+                    <div className="lower">NatDA Site Code</div>
                   </div>
 
                   <div className="site-detail">
                     <div className="upper">
-                      {designation[0] ? <div>{designation}</div> : <div>-</div>}
+                      {isNumber(area_ha[0]) ? (
+                        <div>{area_ha} ha</div>
+                      ) : (
+                        <div>No data</div>
+                      )}
                     </div>
-                    <div className="lower">Designation (English)</div>
+                    <div className="lower">Reported area</div>
                   </div>
+
+                  <div className="site-detail">
+                    <div className="upper">
+                      {year_stablished[0] ? (
+                        <div>{year_stablished}</div>
+                      ) : (
+                        <div>-</div>
+                      )}
+                    </div>
+                    <div className="lower">Site established</div>
+                  </div>
+
+                  {national_id > 0 ? (
+                    <div className="site-detail">
+                      <div className="upper">
+                        <div>{national_id}</div>
+                      </div>
+                      <div className="lower">National Site Code</div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+
+                  <div className="site-detail">
+                    <div className="upper">
+                      {iucn_category[0] ? (
+                        <div>{iucn_category}</div>
+                      ) : (
+                        <div>Not Reported</div>
+                      )}
+                    </div>
+                    <div className="lower">IUCN Management Category</div>
+                  </div>
+
+                  {marine_area_percentage > 0 ? (
+                    <div className="site-detail">
+                      <div className="upper">
+                        <div>{marine_area_percentage} %</div>
+                      </div>
+                      <div className="lower">Marine Area</div>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                 </>
               )}
 
-              <div className="site-detail">
-                <div className="upper">
-                  {site_code[0] ? <div>{site_code}</div> : <div>-</div>}
-                </div>
-                <div className="lower">Site code</div>
-              </div>
-
-              <div className="site-detail">
-                <div className="upper">
-                  {isNumber(area_ha[0]) ? (
-                    <div>{area_ha} ha</div>
-                  ) : (
-                    <div>No data</div>
-                  )}
-                </div>
-                <div className="lower">Reported area</div>
-              </div>
-
-              <div className="site-detail">
-                <div className="upper">
-                  {year_stablished[0] ? (
-                    <div>{year_stablished}</div>
-                  ) : (
-                    <div>-</div>
-                  )}
-                </div>
-                <div className="lower">Site established</div>
-              </div>
-
-              {site_type[0] === 'CDDA' && (
-                <div className="site-detail">
-                  <div className="upper">
-                    {major_ecosystem_type[0] ? (
-                      <div>{major_ecosystem_type}</div>
-                    ) : (
-                      <div>-</div>
-                    )}
-                  </div>
-                  <div className="lower">Ecosystem</div>
-                </div>
-              )}
-
-              {site_type[0] === 'Natura2000' && (
+              {['Natura2000', 'Emerald'].includes(site_type[0]) && (
                 <>
+                  <div className="site-detail">
+                    <div className="upper">
+                      {site_code[0] ? <div>{site_code}</div> : <div>-</div>}
+                    </div>
+                    <div className="lower">Site code</div>
+                  </div>
+
+                  <div className="site-detail">
+                    <div className="upper">
+                      {isNumber(area_ha[0]) ? (
+                        <div>{area_ha} ha</div>
+                      ) : (
+                        <div>No data</div>
+                      )}
+                    </div>
+                    <div className="lower">Reported area</div>
+                  </div>
+
+                  <div className="site-detail">
+                    <div className="upper">
+                      {year_stablished[0] ? (
+                        <div>{year_stablished}</div>
+                      ) : (
+                        <div>-</div>
+                      )}
+                    </div>
+                    <div className="lower">Site established</div>
+                  </div>
+
                   <div className="site-detail">
                     <div className="upper">
                       {isNumber(number_protected_habitat_types[0]) ? (

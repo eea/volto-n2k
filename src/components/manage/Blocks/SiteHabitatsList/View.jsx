@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Container, Pagination, Grid } from 'semantic-ui-react';
 import { getObjectByIndex, photoPlaceholders } from '@eeacms/volto-n2k/helpers';
 import { Filters } from './Filters';
-// import { getPopulationString, getLabelString } from './utils';
 
 import './style.less';
+import { filtersLabels } from './utils';
 
 const getCurrentPageLength = (pagination, arr) => {
   const totalPages = Math.ceil(pagination.totalItems / pagination.itemsPerPage);
@@ -56,13 +56,36 @@ const View = (props) => {
 
     const filteredHabitats = habitats.filter((items, index) => {
       let itemsHaveFilter = true;
+
       Object.keys(activeFilters).forEach((filter) => {
         let habitatHasFilter = false;
-        items.forEach((item) => {
-          if (activeFilters[filter].includes(item[filter])) {
-            habitatHasFilter = true;
+
+        activeFilters[filter].forEach((key) => {
+          if (filter in filtersLabels) {
+            if (
+              filtersLabels[filter][key] === filtersLabels.habitat_prioriy.wp
+            ) {
+              habitatHasFilter = items[0][filter] === 1;
+              return;
+            }
+            if (
+              filtersLabels[filter][key] === filtersLabels.habitat_prioriy.np
+            ) {
+              habitatHasFilter = items[0][filter] === null;
+              return;
+            }
+
+            if (filtersLabels[filter][key] === items[0][filter]) {
+              habitatHasFilter = true;
+              return;
+            }
           }
         });
+
+        if (activeFilters[filter].includes(items[0][filter])) {
+          habitatHasFilter = true;
+        }
+
         if (!habitatHasFilter) {
           itemsHaveFilter = false;
         }

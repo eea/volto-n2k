@@ -3,7 +3,7 @@ import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 import Map from '@eeacms/volto-openlayers-map/Map';
 import { Layers, Layer } from '@eeacms/volto-openlayers-map/Layers';
-import { openlayers } from '@eeacms/volto-openlayers-map';
+import { withOpenLayers } from '@eeacms/volto-openlayers-map';
 
 // layer definitions
 const smallScaleLayerId = 1;
@@ -57,6 +57,7 @@ const dynamicLayerDefinition = `
 ]`;
 
 const View = (props) => {
+  const { ol: openlayers } = props;
   const [sources, setSources] = useState([]);
   const [tiles, setTiles] = useState([]);
   const [extent, setExtent] = useState(null);
@@ -200,4 +201,4 @@ const View = (props) => {
   );
 };
 
-export default View;
+export default withOpenLayers(View);
