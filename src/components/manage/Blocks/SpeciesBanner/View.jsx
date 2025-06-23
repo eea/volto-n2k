@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState, useCallback } from 'react';
 import { compose } from 'redux';
 import cx from 'classnames';
 import loadable from '@loadable/component';
@@ -28,11 +28,19 @@ const ViewComponent = (props) => {
   const swiperEl = useRef();
   const previewEl = useRef();
   const [activeSlide, setActiveSlide] = useState(0);
-  const species_provider = flattenToAppURL(props.data.species_provider);
-  const species_pictures_provider = flattenToAppURL(
-    props.data.species_pictures_provider,
+  const species_provider = useMemo(
+    () => flattenToAppURL(props.data.species_provider),
+    [props.data.species_provider],
   );
-  const species = props.providers_data?.[species_provider] || {};
+  const species_pictures_provider = useMemo(
+    () => flattenToAppURL(props.data.species_pictures_provider),
+    [props.data.species_pictures_provider],
+  );
+
+  const species = useMemo(
+    () => props.providers_data?.[species_provider] || {},
+    [props.providers_data, species_provider],
+  );
   const species_pictures = useMemo(
     () => props.providers_data?.[species_pictures_provider] || {},
     [props.providers_data, species_pictures_provider],
@@ -62,6 +70,28 @@ const ViewComponent = (props) => {
     () => pictures.filter((picture) => !!picture)?.length,
     [pictures],
   );
+
+  const handleSliderPrevious = useCallback(() => {
+    swiperEl.current.slidePrev();
+    if (previewEl.current?.[0]) {
+      previewEl.current[0].slidePrev();
+    }
+    if (previewEl.current?.[1]) {
+      previewEl.current[1].slidePrev();
+    }
+    setActiveSlide(swiperEl.current.realIndex);
+  }, []);
+
+  const handleSliderNext = useCallback(() => {
+    swiperEl.current.slideNext();
+    if (previewEl.current?.[0]) {
+      previewEl.current[0].slideNext();
+    }
+    if (previewEl.current?.[1]) {
+      previewEl.current[1].slideNext();
+    }
+    setActiveSlide(swiperEl.current.realIndex);
+  }, []);
 
   if (!species_provider && props.mode === 'edit') {
     return 'species banner block, species provider undefined';
@@ -110,16 +140,7 @@ const ViewComponent = (props) => {
                 <>
                   <button
                     className="swiper-button image-swiper-button-prev"
-                    onClick={() => {
-                      swiperEl.current.slidePrev();
-                      if (previewEl.current?.[0]) {
-                        previewEl.current[0].slidePrev();
-                      }
-                      if (previewEl.current?.[1]) {
-                        previewEl.current[1].slidePrev();
-                      }
-                      setActiveSlide(swiperEl.current.realIndex);
-                    }}
+                    onClick={handleSliderPrevious}
                   >
                     <Icon
                       className="icon-left"
@@ -130,16 +151,7 @@ const ViewComponent = (props) => {
                   </button>
                   <button
                     className="swiper-button image-swiper-button-next"
-                    onClick={() => {
-                      swiperEl.current.slideNext();
-                      if (previewEl.current?.[0]) {
-                        previewEl.current[0].slideNext();
-                      }
-                      if (previewEl.current?.[1]) {
-                        previewEl.current[1].slideNext();
-                      }
-                      setActiveSlide(swiperEl.current.realIndex);
-                    }}
+                    onClick={handleSliderNext}
                   >
                     <Icon
                       className="icon-right"
@@ -176,7 +188,7 @@ const ViewComponent = (props) => {
                             }}
                           >
                             {pictures.map((source, index) => (
-                              <SwiperSlide>
+                              <SwiperSlide key={source}>
                                 <img
                                   src={getSource(source)}
                                   alt={pictures[index]}
