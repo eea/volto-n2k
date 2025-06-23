@@ -1,22 +1,15 @@
 export const filtersLabels = {
-  population_type: {
-    p: 'Permanent',
-    r: 'Reproducing',
-    c: 'Concentration',
-    w: 'Wintering',
-    getTitle: () => 'Population type',
+  habitat_group: {
+    fo: 'Forests',
+    fr: 'Freshwater',
+    bmf: 'Bogs, mires and fens',
+    gr: 'Grasslands',
+    getTitle: () => 'Habitat groups',
   },
-  counting_unit: {
-    i: 'Individuals',
-    p: 'Pairs',
-    getTitle: () => 'Unit',
-  },
-  abundance_category: {
-    C: 'Common',
-    R: 'Rare',
-    V: 'Very rare',
-    P: 'Present',
-    getTitle: () => 'Abundance',
+  habitat_prioriy: {
+    wp: 'With priority',
+    np: 'Without priority',
+    getTitle: () => 'Habitat priority',
   },
 };
 

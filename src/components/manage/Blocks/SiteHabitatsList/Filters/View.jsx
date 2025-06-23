@@ -7,7 +7,7 @@ import {
   Label,
 } from 'semantic-ui-react';
 import { Icon } from '@plone/volto/components';
-// import filterSVG from '@plone/volto/icons/filter.svg';
+import filterSVG from '@plone/volto/icons/filter.svg';
 import clearSVG from '@plone/volto/icons/clear.svg';
 
 import HabitatsGroups from './HabitatsGroups';
@@ -15,8 +15,10 @@ import SortBy from './SortBy';
 
 import { filtersLabels } from '../utils';
 
+// TODO: Display the correct filters for habitats based on existing data
 const SidebarFilter = (props) => {
   const { activeFilters, filters, filter, index, setActiveFilters } = props;
+
   return (
     <div className="filter">
       <div className="header">
@@ -97,8 +99,22 @@ const View = (props) => {
         if (key !== 'getTitle') {
           newFilters[filter][key] =
             filteredHabitats.filter((habitats) => {
-              return !!habitats.filter((habitat) => habitat[filter] === key)
-                .length;
+              return !!habitats.filter((habitat) => {
+                if (
+                  filtersLabels[filter][key] ===
+                  filtersLabels.habitat_prioriy.wp
+                ) {
+                  return habitat[filter] === 1;
+                }
+                if (
+                  filtersLabels[filter][key] ===
+                  filtersLabels.habitat_prioriy.np
+                ) {
+                  return habitat[filter] === null;
+                }
+
+                return habitat[filter] === filtersLabels[filter][key];
+              }).length;
             }).length || 'none';
         }
       }
@@ -160,9 +176,9 @@ const View = (props) => {
               setPagination({ ...pagination, itemsPerPage: data.value });
             }}
           />
-          {/* <button aria-label="Set filters" onClick={() => setVisible(!visible)}>
+          <button aria-label="Set filters" onClick={() => setVisible(!visible)}>
             <Icon name={filterSVG} size="24px" />
-          </button> */}
+          </button>
         </div>
       </Container>
       <Sidebar
