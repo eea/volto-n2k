@@ -62,11 +62,15 @@ const View = (props) => {
 
         activeFilters[filter].forEach((key) => {
           if (filter in filtersLabels) {
-            if (filtersLabels[filter][key] === filtersLabels.habitat_prioriy.wp) {
+            if (
+              filtersLabels[filter][key] === filtersLabels.habitat_prioriy.wp
+            ) {
               habitatHasFilter = items[0][filter] === 1;
               return;
             }
-            if (filtersLabels[filter][key] === filtersLabels.habitat_prioriy.np) {
+            if (
+              filtersLabels[filter][key] === filtersLabels.habitat_prioriy.np
+            ) {
               habitatHasFilter = items[0][filter] === null;
               return;
             }
