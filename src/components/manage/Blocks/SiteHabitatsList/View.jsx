@@ -194,7 +194,7 @@ const View = (props) => {
                         <div className="name">
                           <Link
                             as="h3"
-                            to={`/habitats/${habitatsData.code_2000}`}
+                            to={`/habitats/${habitatsData.habitat_unique_id}`}
                           >
                             {habitatsData.scientific_name
                               ? habitatsData.scientific_name + ' '
