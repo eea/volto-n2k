@@ -92,18 +92,18 @@ const ViewComponent = (props) => {
   }
 
   const handlePriority = useMemo(() => {
-    const priority = habitat_prioriy[0]
+    const priority = habitat_prioriy[0];
 
     if (priority === 0) {
-      return 'Conditional priority'
+      return 'Conditional priority';
     }
     if (priority === null) {
-      return 'Without priority'
+      return 'Without priority';
     }
     if (priority === 1) {
-      return 'With priority'
+      return 'With priority';
     }
-  }, [habitat_prioriy])
+  }, [habitat_prioriy]);
 
   return (
     <div className="habitat-banner-details">
