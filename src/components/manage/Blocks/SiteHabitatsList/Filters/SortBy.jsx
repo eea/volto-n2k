@@ -16,7 +16,7 @@ const View = (props) => {
     { text: 'Name', value: 'scientific_name', key: 'scientific_name' },
     { text: 'Coverage', value: 'coverage_ha', key: 'coverage_ha' },
     { text: 'Sites', value: 'number_sites', key: 'number_sites' },
-    { text: 'Code', value: 'code_2000', key: 'code_2000' }
+    { text: 'Code', value: 'code_2000', key: 'code_2000' },
   ];
 
   return (
