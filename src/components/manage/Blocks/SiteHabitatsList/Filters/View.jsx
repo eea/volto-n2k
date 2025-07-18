@@ -106,11 +106,19 @@ const View = (props) => {
                 ) {
                   return habitat[filter] === 1;
                 }
+
                 if (
                   filtersLabels[filter][key] ===
                   filtersLabels.habitat_prioriy.np
                 ) {
-                  return !habitat[filter];
+                  return habitat[filter] === null;
+                }
+
+                if (
+                  filtersLabels[filter][key] ===
+                  filtersLabels.habitat_prioriy.cp
+                ) {
+                  return habitat[filter] === 0;
                 }
 
                 return habitat[filter] === filtersLabels[filter][key];
@@ -119,7 +127,6 @@ const View = (props) => {
         }
       }
     });
-
     setFilters(newFilters);
   };
 
