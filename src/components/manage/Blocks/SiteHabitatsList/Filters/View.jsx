@@ -110,7 +110,7 @@ const View = (props) => {
                   filtersLabels[filter][key] ===
                   filtersLabels.habitat_prioriy.np
                 ) {
-                  return habitat[filter] === null;
+                  return !habitat[filter];
                 }
 
                 return habitat[filter] === filtersLabels[filter][key];
@@ -119,6 +119,7 @@ const View = (props) => {
         }
       }
     });
+
     setFilters(newFilters);
   };
 

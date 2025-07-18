@@ -71,7 +71,7 @@ const View = (props) => {
             if (
               filtersLabels[filter][key] === filtersLabels.habitat_prioriy.np
             ) {
-              habitatHasFilter = items[0][filter] === null;
+              habitatHasFilter = !items[0][filter];
               return;
             }
 
