@@ -91,6 +91,20 @@ const ViewComponent = (props) => {
     return 'Habitat banner block, habitat pictures provider undefined';
   }
 
+  const handlePriority = useMemo(() => {
+    const priority = habitat_prioriy[0]
+
+    if (priority === 0) {
+      return 'Conditional priority'
+    }
+    if (priority === null) {
+      return 'Without priority'
+    }
+    if (priority === 1) {
+      return 'With priority'
+    }
+  }, [habitat_prioriy])
+
   return (
     <div className="habitat-banner-details">
       <div className="habitat-details">
@@ -99,11 +113,9 @@ const ViewComponent = (props) => {
           <p className="info">
             Habitats Directive Annex I code&nbsp;&nbsp;&nbsp;{code_2000[0]}
           </p>
-          {habitat_prioriy[0] && (
-            <p className="info" style={{ marginTop: '1rem' }}>
-              Priority habitat type
-            </p>
-          )}
+          <p className="info" style={{ marginTop: '1rem' }}>
+            {handlePriority}
+          </p>
         </div>
         {pictures_length > 0 && (
           <div className={cx('carousel one-slide')}>
