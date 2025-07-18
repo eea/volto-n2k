@@ -53,6 +53,20 @@ const ViewComponent = (props) => {
   } = habitat;
   const { attribution_copyright = [] } = habitat_pictures;
 
+  const handlePriority = useMemo(() => {
+    const priority = habitat_prioriy[0];
+
+    if (priority === 0) {
+      return 'Conditional priority';
+    }
+    if (priority === null) {
+      return 'Without priority';
+    }
+    if (priority === 1) {
+      return 'With priority';
+    }
+  }, [habitat_prioriy]);
+
   const pictures = useMemo(
     () => habitat_pictures?.['WebURL'] || [],
     [habitat_pictures],
@@ -90,20 +104,6 @@ const ViewComponent = (props) => {
   if (!habitat_pictures_provider && props.mode === 'edit') {
     return 'Habitat banner block, habitat pictures provider undefined';
   }
-
-  const handlePriority = useMemo(() => {
-    const priority = habitat_prioriy[0];
-
-    if (priority === 0) {
-      return 'Conditional priority';
-    }
-    if (priority === null) {
-      return 'Without priority';
-    }
-    if (priority === 1) {
-      return 'With priority';
-    }
-  }, [habitat_prioriy]);
 
   return (
     <div className="habitat-banner-details">
