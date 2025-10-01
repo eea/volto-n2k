@@ -155,7 +155,7 @@ const Edit = (props) => {
   }
 
   return (
-    <fieldset className="section-block">
+    <fieldset id={props.data.id} className="section-block">
       <legend
         onClick={() => {
           setSelectedBlock();
