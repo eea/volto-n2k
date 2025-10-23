@@ -2,6 +2,7 @@ export const filtersLabels = {
   habitat_prioriy: {
     wp: 'With priority',
     np: 'Without priority',
+    cp: 'Conditional priority',
     getTitle: () => 'Habitat priority',
   },
 };
