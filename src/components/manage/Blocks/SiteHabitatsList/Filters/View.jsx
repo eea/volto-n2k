@@ -99,22 +99,8 @@ const View = (props) => {
         if (key !== 'getTitle') {
           newFilters[filter][key] =
             filteredHabitats.filter((habitats) => {
-              return !!habitats.filter((habitat) => {
-                if (
-                  filtersLabels[filter][key] ===
-                  filtersLabels.habitat_prioriy.wp
-                ) {
-                  return habitat[filter] === 1;
-                }
-                if (
-                  filtersLabels[filter][key] ===
-                  filtersLabels.habitat_prioriy.np
-                ) {
-                  return habitat[filter] === null;
-                }
-
-                return habitat[filter] === filtersLabels[filter][key];
-              }).length;
+              return !!habitats.filter((habitat) => habitat[filter] === key)
+                .length;
             }).length || 'none';
         }
       }
