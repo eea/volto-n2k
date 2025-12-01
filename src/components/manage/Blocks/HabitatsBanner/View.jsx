@@ -53,7 +53,7 @@ const ViewComponent = (props) => {
   } = habitat;
   const { attribution_copyright = [] } = habitat_pictures;
 
-  const handlePriority = useMemo(() => {
+  const priorityLabel = useMemo(() => {
     const priority = habitat_prioriy[0];
 
     if (priority === 0) {
@@ -114,7 +114,7 @@ const ViewComponent = (props) => {
             Habitats Directive Annex I code&nbsp;&nbsp;&nbsp;{code_2000[0]}
           </p>
           <p className="info" style={{ marginTop: '1rem' }}>
-            {handlePriority}
+            {priorityLabel}
           </p>
         </div>
         {pictures_length > 0 && (

@@ -16,6 +16,10 @@ const getCurrentPageLength = (pagination, arr) => {
   return pagination.itemsPerPage;
 };
 
+function getPriorityString(priority) {
+  return filtersLabels.habitat_prioriy[priority] || '';
+}
+
 const View = (props) => {
   const {
     provider_data = {},
@@ -24,7 +28,7 @@ const View = (props) => {
   const dataReady = React.useRef(false);
   const [activeHabitatsGroup, setActiveHabitatsGroup] = React.useState('All');
   const [filters, setFilters] = React.useState({});
-  const [habitats, spetHabitats] = React.useState([]);
+  const [habitats, setHabitats] = React.useState([]);
   const [filteredHabitats, setFilteredHabitats] = React.useState([]);
   const [pagination, setPagination] = React.useState({
     activePage: 1,
@@ -56,44 +60,13 @@ const View = (props) => {
 
     const filteredHabitats = habitats.filter((items, index) => {
       let itemsHaveFilter = true;
-
       Object.keys(activeFilters).forEach((filter) => {
         let habitatHasFilter = false;
-
-        activeFilters[filter].forEach((key) => {
-          if (filter in filtersLabels) {
-            if (
-              filtersLabels[filter][key] === filtersLabels.habitat_prioriy.wp
-            ) {
-              habitatHasFilter = items[0][filter] === 1;
-              return;
-            }
-
-            if (
-              filtersLabels[filter][key] === filtersLabels.habitat_prioriy.np
-            ) {
-              habitatHasFilter = items[0][filter] === null;
-              return;
-            }
-
-            if (
-              filtersLabels[filter][key] === filtersLabels.habitat_prioriy.cp
-            ) {
-              habitatHasFilter = items[0][filter] === 0;
-              return;
-            }
-
-            if (filtersLabels[filter][key] === items[0][filter]) {
-              habitatHasFilter = true;
-              return;
-            }
+        items.forEach((item) => {
+          if (activeFilters[filter].includes(item[filter])) {
+            habitatHasFilter = true;
           }
         });
-
-        if (activeFilters[filter].includes(items[0][filter])) {
-          habitatHasFilter = true;
-        }
-
         if (!habitatHasFilter) {
           itemsHaveFilter = false;
         }
@@ -123,10 +96,16 @@ const View = (props) => {
         if (!newHabitats[habitatsIndex[habitat.code_2000]]) {
           newHabitats[habitatsIndex[habitat.code_2000]] = [];
         }
-        newHabitats[habitatsIndex[habitat.code_2000]].push(habitat);
+        newHabitats[habitatsIndex[habitat.code_2000]].push({
+          ...habitat,
+          habitat_prioriy:
+            habitat.habitat_prioriy !== null
+              ? habitat.habitat_prioriy.toString()
+              : '-1',
+        });
       });
     }
-    spetHabitats(getSortedHabitats(newHabitats.filter((habitats) => habitats)));
+    setHabitats(getSortedHabitats(newHabitats.filter((habitats) => habitats)));
     /* eslint-disable-next-line */
   }, [JSON.stringify(provider_data)]);
 
@@ -169,6 +148,7 @@ const View = (props) => {
                 k + (pagination.activePage - 1) * pagination.itemsPerPage,
             ).map((index) => {
               const habitatsData = filteredHabitats[index][0];
+              const priority = getPriorityString(habitatsData.habitat_prioriy);
 
               return (
                 <Grid
@@ -219,9 +199,7 @@ const View = (props) => {
                             style={{ fontSize: '1.2rem' }}
                             key={`habitat-${index}-${habitat.code_2000}`}
                           >
-                            {habitat.habitat_prioriy
-                              ? `Priority habitat type; `
-                              : ''}
+                            {priority ? `${priority}; ` : ''}
                             Cover: {habitat.coverage_ha.toFixed(2)} ha (
                             {(habitat.coverage_ha / 100).toFixed(2)} km²)
                             {habitat.caves > 0
