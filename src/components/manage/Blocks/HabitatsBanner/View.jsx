@@ -60,10 +60,10 @@ const ViewComponent = (props) => {
       return 'Conditional priority';
     }
     if (priority === null) {
-      return 'Without priority';
+      return '';
     }
     if (priority === 1) {
-      return 'With priority';
+      return 'Priority habitat';
     }
   }, [habitat_prioriy]);
 
