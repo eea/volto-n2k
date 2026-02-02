@@ -6,6 +6,11 @@ const imageSchema = {
       title: 'Default',
       fields: ['image', 'link', 'title'],
     },
+    {
+      id: 'copyright',
+      title: 'Copyright',
+      fields: ['copyright', 'copyrightIcon', 'copyrightPosition'],
+    },
   ],
   properties: {
     image: {
@@ -18,6 +23,31 @@ const imageSchema = {
     },
     title: {
       title: 'Title',
+    },
+    copyright: {
+      title: 'Text',
+    },
+    copyrightIcon: {
+      title: 'Icon',
+      description: (
+        <>
+          Ex. ri-copyright-line. See{' '}
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://eea.github.io/volto-eea-design-system/docs/webdev/Guidelines/iconography/#icon-set"
+          >
+            Remix Icon set
+          </a>
+        </>
+      ),
+      default: 'ri-copyright-line',
+    },
+    copyrightPosition: {
+      title: 'Align',
+      widget: 'align',
+      actions: ['left', 'right'],
+      defaultValue: 'left',
     },
   },
   required: ['url', 'title'],
