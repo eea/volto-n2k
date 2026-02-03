@@ -1,19 +1,18 @@
 import React from 'react';
 import { SidebarPortal } from '@plone/volto/components';
-import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
+import BlockDataForm from '@plone/volto/components/manage/Form/BlockDataForm';
 import TilesImagesView from './View';
 import getSchema from './schema';
-import './styles.less';
 
 const Edit = (props) => {
-  const { selected = false } = props;
-  const schema = getSchema();
+  const { selected = false, data = {} } = props;
+  const schema = getSchema({ formData: data });
 
   return (
     <>
       <TilesImagesView {...props} mode="edit" />
       <SidebarPortal selected={selected}>
-        <InlineForm
+        <BlockDataForm
           schema={schema}
           title={schema.title}
           onChangeField={(id, value) => {
@@ -22,6 +21,8 @@ const Edit = (props) => {
               [id]: value,
             });
           }}
+          onChangeBlock={props.onChangeBlock}
+          block={props.block}
           formData={props.data}
         />
       </SidebarPortal>

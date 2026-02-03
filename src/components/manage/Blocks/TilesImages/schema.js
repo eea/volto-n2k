@@ -4,12 +4,7 @@ const imageSchema = {
     {
       id: 'default',
       title: 'Default',
-      fields: ['image', 'link', 'title'],
-    },
-    {
-      id: 'copyright',
-      title: 'Copyright',
-      fields: ['copyright', 'copyrightIcon', 'copyrightPosition'],
+      fields: ['image', 'link', 'title', 'copyright'],
     },
   ],
   properties: {
@@ -25,35 +20,13 @@ const imageSchema = {
       title: 'Title',
     },
     copyright: {
-      title: 'Text',
-    },
-    copyrightIcon: {
-      title: 'Icon',
-      description: (
-        <>
-          Ex. ri-copyright-line. See{' '}
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://eea.github.io/volto-eea-design-system/docs/webdev/Guidelines/iconography/#icon-set"
-          >
-            Remix Icon set
-          </a>
-        </>
-      ),
-      default: 'ri-copyright-line',
-    },
-    copyrightPosition: {
-      title: 'Align',
-      widget: 'align',
-      actions: ['left', 'right'],
-      defaultValue: 'left',
+      title: 'Copyright',
     },
   },
   required: ['url', 'title'],
 };
 
-export default function getSchema() {
+export default function getSchema({ formData }) {
   return {
     title: 'Tiles images',
     fieldsets: [
@@ -62,11 +35,15 @@ export default function getSchema() {
         title: 'Default',
         fields: ['theme', 'images'],
       },
-      {
-        id: 'advanced',
-        title: 'Advanced',
-        fields: ['size', 'hasBorder', 'rounded'],
-      },
+      ...(formData?.variation === 'default'
+        ? [
+            {
+              id: 'advanced',
+              title: 'Advanced',
+              fields: ['size', 'hasBorder', 'rounded'],
+            },
+          ]
+        : []),
     ],
     properties: {
       size: {
