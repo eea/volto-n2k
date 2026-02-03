@@ -1,4 +1,6 @@
 import TilesImagesEdit from './Edit';
+import ImageGallery from './variations/ImageGallery/ImageGallery';
+import DefaultView from './variations/Default/Default';
 import TilesImagesView from './View';
 import worldSVG from '@plone/volto/icons/world.svg';
 
@@ -18,6 +20,20 @@ export default function applyConfig(config) {
       addPermission: [],
       view: [],
     },
+    variations: [
+      {
+        id: 'default',
+        isDefault: true,
+        title: 'Default',
+        template: DefaultView,
+      },
+      {
+        id: 'imageGallery',
+        isDefault: false,
+        title: 'ImageGallery',
+        template: ImageGallery,
+      },
+    ],
   };
   return config;
 }

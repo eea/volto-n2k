@@ -1,38 +1,16 @@
 import React from 'react';
-import { UniversalLink } from '@plone/volto/components';
-import cx from 'classnames';
-import './styles.less';
+import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
+import config from '@plone/volto/registry';
 
 const View = (props) => {
-  const { data = {}, mode = 'view' } = props;
-  const images = data.images || [];
+  const { mode = 'view', variation } = props;
 
-  return (
-    <div className={cx('tiles-images', mode, data.theme || 'light')}>
-      {mode === 'edit' && !images.length ? <p>Tiles images block</p> : ''}
-      {images.map((image) => (
-        <p
-          key={`tile-${image.title}`}
-          className={cx('p-image', {
-            'with-border': data.hasBorder ?? true,
-            'rounded-border': data.rounded ?? true,
-          })}
-        >
-          <UniversalLink href={image.link || '#'} title={image.title}>
-            <img
-              src={`${image.image}/@@images/image/mini`}
-              alt={image.title}
-              style={
-                data.size
-                  ? { width: `${data.size}px`, height: `${data.size}px` }
-                  : {}
-              }
-            />
-          </UniversalLink>
-        </p>
-      ))}
-    </div>
-  );
+  const variations =
+    config.blocks?.blocksConfig['tiles_images']?.variations || [];
+  const defaultVariation = variations.filter((item) => item.isDefault)?.[0];
+  const Template = variation?.template ?? defaultVariation?.template ?? null;
+
+  return <Template {...props} mode={mode} />;
 };
 
-export default View;
+export default withBlockExtensions(View);

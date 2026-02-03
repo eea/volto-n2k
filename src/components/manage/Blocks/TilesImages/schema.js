@@ -4,7 +4,7 @@ const imageSchema = {
     {
       id: 'default',
       title: 'Default',
-      fields: ['image', 'link', 'title'],
+      fields: ['image', 'link', 'title', 'copyright'],
     },
   ],
   properties: {
@@ -19,11 +19,14 @@ const imageSchema = {
     title: {
       title: 'Title',
     },
+    copyright: {
+      title: 'Copyright',
+    },
   },
   required: ['url', 'title'],
 };
 
-export default function getSchema() {
+export default function getSchema({ formData }) {
   return {
     title: 'Tiles images',
     fieldsets: [
@@ -32,11 +35,15 @@ export default function getSchema() {
         title: 'Default',
         fields: ['theme', 'images'],
       },
-      {
-        id: 'advanced',
-        title: 'Advanced',
-        fields: ['size', 'hasBorder', 'rounded'],
-      },
+      ...(formData?.variation === 'default'
+        ? [
+            {
+              id: 'advanced',
+              title: 'Advanced',
+              fields: ['size', 'hasBorder', 'rounded'],
+            },
+          ]
+        : []),
     ],
     properties: {
       size: {
