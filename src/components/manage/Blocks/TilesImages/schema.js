@@ -1,15 +1,20 @@
-const imageSchema = {
+const imageSchema = ({ formData }) => ({
   title: 'Image',
   fieldsets: [
     {
       id: 'default',
       title: 'Default',
-      fields: ['image', 'link', 'title', 'copyright'],
+      fields: [
+        'image',
+        ...(formData?.variation !== 'imageGallery' ? ['link'] : []),
+        'title',
+        'copyright',
+      ],
     },
   ],
   properties: {
     image: {
-      title: 'image',
+      title: 'Image',
       widget: 'object_by_path',
     },
     link: {
@@ -23,8 +28,8 @@ const imageSchema = {
       title: 'Copyright',
     },
   },
-  required: ['url', 'title'],
-};
+  required: [],
+});
 
 export default function getSchema({ formData }) {
   return {
@@ -72,7 +77,7 @@ export default function getSchema({ formData }) {
       images: {
         title: 'Images',
         widget: 'object_list',
-        schema: imageSchema,
+        schema: imageSchema({ formData }),
       },
     },
     required: [],

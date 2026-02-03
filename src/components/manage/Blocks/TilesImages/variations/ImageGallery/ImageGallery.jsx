@@ -1,7 +1,7 @@
 import React from 'react';
 import loadable from '@loadable/component';
 import { Modal, Image } from 'semantic-ui-react';
-
+import cx from 'classnames';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -56,7 +56,9 @@ const ImageGallery = (props) => {
         <Image
           src={`${items[0]?.image}/@@images/image/preview`}
           alt={items[0]?.title}
-          className="preview-image"
+          className={cx('preview-image', {
+            'image-gallery-preview': mode === 'edit',
+          })}
         />
       </div>
       {mode === 'view' ? (
