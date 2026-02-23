@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Pagination, Grid } from 'semantic-ui-react';
-import { getObjectByIndex, photoPlaceholders } from '@eeacms/volto-n2k/helpers';
+import { 
+  getObjectByIndex,
+  photoPlaceholders,
+  priorityLabels
+} from '@eeacms/volto-n2k/helpers';
 import { Filters } from './Filters';
 
 import './style.less';
-import { filtersLabels } from './utils';
 
 const getCurrentPageLength = (pagination, arr) => {
   const totalPages = Math.ceil(pagination.totalItems / pagination.itemsPerPage);
@@ -17,7 +20,7 @@ const getCurrentPageLength = (pagination, arr) => {
 };
 
 function getPriorityString(priority) {
-  return filtersLabels.habitat_prioriy[priority] || '';
+  return priorityLabels.habitat_prioriy[priority] || '';
 }
 
 const View = (props) => {
