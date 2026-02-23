@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Pagination, Grid } from 'semantic-ui-react';
-import { 
+import {
   getObjectByIndex,
   photoPlaceholders,
-  priorityLabels
+  priorityLabels,
 } from '@eeacms/volto-n2k/helpers';
 import { Filters } from './Filters';
 
