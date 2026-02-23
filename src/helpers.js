@@ -30,6 +30,14 @@ export const photoPlaceholders = {
   default: defaultPNG,
 };
 
+export const priorityLabels = {
+  habitat_prioriy: {
+    1: 'Priority habitat',
+    0: 'Conditional priority',
+    '-1': '',
+  },
+};
+
 export const getObjectByIndex = (provider_data, index) => {
   const obj = {};
   const keys = Object.keys(provider_data);

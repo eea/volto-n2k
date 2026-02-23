@@ -1,6 +1,6 @@
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
-import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
+import { replaceQueryParam, priorityLabels } from '@eeacms/volto-n2k/helpers';
 import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
 import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
 import loadable from '@loadable/component';
@@ -56,15 +56,7 @@ const ViewComponent = (props) => {
   const priorityLabel = useMemo(() => {
     const priority = habitat_prioriy[0];
 
-    if (priority === 0) {
-      return 'Conditional priority';
-    }
-    if (priority === null) {
-      return '';
-    }
-    if (priority === 1) {
-      return 'Priority habitat';
-    }
+    return priorityLabels.habitat_prioriy[priority] ?? '';
   }, [habitat_prioriy]);
 
   const pictures = useMemo(
