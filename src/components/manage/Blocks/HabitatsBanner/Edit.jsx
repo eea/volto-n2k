@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { SidebarPortal } from '@plone/volto/components';
 import BlockDataForm from '@plone/volto/components/manage/Form/BlockDataForm';
+import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import getSchema from './schema';
 import View from './View';
 

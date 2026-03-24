@@ -147,6 +147,14 @@ export const pathExists = (path, items) => {
   return ok;
 };
 
+export const priorityLabels = {
+  habitat_prioriy: {
+    1: 'Priority habitat',
+    0: 'Conditional priority',
+    '-1': '',
+  },
+};
+
 export const replaceQueryParam = (url, param, newValue) => {
   const regex = new RegExp(`(${encodeURIComponent(param)}=)([^&]+)`, 'i');
   return url.replace(regex, `$1${encodeURIComponent(newValue)}`);
