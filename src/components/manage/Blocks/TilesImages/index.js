@@ -4,7 +4,6 @@ import DataConnectedImageGallery from './variations/DataConnectedImageGallery/Im
 import DefaultView from './variations/Default/Default';
 import TilesImagesView from './View';
 import worldSVG from '@plone/volto/icons/world.svg';
-import schema from '../BodyClass/schema';
 
 export default function applyConfig(config) {
   config.blocks.blocksConfig.tiles_images = {

@@ -1,6 +1,6 @@
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
-import { replaceQueryParam, priorityLabels } from '@eeacms/volto-n2k/helpers';
+import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
 import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
 import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
 import loadable from '@loadable/component';
