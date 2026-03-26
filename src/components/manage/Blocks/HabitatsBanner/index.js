@@ -1,6 +1,7 @@
 import worldSVG from '@plone/volto/icons/world.svg';
 import Edit from './Edit';
 import View from './View';
+import DefaultVariation from './variations/Default';
 
 export default function applyConfig(config) {
   config.blocks.blocksConfig.habitats_banner = {
@@ -19,6 +20,14 @@ export default function applyConfig(config) {
       view: [],
     },
     blockHasOwnFocusManagement: false,
+    variations: [
+      {
+        id: 'default',
+        title: 'Default',
+        isDefault: true,
+        template: DefaultVariation,
+      },
+    ],
   };
   return config;
 }
