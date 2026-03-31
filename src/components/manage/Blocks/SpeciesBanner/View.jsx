@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React, { useRef, useMemo, useState, useCallback } from 'react';
+import { useRef, useMemo, useState, useCallback } from 'react';
 import { compose } from 'redux';
 import cx from 'classnames';
 import loadable from '@loadable/component';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import { Icon } from '@plone/volto/components';
+import { Icon, UniversalLink } from '@plone/volto/components';
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
 import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
@@ -51,6 +51,9 @@ const ViewComponent = (props) => {
     common_name = [],
     code_2000 = [],
     id_eunis = [],
+    e_status_name = [],
+    e_id_eunis_accepted = [],
+    e_scientific_name_accepted = [],
     picture_url = [],
     scientific_name = [],
     source = [],
@@ -110,6 +113,15 @@ const ViewComponent = (props) => {
             <span style={{ fontStyle: 'italic', textTransform: 'none' }}>
               {scientific_name[0]}
             </span>
+            {e_id_eunis_accepted[0] &&
+              e_id_eunis_accepted[0] != id_eunis[0] && (
+                <span style={{ fontStyle: 'italic', textTransform: 'none' }}>
+                  &nbsp;- synonym of{' '}
+                  <UniversalLink href={`/species/${e_id_eunis_accepted[0]}`}>
+                    {e_scientific_name_accepted[0]}
+                  </UniversalLink>
+                </span>
+              )}
           </h2>
           {author[0] && (
             <p className="info radjhan-bold" style={{ marginBottom: '0.5rem' }}>
