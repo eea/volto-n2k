@@ -51,7 +51,6 @@ const ViewComponent = (props) => {
     common_name = [],
     code_2000 = [],
     id_eunis = [],
-    e_status_name = [],
     e_id_eunis_accepted = [],
     e_scientific_name_accepted = [],
     picture_url = [],
