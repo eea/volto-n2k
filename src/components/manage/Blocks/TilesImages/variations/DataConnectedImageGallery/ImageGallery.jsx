@@ -76,7 +76,7 @@ const RedHabitats = (props) => {
   }
 
   return (
-    <div className="habitat-banner-details">
+    <div className="habitat-banner-details-2">
       <div className="habitat-details">
         {pictures_length > 0 && (
           <div className={cx('carousel one-slide')}>

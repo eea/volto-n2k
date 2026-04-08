@@ -7,6 +7,7 @@ a.image-text:hover {
   flex-flow: row;
   align-items: center;
   margin-bottom: 1rem;
+  column-gap: 1rem;
 
   .slate-editor {
     width: 100%;
@@ -58,6 +59,9 @@ a.image-text:hover {
   }
 
   .p-image {
+    display: block;
+    width: fit-content;
+    flex-shrink: 0;
     margin-bottom: 0 !important;
 
     a {
@@ -68,8 +72,8 @@ a.image-text:hover {
       width: 130px;
       height: 130px;
       padding: 6px;
-      margin-right: 1rem;
       margin-bottom: 0;
+      object-fit: contain;
     }
   }
 
