@@ -113,7 +113,7 @@ const ViewComponent = (props) => {
               {scientific_name[0]}
             </span>
             {e_id_eunis_accepted[0] &&
-              e_id_eunis_accepted[0] != id_eunis[0] && (
+              e_id_eunis_accepted[0] != id_eunis[0] && ( // eslint-disable-line eqeqeq
                 <span style={{ fontStyle: 'italic', textTransform: 'none' }}>
                   &nbsp;- synonym of{' '}
                   <UniversalLink href={`/species/${e_id_eunis_accepted[0]}`}>
