@@ -40,24 +40,26 @@ const View = (props) => {
       return;
     const esrijsonFormat = new format.EsriJSON();
     // Get site shape
-    fetch(getSiteShapeURL(site_code[0], site_type[0])).then(function (response) {
-      if (response.status !== 200) return;
-      response.json().then(function (data) {
-        dataFetched.current = true;
-        if (data.features && data.features.length > 0) {
-          const features = esrijsonFormat.readFeatures(data);
-          if (features.length > 0) {
-            vectorSource.addFeatures(features);
-            const vectorExtent = vectorSource.getExtent();
-            let size = extent.getSize(vectorExtent);
-            setOptions({
-              ...options,
-              extent: new extent.buffer(vectorExtent, size[0] * 0.1),
-            });
+    fetch(getSiteShapeURL(site_code[0], site_type[0])).then(
+      function (response) {
+        if (response.status !== 200) return;
+        response.json().then(function (data) {
+          dataFetched.current = true;
+          if (data.features && data.features.length > 0) {
+            const features = esrijsonFormat.readFeatures(data);
+            if (features.length > 0) {
+              vectorSource.addFeatures(features);
+              const vectorExtent = vectorSource.getExtent();
+              let size = extent.getSize(vectorExtent);
+              setOptions({
+                ...options,
+                extent: new extent.buffer(vectorExtent, size[0] * 0.1),
+              });
+            }
           }
-        }
-      });
-    });
+        });
+      },
+    );
     /* eslint-disable-next-line */
   }, [vectorSource, site_code?.[0]]);
 
