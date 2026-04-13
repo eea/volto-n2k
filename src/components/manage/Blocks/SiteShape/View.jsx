@@ -16,7 +16,7 @@ const View = (props) => {
   const [tileWMSSources, setTileWMSSources] = useState([]);
   const { extent, format, proj, style, source } = openlayers;
   const provider_data = props.provider_data || {};
-  const { site_code = [] } = provider_data;
+  const { site_code = [], site_type = [] } = provider_data;
 
   useEffect(() => {
     if (__SERVER__) return;
@@ -40,7 +40,7 @@ const View = (props) => {
       return;
     const esrijsonFormat = new format.EsriJSON();
     // Get site shape
-    fetch(getSiteShapeURL(site_code[0])).then(function (response) {
+    fetch(getSiteShapeURL(site_code[0], site_type[0])).then(function (response) {
       if (response.status !== 200) return;
       response.json().then(function (data) {
         dataFetched.current = true;

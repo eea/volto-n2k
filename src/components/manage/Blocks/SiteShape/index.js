@@ -1,9 +1,10 @@
 import SiteShapeView from './View';
 import getSchema from './schema';
 
-export function getSiteShapeURL(site_code) {
+export function getSiteShapeURL(site_code, site_type) {
+  const service = site_type === 'Emerald' ? 'EmeraldSites' : 'Natura2000Sites';
   return encodeURI(
-    `https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Sites/MapServer/2/query?f=json&where=SITECODE LIKE '%${site_code.toUpperCase()}%'&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=SITECODE,SITENAME,OBJECTID&outSR=102100`,
+    `https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/${service}/MapServer/2/query?f=json&where=SITECODE LIKE '%${site_code.toUpperCase()}%'&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=SITECODE,SITENAME,OBJECTID&outSR=102100`,
   );
 }
 
