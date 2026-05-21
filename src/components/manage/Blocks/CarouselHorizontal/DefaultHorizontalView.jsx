@@ -4,7 +4,8 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router';
 import loadable from '@loadable/component';
 import cx from 'classnames';
-import { Icon, RenderBlocks } from '@plone/volto/components';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
+import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
 import { withScrollToTarget } from '@eeacms/volto-tabs-block/hocs';
 
 import rightArrowSVG from '@eeacms/volto-n2k/icons/right-key.svg';

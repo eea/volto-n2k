@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { Menu, Container, Sticky } from 'semantic-ui-react';
 import qs from 'querystring';
 import cx from 'classnames';
-import { UniversalLink } from '@plone/volto/components';
+import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
 import { withHashLink } from '@eeacms/volto-n2k/hocs';
 import './styles.less';
 

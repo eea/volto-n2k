@@ -1,5 +1,5 @@
 import React from 'react';
-import { UniversalLink } from '@plone/volto/components';
+import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
 import { withRouter } from 'react-router';
 import { useSelector } from 'react-redux';
 import { withHashLink } from '@eeacms/volto-n2k/hocs';

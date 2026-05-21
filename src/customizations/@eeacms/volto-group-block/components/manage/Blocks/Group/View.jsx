@@ -1,5 +1,5 @@
 import React from 'react';
-import { RenderBlocks } from '@plone/volto/components';
+import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
 import config from '@plone/volto/registry';
 
 const View = (props) => {

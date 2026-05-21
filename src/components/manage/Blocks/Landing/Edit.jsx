@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import { Grid, Button } from 'semantic-ui-react';
 import { isEmpty } from 'lodash';
 import EditBlockWrapper from './EditBlockWrapper';
-import { emptyBlocksForm } from '@plone/volto/helpers';
-import {
-  SidebarPortal,
-  UniversalLink,
-  BlocksForm,
-  Icon,
-} from '@plone/volto/components';
+import { emptyBlocksForm } from '@plone/volto/helpers/Blocks/Blocks';
+import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
+import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
+import BlocksForm from '@plone/volto/components/manage/Blocks/Block/BlocksForm';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import config from '@plone/volto/registry';
 import settingsSVG from '@plone/volto/icons/settings.svg';

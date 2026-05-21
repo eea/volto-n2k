@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '@plone/volto/registry';
-import { SidebarPortal } from '@plone/volto/components';
+import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
 import { Editor } from 'slate';

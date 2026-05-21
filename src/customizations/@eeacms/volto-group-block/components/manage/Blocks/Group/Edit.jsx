@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { isEmpty } from 'lodash';
-import {
-  BlocksForm,
-  SidebarPortal,
-  Icon,
-  BlockDataForm,
-} from '@plone/volto/components';
-import { emptyBlocksForm } from '@plone/volto/helpers';
+import BlocksForm from '@plone/volto/components/manage/Blocks/Block/BlocksForm';
+import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
+import BlockDataForm from '@plone/volto/components/manage/Form/BlockDataForm';
+import { emptyBlocksForm } from '@plone/volto/helpers/Blocks/Blocks';
 import delightedSVG from '@plone/volto/icons/delighted.svg';
 import dissatisfiedSVG from '@plone/volto/icons/dissatisfied.svg';
 import PropTypes from 'prop-types';

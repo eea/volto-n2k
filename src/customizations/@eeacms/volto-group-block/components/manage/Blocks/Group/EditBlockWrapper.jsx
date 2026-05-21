@@ -1,9 +1,8 @@
 import React from 'react';
-import { Icon, BlockChooser } from '@plone/volto/components';
-import {
-  blockHasValue,
-  buildStyleClassNamesFromData,
-} from '@plone/volto/helpers';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
+import BlockChooser from '@plone/volto/components/manage/BlockChooser/BlockChooser';
+import { blockHasValue } from '@plone/volto/helpers/Blocks/Blocks';
+import { buildStyleClassNamesFromData } from '@plone/volto/helpers/Blocks/Blocks';
 import config from '@plone/volto/registry';
 import { Button } from 'semantic-ui-react';
 import includes from 'lodash/includes';

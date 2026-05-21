@@ -8,14 +8,15 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { matchPath } from 'react-router';
-import { asyncConnect, Helmet } from '@plone/volto/helpers';
+import { asyncConnect } from '@plone/volto/helpers/AsyncConnect/AsyncConnect';
+import Helmet from '@plone/volto/helpers/Helmet/Helmet';
 import { defineMessages, injectIntl } from 'react-intl';
 import { Container } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import config from '@plone/volto/registry';
 import { withLocalStorage } from '@eeacms/volto-n2k/hocs';
 
-import { getNavigation } from '@plone/volto/actions';
+import { getNavigation } from '@plone/volto/actions/navigation/navigation';
 
 const messages = defineMessages({
   Sitemap: {
