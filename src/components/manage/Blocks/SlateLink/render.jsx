@@ -37,10 +37,10 @@ export const LinkElement = withHashLink(
       const href = internal_hash
         ? `#${internal_hash}`
         : email
-        ? `mailto:${email.email_address}${
-            email.email_subject ? `?subject=${email.email_subject}` : ''
-          }`
-        : external_link || internal_link || url;
+          ? `mailto:${email.email_address}${
+              email.email_subject ? `?subject=${email.email_subject}` : ''
+            }`
+          : external_link || internal_link || url;
 
       const { title } = element?.data || {};
 

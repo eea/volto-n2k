@@ -86,12 +86,12 @@ const Edit = (props) => {
       const foundText = blocksObject[blockId]?.plaintext
         ? blocksObject[blockId]?.plaintext
         : blocksObject[blockId]?.text?.blocks[0]?.text
-        ? blocksObject[blockId].text.blocks[0].text
-        : blocksObject[blockId]?.data?.blocks
-        ? countTextInBlocks(blocksObject[blockId]?.data?.blocks)
-        : blocksObject[blockId]?.blocks
-        ? countTextInBlocks(blocksObject[blockId]?.blocks)
-        : '';
+          ? blocksObject[blockId].text.blocks[0].text
+          : blocksObject[blockId]?.data?.blocks
+            ? countTextInBlocks(blocksObject[blockId]?.data?.blocks)
+            : blocksObject[blockId]?.blocks
+              ? countTextInBlocks(blocksObject[blockId]?.blocks)
+              : '';
       const resultText =
         typeof foundText === 'string' || foundText instanceof String
           ? foundText
@@ -116,8 +116,8 @@ const Edit = (props) => {
     charCount < Math.ceil(props.data.maxChars / 1.05)
       ? 'info'
       : charCount < props.data.maxChars
-      ? 'warning'
-      : 'danger';
+        ? 'warning'
+        : 'danger';
 
   const counterComponent = props.data.maxChars ? (
     <p
