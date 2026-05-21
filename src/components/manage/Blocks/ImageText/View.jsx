@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
+import Image from '@plone/volto/components/theme/Image/Image';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
 import { createEditor } from 'slate';
 import cx from 'classnames';
@@ -28,7 +29,7 @@ const View = (props) => {
               'rounded-border': data.rounded ?? true,
             })}
           >
-            <img
+            <Image
               src={`${data.image}/@@images/image/mini`}
               alt={data.imageTitle}
               style={

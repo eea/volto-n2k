@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Pagination, Grid } from 'semantic-ui-react';
+import Image from '@plone/volto/components/theme/Image/Image';
 import {
   getObjectByIndex,
   photoPlaceholders,
@@ -166,7 +167,7 @@ const View = (props) => {
                       computer={2}
                       className="habitats-photo"
                     >
-                      <img
+                      <Image
                         src={
                           habitatsData.picture_url ||
                           photoPlaceholders[habitatsData.habitat_group] ||

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Grid } from 'semantic-ui-react';
 import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
 import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
+import Image from '@plone/volto/components/theme/Image/Image';
 import DefaultView from './DefalutView';
 import hiker from './images/hiker.webp';
 import { tileProps, getStyle } from './index';
@@ -49,7 +50,7 @@ const View = (props) => {
                   {...tileProps}
                 >
                   <UniversalLink href={item.link || '#'} title={item.title}>
-                    <img
+                    <Image
                       className="image"
                       src={`${item.image}/@@images/image`}
                       alt={item.title}
@@ -62,7 +63,7 @@ const View = (props) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <img className="slick-image" src={hiker} alt="Hiker" />
+      <Image className="slick-image" src={hiker} alt="Hiker" />
     </div>
   );
 };

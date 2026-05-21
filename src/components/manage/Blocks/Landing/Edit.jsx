@@ -8,6 +8,7 @@ import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal'
 import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
 import BlocksForm from '@plone/volto/components/manage/Blocks/Block/BlocksForm';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
+import Image from '@plone/volto/components/theme/Image/Image';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import config from '@plone/volto/registry';
 import settingsSVG from '@plone/volto/icons/settings.svg';
@@ -185,7 +186,7 @@ const Edit = (props) => {
                       {...tileProps}
                     >
                       <UniversalLink href={item.link || '#'} title={item.title}>
-                        <img
+                        <Image
                           className="image"
                           src={`${item.image}/@@images/image`}
                           alt={item.title}
@@ -198,7 +199,7 @@ const Edit = (props) => {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-          <img className="slick-image" src={hiker} alt="Hiker" />
+          <Image className="slick-image" src={hiker} alt="Hiker" />
         </div>
       )}
 

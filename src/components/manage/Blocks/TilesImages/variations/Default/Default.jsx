@@ -1,5 +1,6 @@
 import React from 'react';
 import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
+import Image from '@plone/volto/components/theme/Image/Image';
 import cx from 'classnames';
 import './styles.less';
 import Copyright from './Copyright';
@@ -25,7 +26,7 @@ const DefaultView = (props) => {
             >
               <UniversalLink href={image.link || '#'} title={image.title}>
                 <>
-                  <img
+                  <Image
                     src={`${image.image}/@@images/image/mini`}
                     alt={image.title}
                     style={
