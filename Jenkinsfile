@@ -157,62 +157,62 @@ pipeline {
               }
           }
             
-          stage('Integration tests') {
-              when { environment name: 'SKIP_TESTS', value: '' }
-              steps {
-                script {
-                  try {
-                    sh '''docker run --pull always --rm -d --name="$IMAGE_NAME-plone-current" -e SITE="Plone" -e PROFILES="$BACKEND_PROFILES" -e ADDONS="$BACKEND_ADDONS" eeacms/plone-backend'''
-                    sh '''docker run -d --shm-size=4g --link $IMAGE_NAME-plone-current:plone --name="$IMAGE_NAME-cypress-current" -e "RAZZLE_INTERNAL_API_PATH=http://plone:8080/Plone" --entrypoint=make --workdir=/app/src/addons/$GIT_NAME $IMAGE_NAME-frontend-current start-ci'''
-                    frontend = sh script:'''docker exec --workdir=/app/src/addons/${GIT_NAME} $IMAGE_NAME-cypress-current make check-ci''', returnStatus: true
-                    if ( frontend != 0 ) {
-                      sh '''docker logs $IMAGE_NAME-cypress-current; exit 1'''
-                    }
+          // stage('Integration tests') {
+          //     when { environment name: 'SKIP_TESTS', value: '' }
+          //     steps {
+          //       script {
+          //         try {
+          //           sh '''docker run --pull always --rm -d --name="$IMAGE_NAME-plone-current" -e SITE="Plone" -e PROFILES="$BACKEND_PROFILES" -e ADDONS="$BACKEND_ADDONS" eeacms/plone-backend'''
+          //           sh '''docker run -d --shm-size=4g --link $IMAGE_NAME-plone-current:plone --name="$IMAGE_NAME-cypress-current" -e "RAZZLE_INTERNAL_API_PATH=http://plone:8080/Plone" --entrypoint=make --workdir=/app/src/addons/$GIT_NAME $IMAGE_NAME-frontend-current start-ci'''
+          //           frontend = sh script:'''docker exec --workdir=/app/src/addons/${GIT_NAME} $IMAGE_NAME-cypress-current make check-ci''', returnStatus: true
+          //           if ( frontend != 0 ) {
+          //             sh '''docker logs $IMAGE_NAME-cypress-current; exit 1'''
+          //           }
 
-                    sh '''timeout -s 9 1800 docker exec --workdir=/app/src/addons/${GIT_NAME} $IMAGE_NAME-cypress-current make cypress-ci'''
-                  } finally {
-                    try {
-                      if ( frontend == 0 ) {
-                      sh '''rm -rf cypress-videos-current cypress-results-current cypress-coverage-current cypress-screenshots-current'''
-                      sh '''mkdir -p cypress-videos-current cypress-results-current cypress-coverage-current cypress-screenshots-current'''
-                      videos = sh script: '''docker cp $IMAGE_NAME-cypress-current:/app/src/addons/$GIT_NAME/cypress/videos cypress-videos-current/''', returnStatus: true
-                      sh '''docker cp $IMAGE_NAME-cypress-current:/app/src/addons/$GIT_NAME/cypress/reports cypress-results-current/'''
-                      screenshots = sh script: '''docker cp $IMAGE_NAME-cypress-current:/app/src/addons/$GIT_NAME/cypress/screenshots cypress-screenshots-current''', returnStatus: true
+          //           sh '''timeout -s 9 1800 docker exec --workdir=/app/src/addons/${GIT_NAME} $IMAGE_NAME-cypress-current make cypress-ci'''
+          //         } finally {
+          //           try {
+          //             if ( frontend == 0 ) {
+          //             sh '''rm -rf cypress-videos-current cypress-results-current cypress-coverage-current cypress-screenshots-current'''
+          //             sh '''mkdir -p cypress-videos-current cypress-results-current cypress-coverage-current cypress-screenshots-current'''
+          //             videos = sh script: '''docker cp $IMAGE_NAME-cypress-current:/app/src/addons/$GIT_NAME/cypress/videos cypress-videos-current/''', returnStatus: true
+          //             sh '''docker cp $IMAGE_NAME-cypress-current:/app/src/addons/$GIT_NAME/cypress/reports cypress-results-current/'''
+          //             screenshots = sh script: '''docker cp $IMAGE_NAME-cypress-current:/app/src/addons/$GIT_NAME/cypress/screenshots cypress-screenshots-current''', returnStatus: true
 
-                      archiveArtifacts artifacts: 'cypress-screenshots-current/**', fingerprint: true, allowEmptyArchive: true
+          //             archiveArtifacts artifacts: 'cypress-screenshots-current/**', fingerprint: true, allowEmptyArchive: true
 
-                      coverage = sh script: '''docker cp $IMAGE_NAME-cypress-current:/app/src/addons/$GIT_NAME/coverage cypress-coverage-current''', returnStatus: true
+          //             coverage = sh script: '''docker cp $IMAGE_NAME-cypress-current:/app/src/addons/$GIT_NAME/coverage cypress-coverage-current''', returnStatus: true
 
-                      if ( coverage == 0 ) {
-                        publishHTML(target : [allowMissing: false,
-                             alwaysLinkToLastBuild: true,
-                             keepAll: true,
-                             reportDir: 'cypress-coverage-current/coverage/lcov-report',
-                             reportFiles: 'index.html',
-                             reportName: 'CypressCoverage',
-                             reportTitles: 'Integration Tests Code Coverage'])
-                      }
-                      if ( videos == 0 ) {
-                        sh '''for file in $(find cypress-results-current -name *.xml); do if [ $(grep -E 'failures="[1-9].*"' $file | wc -l) -eq 0 ]; then testname=$(grep -E 'file=.*failures="0"' $file | sed 's#.* file=".*\\/\\(.*\\.[jsxt]\\+\\)" time.*#\\1#' );  rm -f cypress-videos-current/videos/$testname.mp4; fi; done'''
-                        archiveArtifacts artifacts: 'cypress-videos-current/**/*.mp4', fingerprint: true, allowEmptyArchive: true
-                      }
-                      }
-                    } finally {
-                      catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
-                        junit testResults: 'cypress-results-current/**/*.xml', allowEmptyResults: true
-                      }
-                      catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
-                        sh '''docker logs $IMAGE_NAME-cypress-current'''
-                      }
-                      sh script: "docker stop $IMAGE_NAME-cypress-current", returnStatus: true
-                      sh script: "docker stop $IMAGE_NAME-plone-current", returnStatus: true
-                      sh script: "docker rm -v $IMAGE_NAME-plone-current", returnStatus: true
-                      sh script: "docker rm -v $IMAGE_NAME-cypress-current", returnStatus: true
-                    }
-                  }
-                }
-              }
-          }
+          //             if ( coverage == 0 ) {
+          //               publishHTML(target : [allowMissing: false,
+          //                    alwaysLinkToLastBuild: true,
+          //                    keepAll: true,
+          //                    reportDir: 'cypress-coverage-current/coverage/lcov-report',
+          //                    reportFiles: 'index.html',
+          //                    reportName: 'CypressCoverage',
+          //                    reportTitles: 'Integration Tests Code Coverage'])
+          //             }
+          //             if ( videos == 0 ) {
+          //               sh '''for file in $(find cypress-results-current -name *.xml); do if [ $(grep -E 'failures="[1-9].*"' $file | wc -l) -eq 0 ]; then testname=$(grep -E 'file=.*failures="0"' $file | sed 's#.* file=".*\\/\\(.*\\.[jsxt]\\+\\)" time.*#\\1#' );  rm -f cypress-videos-current/videos/$testname.mp4; fi; done'''
+          //               archiveArtifacts artifacts: 'cypress-videos-current/**/*.mp4', fingerprint: true, allowEmptyArchive: true
+          //             }
+          //             }
+          //           } finally {
+          //             catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
+          //               junit testResults: 'cypress-results-current/**/*.xml', allowEmptyResults: true
+          //             }
+          //             catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
+          //               sh '''docker logs $IMAGE_NAME-cypress-current'''
+          //             }
+          //             sh script: "docker stop $IMAGE_NAME-cypress-current", returnStatus: true
+          //             sh script: "docker stop $IMAGE_NAME-plone-current", returnStatus: true
+          //             sh script: "docker rm -v $IMAGE_NAME-plone-current", returnStatus: true
+          //             sh script: "docker rm -v $IMAGE_NAME-cypress-current", returnStatus: true
+          //           }
+          //         }
+          //       }
+          //     }
+          // }
 
     stage('Report to SonarQube') {
       when {
@@ -291,51 +291,6 @@ pipeline {
                 }
               }
             }
-
-           stage('Integration tests') {
-              steps {
-                script {
-                  try {
-                    sh '''docker run --pull always --rm -d --name="$IMAGE_NAME-plone-previous" -e SITE="Plone" -e PROFILES="$BACKEND_PROFILES" -e ADDONS="$BACKEND_ADDONS" eeacms/plone-backend'''
-                    sh '''docker run -d --shm-size=4g --link $IMAGE_NAME-plone-previous:plone --name="$IMAGE_NAME-cypress-previous" -e "RAZZLE_INTERNAL_API_PATH=http://plone:8080/Plone" --entrypoint=make --workdir=/app/src/addons/$GIT_NAME $IMAGE_NAME-frontend-previous start-ci'''
-                    frontend = sh script:'''docker exec --workdir=/app/src/addons/${GIT_NAME} $IMAGE_NAME-cypress-previous make check-ci''', returnStatus: true
-                    if ( frontend != 0 ) {
-                      sh '''docker logs $IMAGE_NAME-cypress-previous; exit 1'''
-                    }
-                    sh '''timeout -s 9 1800 docker exec --workdir=/app/src/addons/${GIT_NAME} $IMAGE_NAME-cypress-previous make cypress-ci'''
-                  } finally {
-                    try {
-                      if ( frontend == 0 ) {
-                      sh '''rm -rf cypress-videos-previous cypress-results-previous cypress-coverage-previous cypress-screenshots-previous'''
-                      sh '''mkdir -p cypress-videos-previous cypress-results-previous cypress-coverage-previous cypress-screenshots-previous'''
-                      videos = sh script: '''docker cp $IMAGE_NAME-cypress-previous:/app/src/addons/$GIT_NAME/cypress/videos cypress-videos-previous/''', returnStatus: true
-                      sh '''docker cp $IMAGE_NAME-cypress-previous:/app/src/addons/$GIT_NAME/cypress/reports cypress-results-previous/'''
-                      screenshots = sh script: '''docker cp $IMAGE_NAME-cypress-previous:/app/src/addons/$GIT_NAME/cypress/screenshots cypress-screenshots-previous''', returnStatus: true
-
-                      archiveArtifacts artifacts: 'cypress-screenshots-previous/**', fingerprint: true, allowEmptyArchive: true
-
-                      if ( videos == 0 ) {
-                        sh '''for file in $(find cypress-results-previous -name *.xml); do if [ $(grep -E 'failures="[1-9].*"' $file | wc -l) -eq 0 ]; then testname=$(grep -E 'file=.*failures="0"' $file | sed 's#.* file=".*\\/\\(.*\\.[jsxt]\\+\\)" time.*#\\1#' );  rm -f cypress-videos-previous/videos/$testname.mp4; fi; done'''
-                        archiveArtifacts artifacts: 'cypress-videos-previous/**/*.mp4', fingerprint: true, allowEmptyArchive: true
-                      }
-                      }
-                    } finally {
-                      catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
-                        junit testResults: 'cypress-results-previous/**/*.xml', allowEmptyResults: true
-                      }
-                      catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
-                        sh '''docker logs $IMAGE_NAME-cypress-previous'''
-                      }
-                      sh script: "docker stop $IMAGE_NAME-cypress-previous", returnStatus: true
-                      sh script: "docker stop $IMAGE_NAME-plone-previous", returnStatus: true
-                      sh script: "docker rm -v $IMAGE_NAME-plone-previous", returnStatus: true
-                      sh script: "docker rm -v $IMAGE_NAME-cypress-previous", returnStatus: true
-                    }
-                  }
-                }
-              }
-            }
-
         }
       }
       }

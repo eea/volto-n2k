@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Button } from 'semantic-ui-react';
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import EditBlockWrapper from './EditBlockWrapper';
 import { emptyBlocksForm } from '@plone/volto/helpers/Blocks/Blocks';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
