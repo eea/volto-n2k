@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { matchPath } from 'react-router';
-import { asyncConnect } from '@plone/volto/helpers/AsyncConnect/AsyncConnect';
+import { asyncConnect } from '@plone/volto/helpers/AsyncConnect';
 import Helmet from '@plone/volto/helpers/Helmet/Helmet';
 import { defineMessages, injectIntl } from 'react-intl';
 import { Container } from 'semantic-ui-react';
