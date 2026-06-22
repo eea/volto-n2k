@@ -1,6 +1,7 @@
 import React from 'react';
 import config from '@plone/volto/registry';
-import { SidebarPortal } from '@plone/volto/components';
+import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
+import Image from '@plone/volto/components/theme/Image/Image';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import SlateEditor from '@plone/volto-slate/editor/SlateEditor';
 import { Editor } from 'slate';
@@ -45,7 +46,7 @@ const Edit = (props) => {
             'rounded-border': data.rounded ?? true,
           })}
         >
-          <img
+          <Image
             src={`${data.image}/@@images/image`}
             alt={data.imageTitle}
             style={

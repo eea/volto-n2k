@@ -143,6 +143,7 @@ div#view .habitat-banner-details-2 .ui.container > * {
 
       &.one-slide .swiper {
         width: 100%;
+        max-width: 100%;
       }
 
       &.two-slides .swiper {
@@ -179,6 +180,10 @@ div#view .habitat-banner-details-2 .ui.container > * {
       }
 
       .swiper {
+        .swiper-slide {
+          width: 100%;
+        }
+
         &.preview .swiper-slide {
           filter: grayscale(100%);
         }
@@ -186,8 +191,8 @@ div#view .habitat-banner-details-2 .ui.container > * {
         img {
           display: block;
           width: 100%;
-          height: 100%;
-          object-fit: contain;
+          height: 320px;
+          object-fit: cover;
         }
       }
 

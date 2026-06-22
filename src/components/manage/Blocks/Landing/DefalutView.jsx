@@ -4,7 +4,8 @@ import { generatePath } from 'react-router';
 import Cookies from 'universal-cookie';
 import { Grid } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
-import { UniversalLink } from '@plone/volto/components';
+import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
+import Image from '@plone/volto/components/theme/Image/Image';
 import hiker from './images/hiker.webp';
 import { tiles, tileProps, getStyle } from './index';
 
@@ -82,7 +83,7 @@ const DefaultView = (props) => {
                           {...tileProps}
                         >
                           <UniversalLink href={link || '#'} title={item.title}>
-                            <img
+                            <Image
                               className="image"
                               src={item.image}
                               alt={item.title}
@@ -97,7 +98,7 @@ const DefaultView = (props) => {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <img className="slick-image" src={hiker} alt="Hiker" />
+        <Image className="slick-image" src={hiker} alt="Hiker" />
       </div>
     </>
   );

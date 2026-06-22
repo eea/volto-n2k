@@ -4,8 +4,9 @@ import { replaceQueryParam, priorityLabels } from '@eeacms/volto-n2k/helpers';
 import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
 import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
 import loadable from '@loadable/component';
-import { Icon } from '@plone/volto/components';
-import { flattenToAppURL } from '@plone/volto/helpers';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
+import Image from '@plone/volto/components/theme/Image/Image';
+import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import cx from 'classnames';
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { compose } from 'redux';
@@ -166,7 +167,7 @@ const Default = (props) => {
                             >
                               {pictures.map((source, index) => (
                                 <SwiperSlide key={source}>
-                                  <img
+                                  <Image
                                     src={getSource(source)}
                                     alt={pictures[index]}
                                   />
