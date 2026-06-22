@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { Icon } from '@plone/volto/components';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
 
 import arrowSVG from '@plone/volto/icons/ahead.svg';
 

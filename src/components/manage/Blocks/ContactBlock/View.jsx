@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from '@plone/volto/components';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
 import cx from 'classnames';
 import domainSVG from './icons/domain.svg';
 import locationSVG from './icons/location.svg';

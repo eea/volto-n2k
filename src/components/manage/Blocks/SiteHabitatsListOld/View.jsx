@@ -1,6 +1,6 @@
 import React from 'react';
 import findIndex from 'lodash/findIndex';
-import { Icon } from '@plone/volto/components';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 import { getObjectByIndex } from '@eeacms/volto-n2k/helpers';

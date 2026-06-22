@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
-import { Icon } from '@plone/volto/components';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
 import upSVG from '@plone/volto/icons/up.svg';
 import downSVG from '@plone/volto/icons/down.svg';
 

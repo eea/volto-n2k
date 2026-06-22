@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Icon } from '@plone/volto/components';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
 
 import arrowSVG from '@plone/volto/icons/up-key.svg';
 

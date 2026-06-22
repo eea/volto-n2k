@@ -3,8 +3,10 @@ import { useRef, useMemo, useState, useCallback } from 'react';
 import { compose } from 'redux';
 import cx from 'classnames';
 import loadable from '@loadable/component';
-import { flattenToAppURL } from '@plone/volto/helpers';
-import { Icon, UniversalLink } from '@plone/volto/components';
+import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
+import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
+import Image from '@plone/volto/components/theme/Image/Image';
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
 import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
@@ -200,7 +202,7 @@ const ViewComponent = (props) => {
                           >
                             {pictures.map((source, index) => (
                               <SwiperSlide key={source}>
-                                <img
+                                <Image
                                   src={getSource(source)}
                                   alt={pictures[index]}
                                 />

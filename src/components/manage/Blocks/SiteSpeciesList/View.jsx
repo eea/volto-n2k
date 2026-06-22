@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Pagination, Grid } from 'semantic-ui-react';
+import Image from '@plone/volto/components/theme/Image/Image';
 import { getObjectByIndex, photoPlaceholders } from '@eeacms/volto-n2k/helpers';
 import { Filters } from './Filters';
 import { getPopulationString, getLabelString } from './utils';
@@ -150,7 +151,7 @@ const View = (props) => {
                       computer={2}
                       className="species-photo"
                     >
-                      <img
+                      <Image
                         src={
                           speciesData.picture_url ||
                           photoPlaceholders[speciesData.species_group_name] ||

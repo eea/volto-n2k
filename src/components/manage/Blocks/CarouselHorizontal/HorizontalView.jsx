@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router';
 import loadable from '@loadable/component';
-import { Icon, RenderBlocks } from '@plone/volto/components';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
+import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
 import { withScrollToTarget } from '@eeacms/volto-tabs-block/hocs';
 import rightArrowSVG from '@eeacms/volto-n2k/icons/right-key.svg';
 import leftArrowSVG from '@eeacms/volto-n2k/icons/left-key.svg';
+import Image from '@plone/volto/components/theme/Image/Image';
 import cx from 'classnames';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '@eeacms/volto-tabs-block/less/carousel.less';
@@ -217,7 +220,7 @@ const View = (props) => {
       >
         {panes.length ? panes.map((pane) => pane.renderItem) : ''}
       </Slider>
-      <img
+      <Image
         ref={img}
         className={cx('slick-image', { hidden: activeTabIndex !== 0 })}
         src={`${image}/@@images/image/preview`}

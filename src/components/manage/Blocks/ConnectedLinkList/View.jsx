@@ -16,6 +16,7 @@ const View = (props) => {
           .fill()
           .map((_, column) => (
             <FormattedValue
+              key={column}
               textTemplate={data.textTemplate}
               linkTemplate={data.linkTemplate}
               value={provider_data[data.value]?.[column]}
