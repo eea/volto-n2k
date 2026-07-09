@@ -2,8 +2,13 @@ import React, { useState, useMemo, useEffect } from 'react';
 import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 import Map from '@eeacms/volto-openlayers-map/Map';
+import { Controls } from '@eeacms/volto-openlayers-map/Controls';
 import { Layers, Layer } from '@eeacms/volto-openlayers-map/Layers';
 import { withOpenLayers } from '@eeacms/volto-openlayers-map';
+import {
+  ESRI_LIGHT_GRAY_ATTRIBUTION,
+  ESRI_HILLSHADE_ATTRIBUTION,
+} from '@eeacms/volto-n2k/constants';
 
 // layer definitions
 const smallScaleLayerId = 1;
@@ -84,11 +89,13 @@ const View = (props) => {
         url:
           'https://server.arcgisonline.com/ArcGIS/rest/services/' +
           'Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+        attributions: ESRI_LIGHT_GRAY_ATTRIBUTION,
       }),
       new source.XYZ({
         url:
           'https://server.arcgisonline.com/ArcGIS/rest/services/' +
           'Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}',
+        attributions: ESRI_HILLSHADE_ATTRIBUTION,
       }),
     ]);
     /* eslint-disable-next-line */
@@ -196,6 +203,10 @@ const View = (props) => {
           <Layer.Image source={sources[1]} zIndex={2} />
           <Layer.Image source={sources[2]} zIndex={2} />
         </Layers>
+        <Controls
+          attribution={true}
+          attributionOptions={{ collapsible: false }}
+        />
       </Map>
     </div>
   );
