@@ -9,4 +9,4 @@ export const GISCO_OSM_ATTRIBUTION = `${OSM_ATTRIBUTION}, © <a href="https://ec
 export const ESRI_LIGHT_GRAY_ATTRIBUTION = `Tiles © <a href="https://www.esri.com/" target="_blank" rel="noopener noreferrer">Esri</a> — Esri, HERE, Garmin, ${OSM_ATTRIBUTION}, and the GIS user community`;
 
 export const ESRI_HILLSHADE_ATTRIBUTION =
-  'Tiles © <a href="https://www.esri.com/" target="_blank" rel="noopener noreferrer">Esri</a> — Source: Esri, USGS, NASA, and the GIS user community';
+  'Tiles © <a href="https://www.esri.com/" target="_blank" rel="noopener noreferrer">Esri</a> — Sources: Esri, Vantor, Airbus DS, USGS, NGA, NASA, CGIAR, N Robinson, NCEAS, NLS, OS, NMA, Geodatastyrelsen, Rijkswaterstaat, GSA, Geoland, FEMA, Intermap, and the GIS user community';
