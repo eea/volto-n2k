@@ -6,6 +6,7 @@ import { Interactions } from '@eeacms/volto-openlayers-map/Interactions';
 import { Controls } from '@eeacms/volto-openlayers-map/Controls';
 import { Layers, Layer } from '@eeacms/volto-openlayers-map/Layers';
 import { withOpenLayers } from '@eeacms/volto-openlayers-map';
+import { GISCO_OSM_ATTRIBUTION } from '@eeacms/volto-n2k/constants';
 import { getActiveSitesURL } from './index';
 import './style.less';
 
@@ -31,6 +32,7 @@ const View = (props) => {
     setTileWMSSources([
       new source.TileWMS({
         url: 'https://gisco-services.ec.europa.eu/maps/service',
+        attributions: GISCO_OSM_ATTRIBUTION,
         params: {
           LAYERS: 'OSMBlossomComposite',
           TILED: true,
@@ -143,7 +145,11 @@ const View = (props) => {
               zIndex={2}
             />
           </Layers>
-          <Controls attribution={true} zoom={false} />
+          <Controls
+            attribution={true}
+            attributionOptions={{ collapsible: false }}
+            zoom={false}
+          />
           <Interactions
             doubleClickZoom={true}
             dragAndDrop={false}
