@@ -24,7 +24,7 @@ const baseSettings = {
 
 const ImageGallery = (props) => {
   const { data = {}, mode } = props;
-  const items = data.images || [];
+  const items = React.useMemo(() => data.images || [], [data.images]);
   const [open, setOpen] = React.useState(false);
   const [inlineIndex, setInlineIndex] = React.useState(0);
 
