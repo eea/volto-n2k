@@ -1,10 +1,11 @@
 import React from 'react';
 import loadable from '@loadable/component';
-import { Modal, Image } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 import cx from 'classnames';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import GalleryModal from '../shared/GalleryModal';
 import './styles.less';
 
 const Slider = loadable(() => import('react-slick'));
@@ -23,11 +24,9 @@ const baseSettings = {
 
 const ImageGallery = (props) => {
   const { data = {}, mode } = props;
-  const items = data.images || [];
+  const items = React.useMemo(() => data.images || [], [data.images]);
   const [open, setOpen] = React.useState(false);
   const [inlineIndex, setInlineIndex] = React.useState(0);
-  const [modalIndex, setModalIndex] = React.useState(0);
-  const sliderRef = React.useRef(null);
 
   const inlineSettings = React.useMemo(
     () => ({
@@ -38,18 +37,20 @@ const ImageGallery = (props) => {
     [],
   );
 
-  const modalSettings = React.useMemo(
-    () => ({
-      ...baseSettings,
-      beforeChange: (current, next) => setModalIndex(next),
-      initialSlide: inlineIndex,
-    }),
-    [inlineIndex],
+  const modalItems = React.useMemo(
+    () =>
+      items.map((item) => ({
+        id: item.image,
+        src: `${item.image}/@@images/image/larger`,
+        title: item.title,
+        description: item.description,
+        copyright: item.copyright,
+      })),
+    [items],
   );
 
   const handleClick = () => {
     if (items.length) {
-      setModalIndex(inlineIndex);
       setOpen(true);
     }
   };
@@ -91,9 +92,6 @@ const ImageGallery = (props) => {
     );
   };
 
-  // const inlineImage = items[inlineIndex];
-  const modalImage = items[modalIndex];
-
   return (
     <div className="image-gallery">
       {mode === 'view' ? (
@@ -103,30 +101,12 @@ const ImageGallery = (props) => {
               {items.map((item, i) => renderSlide(item, i, handleClick))}
             </Slider>
           </div>
-          {/* <div className="image-gallery-caption">
-            <h3>{inlineImage?.title}</h3>
-            <p>{inlineImage?.description}</p>
-          </div> */}
-          <Modal
-            closeIcon
+          <GalleryModal
             open={open}
-            className="slider-modal"
             onClose={() => setOpen(false)}
-            onOpen={() => setOpen(true)}
-          >
-            <Modal.Content>
-              <h3>{modalImage?.title}</h3>
-              <p>{modalImage?.description}</p>
-              {open ? (
-                <Slider {...modalSettings} ref={sliderRef}>
-                  {items.map((item, i) => renderSlide(item, i))}
-                </Slider>
-              ) : null}
-              <div className="slide-image-count">
-                <strong>{modalIndex + 1}</strong> of {items.length}
-              </div>
-            </Modal.Content>
-          </Modal>
+            items={modalItems}
+            initialSlide={inlineIndex}
+          />
         </>
       ) : (
         <>

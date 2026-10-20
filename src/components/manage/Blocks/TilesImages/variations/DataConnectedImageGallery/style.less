@@ -60,6 +60,7 @@ div#view .habitat-banner-details-2 .ui.container > * {
 
   .habitat-details {
     display: flex;
+    overflow: hidden;
     align-items: center;
     justify-content: space-between;
 
@@ -131,108 +132,73 @@ div#view .habitat-banner-details-2 .ui.container > * {
 
     .carousel {
       display: flex;
-      height: 320px;
 
       p {
         font-family: 'RajdhaniB', 'Helvetica Neue', Arial, Helvetica, sans-serif;
       }
 
-      img {
-        width: 100%;
+      .gallery-slide {
+        position: relative;
+        display: inline-block;
+        line-height: 0;
       }
 
-      &.one-slide .swiper {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      &.two-slides .swiper {
-        width: 50%;
-
-        @media @mobile {
-          width: 100%;
-
-          &.preview.preview-one {
-            display: none;
-          }
-        }
-      }
-
-      &.three-slides .swiper {
-        width: 33.33%;
-
-        @media @tablet {
-          width: 50%;
-
-          &.preview.preview-two {
-            display: none;
-          }
-        }
-
-        @media @mobile {
-          width: 100%;
-
-          &.preview.preview-two,
-          &.preview.preview-one {
-            display: none;
-          }
-        }
-      }
-
-      .swiper {
-        .swiper-slide {
-          width: 100%;
-        }
-
-        &.preview .swiper-slide {
-          filter: grayscale(100%);
-        }
+      .gallery-image {
+        cursor: pointer;
 
         img {
           display: block;
-          width: 100%;
+          width: auto;
+          max-width: 100%;
           height: 320px;
-          object-fit: cover;
+          object-fit: contain;
         }
       }
 
       .arrows {
         position: absolute;
         z-index: 2;
+        right: 0;
         bottom: 0;
         left: 0;
         display: flex;
-        width: 100%;
+        width: 360px;
+        height: 2rem;
         align-items: center;
+        background-color: rgba(0, 0, 0, 0.55);
+        color: #fff;
 
         button {
+          display: flex;
+          width: 1.75rem;
+          height: 100%;
+          flex: 0 0 auto;
+          align-items: center;
+          justify-content: center;
           padding: 0;
           border: none;
           margin: 0;
           background-color: transparent;
+          cursor: pointer;
         }
 
         .icon {
           display: block;
-          width: 32px;
-          background-color: #fff;
-          cursor: pointer;
+          width: auto;
+          height: 1rem;
+          background-color: transparent;
         }
 
         p {
           overflow: hidden;
-          width: 100%;
-          padding: 0.25rem 0.25rem 0.25rem 1rem;
+          min-width: 0;
+          flex: 1;
+          padding: 0 0.5rem 0 0.25rem;
           margin: 0;
-          backdrop-filter: brightness(0.5);
+          font-size: 0.875rem;
+          line-height: 1.2;
           text-overflow: ellipsis;
           white-space: nowrap;
-        }
-
-        &:not(.arrows-hidden) {
-          p {
-            width: calc(100% - 64px);
-          }
         }
       }
     }

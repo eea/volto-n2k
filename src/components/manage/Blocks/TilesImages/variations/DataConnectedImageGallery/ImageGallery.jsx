@@ -1,21 +1,17 @@
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 import { connectToMultipleProviders } from '@eeacms/volto-datablocks/hocs';
 import { replaceQueryParam } from '@eeacms/volto-n2k/helpers';
-import arrowLeft from '@eeacms/volto-n2k/icons/arrow-left.svg';
-import arrowRight from '@eeacms/volto-n2k/icons/arrow-right.svg';
-import loadable from '@loadable/component';
+import chevronLeft from '@eeacms/volto-n2k/icons/chevron-left.svg';
+import chevronRight from '@eeacms/volto-n2k/icons/chevron-right.svg';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
 import Image from '@plone/volto/components/theme/Image/Image';
 import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import cx from 'classnames';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { compose } from 'redux';
 
-import 'swiper/css';
+import GalleryModal from '../shared/GalleryModal';
 import './style.less';
-
-const SwiperLoader = loadable.lib(() => import('swiper'));
-const SwiperReactLoader = loadable.lib(() => import('swiper/react'));
 
 const getSource = (source) => {
   let parsedSource = replaceQueryParam(source, 'x', 800);
@@ -24,10 +20,9 @@ const getSource = (source) => {
   return parsedSource;
 };
 
-const RedHabitats = (props) => {
-  const swiperEl = useRef();
-  const previewEl = useRef();
+const DataConnectedImageGallery = (props) => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const habitat_pictures_provider = useMemo(
     () => flattenToAppURL(props.data.images),
@@ -50,27 +45,37 @@ const RedHabitats = (props) => {
     [pictures],
   );
 
+  const galleryItems = useMemo(
+    () =>
+      pictures.map((source, index) => ({
+        id: source,
+        src: getSource(source),
+        copyright: attribution_copyright[index],
+      })),
+    [pictures, attribution_copyright],
+  );
+
   const handleSliderPrevious = useCallback(() => {
-    swiperEl.current.slidePrev();
-    if (previewEl.current?.[0]) {
-      previewEl.current[0].slidePrev();
-    }
-    if (previewEl.current?.[1]) {
-      previewEl.current[1].slidePrev();
-    }
-    setActiveSlide(swiperEl.current.realIndex);
-  }, []);
+    setActiveSlide((index) => (index - 1 + pictures_length) % pictures_length);
+  }, [pictures_length]);
 
   const handleSliderNext = useCallback(() => {
-    swiperEl.current.slideNext();
-    if (previewEl.current?.[0]) {
-      previewEl.current[0].slideNext();
-    }
-    if (previewEl.current?.[1]) {
-      previewEl.current[1].slideNext();
-    }
-    setActiveSlide(swiperEl.current.realIndex);
+    setActiveSlide((index) => (index + 1) % pictures_length);
+  }, [pictures_length]);
+
+  const handleOpenModal = useCallback(() => {
+    setModalOpen(true);
   }, []);
+
+  const handleModalKeyDown = useCallback(
+    (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleOpenModal();
+      }
+    },
+    [handleOpenModal],
+  );
 
   if (!habitat_pictures_provider && props.mode === 'edit') {
     return ' habitat pictures provider undefined';
@@ -81,79 +86,76 @@ const RedHabitats = (props) => {
       <div className="habitat-details">
         {pictures_length > 0 && (
           <div className={cx('carousel one-slide')}>
-            <div
-              className={cx('arrows', { 'arrows-hidden': pictures_length < 2 })}
-            >
-              {pictures_length > 1 && (
-                <>
-                  <button
-                    className="swiper-button image-swiper-button-prev"
-                    onClick={handleSliderPrevious}
-                  >
-                    <Icon
-                      className="icon-left"
-                      color="#000"
-                      name={arrowLeft}
-                      size="32px"
-                    />
-                  </button>
-                  <button
-                    className="swiper-button image-swiper-button-next"
-                    onClick={handleSliderNext}
-                  >
-                    <Icon
-                      className="icon-right"
-                      color="#000"
-                      name={arrowRight}
-                      size="32px"
-                    />
-                  </button>
-                </>
-              )}
-              {!!attribution_copyright[activeSlide] && (
-                <p title={attribution_copyright[activeSlide]}>
-                  {attribution_copyright[activeSlide]}
-                </p>
+            <div className="gallery-slide">
+              <div
+                className="gallery-image"
+                role="button"
+                tabIndex={0}
+                onClick={handleOpenModal}
+                onKeyDown={handleModalKeyDown}
+              >
+                <Image
+                  src={getSource(pictures[activeSlide])}
+                  alt={
+                    attribution_copyright[activeSlide] ||
+                    `Image ${activeSlide + 1}`
+                  }
+                />
+              </div>
+              {(pictures_length > 1 ||
+                !!attribution_copyright[activeSlide]) && (
+                <div
+                  className={cx('arrows', {
+                    'arrows-hidden': pictures_length < 2,
+                  })}
+                >
+                  {pictures_length > 1 && (
+                    <>
+                      <button
+                        className="swiper-button image-swiper-button-prev"
+                        aria-label="Previous image"
+                        onClick={handleSliderPrevious}
+                      >
+                        <Icon
+                          className="icon-left"
+                          color="#fff"
+                          name={chevronLeft}
+                          size="18px"
+                        />
+                      </button>
+                      <button
+                        className="swiper-button image-swiper-button-next"
+                        aria-label="Next image"
+                        onClick={handleSliderNext}
+                      >
+                        <Icon
+                          className="icon-right"
+                          color="#fff"
+                          name={chevronRight}
+                          size="18px"
+                        />
+                      </button>
+                    </>
+                  )}
+                  {!!attribution_copyright[activeSlide] && (
+                    <p title={attribution_copyright[activeSlide]}>
+                      {attribution_copyright[activeSlide]}
+                    </p>
+                  )}
+                </div>
               )}
             </div>
-            {__CLIENT__ && (
-              <SwiperLoader>
-                {() => {
-                  return (
-                    <SwiperReactLoader>
-                      {({ Swiper, SwiperSlide }) => {
-                        return (
-                          <>
-                            <Swiper
-                              loop={true}
-                              allowTouchMove={false}
-                              initialSlide={0}
-                              slidesPerView={1}
-                              spaceBetween={0}
-                              onBeforeInit={(swiper) => {
-                                swiperEl.current = swiper;
-                              }}
-                            >
-                              {pictures.map((source, index) => (
-                                <SwiperSlide key={source}>
-                                  <Image
-                                    src={getSource(source)}
-                                    alt={pictures[index]}
-                                  />
-                                </SwiperSlide>
-                              ))}
-                            </Swiper>
-                          </>
-                        );
-                      }}
-                    </SwiperReactLoader>
-                  );
-                }}
-              </SwiperLoader>
-            )}
           </div>
         )}
       </div>
+      {__CLIENT__ && (
+        <GalleryModal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          items={galleryItems}
+          initialSlide={activeSlide}
+        />
+      )}
     </div>
   );
 };
@@ -162,7 +164,7 @@ const ViewCompose = compose(
   connectToMultipleProviders((props) => ({
     providers: [{ provider_url: props.data?.images }],
   })),
-)(RedHabitats);
+)(DataConnectedImageGallery);
 
 export default function View(props) {
   return (
